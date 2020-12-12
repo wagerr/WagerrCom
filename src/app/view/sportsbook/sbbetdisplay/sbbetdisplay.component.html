@@ -1,0 +1,145 @@
+<div class="bet-tab-pane tab-pane fade show active" id="bet" role="tabpanel" aria-labelledby="bet-tab" *ngIf="accountSettings">
+  <div class="sportsbook-div-table">
+    <div class="headers d-none d-sm-flex text-uppercase text-center">
+      <div class="date w-100">date</div>
+      <div class="money-line w-100">Money Line</div>
+      <div class="spread w-100">spread</div>
+      <div class="total w-100">total</div>
+    </div>
+    <div class="headers d-md-none d-sm-flex text-uppercase p-0">
+      <div class="d-flex w-100 mobile-sportsbook-market-selector justify-content-center align-content-center">
+        <div class="w-100 p-1 pt-2 pb-2" [ngClass]="(mobileSet == 'moneyline') ? 'active' : ''"
+             (click)="mobileSet = 'moneyline'">Money Line
+        </div>
+        <div class="w-100 p-1 pt-2 pb-2" [ngClass]="(mobileSet == 'spread') ? 'active' : ''"
+             (click)="mobileSet = 'spread'">Spread
+        </div>
+        <div class="w-100 p-1 pt-2 pb-2" [ngClass]="(mobileSet == 'total') ? 'active' : ''"
+             (click)="mobileSet = 'total'">Total
+        </div>
+      </div>
+    </div>
+    <div class="scrollList" [ngClass]="(isLoggedIn()) ? 'loggedin' : 'loggedout'">
+    <ng-container *ngFor="let league of finalEvents; let i = index">
+      <div class="LeagueName pl-3 pt-2 d-flex flex-row leagueHeaders">
+        <div class="w-100">
+          {{league.name}}
+          <ng-container *ngIf="league.show">
+            <i class="far fa-chevron-down" (click)="showLeague(i)"></i>
+          </ng-container>
+          <ng-container *ngIf="!league.show">
+            <i class="far fa-chevron-right" (click)="showLeague(i)"></i>
+          </ng-container>
+        </div>
+        <ng-container *ngIf="league.show">
+          <div class="money-line w-100  d-sm-flex d-none flex-row  text-uppercase text-center"
+               [ngClass]="(mobileSet == 'moneyline') ? 'd-flex' : ''">
+          <span class="w-100 justify-content-center pl-1 pt-2">
+            <span class="titleItem">1</span>
+          </span>
+            <ng-container *ngIf="isThreeWay(league.data[0])">
+            <span class="w-100 justify-content-center pt-2">
+              <span class="titleItem">X</span>
+            </span>
+            </ng-container>
+            <span class="w-100 justify-content-center pr-2  pt-2">
+              <span class="titleItem">2</span>
+            </span>
+          </div>
+          <div class="spreadh w-100 text-uppercase  d-sm-flex d-none flex-row  text-center "
+               [ngClass]="(mobileSet == 'spread') ? 'd-flex' : ''">
+            <span class="w-100 justify-content-center pl-3 pt-2">HOME</span>
+            <span class="w-100 justify-content-center pr-3 pt-2 ml-1">AWAY</span>
+          </div>
+          <div class="totalh w-100 text-uppercase d-sm-flex d-none flex-row text-center"
+               [ngClass]="(mobileSet == 'total') ? 'd-flex' : ''">
+            <span class="w-100 justify-content-center pl-3 pt-2">OVER</span><span
+            class="w-100 justify-content-center pr-3 pt-2 ml-1">UNDER</span>
+          </div>
+        </ng-container>
+      </div>
+      <ng-container *ngIf="league.show">
+        <ng-container *ngFor="let item of league.data">
+          <div class="table-row d-flex">
+            <div class="team w-100 d-flex flex-column flex-grow-1 flex-sm-grow-0 p-0" (click)="gotoEvent(item.event_id)">
+              <div
+                class="w-100 flex-grow-1 align-items-center d-flex px-3 text-left pt-1 text-white">{{item.teams.home}}</div>
+              <div
+                class="w-100 flex-grow-1 align-items-center d-flex px-3 text-left text-highlight2">{{item.teams.away}}</div>
+              <div
+                class="w-100 startTime flex-grow-1 align-items-center d-flex px-3 text-left pb-1 text-white-50">{{getStartTime(item) | date: 'MMM, dd hh:mm aaa'}}</div>
+            </div>
+            <div class="money-line w-100 d-sm-flex d-none flex-row p-0 font-weight-bold"
+                 [ngClass]="(mobileSet == 'moneyline') ? 'active' : ''">
+              <div class="flex-grow-1 align-items-center d-flex px-1 justify-content-center itemBox ml-2"
+                   (click)="addToBetSlip(item, 'moneyline', 'home', getMLPoints(item, 'Home'))">
+                <span class="text-white">
+                  <app-eurousodds [points]="getMLPoints(item, 'Home')" [type]="accountSettings?.odds"></app-eurousodds>
+                </span>
+              </div>
+              <ng-container *ngIf="isThreeWay(item)">
+                <div class="flex-grow-1 align-items-center d-flex px-1 justify-content-center itemBox"
+                     (click)="addToBetSlip(item, 'moneyline', 'draw', getMLPoints(item, 'Draw'))">
+                  <span class="text-white-50">
+                  <app-eurousodds [points]="getMLPoints(item, 'Draw')" [type]="accountSettings?.odds"></app-eurousodds>
+                  </span>
+                </div>
+              </ng-container>
+              <div class="flex-grow-1 align-items-center d-flex px-1 justify-content-center itemBox mr-2"
+                   (click)="addToBetSlip(item, 'moneyline', 'away', getMLPoints(item, 'Away'))">
+                <span class="text-highlight2">
+                  <app-eurousodds [points]="getMLPoints(item, 'Away')" [type]="accountSettings?.odds"></app-eurousodds>
+                </span></div>
+            </div>
+            <div class="spread w-100 d-sm-flex d-none p-0 font-weight-bold"
+                 [ngClass]="(mobileSet == 'spread') ? 'active' : ''">
+              <div class="flex-grow-1 align-items-center d-flex flex-column justify-content-center itemBox ml-4"
+                   (click)="addToBetSlip(item, 'spread', 'home', getSpreadPoints(item, 'Home'), getSpreadNumber(item, 'home'))">
+                <span class="stline">{{(getSpreadNumber(item, 'home') === '—') ? '' : getSpreadNumber(item, 'home')}}</span>
+                <span class="" *ngIf="getSpreadPoints(item, 'Home') > 0">
+                  <app-eurousodds [points]="getSpreadPoints(item, 'Home')" [type]="accountSettings?.odds"></app-eurousodds>
+                </span>
+                <span class="" *ngIf="getSpreadPoints(item, 'Home') === '—'">
+                  {{getSpreadPoints(item, 'Home')}}
+                </span>
+              </div>
+              <div class="flex-grow-1 align-items-center d-flex flex-column justify-content-center itemBox mr-4"
+                   (click)="addToBetSlip(item, 'spread', 'away', getSpreadPoints(item, 'Away'), getSpreadNumber(item, 'away'))">
+                <span class="stline">{{(getSpreadNumber(item, 'away') === '—') ? '' : getSpreadNumber(item, 'away')}}</span>
+                <span class="text-highlight2" *ngIf="getSpreadPoints(item, 'Away') > 0">
+                  <app-eurousodds [points]="getSpreadPoints(item, 'Away')" [type]="accountSettings?.odds"></app-eurousodds>
+                </span>
+                <span class="text-highlight2"
+                      *ngIf="getSpreadPoints(item, 'Away') === '—'">{{getSpreadPoints(item, 'Away')}}</span>
+              </div>
+            </div>
+            <div class="total w-100 d-sm-flex d-none p-0 font-weight-bold"
+                 [ngClass]="(mobileSet == 'total') ? 'active' : ''">
+              <div class="flex-grow-1 align-items-center d-flex flex-column justify-content-center itemBox ml-4"
+                   (click)="addToBetSlip(item, 'total', 'over', getTotalsPoints(item, 'Over'), getTotalsNumber(item))">
+                <span class="stline">{{getTotalsNumber(item)}}</span>
+                <span class="" *ngIf="getTotalsPoints(item, 'Over') > 0">
+                  <app-eurousodds [points]="getTotalsPoints(item, 'Over')" [type]="accountSettings?.odds"></app-eurousodds>
+                </span>
+                <span class="text-highlight2" *ngIf="getTotalsPoints(item, 'Over') === '—'">
+                  {{getTotalsPoints(item, 'Over')}}
+                </span>
+              </div>
+              <div class="flex-grow-1 align-items-center d-flex flex-column justify-content-center itemBox mr-4"
+                   (click)="addToBetSlip(item, 'total', 'under', getTotalsPoints(item, 'Under'), getTotalsNumber(item))">
+                <span class="stline">{{getTotalsNumber(item)}}</span>
+                <span class="text-highlight2" *ngIf="getTotalsPoints(item, 'Under') > 0">
+                  <app-eurousodds [points]="getTotalsPoints(item, 'Under')" [type]="accountSettings?.odds"></app-eurousodds>
+                </span>
+                <span class="text-highlight2" *ngIf="getTotalsPoints(item, 'Under') === '—'">
+                  {{getTotalsPoints(item, 'Under')}}
+                </span>
+              </div>
+            </div>
+          </div>
+        </ng-container>
+      </ng-container>
+    </ng-container>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,17 @@
+:host {
+  display: block;
+  overflow: hidden; /* Hide everything that doesn't fit compoennt */
+}
+.teamLogo {
+  height: 40px !important;
+  width: 40px !important;
+  filter: invert(0%) !important;
+}
+.teamLogo img {
+}
+.sportLogo {
+  height: 65px !important;
+}
+.compareImg {
+  height: 600px;
+}

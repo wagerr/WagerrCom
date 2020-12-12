@@ -1,0 +1,100 @@
+<div class="modal-header">
+  <h4 class="modal-title font-arboria-bold pull-left">Withdrawal</h4>
+  <button type="button" class="close pull-right" aria-label="Close" (click)="bsModalRef.hide()">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div class="modal-body">
+  <form [formGroup]="withdrawForm">
+    <div class="d-flex flex-row">
+      <div class="w-25"></div>
+      <div class="w-100 d-flex flex-row">
+        <div class="w-50 font-arboria-medium font16px">Address</div>
+        <div class="w-100 font-arboria-medium font12px text-highlight2">
+          <div *ngIf="address.invalid && (address.dirty || address.touched)">
+            <span *ngIf="address.errors.wgr || address.errors.required">
+              address not valid.
+            </span>
+          </div>
+        </div>
+      </div>
+      <div class="w-25"></div>
+    </div>
+    <div class="d-flex flex-row">
+      <div class="w-25"></div>
+      <div class="w-100 d-flex flex-row border">
+        <div class="w-100 text-center p-2">
+          <input class="border-0 w-100 font-arboria-medium font13px" placeholder="Valid WGR address" formControlName="address">
+        </div>
+      </div>
+      <div class="w-25"></div>
+    </div>
+    <div class="d-flex flex-row">
+      <div class="w-25"></div>
+      <div class="w-100 font-arboria-medium font16px">Amount</div>
+      <div class="w-25"></div>
+    </div>
+    <div class="d-flex flex-row">
+      <div class="w-25"></div>
+      <div class="w-100 d-flex flex-row border">
+        <div class="w-100 text-center p-2">
+          <input type="number" class="border-0 w-100 font-arboria-medium" placeholder="0.00000000" formControlName="amount" (keyup)="updateTotal()">
+        </div>
+        <div class="font-roboto-condensed font-weight-bold font16px w-auto p-2 border-left usePointer text-highlight"
+             (click)="setMax()">
+          MAX
+        </div>
+      </div>
+      <div class="w-25"></div>
+    </div>
+    <div class="d-flex flex-row">
+      <div class="w-25"></div>
+      <div class="w-100 font-arboria-medium font12px text-highlight2">Available Balance: {{balance.toFixed(8)}}</div>
+      <div class="w-25"></div>
+    </div>
+    <div class="d-flex flex-row mt-4">
+      <div class="w-25"></div>
+      <div class="w-100 d-flex flex-row">
+        <div class="w-auto font-arboria-medium font16px">
+          Fee
+        </div>
+        <div class="w-100 border-bottom-dotted  ml-2 mr-2">
+        </div>
+        <div class="w-auto font-arboria-light font14px text-black-50">
+          {{fee.toFixed(8)}}
+        </div>
+      </div>
+      <div class="w-25"></div>
+    </div>
+    <div class="d-flex flex-row mt-1">
+      <div class="w-25"></div>
+      <div class="w-100 d-flex flex-row">
+        <div class="w-auto font-arboria-medium font16px">
+          Total
+        </div>
+        <div class="w-100 border-bottom-dotted ml-2 mr-2">
+        </div>
+        <div class="w-auto font-arboria-light font14px text-black-50">
+          {{getTotal()}}
+        </div>
+      </div>
+      <div class="w-25"></div>
+    </div>
+    <div class="d-flex flex-column mt-4 mb-3" *ngIf="!verifyWithdraw">
+      <div class="w-100 text-center">
+        <button class="btn btn-sportsbook font-arboria-bold text-uppercase widthSize200px" (click)="verifyWithdraw = true" [disabled]="!withdrawForm.valid">Withdraw</button>
+      </div>
+    </div>
+    <div class="d-flex flex-row mt-4 mb-3" *ngIf="verifyWithdraw">
+      <div class="w-25"></div>
+      <div class="w-100 text-center">
+        <button class="btn btn-sportsbook mr-2 font-arboria-bold text-uppercase" (click)="cancel()" [disabled]="!withdrawForm.valid">Cancel</button>
+      </div>
+      <div class="w-25"></div>
+      <div class="w-100 text-center">
+        <button class="btn font-arboria-bold btn-sportsbook-gray ml-2 text-uppercase" (click)="withdraw()" [disabled]="!withdrawForm.valid">Confirm</button>
+      </div>
+      <div class="w-25"></div>
+    </div>
+  </form>
+</div>

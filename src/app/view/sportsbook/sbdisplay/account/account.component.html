@@ -1,0 +1,528 @@
+<ng-container *ngIf="whatModal('signin')">
+  <div class="modal-header text-center flex-row ">
+    <div class="w-100 text-center">
+      <h5 class="modal-title text-uppercase font-weight-black font-arboria-bold" id="buyModalLabel">Account</h5>
+    </div>
+    <div class="w-auto">
+      <button type="button" class="close pull-right" aria-label="Close" (click)="closeModal()">
+        <span aria-hidden="true"><i class="fal fa-times"></i></span>
+      </button>
+    </div>
+  </div>
+  <div class="modal-body">
+    <div class="d-sm-flex flex-row signin">
+      <div class="w-100 d-none signin-left flex-column text-center justify-content-center align-content-center">
+        <div class="w-100 font-roboto-condensed font-weight-bold font33px mb-3">Regular Account</div>
+        <div class="w-100 font-roboto-condensed font26px fontColor70">Use an existing social</div>
+        <div class="w-100 mb-3 font-roboto-condensed font26px fontColor70">account to login.</div>
+        <div class="w-100  height">
+          <div class="h-100 d-flex justify-content-center align-content-center">
+            <div class="d-flex h-100 w-100 justify-content-center  align-content-center">
+              <img src="assets/images/google1.svg" class="img-fluid">
+              <img src="assets/images/twitter1.svg" class="img-fluid pl-2 pr-2">
+              <img src="assets/images/facebook1.svg" class="img-fluid">
+            </div>
+          </div>
+        </div>
+        <div class="w-100">
+          <span class="font-roboto-condensed text-highlight font-weight-bold font24px">Best For:</span>&nbsp;&nbsp;
+          <span class="font-roboto-condensed font-weight-bold font24px">Most Users</span>
+        </div>
+        <div class="w-100  p-3">
+          <button class="btn Buy-Modal-Btn disabled">Create Account</button>
+          <!--            <button class="btn Buy-Modal-Btn disabled" (click)="modalSwitch('create-regular')">Create Account</button>-->
+        </div>
+        <div class="w-100 d-sm-flex flex-column text-center justify-content-center align-content-center p-3">
+          <div class="w-100 font-arboria-book font16px lineheight1">Already have a<br>Regular Account?</div>
+          <!--            <ng-container *ngIf="!accountsEnabled()">-->
+          <div class="w-100 font-arboria-bold text-center font16px text-highlight usePointer disabled p-1">Sign
+            In
+          </div>
+          <!--            </ng-container>-->
+          <!--            <ng-container  *ngIf="accountsEnabled()">-->
+          <!--                          <div class="font-arboria-book font-weight-bold font16px text-highlight usePointer"-->
+          <!--                               (click)="modalSwitch('signin-regular')">Sign in-->
+          <!--                          </div>-->
+          <!--            </ng-container>-->
+        </div>
+      </div>
+      <div class="border-left  d-none"></div>
+      <div class="w-100 signin-right flex-column text-center">
+        <div class="w-100 font-roboto-condensed font-weight-bold font33px mb-3">Anonymous Account</div>
+        <div class="w-100 font-roboto-condensed font26px fontColor70">No Email address.</div>
+        <div class="w-100 mb-3 font-roboto-condensed font26px fontColor70">No password.</div>
+        <div class="w-100 height">
+          <div class="h-100 d-flex justify-content-center align-content-center"><img
+            src="assets/images/privacyicon.svg"></div>
+        </div>
+        <div class="w-100">
+          <span class="font-roboto-condensed text-highlight font-weight-bold font24px">Best For:</span>&nbsp;&nbsp;
+          <span class="font-roboto-condensed font-weight-bold font24px">Technical Users</span>
+        </div>
+        <div class="w-100 p-3">
+          <ng-container *ngIf="!accountsEnabled()">
+            <button class="btn Buy-Modal-Btn disabled">Create Account</button>
+          </ng-container>
+          <ng-container *ngIf="accountsEnabled()">
+            <button class="btn Buy-Modal-Btn" (click)="modalSwitch('create-anon')">Create Account</button>
+          </ng-container>
+        </div>
+        <div class="w-100 d-sm-flex flex-column text-center justify-content-center align-content-center p-3">
+          <div class="w-100 font-arboria-book font16px lineheight1">Already have an<br>Anonymous Account?</div>
+
+          <ng-container *ngIf="accountsEnabled()">
+            <div class="font-arboria-book font-weight-bold font16px text-highlight usePointer"
+                 (click)="modalSwitch('signin-anon')">import SEED
+            </div>
+          </ng-container>
+
+          <ng-container *ngIf="!accountsEnabled()">
+            <div class="font-arboria-book font-weight-bold font16px text-highlight usePointer">import SEED
+            </div>
+          </ng-container>
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-container>
+<ng-container *ngIf="whatModal('create-regular')">
+  <div class="modal-header text-center flex-row ">
+    <div class="w-100 text-center">
+      <h5 class="modal-title text-uppercase font-weight-black font-arboria-bold" id="buyModalLabel">Account</h5>
+    </div>
+    <div class="w-auto">
+      <button type="button" class="close pull-right" aria-label="Close" (click)="closeModal()">
+        <span aria-hidden="true"><i class="fal fa-times"></i></span>
+      </button>
+    </div>
+  </div>
+  <div class="modal-body">
+    <div class="d-flex flex-row create-regular">
+      <div class="w-100 flex-column text-center justify-content-center align-content-center">
+        <div class="w-100 font-roboto-condensed font-weight-bold font33px mb-3">Create Regular Account</div>
+        <div class="w-100 font-roboto-condensed font26px fontColor70">Use one of your social logins to manage your
+          login on wagerr.com
+        </div>
+        <div class="w-100 mt-4">
+          <button class="w-75 btn btn-outline-dark btn-SignIn m-1" (click)="authService.GoogleAuth()">
+            <img src="assets/images/google1.svg" class="img-fluid btn-img">
+            <span
+              class="font-roboto-condensed font-weight-bold font16px pl-3">Sign in using your Google Account</span>
+          </button>
+        </div>
+        <div class="w-100">
+          <button class="w-75 btn btn-outline-dark btn-SignIn m-1" (click)="authService.FacebookAuth()">
+            <img src="assets/images/facebook1.svg" class="img-fluid btn-img">
+            <span
+              class="font-roboto-condensed font-weight-bold font16px pl-3">Sign in using your Facebook Account</span>
+          </button>
+        </div>
+        <div class="w-100">
+          <button class="w-75 btn btn-outline-dark btn-SignIn m-1" (click)="authService.TwitterAuth()">
+            <img src="assets/images/twitter1.svg" class="img-fluid btn-img">
+            <span
+              class="font-roboto-condensed font-weight-bold font16px pl-3">Sign in using your Twitter Account</span>
+          </button>
+        </div>
+        <div class="w-100 mt-5" *ngIf="authService.isLoggedIn">
+          {{socialCreate()}}
+          <ng-container *ngIf="isLoggedIn()">
+            <button class="w-50 btn btn-outline-dark btn-SignIn m-1" (click)="modalSwitch('create-next-step')">
+              <span
+                class="font-roboto-condensed font-weight-bold font16px pl-3">Start Betting</span>
+            </button>
+          </ng-container>
+        </div>
+      </div>
+    </div>
+    <div class="d-flex flex-row signin-footer">
+      <div class="w-100 d-sm-flex flex-row text-center justify-content-center align-content-center mt-5 mb-4">
+        <div class="w-100 font-arboria-book font16px">Already have an account?&nbsp;</div>
+        <div
+          class="w-75 font-arboria-book font-weight-bold font16px text-highlight usePointer"
+          (click)="modalSwitch('signin-regular')">Sign in
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-container>
+<ng-container *ngIf="whatModal('create-anon')">
+  <div class="modal-body">
+  <div class="d-flex flex-row create-regular">
+    <div class="w-100 flex-column text-center justify-content-center align-content-center">
+      <div class="w-100 font-roboto-condensed font-weight-bold font33px">Anonymous Account Created</div>
+      <div class="w-100 font-roboto-condensed font-weight-book font33px mb-3">No Email. No Password.</div>
+      <div class="w-100 d-flex text-center justify-content-center align-content-center mb-3">
+        <div class="w-75 actionRequiredBox d-flex flex-column py-2">
+          <div class="w-100 text-center font-arboria-bold font24px text-highlight ">ACTION REQUIRED</div>
+          <div class="w-100 text-center font-arboria-book font16px">You must back up your SEED (12-word passphrase) to
+            secure your account.
+          </div>
+        </div>
+      </div>
+      <div class="w-100 flex-row d-flex justify-content-center align-content-center mb-2">
+        <div class="w-75 d-flex">
+          <span
+            class="w-auto text-highlight font-roboto-condensed font-weight-bold font20px lineheight1">1.&nbsp;</span>
+          <span class="w-100 font16px font-roboto-condensed font-weight-book  text-left">
+                Your account is temporarily stored as a cookie in your browser. If your cookies are cleared, blocked or deleted, you will lose access to your funds. Permanently.
+              </span>
+        </div>
+      </div>
+      <div class="w-100 flex-row d-flex justify-content-center align-content-center mb-2">
+        <div class="w-75 d-flex">
+          <span
+            class="w-auto text-highlight font-roboto-condensed font-weight-bold font20px lineheight1">2.&nbsp;</span>
+          <span class="w-100 font16px font-roboto-condensed font-weight-book text-left">
+              If you back up your SEED securely, you will always be able to re-import your account.
+            </span>
+        </div>
+      </div>
+      <div class="w-100 flex-row d-flex justify-content-center align-content-center mb-2">
+        <div class="w-75 d-flex">
+          <span
+            class="w-auto text-highlight font-roboto-condensed font-weight-bold font20px lineheight1">3.&nbsp;</span>
+          <span class="w-100 font16px font-roboto-condensed font-weight-book  text-left">
+              Keep it secret. If anyone else gains access to your SEED, they can access your funds.
+            </span>
+        </div>
+      </div>
+      <div class="w-100 flex-row mt-2 mb-2">
+            <span
+              class="font-roboto-condensed font-weight-bold font20px">Your <span class="text-highlight">SEED</span> is these 12 words</span>
+      </div>
+      <div class="w-100 d-flex flex-row mb-1 justify-content-center align-content-center">
+        <div class="w-85 d-flex flex-row justify-content-center align-content-center">
+          <div
+            class="w-100 wordItem d-flex m-1 border borderRounded p-2 font16px justify-content-center align-content-center">{{genMnemonic.word1}}</div>
+          <div
+            class="w-100 wordItem d-flex m-1 border borderRounded p-2 font16px justify-content-center align-content-center">{{genMnemonic.word2}}</div>
+          <div
+            class="w-100 wordItem d-flex m-1 border borderRounded p-2 font16px justify-content-center align-content-center">{{genMnemonic.word3}}</div>
+          <div
+            class="w-100 wordItem d-flex m-1 border borderRounded p-2 font16px justify-content-center align-content-center">{{genMnemonic.word4}}</div>
+        </div>
+      </div>
+      <div class="w-100 d-flex flex-row mb-1 justify-content-center align-content-center">
+        <div class="w-85 d-flex flex-row justify-content-center align-content-center">
+          <div
+            class="w-100 wordItem d-flex m-1 border borderRounded p-2 font16px justify-content-center align-content-center">{{genMnemonic.word5}}</div>
+          <div
+            class="w-100 wordItem d-flex m-1 border borderRounded p-2 font16px justify-content-center align-content-center">{{genMnemonic.word6}}</div>
+          <div
+            class="w-100 wordItem d-flex m-1 border borderRounded p-2 font16px justify-content-center align-content-center">{{genMnemonic.word7}}</div>
+          <div
+            class="w-100 wordItem d-flex m-1 border borderRounded p-2 font16px justify-content-center align-content-center">{{genMnemonic.word8}}</div>
+        </div>
+      </div>
+      <div class="w-100 d-flex flex-row mb-1 justify-content-center align-content-center">
+        <div class="w-85 d-flex flex-row justify-content-center align-content-center">
+          <div
+            class="w-100 wordItem d-flex m-1 border borderRounded p-2 font16px justify-content-center align-content-center">{{genMnemonic.word9}}</div>
+          <div
+            class="w-100 wordItem d-flex m-1 border borderRounded p-2 font16px justify-content-center align-content-center">{{genMnemonic.word10}}</div>
+          <div
+            class="w-100 wordItem d-flex m-1 border borderRounded p-2 font16px justify-content-center align-content-center">{{genMnemonic.word11}}</div>
+          <div
+            class="w-100 wordItem d-flex m-1 border borderRounded p-2 font16px justify-content-center align-content-center">{{genMnemonic.word12}}</div>
+        </div>
+      </div>
+      <div id="print-section" class="hideBox">
+        <app-print-seed-code [seed]="genMnemonic"></app-print-seed-code>
+      </div>
+      <div class="w-100 mb-2 mt-3">
+        <button class="btn Buy-Modal-Btn font-arboria-book font-weight-bold font16px w-50"
+                (click)="printSeed = true"
+                [useExistingCss]="true"
+                printTitle="Wagerr.com Sportsbook SEED"
+                printSectionId="print-section"
+                ngxPrint>Print/Save SEED
+        </button>
+      </div>
+      <div class="w-100">
+        <button class="btn Buy-Modal-Btn font-arboria-book font-weight-bold font16px w-50"
+                (click)="modalSwitch('load-account')">I backed up my SEED
+        </button>
+      </div>
+    </div>
+  </div>
+  <div class="d-flex flex-row signin-footer">
+    <div class="w-100 d-sm-flex flex-row text-center justify-content-center align-content-center mt-5 mb-4">
+      <div class="w-100 font-arboria-book font16px">Already have an account?&nbsp;</div>
+      <div
+        class="w-75 font-arboria-book font-weight-bold font16px text-highlight usePointer"
+        (click)="modalSwitch('signin-anon')">Add This Device
+      </div>
+    </div>
+  </div>
+  </div>
+</ng-container>
+<ng-container *ngIf="whatModal('signin-regular')">
+  <div class="modal-header text-center flex-row ">
+    <div class="w-100 text-center">
+      <h5 class="modal-title text-uppercase font-weight-black font-arboria-bold" id="buyModalLabel">Account</h5>
+    </div>
+    <div class="w-auto">
+      <button type="button" class="close pull-right" aria-label="Close" (click)="closeModal()">
+        <span aria-hidden="true"><i class="fal fa-times"></i></span>
+      </button>
+    </div>
+  </div>
+  <div class="d-flex flex-row create-regular">
+    <div class="w-100 flex-column text-center justify-content-center align-content-center">
+      <div class="w-100 font-roboto-condensed font-weight-bold font33px mb-3">Regular Account</div>
+      <div class="w-100 font-roboto-condensed font26px fontColor70">Use one of your social logins to manage your
+        login on wagerr.com
+      </div>
+      <div class="w-100 mt-4">
+        <button class="w-75 btn btn-outline-dark btn-SignIn m-1" (click)="authService.GoogleAuth()">
+          <img src="assets/images/google1.svg" class="img-fluid btn-img">
+          <span
+            class="font-roboto-condensed font-weight-bold font16px pl-3">Sign in using your Google Account</span>
+        </button>
+      </div>
+      <div class="w-100">
+        <button class="w-75 btn btn-outline-dark btn-SignIn m-1" (click)="authService.FacebookAuth()">
+          <img src="assets/images/facebook1.svg" class="img-fluid btn-img">
+          <span
+            class="font-roboto-condensed font-weight-bold font16px pl-3">Sign in using your Facebook Account</span>
+        </button>
+      </div>
+      <div class="w-100">
+        <button class="w-75 btn btn-outline-dark btn-SignIn m-1" (click)="authService.TwitterAuth()">
+          <img src="assets/images/twitter1.svg" class="img-fluid btn-img">
+          <span
+            class="font-roboto-condensed font-weight-bold font16px pl-3">Sign in using your Twitter Account</span>
+        </button>
+      </div>
+    </div>
+  </div>
+  <div class="d-flex flex-row signin-footer">
+    <div class="w-100 d-sm-flex flex-row text-center justify-content-center align-content-center mt-5 mb-4">
+      <div class="w-100 font-arboria-book font16px">Need New Account?&nbsp;</div>
+      <div
+        class="w-100 font-arboria-book font-weight-bold font16px text-highlight usePointer"
+        (click)="modalSwitch('signin')">Create Account
+      </div>
+    </div>
+  </div>
+</ng-container>
+<ng-container *ngIf="whatModal('signin-anon')">
+  <div class="modal-header text-center flex-row ">
+    <div class="w-100 text-center">
+      <h5 class="modal-title text-uppercase font-weight-black font-arboria-bold" id="buyModalLabel">Account</h5>
+    </div>
+    <div class="w-auto">
+      <button type="button" class="close pull-right" aria-label="Close" (click)="closeModal()">
+        <span aria-hidden="true"><i class="fal fa-times"></i></span>
+      </button>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-12">
+      <div class="d-flex flex-column justify-content-center align-content-center pt-1">
+        <form [formGroup]="mnemonicWords">
+          <div
+            class="d-flex w-100 font-arboria-book font26px fontColor70 font-weight-medium justify-content-center align-content-center mb-2">
+            Import Account SEED
+          </div>
+          <div class="w-100 d-flex flex-row mb-1 justify-content-center align-content-center">
+            <div class="w-85 d-flex flex-row justify-content-center align-content-center">
+              <div
+                class="w-100 wordItem seedItem d-flex m-1 border borderRounded p-2 font16px justify-content-center align-content-center">
+                <input type="text" class="text-center seedWord" placeholder="word1" formControlName="word1">
+              </div>
+              <div
+                class="w-100 wordItem seedItem d-flex m-1 border borderRounded p-2 font16px justify-content-center align-content-center">
+                <input type="text" class="text-center seedWord" placeholder="word2" formControlName="word2">
+              </div>
+              <div
+                class="w-100 wordItem seedItem d-flex m-1 border borderRounded p-2 font16px justify-content-center align-content-center">
+                <input type="text" class="text-center seedWord" placeholder="word3" formControlName="word3">
+              </div>
+              <div
+                class="w-100 wordItem seedItem d-flex m-1 border borderRounded p-2 font16px justify-content-center align-content-center">
+                <input type="text" class="text-center seedWord" placeholder="word4" formControlName="word4">
+              </div>
+            </div>
+          </div>
+          <div class="w-100 d-flex flex-row mb-1 justify-content-center align-content-center">
+            <div class="w-85 d-flex flex-row justify-content-center align-content-center">
+              <div
+                class="w-100 wordItem seedItem d-flex m-1 border borderRounded p-2 font16px justify-content-center align-content-center">
+                <input type="text" class="text-center seedWord" placeholder="word5" formControlName="word5">
+              </div>
+              <div
+                class="w-100 wordItem seedItem d-flex m-1 border borderRounded p-2 font16px justify-content-center align-content-center">
+                <input type="text" class="text-center seedWord" placeholder="word6" formControlName="word6">
+              </div>
+              <div
+                class="w-100 wordItem seedItem d-flex m-1 border borderRounded p-2 font16px justify-content-center align-content-center">
+                <input type="text" class="text-center seedWord" placeholder="word7" formControlName="word7">
+              </div>
+              <div
+                class="w-100 wordItem seedItem d-flex m-1 border borderRounded p-2 font16px justify-content-center align-content-center">
+                <input type="text" class="text-center seedWord" placeholder="word8" formControlName="word8">
+              </div>
+            </div>
+          </div>
+          <div class="w-100 d-flex flex-row mb-1 justify-content-center align-content-center mb-4">
+            <div class="w-85 d-flex flex-row justify-content-center align-content-center">
+              <div
+                class="w-100 wordItem seedItem d-flex m-1 border borderRounded p-2 font16px justify-content-center align-content-center">
+                <input type="text" class="text-center seedWord" placeholder="word9" formControlName="word9">
+              </div>
+              <div
+                class="w-100 wordItem seedItem d-flex m-1 border borderRounded p-2 font16px justify-content-center align-content-center">
+                <input type="text" class="text-center seedWord" placeholder="word10" formControlName="word10">
+              </div>
+              <div
+                class="w-100 wordItem seedItem d-flex m-1 border borderRounded p-2 font16px justify-content-center align-content-center">
+                <input type="text" class="text-center seedWord" placeholder="word11" formControlName="word11">
+              </div>
+              <div
+                class="w-100 wordItem seedItem d-flex m-1 border borderRounded p-2 font16px justify-content-center align-content-center">
+                <input type="text" class="text-center seedWord" placeholder="word12" formControlName="word12">
+              </div>
+            </div>
+          </div>
+          <div class="d-flex w-100 justify-content-center align-content-center pb-4">
+            <!--                <a [routerLink]="" class="btn w-25 Buy-Modal-Btn mr-2">Use Camera</a>-->
+            <a [routerLink]="" class="btn font-arboria-bold text-uppercase w-50 Buy-Modal-Btn ml-2"
+               (click)="import()">Import</a>
+          </div>
+        </form>
+        <div class="d-flex w-100 justify-content-center align-content-center pb-4">
+          <div class="font-arboria-book">Adding a second device to your account?</div>
+        </div>
+        <div class="d-flex w-100 justify-content-center align-content-center pb-4">
+          <a [routerLink]="" class="btn  font-arboria-bold text-uppercase w-50 Buy-Modal-Btn ml-2"
+             (click)="scanqrcode()">SCAN QR CODE</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-container>
+<ng-container *ngIf="whatModal('create-next-step')">
+  <div class="modal-header text-center flex-row ">
+    <div class="w-100 text-center">
+      <h5 class="modal-title text-uppercase font-weight-black font-arboria-bold" id="buyModalLabel">Account</h5>
+    </div>
+    <div class="w-auto">
+      <button type="button" class="close pull-right" aria-label="Close" (click)="closeModal()">
+        <span aria-hidden="true"><i class="fal fa-times"></i></span>
+      </button>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-12">
+      <div class="d-flex flex-column justify-content-center align-content-center pt-3">
+        <form [formGroup]="mnemonicWords">
+          <div
+            class="d-flex w-100 font-roboto-condensed font26px fontColor70 font-weight-medium justify-content-center align-content-center">
+            Import Account SEED
+          </div>
+          <div
+            class="d-flex w-100 font-roboto-condensed font20px font-weight-light justify-content-center align-content-center mb-3">
+            Input your SEED
+          </div>
+          <div class="w-100 d-flex flex-row mb-1 justify-content-center align-content-center">
+            <div class="w-85 d-flex flex-row justify-content-center align-content-center">
+              <div
+                class="w-100 wordItem seedItem d-flex m-1 border borderRounded p-2 font16px justify-content-center align-content-center">
+                <input type="text" class="text-center seedWord" placeholder="word1" formControlName="word1">
+              </div>
+              <div
+                class="w-100 wordItem seedItem d-flex m-1 border borderRounded p-2 font16px justify-content-center align-content-center">
+                <input type="text" class="text-center seedWord" placeholder="word2" formControlName="word2">
+              </div>
+              <div
+                class="w-100 wordItem seedItem d-flex m-1 border borderRounded p-2 font16px justify-content-center align-content-center">
+                <input type="text" class="text-center seedWord" placeholder="word3" formControlName="word3">
+              </div>
+              <div
+                class="w-100 wordItem seedItem d-flex m-1 border borderRounded p-2 font16px justify-content-center align-content-center">
+                <input type="text" class="text-center seedWord" placeholder="word4" formControlName="word4">
+              </div>
+            </div>
+          </div>
+          <div class="w-100 d-flex flex-row mb-1 justify-content-center align-content-center">
+            <div class="w-85 d-flex flex-row justify-content-center align-content-center">
+              <div
+                class="w-100 wordItem seedItem d-flex m-1 border borderRounded p-2 font16px justify-content-center align-content-center">
+                <input type="text" class="text-center seedWord" placeholder="word5" formControlName="word5">
+              </div>
+              <div
+                class="w-100 wordItem seedItem d-flex m-1 border borderRounded p-2 font16px justify-content-center align-content-center">
+                <input type="text" class="text-center seedWord" placeholder="word6" formControlName="word6">
+              </div>
+              <div
+                class="w-100 wordItem seedItem d-flex m-1 border borderRounded p-2 font16px justify-content-center align-content-center">
+                <input type="text" class="text-center seedWord" placeholder="word7" formControlName="word7">
+              </div>
+              <div
+                class="w-100 wordItem seedItem d-flex m-1 border borderRounded p-2 font16px justify-content-center align-content-center">
+                <input type="text" class="text-center seedWord" placeholder="word8" formControlName="word8">
+              </div>
+            </div>
+          </div>
+          <div class="w-100 d-flex flex-row mb-1 justify-content-center align-content-center mb-4">
+            <div class="w-85 d-flex flex-row justify-content-center align-content-center">
+              <div
+                class="w-100 wordItem seedItem d-flex m-1 border borderRounded p-2 font16px justify-content-center align-content-center">
+                <input type="text" class="text-center seedWord" placeholder="word9" formControlName="word9">
+              </div>
+              <div
+                class="w-100 wordItem seedItem d-flex m-1 border borderRounded p-2 font16px justify-content-center align-content-center">
+                <input type="text" class="text-center seedWord" placeholder="word10" formControlName="word10">
+              </div>
+              <div
+                class="w-100 wordItem seedItem d-flex m-1 border borderRounded p-2 font16px justify-content-center align-content-center">
+                <input type="text" class="text-center seedWord" placeholder="word11" formControlName="word11">
+              </div>
+              <div
+                class="w-100 wordItem seedItem d-flex m-1 border borderRounded p-2 font16px justify-content-center align-content-center">
+                <input type="text" class="text-center seedWord" placeholder="word12" formControlName="word12">
+              </div>
+            </div>
+          </div>
+          <div class="d-flex w-100 justify-content-center align-content-center pb-4">
+            <!--                <a [routerLink]="" class="btn w-25 Buy-Modal-Btn mr-2">Use Camera</a>-->
+            <a [routerLink]="" class="btn w-25 Buy-Modal-Btn ml-2" (click)="import()">Import</a>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</ng-container>
+<ng-container *ngIf="whatModal('load-account')">
+  <div class="modal-header text-center flex-row ">
+    <div class="w-100 text-center">
+      <h5 class="modal-title text-uppercase font-weight-black font-arboria-bold" id="buyModalLabel">Account</h5>
+    </div>
+    <div class="w-auto">
+      <button type="button" class="close pull-right" aria-label="Close" (click)="closeModal()">
+        <span aria-hidden="true"><i class="fal fa-times"></i></span>
+      </button>
+    </div>
+  </div>
+  <div class="modal-body">
+    <div class="d-flex flex-column">
+      <div class="w-100 text-center font-roboto-condensed font-weight-bold font24px mt-2">
+        You are ready to start betting!
+      </div>
+      <div class="w-100 text-center font-roboto-condensed font20px fontColor70 lineheight1 mt-3">
+        Load your account with WGR.
+      </div>
+      <div class="w-100 text-center font-roboto-condensed font20px fontColor70 lineheight1">
+        Buy WGR with USD, EUR, GBP, and more!
+      </div>
+      <div class="w-100 text-center font-arboria-book font12px mt-3 mb-2">
+        <button class="btn btn-sportsbook widthSize200px" (click)="loadAccount()">Load Account</button>
+      </div>
+    </div>
+  </div>
+  <app-affiliate [modal]="false"></app-affiliate>
+</ng-container>
+<ng-container *ngIf="whatModal('')">
+</ng-container>

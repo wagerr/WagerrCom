@@ -1,0 +1,254 @@
+<div id="betslip" class="betslip card sportsbook-card mt-2 d-block">
+  <div
+    class="card-header d-flex justify-content-between font-arboria-bold align-items-center py-1 pr-2 pl-3 font-weight-bold text-uppercase">
+    bet slip
+    <ng-container *ngIf="bets.length > 0">
+      <button class="btn btn-sm font-weight-bold text-uppercase btn-clear-all-full" (click)="clearAll()">clear all
+      </button>
+    </ng-container>
+  </div>
+  <div
+    class="card-header d-flex justify-content-between p-0 align-items-center font-weight-bold text-uppercase">
+    <div class="bettype bt-active usePointer w-100 font-arboria-bold text-center border-right-gray font13px py-1">
+      SINGLE
+    </div>
+    <div class="bettype w-100 font-arboria-bold text-center font13px  py-1">PARLAY</div>
+  </div>
+  <div class="card-body pt-0 px-2">
+    <ng-container *ngFor="let bet of wsb.bets | async; let i = index">
+      <div class="mt-2 card bg-transparent" *ngIf="!bet.txid">
+        <div class="pl-2 pr-1 pt-1 card-header d-flex justify-content-between border-0 pb-0">
+          <div *ngIf="!isTotal(bet.type)">
+            <span class="text-highlight font-weight-bold">{{shortType(bet.type)}}</span>
+            <span class="text-left"> | {{selectTeam(bet.event, bet.selected)}}</span>
+            <span class="text-lefttext-highlight" *ngIf="isSpread(bet.type)"> {{getSpreadExtra(bet)}}</span>
+          </div>
+          <div *ngIf="isTotal(bet.type)">
+            <span class="text-highlight font-weight-bold text-uppercase">{{bet.selected}}</span>
+            <span class="text-left"> / {{getTotalExtra(bet)}}</span>
+          </div>
+          <a class="btn m-0 p-1 close" [routerLink]="" (click)="deleteBet(i)">
+            <img src="/assets/images/cancel.svg" alt="">
+          </a>
+        </div>
+        <div class="px-2 pb-1 pt-0 card-body">
+          <div
+            class="versus font-weight-light d-flex justify-content-between align-items-center">{{getHomeTeam(bet.event)}}
+            <br>
+            {{getAwayTeam(bet.event)}} <span
+              class="font-weight-bold text-highlight game-coef">
+                    <app-eurousodds [points]="getUpdatedBetPoints(bet)" [type]="accountSettings?.odds"></app-eurousodds>
+            </span>
+          </div>
+          <div class="d-flex flex-row mt-2">
+            <div class="w-50 d-flex flex-column">
+              <input class="w-100 form-control form-control-sm betslipNumber" type="number" [(ngModel)]="bet.userBet"
+                     (focusout)="checkBet(bet)">
+              <span
+                class="font-weight-bold text-underline text-uppercase usePointer font16px"
+                (click)="betMax(bet)">bet max</span>
+            </div>
+            <div class="w-100 d-flex flex-column">
+              <span class="font-italic align-self-end ml-auto font10px">Potential Return</span>
+              <span class="bet-max-return align-self-end">{{getPotentialReturn(bet) | number: '1.2-2'}} <span
+                class="font-weight-bold font12px text-highlight">{{((isTestnet) ? 'tWGR' : 'WGR')}}</span></span>
+              <span
+                class="align-self-end font12px opacity60">({{convertToUSD(getPotentialReturn(bet)) | currency: curCode}}
+                {{curCode}})</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </ng-container>
+    <div class="mt-4 px-2">
+      <div class="w-100 d-flex flex-row">
+        <div class="w-100 d-flex justify-content-between total-stake font-roboto-condensed pt-2">Total Stake</div>
+        <div class="w-100 d-flex flex-column justify-content-end total-stake font-roboto-condensed">
+          <div class="w-100 d-flex justify-content-end">
+            <span class="font16px"> {{totalStake | number: '1.2-2'}}
+              <span class="font-weight-bold font12px text-highlight">{{((isTestnet) ? 'tWGR' : 'WGR')}}</span>
+            </span>
+          </div>
+          <div class="w-100 d-flex justify-content-end">
+            <span
+              class="align-self-end font10px opacity60">({{convertToUSD(totalStake) | currency: curCode}} {{curCode}}
+              )</span>
+          </div>
+        </div>
+      </div>
+      <div class="w-100 d-flex flex-row mt-2">
+        <div class="w-100 d-flex justify-content-between total-stake font-roboto-condensed pt-2">Total Potential
+          Return
+        </div>
+        <div class="w-100 d-flex flex-column justify-content-end total-stake font-roboto-condensed">
+          <div class="w-100 d-flex justify-content-end">
+            <span class="font16px"> {{totalPotential | number: '1.2-2'}}
+              <span class="font-weight-bold font12px text-highlight">{{((isTestnet) ? 'tWGR' : 'WGR')}}</span>
+            </span>
+          </div>
+          <div class="w-100 d-flex justify-content-end">
+            <span
+              class="align-self-end font10px opacity60">({{convertToUSD(totalPotential) | currency: curCode}} {{curCode}}
+              )</span>
+          </div>
+        </div>
+      </div>
+      <ng-container *ngIf="isLoggedIn()">
+        <button class="btn font-arboria-bold btn-sportsbook mx-auto mt-4 mb-2 d-block text-uppercase" type="button"
+                (click)="openModal(betSlipModal)"
+                [disabled]="placeBetsDisabled()">place {{(bets.length > 1) ? 'bets' : 'bet'}}
+        </button>
+      </ng-container>
+      <ng-container *ngIf="!isLoggedIn()">
+        <button class="btn font-arboria-bold btn-sportsbook opacity50 mx-auto mt-4 mb-2 font12px d-block text-uppercase"
+                type="button"
+                (click)="openModalAccount()">Login to Place Bets
+        </button>
+      </ng-container>
+    </div>
+    <div class="text-center d-none">
+      <div class="my-5">you have no bets in your slip</div>
+      <button class="btn btn-sportsbook mb-3">view sports</button>
+    </div>
+  </div>
+</div>
+
+<ng-container *ngFor="let bet of getAllPlacedBets()">
+  <div id="betslip" class="betslip card sportsbook-card mt-2 d-block" *ngIf="!bet.hide">
+    <div class="card-body p-0 d-flex flex-row slipBox" tooltip="Your bet has been broadcast to the Wagerr network. It will display in bet history upon network acceptance and confirmation.
+">
+      <div class="w-auto p-1 d-flex flex-column align-content-center justify-content-center">
+        <ng-container *ngIf="bet.status === 'processing'">
+          <svg class="spinnerBet" viewBox="0 0 50 50">
+            <circle class="path" cx="25" cy="25" r="20" fill="none" stroke-width="5"></circle>
+          </svg>
+        </ng-container>
+        <ng-container *ngIf="bet.status === 'completed'">
+          <span class="spinnerBetDead">
+            <img src="/assets/images/whiteRedCheck.svg" class="img-fluid">
+          </span>
+        </ng-container>
+      </div>
+      <div class="w-100 d-flex flex-column py-1">
+        <div class="w-100 font-roboto-condensed"
+             [ngClass]="(bet.status === 'completed' && bet.bet.type === 'total') ? 'font3qem' : 'fontP7em lineheight1-2 '"><span
+          class="text-highlight">{{shortType(bet.bet.type)}}</span> - <span class="teamNames"
+                                                                            [innerHTML]="getBetTeam(bet.bet)"></span>
+
+        </div>
+        <div class="w-100 d-flex flex-row lineheight1-2 font14px">
+          <div class="w-100 font-roboto-condensed font-weight-bold">
+            <span class=""> {{bet.bet.userBet | number: '1.2-2'}}
+              <span class="font-weight-bold text-gray font10px">{{((isTestnet) ? 'tWGR' : 'WGR')}}</span>
+            </span>
+            <ng-container *ngIf="bet.bet.type !== 'total'">
+              &nbsp;<span class="font-weight-bold">@</span>&nbsp;<span
+              class="font-weight-bold text-highlight">{{bet.bet.points}}</span>
+            </ng-container>
+            <ng-container *ngIf="bet.bet.type === 'total'">
+              <span
+                class="font-roboto-condensed font-weight-bold text-highlight">&nbsp;{{shortSelected(bet.bet.selected)}}
+                <span class="text-white">/{{bet.bet.extra}}
+                  <span class="font-weight-bold">@</span>&nbsp;
+                  <span class="font-weight-bold text-highlight">{{bet.bet.points}}</span>
+                </span>
+              </span>
+            </ng-container>
+          </div>
+          <ng-container *ngIf="bet.status === 'completed'">
+            <div class="w-auto px-1 d-flex flex-column align-content-center justify-content-center">
+<!--              <button class="btn btn-outline-light font-roboto-condensed font-weight-bold font10px py-0 shareButton">-->
+<!--                SHARE-->
+<!--              </button>-->
+            </div>
+          </ng-container>
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-container>
+
+<ng-template #betSlipModal>
+  <div class="modal-header">
+    <h4 class="modal-title pull-left font-arboria-bold font26px text-title-gray">Confirm Bets</h4>
+    <button type="button" class="close pull-right" aria-label="Close" (click)="closeBetView()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <div class="d-flex flex-column">
+      <ng-container *ngIf="bets.length > 0">
+        <ng-container *ngFor="let bet of bets; let i=index">
+          <div class="w-100 pb-2 pt-2 border-bottom d-flex flex-row">
+            <div class="w-auto text-center font-roboto-condensed px-3">
+              Bet {{i + 1}}
+            </div>
+            <div class="w-100 d-flex flex-column">
+              <div class="w-100 d-flex flex-row">
+                <div class="w-100">
+                  <div class="w-100 d-flex flex-row">
+                    <div class="w-100 font-roboto-condensed font16px" [innerHTML]="getBetTeam(bet)"></div>
+                    <div class="w-75 text-right font-weight-bold font-roboto-condensed font14px">{{getBetAmt(bet)}}<span
+                      class="font-weight-medium font11px">{{((isTestnet) ? 'tWGR' : 'WGR')}}</span></div>
+                  </div>
+                  <div class="w-100 d-flex flex-row">
+                    <div
+                      class="w-100 text-uppercase font-weight-bold font-roboto-condensed font12px">{{getBetType(bet)}}</div>
+                    <div
+                      class="w-75 text-uppercase text-highlight2 text-right font-weight-bold font-roboto-condensed font14px"
+                      [innerHTML]="getBetPoints(bet)"></div>
+                  </div>
+                </div>
+                <div class="w-25 d-flex flex-column">
+                  <ng-container *ngIf="bet.status === 'completed'">
+                    <div class="w-100 text-center text-uppercase font-roboto-condensed font10px">share</div>
+                    <div class="w-100 text-center">
+                      <span class="pr-1"><i class="facebookColor fab fa-facebook-square fa-sm"></i></span>
+                      <span class="pl-1"><i class="twitterColor fab fa-twitter-square fa-sm"></i></span>
+                    </div>
+                  </ng-container>
+                </div>
+              </div>
+              <div class="w-100 font-roboto-condensed font10px">
+                <ng-container *ngIf="bet.status === 'completed'">
+                  BET CONFIRMATION: <a href="https://explorer.wagerr.com/#/tx/{{bet.txid}}" target="_blank"
+                                       class="text-highlight2">{{bet.txid}}</a>
+                </ng-container>
+              </div>
+            </div>
+          </div>
+        </ng-container>
+        <!--        <ng-container *ngIf="allPlacedBets.length === 0">-->
+        <div class="w-100 p-3 d-flex flex-row">
+          <div class="w-25"></div>
+          <div class="w-50">
+            <button class="btn btn-sportsbook-gray  text-uppercase font-arboria-bold" (click)="modalRef.hide()">Edit
+              Bets
+            </button>
+          </div>
+          <div class="w-25"></div>
+          <div class="w-50">
+            <button class="btn btn-sportsbook  text-uppercase font-arboria-bold" (click)="placeBets()">Place Bets
+            </button>
+          </div>
+          <div class="w-25"></div>
+        </div>
+        <!--        </ng-container>-->
+        <!--        <ng-container *ngIf="!allBetsComplete">-->
+        <!--          <div class="w-100 p-3 d-flex flex-row">-->
+        <!--            <div class="w-100 font-arboria-light font16px text-center">Your Bets are being placed and accepted by the-->
+        <!--              wagerr blockchain this may take a minute to show in History<br>Please be patient-->
+        <!--            </div>-->
+        <!--          </div>-->
+        <!--        </ng-container>-->
+      </ng-container>
+      <ng-container *ngIf="allBetsComplete">
+        <div class="w-100 p-3 d-flex flex-row">
+          <div class="w-100 font-arboria-light font16px text-center">Your Bet/s have been placed, your History tab will
+            be updated in a few moments with your new pending bets.
+          </div>
+        </div>
+      </ng-container>
+    </div>
+  </div>
+</ng-template>

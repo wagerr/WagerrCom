@@ -1,0 +1,37 @@
+<div class="modal-header" *ngIf="modal">
+  <h4 class="modal-title pull-left">&nbsp;</h4>
+  <button type="button" class="close pull-right" aria-label="Close" (click)="bsModalRef.hide()">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div class="modal-body">
+  <div class="d-flex flex-column">
+    <div class="w-100 text-center font-roboto-condensed font-weight-bold font24px mt-2">Earn Affiliate Rewards!
+    </div>
+<!--    <div class="w-100 text-center font-roboto-condensed font20px fontColor70 lineheight1 mt-3">Earn 2.5% of betting fees-->
+<!--      and 5% of Loading-->
+<!--    </div>-->
+<!--    <div class="w-100 text-center font-roboto-condensed font20px fontColor70 lineheight1">fees on all Regular Account-->
+<!--      Signups.-->
+<!--    </div>-->
+    <div class="w-100 text-center font-roboto-condensed font20px fontColor70 lineheight1">Dashboard tracking and details coming soon.</div>
+    <div class="w-100 text-center font-arboria-book font12px mt-3 mb-2">Your Affiliate Link</div>
+    <div class="w-100 d-flex flex-row">
+      <div class="w-25"></div>
+      <div class="w-100 d-flex flex-row border">
+        <div class="w-100 text-center p-2"><div
+          class="affLink font-gotham font-weight-medium font11px">{{getUserBetAddress()}}</div></div>
+        <div class="w-auto p-2 border-left usePointer" (click)="copyMessage(getUserBetAddress())"><i
+          class="fal fa-copy text-highlight"></i></div>
+      </div>
+      <div class="w-25"></div>
+    </div>
+    <div class="w-100 d-flex flex-row">
+      <div class="w-25"></div>
+      <div class="w-100 font-gotham font-weight-medium font16px text-center">
+        <ng-container *ngIf="didCopy"><span class="small text-highlight2">Copied Affiliate Link</span></ng-container>
+      </div>
+      <div class="w-25"></div>
+    </div>
+  </div>
+</div>

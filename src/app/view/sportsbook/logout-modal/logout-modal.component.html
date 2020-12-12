@@ -1,0 +1,16 @@
+<div class="modal-body">
+  <div class="d-flex flex-column">
+    <div class="w-100 text-center font-arboria-bold font26px mt-4">ARE YOU SURE?</div>
+    <div class="w-100 text-center font-arboria-medium font20px fontColor70 mt-2 mb-4">Logging out deletes your account from the browser.<br>Your SEED phrase will be the only way to recover your account.</div>
+    <div class="w-100 text-center d-flex flex-row mb-3">
+      <div class="w-25"></div>
+      <div class="w-75"><button class="btn btn-sportsbook font-arboria-bold font16px" (click)="bsModalRef.hide()">CANCEL</button></div>
+      <div class="w-25"></div>
+      <div class="w-75"><button class="btn btn-sportsbook-gray font-arboria-bold font16px" (click)="logout()">LOGOUT</button></div>
+      <div class="w-25"></div>
+    </div>
+    <div class="w-100 text-center font-arboria-medium font12pxpx fontColor70 mb-3">
+      <a routerLink="/sportsbook/settings" (click)="setMobileNav('settings')">Back up your SEED in <u class="font-weight-bold font16px text-highlight usePointer">SETTINGS</u></a>
+    </div>
+  </div>
+</div>

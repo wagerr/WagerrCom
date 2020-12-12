@@ -1,0 +1,55 @@
+<div class="modal-body">
+  <ng-container *ngIf="!canApprove">
+    <div class="d-flex flex-row">
+      <div class="w-100  font-arboria-bold font26px fontColor70 text-center">Scan from new device</div>
+    </div>
+    <div class="d-flex flex-row">
+      <div class="w-100"></div>
+      <div class="w-auto">
+        <ngx-qrcode
+          [elementType]="elementType"
+          [value]="qrcode"
+          cssClass="aclass"
+          errorCorrectionLevel="L">
+        </ngx-qrcode></div>
+      <div class="w-100"></div>
+    </div>
+    <div class="d-flex flex-row mt-2">
+      <div class="w-50"></div>
+      <div class="w-50"><button class="btn btn-sportsbook text-uppercase font-arboria-bold font20px" (click)="disapproveUser()">cancel</button></div>
+      <div class="w-50"></div>
+    </div>
+    <div class="d-flex flex-row mt-2">
+      <div class="w-25"></div>
+      <div class="w-100 font-arboria-book text-center font16px">Note: On iOS, this method only works in Safari.</div>
+      <div class="w-25"></div>
+    </div>
+  </ng-container>
+  <ng-container *ngIf="canApprove">
+    <div class="d-flex flex-row">
+      <div class="w-100  font-arboria-bold font26px fontColor70 text-center">Confirm New Device</div>
+    </div>
+    <div class="d-flex flex-column">
+      <div class="w-100 d-flex flex-row my-4">
+        <ng-container *ngFor="let team of teamDisplay | keyvalue">
+          <div class="w-100 d-flex justify-content-center align-content-center">
+            <app-teamlogo [teamname]="getTeam(team.value)" getClass="authTeamLogo pr-2"></app-teamlogo>
+          </div>
+        </ng-container>
+      </div>
+      <div class="w-100 text-center font-arboria-light font16px my-2">Make sure icons match new device</div>
+      <div class="w-100 d-flex flex-row my-2">
+        <div class="w-25"></div>
+        <div class="w-50"><button class="btn btn-sportsbook font-arboria-bold font20px" (click)="approveUser()">Approve</button></div>
+        <div class="w-25"></div>
+        <div class="w-50"><button class="btn btn-sportsbook-gray  font-arboria-bold font20px" (click)="disapproveUser()">Deny</button></div>
+        <div class="w-25"></div>
+      </div>
+      <div class="d-flex flex-row mt-2">
+        <div class="w-25"></div>
+        <div class="w-100 font-arboria-book text-center font16px">Need Help? <a href="" class="font-arboria-bold font16px fontColorE6" target="_blank">Read Instructions</a></div>
+        <div class="w-25"></div>
+      </div>
+    </div>
+  </ng-container>
+</div>

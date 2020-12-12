@@ -1,0 +1,40 @@
+<div [ngClass]="(topBar) ? 'd-flex flex-row' : 'd-flex flex-column'">
+  <div id="balance" [ngClass]="(topBar) ? 'mx-1' : ''" class="w-100 card balance-wrapper d-none activated mt-3 mt-sm-2">
+    <div class="card-body d-flex justify-content-between text-white p-2 px-3">
+      <span class="w-100 font-arboria-bold font-weight-bold text-uppercase">balance</span>
+      <span class="w-100 text-right font-roboto-condensed">
+      <ng-container *ngIf="balance > 0">
+      <span class="balance-value" *ngIf="balance > 0">{{getBal(0)}}.<span
+        class="text-muted custom">{{getBal(1).substring(0, 2)}}</span></span>&nbsp;
+      </ng-container>
+      <ng-container *ngIf="balance <= 0">
+      <span class="balance-value">0.<span class="text-muted custom">00</span></span>&nbsp;
+        </ng-container>
+      <span class="text-highlight font-weight-bold font12px">{{((isTestnet) ? 'tWGR' : 'WGR')}}</span>
+    </span>
+    </div>
+  </div>
+  <div id="pendingDeposit" [ngClass]="(topBar) ? 'mx-1' : ''"
+       class="w-100  card depBalance-wrapper d-none activated mt-3 mt-sm-2" *ngIf="preBalance > 0">
+    <div class="card-body d-flex justify-content-between text-white p-2 px-3">
+      <span class="w-100 font-arboria-bold font-weight-bold text-uppercase">Pending Balance</span>
+      <span class="w-100 text-right font-roboto-condensed">
+      <span class="balance-value">{{getPreBal(0)}}.<span
+        class="text-white-50 custom">{{getPreBal(1).substring(0, 2)}}</span></span>&nbsp;
+      <span class="text-black font-weight-bold font12px">{{((isTestnet) ? 'tWGR' : 'WGR')}}</span>
+    </span>
+    </div>
+  </div>
+  <div id="winBalance" [ngClass]="(topBar) ? 'mx-1' : ''"
+       class="w-100 card depBalance-wrapper d-none activated mt-3 mt-sm-2" *ngIf="winBalance > 0">
+    <div class="card-body d-flex justify-content-between text-white p-2 px-3"
+         tooltip="Winnings become spendable after 100 confirmations on the Wagerr network.">
+      <span class="w-100 font-arboria-bold font-weight-bold text-uppercase">Payout Pending</span>
+      <span class="w-75 text-right font-roboto-condensed">
+      <span class="balance-value">{{getWinBal(0)}}.<span
+        class="text-white-50 custom">{{getWinBal(1).substring(0, 2)}}</span></span>&nbsp;
+      <span class="text-black font-weight-bold font12px">{{((isTestnet) ? 'tWGR' : 'WGR')}}</span>
+    </span>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,132 @@
+
+<ng-container *ngFor="let item of specials">
+  <div class="d-flex flex-row pb-4 pt-5" *ngIf="item.view === 'true'">
+    <!--        <div class="" [@flyInOut] *ngIf="activePane === 'pane0'">-->
+    <div class="w-100 d-flex justify-content-center align-content-center ">
+      <div class="w-75 d-sm-flex flex-sm-row d-flex flex-column">
+        <div class="w-100 d-flex justify-content-center align-content-center">
+          <ng-container *ngIf="isTypeBasic(item)">
+            <img src="{{item.imgUrl}}" class="img-fluid sliderImg">
+          </ng-container>
+          <ng-container  *ngIf="!isTypeBasic(item)">
+            <div class="CustomFadeWinja">
+              <div class="blankTriangle">
+                <img src="/assets/images/blanktriangle01.svg" class="img-fluid sliderImg">
+              </div>
+              <ng-container *ngIf="isTypeftw(item)">
+                <div class="winja">
+                  <img src="/assets/images/winjaicon2.svg" class="img-fluid sliderImg">
+                </div>
+                <div class="fadeWinja">
+                  <img src="/assets/images/fadethewinja-01.svg" class="img-fluid sliderImg">
+                </div>
+              </ng-container>
+              <ng-container *ngIf="isTypeftd(item)">
+                <div class="winja">
+                </div>
+                <div class="fadeWinja">
+                  <img src="/assets/images/fadethedgenwhite.svg" class="img-fluid sliderImg">
+                </div>
+              </ng-container>
+              <div class="team font-arboria-bold text-center">
+                <div class="teamData">{{getTeam(item.highlightteam)}} <span class="text-highlight">  {{getLine(item.highlightteam, item.highlighttype, item.eventid)}}</span></div>
+              </div>
+            </div>
+          </ng-container>
+        </div>
+        <div class="w-100 text-center text-sm-left">
+          <h2 class="pt-0 pt-sm-4 font-arboria-light font33px" [innerHTML]="item.title"></h2>
+          <p class="font-arboria-book font16px mx-auto mx-0 pt-0 text-left mb-sm-4 px-0" [innerHTML]="item.text"></p>
+          <ng-container *ngIf="item.buttonType === 'router'">
+            <a routerLink="{{item.buttonLink}}"
+               class="btn round-btn btn-outline-light-gray w-50 font-arboria-bold text-uppercase" [innerHTML]="item.buttonText"></a>
+          </ng-container>
+          <ng-container *ngIf="item.buttonType === 'href'">
+            <a href="{{item.buttonLink}}"
+               class="btn round-btn btn-outline-light-gray w-50 font-arboria-bold text-uppercase" [innerHTML]="item.buttonText"></a>
+          </ng-container>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</ng-container>
+
+  <!--        <div class="w-100 d-flex justify-content-center align-content-center ">-->
+  <!--          <div class="w-100 d-sm-flex flex-sm-row d-flex flex-column">-->
+<!--  &lt;!&ndash;            <div class="w-100 h-100 d-flex justify-content-center align-content-center">&ndash;&gt;-->
+<!--                <div class="CustomFadeWinja">-->
+<!--                  <div class="blankTriangle">-->
+<!--                    <img src="/assets/images/blanktriangle01.svg" class="img-fluid sliderImg">-->
+<!--                  </div>-->
+<!--                  <div class="winja">-->
+<!--                    <img src="/assets/images/winjaicon2.svg" class="img-fluid sliderImg">-->
+<!--                  </div>-->
+<!--                  <div class="fadeWinja">-->
+<!--                    <img src="/assets/images/fadethewinja-01.svg" class="img-fluid sliderImg">-->
+<!--                  </div>-->
+<!--                  <div class="team font-arboria-bold text-center">-->
+<!--                    <div class="teamData">SEA SEAHAWKS <span class="text-highlight">  -400</span></div>-->
+<!--                  </div>-->
+<!--                </div>-->
+<!--              </div>-->
+  <!--            <div class="w-100 text-center text-sm-left">-->
+  <!--              <h2 class="pt-0 pt-sm-4 font-arboria-light font33px"><span class="font-arboria-bold">SAVE </span>more,-->
+  <!--                <span class="font-arboria-bold">MAKE </span>more</h2>-->
+  <!--              <p class="font-arboria-book font16px mx-auto mx-0 pt-0 text-left mb-sm-4 px-0">Because Wagerr has the-->
+  <!--                lowest juice in the world, bettors get a bigger edge when they bet on the Wagerr network. Move to-->
+  <!--                Wagerr. Maximize your wins.</p>-->
+  <!--              <a routerLink="sportsbook"-->
+  <!--                 class="btn round-btn btn-outline-light-gray w-50 font-arboria-bold text-uppercase">START BETTING</a>-->
+  <!--            </div>-->
+  <!--          </div>-->
+  <!--        </div>-->
+  <!--        </div>-->
+  <!--        <div class="" [@flyInOut] *ngIf="activePane === 'pane1'">-->
+  <!--          <div class="w-100 d-sm-flex flex-sm-row d-flex flex-column">-->
+  <!--            <div class="w-50 d-flex justify-content-center align-content-center">-->
+  <!--              <img src="/assets/images/40percent-01.svg" class="img-fluid sliderImg">-->
+  <!--            </div>-->
+  <!--            <div class="w-75 text-center text-sm-left">-->
+  <!--              <h2 class="pt-4 font-arboria-light font33px">Save <span class="font-arboria-bold">MORE</span>,-->
+  <!--                make-->
+  <!--                <span class="font-arboria-bold">MORE</span></h2>-->
+  <!--              <p class="font-arboria-book font16px mx-auto mx-sm-0 text-left mb-4 px-4 px-sm-0">Because Wagerr has the-->
+  <!--                lowest juice in the world-->
+  <!--                bettors-->
+  <!--                have a bigger edge when they bet with the Wagerr network. Move to wagerr maximize your chances for-->
+  <!--                victory-->
+  <!--                today.</p>-->
+  <!--              <a routerLink="sportsbook"-->
+  <!--                 class="btn round-btn btn-outline-light-gray w-50 font-arboria-bold text-uppercase">START BETTING</a>-->
+  <!--            </div>-->
+  <!--            <div class="w-75 d-flex justify-content-center justify-content-sm-end align-items-center pb-4">-->
+  <!--              &nbsp;-->
+  <!--            </div>-->
+  <!--          </div>-->
+  <!--        </div>-->
+  <!--        <div class="" [@flyInOut] *ngIf="activePane === 'pane2'">-->
+  <!--          <div class="w-100 d-sm-flex flex-sm-row d-flex flex-column">-->
+  <!--            <div class="w-50 d-flex justify-content-center align-content-center">-->
+  <!--              <img src="/assets/images/40percent-01.svg" class="img-fluid sliderImg">-->
+  <!--            </div>-->
+  <!--            <div class="w-75 text-center text-sm-left">-->
+  <!--              <h2 class="pt-4 font-arboria-light font33px">Save <span class="font-arboria-bold">MORE</span>,-->
+  <!--                make-->
+  <!--                <span class="font-arboria-bold">MORE</span></h2>-->
+  <!--              <p class="font-arboria-book font16px mx-auto mx-sm-0 text-left mb-4 px-4 px-sm-0">Because Wagerr has the-->
+  <!--                lowest juice in the world-->
+  <!--                bettors-->
+  <!--                have a bigger edge when they bet with the Wagerr network. Move to wagerr maximize your chances for-->
+  <!--                victory-->
+  <!--                today.</p>-->
+  <!--              <a routerLink="sportsbook"-->
+  <!--                 class="btn round-btn btn-outline-light-gray w-50 font-arboria-bold text-uppercase">START BETTING</a>-->
+  <!--            </div>-->
+  <!--            <div class="w-75 d-flex justify-content-center justify-content-sm-end align-items-center pb-4">-->
+  <!--              &nbsp;-->
+  <!--            </div>-->
+  <!--          </div>-->
+  <!--        </div>-->
+  <!--        <div class="" [@flyInOut] *ngIf="activePane === 'pane3'">-->
+  <!--        </div>-->

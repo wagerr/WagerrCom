@@ -1,0 +1,16 @@
+.teamLogo {
+  height: 300px !important;
+  width: 300px !important;
+  filter: invert(0%) !important;
+}
+
+.teamLogomobile {
+  width: 75% !important;
+}
+
+
+@media only screen  and (max-width: 767px) {
+  .font42px {
+    font-size: 21px !important;
+  }
+}
