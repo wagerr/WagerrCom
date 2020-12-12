@@ -1,0 +1,6 @@
+<ng-container *ngIf="type === 'euro'">
+  {{points | number: '1.2-2'}}
+</ng-container>
+<ng-container *ngIf="type === 'us'">
+  {{usOdds(points)}}
+</ng-container>

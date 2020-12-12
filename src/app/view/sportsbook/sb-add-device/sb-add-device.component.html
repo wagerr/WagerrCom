@@ -1,0 +1,75 @@
+<div class="modal-body">
+  <ng-container *ngIf="scannerEnabled">
+    <div class="d-flex flex-row">
+      <div class="w-100  font-arboria-bold font20px fontColor70 text-center">Scan QR Code</div>
+    </div>
+    <div class="d-flex flex-column">
+      <div class="w-100">
+        <zxing-scanner
+          [enable]="scannerEnabled"
+          [(device)]="currentDevice"
+          (camerasFound)="onCamerasFound($event)"
+          [tryHarder]="true"
+          (scanSuccess)="scanSuccessHandler($event)"
+        ></zxing-scanner>
+      </div>
+      <div class="w-100 d-flex flex-row text-center my-2" *ngIf="changeCamera">
+        <div class="w-25"></div>
+        <div class="w-75">
+          <select name="camera" #cameras (change)="updateCamera(cameras.value)">
+            <option value="none"></option>
+            <ng-container *ngFor="let camera of deviceList | keyvalue">
+              <option value="{{camera.key}}">{{camera.value.label}}</option>
+            </ng-container>
+          </select>
+        </div>
+        <div class="w-25"></div>
+      </div>
+      <div class="w-100 d-flex flex-row my-2">
+        <div class="w-25"></div>
+        <div class="w-50">
+          <button class="btn btn-sportsbook font-arboria-bold font16px" (click)="changeCamera = true">Change Camera
+          </button>
+        </div>
+        <div class="w-25"></div>
+        <div class="w-50">
+          <button class="btn btn-sportsbook-gray  font-arboria-bold font16px" (click)="cancel()">Cancel</button>
+        </div>
+        <div class="w-25"></div>
+      </div>
+      <div class="d-flex flex-row mt-2">
+        <div class="w-50"></div>
+        <div class="w-100 font-arboria-book text-center font16px">Need Help? <a href=""
+                                                                                class="font-arboria-bold font16px fontColorE6"
+                                                                                target="_blank">Read Instructions</a>
+        </div>
+        <div class="w-50"></div>
+      </div>
+    </div>
+  </ng-container>
+  <ng-container *ngIf="!scannerEnabled">
+    <div class="d-flex flex-row">
+      <div class="w-100  font-arboria-bold font26px fontColor70 text-center">Confirm New Device</div>
+    </div>
+    <div class="d-flex flex-column">
+      <div class="w-100 d-flex flex-row my-4">
+        <ng-container *ngFor="let team of teamDisplay | keyvalue">
+          <div class="w-100 d-flex justify-content-center align-content-center">
+            <app-teamlogo [teamname]="getTeam(team.value)" getClass="authTeamLogo pr-2"></app-teamlogo>
+          </div>
+        </ng-container>
+      </div>
+      <div class="w-100 text-center font-arboria-light font16px my-2">Make sure icons match primary device</div>
+      <div class="w-100 d-flex flex-row my-2">
+        <div class="w-50"></div>
+        <div class="w-50"><button class="btn btn-sportsbook-gray  font-arboria-bold font20px" (click)="cancel()">Cancel</button></div>
+        <div class="w-50"></div>
+      </div>
+      <div class="d-flex flex-row mt-2">
+        <div class="w-25"></div>
+        <div class="w-100 font-arboria-book text-center font16px">Need Help? <a href="" class="font-arboria-bold font16px fontColorE6" target="_blank">Read Instructions</a></div>
+        <div class="w-25"></div>
+      </div>
+    </div>
+  </ng-container>
+</div>

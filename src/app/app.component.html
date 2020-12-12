@@ -1,0 +1,10 @@
+<div class="container-fluid LoaderView" *ngIf="!loaded">
+  <div class="d-flex flex-column loaderimg justify-content-center align-content-center">
+    <div class="w-100 justify-content-center align-content-center text-center">
+      <img src="/assets/images/wgrmwspinner.svg">
+    </div>
+  </div>
+</div>
+<ng-container *ngIf="loaded">
+  <router-outlet (activate)="onActivate($event)"></router-outlet>
+</ng-container>

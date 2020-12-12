@@ -1,0 +1,93 @@
+<div class="row pb-5 mb-3 pb-sm-0 mb-sm-0 h-sm-100 mr-0" *ngIf="eventData">
+  <div id="bets" class="col pt-2 d-md-block d-lg-block pr-0"
+       [ngClass]="mobileNavIsActive('event', 'active', '')">
+    <div class="card bets">
+      <div class="card-body p-0 position-relative">
+        <div class="overlay position-absolute"></div>
+        <ul class="nav nav-tabs text-uppercase font-weight-bold text-center">
+          <li class="nav-item w-100  d-flex flex-row">
+            <div class="w-auto px-2 usePointer">&nbsp;&nbsp;</div>
+            <div class="w-100">Sportsbook Event</div>
+            <div class="w-auto px-2 usePointer" (click)="backToSportsBook()"><i class="fal fa-times"></i></div>
+          </li>
+        </ul>
+        <div class="content">
+          <div class="w-100 d-flex flex-row">
+            <div class="teamlogo"
+                 [ngClass]="isMobile('teamlogoMobile')">
+              <app-teamlogo type="left" [teamname]="eventData.teams.home"
+                            getClass="teamLogo widthSize200px"></app-teamlogo>
+            </div>
+            <div class="w-75 d-flex flex-column text-center justify-content-center align-content-center teamnames">
+              <div
+                class="w-100 font-roboto-condensed font-weight-bold teamnames"
+                [ngClass]="isMobile('teamnamesMobile')"
+              >{{eventData.teams.home}}</div>
+              <div class="w-100 font-roboto-condensed font-italic teamnames"
+                   [ngClass]="isMobile('teamnamesMobile')">vs.</div>
+              <div
+                class="w-100 font-roboto-condensed font-weight-bold teamnames"
+                [ngClass]="isMobile('teamnamesMobile')">{{eventData.teams.away}}</div>
+              <div
+                class="w-100 font-roboto-condensed font-weight-bold teamnames time lineheight1">{{getStartTime(eventData) | date: 'MMM, dd hh:mm aaa'}}</div>
+            </div>
+            <div class="teamlogo text-right"
+                 [ngClass]="isMobile('teamlogoMobile')">
+              <app-teamlogo type="right" [teamname]="eventData.teams.away"
+                            getClass="teamLogo widthSize200px"></app-teamlogo>
+            </div>
+          </div>
+          <app-sbbetdisplay [sport]="eventData.sport.toLowerCase()" [eventid]="eventData.event_id"
+                            *ngIf="showBet"></app-sbbetdisplay>
+        </div>
+      </div>
+      <div class="card-body p-0 position-relative">
+        <div class="overlay position-absolute"></div>
+        <ul class="nav nav-tabs text-uppercase font-weight-bold text-center flex-nowrap" role="tablist">
+          <li class="nav-item w-100">
+            <a class="h-100 nav-link rounded-0 py-3 py-sm-1" [ngClass]="(showType === 'moneyline') ? 'active' : '' "
+               id="ml-tab"
+               data-toggle="tab" [routerLink]="" (click)="setGraph('moneyline')" role="tab" aria-controls="bet"
+               aria-selected="true">moneyline trend</a>
+          </li>
+          <li class="nav-item w-100">
+            <a class="h-100 nav-link rounded-0 py-3 py-sm-1" [ngClass]="(showType === 'spread') ? 'active' : '' "
+               id="spread-tab" data-toggle="tab" [routerLink]="" (click)="setGraph('spread')" role="tab"
+               aria-controls="bet-exchange" aria-selected="false">spread trend</a>
+          </li>
+          <li class="nav-item w-100">
+            <a class="h-100 nav-link rounded-0 py-3 py-sm-1" [ngClass]="(showType === 'total') ? 'active' : '' "
+               id="total-tab" data-toggle="tab" [routerLink]="" (click)="setGraph('total')" role="tab"
+               aria-controls="bet-exchange" aria-selected="false">total trend</a>
+          </li>
+        </ul>
+        <div class="tab-content" *ngIf="eventJson && eventJson.postedData">
+          <ng-container *ngIf="showType === 'moneyline'">
+            <app-chart [eventData]="eventJson" [type]="showType"></app-chart>
+          </ng-container>
+          <ng-container *ngIf="showType === 'spread'">
+            <app-chart [eventData]="eventJson" [type]="showType"></app-chart>
+          </ng-container>
+          <ng-container *ngIf="showType === 'total'">
+            <app-chart [eventData]="eventJson" [type]="showType"></app-chart>
+          </ng-container>
+        </div>
+        <div class="tab-content chartSize" *ngIf="!eventJson">
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <ng-container *ngIf="whatOS() === 'mobile'">
+    <aside class="col-12 col-sm-3 order-0 order-sm-1 px-sm-2 d-md-block d-lg-block">
+      <app-sbbalance *ngIf="isLoggedIn() && whatOS() === 'desktop'"></app-sbbalance>
+      <div class="d-md-block d-lg-block" [ngClass]="mobileNavIsActive('betslip', 'active', 'd-none')">
+        <app-sbbetslip></app-sbbetslip>
+      </div>
+      <div class="d-md-block d-lg-block" [ngClass]="mobileNavIsActive('chat', 'active', 'd-none')">
+        <!--        <app-sbchat></app-sbchat>-->
+        <app-sbbetabook></app-sbbetabook>
+      </div>
+    </aside>
+  </ng-container>
+</div>

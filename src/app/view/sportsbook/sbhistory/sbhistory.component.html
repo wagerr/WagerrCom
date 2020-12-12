@@ -1,0 +1,333 @@
+<div class="row pb-5 mb-3 pb-sm-0 mb-sm-0 h-sm-100 mr-0">
+  <div id="bets" class="col pt-2 d-md-block d-lg-block pr-2">
+    <ng-container *ngIf="whatOS() !== 'mobile'">
+    <app-sbbalance [topBar]="isTop"></app-sbbalance><Br>
+    </ng-container>
+    <div class="card bets mb-2">
+      <div class="card-body p-0 position-relative">
+        <div class="overlay position-absolute"></div>
+        <ul class="nav nav-tabs text-uppercase font-weight-bold px-2 py-1" role="tablist">
+          <li class="nav-item w-100 d-flex flex-row pl-2">
+            <div class="text-left text-uppercase w-50">pending bets</div>
+            <div class="w-100 d-flex flex-row text-right font-roboto-condensed">
+              <div class="w-100 pr-1 text-white-50">
+                <span class="font12px text-capitalize">Pending Stake</span>&nbsp;
+                <span class="text-white" [innerHTML]="getToWin(totalAmount())"></span>
+                <div class="btn-group ml-2" dropdown *ngIf="whatOS() !== 'mobile'">
+                  <button id="button-container" dropdownToggle type="button"
+                          class="w-50px text-right text-uppercase filterOne btn btn-outline-dark dropdown-toggle"
+                          aria-controls="dropdown-container">
+                    {{pendingMaxSize}}
+                    <span class="caret"></span>
+                  </button>
+                  <ul id="dropdown-container" *dropdownMenu class="dropdown-menu filterOne"
+                      role="menu" aria-labelledby="button-container">
+                    <li role="menuitem">
+                      <span class="dropdown-item text-uppercase filterOne usePointer"
+                            (click)="updatePendingMaxSize(5)">5</span>
+                      <span class="dropdown-item text-uppercase filterOne usePointer"
+                            (click)="updatePendingMaxSize(10)">10</span>
+                      <span class="dropdown-item text-uppercase filterOne usePointer"
+                            (click)="updatePendingMaxSize(25)">25</span>
+                      <span class="dropdown-item text-uppercase filterOne usePointer"
+                            (click)="updatePendingMaxSize(50)">50</span>
+                      <span class="dropdown-item text-uppercase filterOne usePointer"
+                            (click)="updatePendingMaxSize(100)">100</span>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </li>
+        </ul>
+        <div class="tab-content">
+          <div class="d-flex flex-column">
+            <div class="w-100 d-none d-sm-flex flex-row py-2 headerBar">
+              <div class="w-100 d-flex flex-row pl-2">
+                <div class="text-center text-uppercase w-eventLink"></div>
+                <div class="w-35 text-center text-uppercase">date</div>
+                <div class="w-100 text-center text-uppercase">team</div>
+                <div class="w-35 text-center text-uppercase">type</div>
+                <div class="w-35 text-center text-uppercase">amount</div>
+                <div class="w-25 text-center text-uppercase">odds</div>
+                <div class="w-25 text-center text-uppercase">to win</div>
+                <div class="w-25 text-center text-uppercase">view TX</div>
+              </div>
+            </div>
+            <div class="w-100 d-flex d-sm-none flex-row py-2 headerBar">
+              <div class="w-100 d-flex flex-row ">
+                <div class="w-35 text-center text-uppercase">date</div>
+                <div class="w-100 text-center text-uppercase d-flex flex-row">
+                  <div class="w-100 text-center text-uppercase">BET</div>
+                  <div class="w-75 text-center text-uppercase">ODDS</div>
+                </div>
+                <div class="w-35 text-center text-uppercase">to win</div>
+              </div>
+            </div>
+            <div class="w-100 d-flex flex-column py-2">
+              <ng-container *ngFor="let bet of filterPendingBets()">
+                <div class="w-100 d-none d-sm-flex flex-row item mb-2 pl-2">
+                  <div class="text-center text-uppercase border borderLeftRound w-eventLink">
+                    <a [routerLink]="['/sportsbook/event/' + bet.legs[0]['event-id']]"
+                       class="btn btn-sportsbook4"><i class="fal fa-info-circle"></i></a>
+                  </div>
+                  <div class="w-35 text-center text-uppercase border py-2">
+                    {{bet.time * 1000 | date: 'MMM d, y, h:mm a'}}
+                  </div>
+                  <div class="w-100 text-center text-uppercase border pt-2">
+                    <ng-container *ngIf="getTeamType(bet) === 'home'">
+                      <app-teamlogo [teamname]="getTeam(bet, 'home')" getClass="rowTeamLogo pr-2"></app-teamlogo>
+                      {{getTeam(bet, 'home')}}
+                    </ng-container>
+                    <ng-container *ngIf="getTeamType(bet) === 'away'">
+                      <app-teamlogo [teamname]="getTeam(bet, 'away')" getClass="rowTeamLogo pr-2"></app-teamlogo>
+                      {{getTeam(bet, 'away')}}
+                    </ng-container>
+                    <ng-container *ngIf="getTeamType(bet) === 'all'">
+                      <app-teamlogo [teamname]="getTeam(bet, 'home')" getClass="rowTeamLogo pr-2"></app-teamlogo>
+                      {{getTeam(bet, 'home')}} <span class="px-1 text-highlight2">vs.</span> {{getTeam(bet, 'away')}}
+                      <app-teamlogo [teamname]="getTeam(bet, 'away')" getClass="rowTeamLogo pl-2"></app-teamlogo>
+                    </ng-container>
+                  </div>
+                  <div class="w-35 text-center font-weight-bold text-white text-uppercase border py-2"
+                       [innerHTML]="getBetType(bet)"></div>
+                  <div
+                    class="w-35 text-center font-weight-bold text-white border py-p35 toWin"
+                    [innerHTML]="getToWin(bet.amount.toFixed(2), false, true)"></div>
+                  <div
+                    class="w-25 text-center font-weight-bold text-highlight2 text-uppercase border py-2">
+                    <app-eurousodds [points]="getOdds(bet)" [type]="accountSettings?.odds"></app-eurousodds>
+                  </div>
+                  <div
+                    class="w-25 text-center font-weight-bold text-white border borderRightRound py-p35 toWin"
+                    [innerHTML]="getToWin((bet.amount * getOdds(bet)).toFixed(2), false, true)"></div>
+                  <div class="w-25 text-center text-uppercase px-1">
+                    <a href="https://explorer.wagerr.com/#/tx/{{bet.betTxHash}}" target="_blank"
+                       class="btn btn-sportsbook3"><i class="far fa-search"></i></a></div>
+                </div>
+                <div class="w-100 d-flex d-sm-none flex-row item mb-2 px-2">
+                  <div class="w-25 text-center text-uppercase border borderLeftRound py-2">
+                    {{bet.time * 1000 | date: 'MMM'}}<br>
+                    {{bet.time * 1000 | date: 'd'}}
+                  </div>
+                  <div class="w-100 border d-flex flex-column">
+                    <div class="w-100 border-bottom py-1 pl-2">
+                      <ng-container *ngIf="getTeamType(bet) === 'home'">
+                        {{getTeam(bet, 'home')}}
+                      </ng-container>
+                      <ng-container *ngIf="getTeamType(bet) === 'away'">
+                        {{getTeam(bet, 'away')}}
+                      </ng-container>
+                      <ng-container *ngIf="getTeamType(bet) === 'all'">
+                        <span class="teamFontFit">{{getTeam(bet, 'home')}}
+                          <span class="px-1 text-highlight2">vs.</span>
+                          {{getTeam(bet, 'away')}}</span>
+                      </ng-container>
+                    </div>
+                    <div class="w-100 d-flex flex-row">
+                      <div class="w-100 border-right  font-weight-bold pl-2 py-1" [innerHTML]="getBetType(bet)"></div>
+                      <div class="w-75 text-center  font-weight-bold text-highlight2 py-1">{{getOdds(bet)}}</div>
+                    </div>
+                  </div>
+                  <div
+                    class="w-25 text-center font-weight-bold text-white text-uppercase border borderRightRound py-2 toWin"
+                    [innerHTML]="getToWin((bet.amount * getOdds(bet)).toFixed(2), true, true)"></div>
+                </div>
+              </ng-container>
+            </div>
+            <div class="w-100 d-flex flex-row justify-content-center">
+              <pagination [totalItems]="pendingTotalItems" [(ngModel)]="pendingCurrentPage" [itemsPerPage]="pendingMaxSize" [maxSize]="txMaxSize"></pagination>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!--    *ngFor="let tx of txlist"-->
+    <div class="card bets">
+      <div class="card-body p-0 position-relative">
+        <div class="overlay position-absolute"></div>
+        <ul class="nav nav-tabs text-uppercase font-weight-bold px-2 py-1" role="tablist">
+          <li class="nav-item w-100 d-flex flex-row">
+            <div class="w-25">
+              History
+            </div>
+            <div class="w-100 text-right pb-1">
+              <button class="btn filterOne btn btn-outline-dark px-3 mr-2" (click)="toggeleNet()">
+                {{ (finalNet) ? 'Net' : 'Gross' }} Winnings
+              </button>
+              <div class="btn-group" dropdown>
+                <button id="button-container" dropdownToggle type="button"
+                        class="w-100px text-right text-uppercase filterOne btn btn-outline-dark dropdown-toggle"
+                        aria-controls="dropdown-container">
+                  {{getSortHistory}}
+                  <span class="caret"></span>
+                </button>
+                <ul id="dropdown-container" *dropdownMenu class="dropdown-menu filterOne"
+                    role="menu" aria-labelledby="button-container">
+                  <li role="menuitem"><span class="dropdown-item text-uppercase filterOne usePointer"
+                                            (click)="sortHistory('all')">all</span></li>
+                  <li role="menuitem"><span class="dropdown-item text-uppercase filterOne usePointer"
+                                            (click)="sortHistory('bets only')">bets only</span></li>
+                  <li role="menuitem"><span class="dropdown-item text-uppercase filterOne usePointer"
+                                            (click)="sortHistory('moneyline')">Moneyline</span></li>
+                  <li role="menuitem"><span class="dropdown-item text-uppercase filterOne usePointer"
+                                            (click)="sortHistory('spread')">spread</span></li>
+                  <li role="menuitem"><span class="dropdown-item text-uppercase filterOne usePointer"
+                                            (click)="sortHistory('total')">total</span></li>
+                  <li role="menuitem"><span class="dropdown-item text-uppercase filterOne usePointer"
+                                            (click)="sortHistory('deposit')">deposit</span></li>
+                  <li role="menuitem"><span class="dropdown-item text-uppercase filterOne usePointer"
+                                            (click)="sortHistory('withdrawal')">withdrawal</span></li>
+                  <li role="menuitem"><span class="dropdown-item text-uppercase filterOne usePointer"
+                                            (click)="sortHistory('won')">won</span></li>
+                  <li role="menuitem"><span class="dropdown-item text-uppercase filterOne usePointer"
+                                            (click)="sortHistory('lost')">lost</span></li>
+                  <li role="menuitem"><span class="dropdown-item text-uppercase filterOne usePointer"
+                                            (click)="sortHistory('refund')">refund</span></li>
+                </ul>
+              </div>
+              <div class="btn-group ml-2" dropdown *ngIf="whatOS() !== 'mobile'">
+                <button id="button-container" dropdownToggle type="button"
+                        class="w-50px text-right text-uppercase filterOne btn btn-outline-dark dropdown-toggle"
+                        aria-controls="dropdown-container">
+                  {{txSize}}
+                  <span class="caret"></span>
+                </button>
+                <ul id="dropdown-container" *dropdownMenu class="dropdown-menu filterOne"
+                    role="menu" aria-labelledby="button-container">
+                  <li role="menuitem">
+                    <span class="dropdown-item text-uppercase filterOne usePointer"
+                          (click)="updateTXMAxSize(5)">5</span>
+                    <span class="dropdown-item text-uppercase filterOne usePointer"
+                          (click)="updateTXMAxSize(10)">10</span>
+                    <span class="dropdown-item text-uppercase filterOne usePointer"
+                          (click)="updateTXMAxSize(25)">25</span>
+                    <span class="dropdown-item text-uppercase filterOne usePointer"
+                          (click)="updateTXMAxSize(50)">50</span>
+                    <span class="dropdown-item text-uppercase filterOne usePointer"
+                          (click)="updateTXMAxSize(100)">100</span>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </li>
+        </ul>
+        <div class="tab-content">
+          <div class="d-flex flex-column">
+            <div class="w-100  d-none d-sm-flex flex-row py-2 headerBar">
+              <div class="w-100 d-flex flex-row ">
+                <div class="w-35 text-center text-uppercase">date</div>
+                <div class="w-100 text-center text-uppercase">team</div>
+                <div class="w-35 text-center text-uppercase">type</div>
+                <div class="w-35 text-center text-uppercase">amount</div>
+                <div class="w-25 text-center text-uppercase">odds</div>
+                <div class="w-25 text-center text-uppercase">score</div>
+                <div class="w-50 text-center text-uppercase">final</div>
+                <div class="w-25 text-center text-uppercase">view TX</div>
+              </div>
+            </div>
+            <div class="w-100  d-flex d-sm-none flex-row py-2 headerBar">
+              <div class="w-100 d-flex flex-row ">
+                <div class="w-35 text-center text-uppercase">date</div>
+                <div class="w-100 text-center text-uppercase d-flex flex-row">
+                  <div class="w-100 text-center text-uppercase">BET</div>
+                  <div class="w-75 text-center text-uppercase">ODDS<span class="text-highlight2">/</span>SCORE</div>
+                </div>
+                <div class="w-35 text-center text-uppercase">final</div>
+              </div>
+            </div>
+            <div class="w-100 d-flex flex-column py-2">
+              <ng-container *ngFor="let tx of getTXList()">
+                <div class="w-100 d-none d-sm-flex flex-row item mb-2 pl-2">
+                  <div class="w-35 text-center text-uppercase border borderLeftRound py-2">
+                    {{tx.time * 1000 | date: 'MMM d, y, h:mm a'}}</div>
+                  <div class="w-100 text-center text-uppercase border pt-2">
+                    <ng-container *ngIf="getTeamType(tx.bet) === 'home'">
+                      <app-teamlogo [teamname]="getTeam(tx.bet, 'home')" getClass="rowTeamLogo pr-2"></app-teamlogo>
+                      {{getTeam(tx.bet, 'home')}}
+                    </ng-container>
+                    <ng-container *ngIf="getTeamType(tx.bet) === 'away'">
+                      <app-teamlogo [teamname]="getTeam(tx.bet, 'away')" getClass="rowTeamLogo pr-2"></app-teamlogo>
+                      {{getTeam(tx.bet, 'away')}}
+                    </ng-container>
+                    <ng-container *ngIf="getTeamType(tx.bet) === 'all'">
+                      <app-teamlogo [teamname]="getTeam(tx.bet, 'home')" getClass="rowTeamLogo pr-2"></app-teamlogo>
+                      {{getTeam(tx.bet, 'home')}} <span
+                      class="px-2 text-highlight2">vs.</span> {{getTeam(tx.bet, 'away')}}
+                      <app-teamlogo [teamname]="getTeam(tx.bet, 'away')" getClass="rowTeamLogo pl-2"></app-teamlogo>
+                    </ng-container>
+                  </div>
+                  <div class="w-35 text-center font-weight-bold text-white  text-uppercase border py-2"
+                       [innerHTML]="getTxType(tx)"></div>
+                  <div
+                    class="w-35 text-center font-weight-bold text-white border toWin py-p35"
+                    [innerHTML]="getToWin(getAmount(tx).toFixed(8), false, true)"></div>
+                  <div
+                    class="w-25 text-center font-weight-bold text-highlight2  text-uppercase border py-2">
+                    <app-eurousodds [points]="getOdds(tx.bet)" [type]="accountSettings?.odds"></app-eurousodds>
+                  </div>
+                  <div
+                    class="w-25 text-center font-weight-bold text-highlight2  text-uppercase border py-2"
+                    [innerHTML]="getScore(tx.bet)"></div>
+                  <div
+                    class="w-50 text-center font-weight-bold text-white border borderRightRound toWin py-p35">
+                      <span class="font11px" [ngClass]="(getWinLose(tx.bet) === 'won') ? 'text-highlight2' : ''">{{getWinLose(tx.bet)}}</span>&nbsp;
+                      <ng-container *ngIf="getWinLose(tx.bet) === 'won'">
+                        <span [innerHTML]="getToWin(getWinnings(tx), false, true)"></span>
+                      </ng-container>
+                  </div>
+                  <div class="w-25 text-center text-uppercase px-1">
+                    <a href="https://explorer.wagerr.com/#/tx/{{tx.txid}}" target="_blank"
+                       class="btn btn-sportsbook3"><i class="far fa-search"></i></a>
+                  </div>
+                </div>
+                <div class="w-100 d-flex d-sm-none flex-row item mb-2 px-2">
+                  <div class="w-25 text-center text-uppercase border borderLeftRound py-3">
+                    {{tx.time * 1000 | date: 'MMM'}}<br>
+                    {{tx.time * 1000 | date: 'd'}}
+                  </div>
+                  <div class="w-100 border d-flex flex-column">
+                    <div class="w-100 border-bottom py-1 pl-2">
+                      <ng-container *ngIf="getTeamType(tx.bet) === 'home'">
+                        {{getTeam(tx.bet, 'home')}}
+                      </ng-container>
+                      <ng-container *ngIf="getTeamType(tx.bet) === 'away'">
+                        {{getTeam(tx.bet, 'away')}}
+                      </ng-container>
+                      <ng-container *ngIf="getTeamType(tx.bet) === 'all'">
+                        <span class="teamFontFit">{{getTeam(tx.bet, 'home')}} <span
+                          class="px-1 text-highlight2">vs.</span> {{getTeam(tx.bet, 'away')}}</span>
+                      </ng-container>
+                      <ng-container *ngIf="getTeamType(tx.bet) === 'none'">&nbsp;</ng-container>
+                    </div>
+                    <div class="w-100 d-flex flex-row">
+                      <div class="w-100 border-right border-bottom  font-weight-bold pl-2 py-1"
+                           [innerHTML]="getTxType(tx)"></div>
+                      <div
+                        class="w-75 text-center border-bottom  font-weight-bold text-highlight2 py-1">{{getOdds(tx.bet)}}</div>
+                    </div>
+                    <div class="w-100 d-flex flex-row">
+                      <div class="w-100 border-right  font-weight-bold pl-2 py-1">{{(isBet(tx)) ? 'Stake&nbsp;' : ''}}
+                        <span [innerHTML]="getToWin(getAmount(tx).toFixed(2), false)"></span></div>
+                      <div class="w-75 text-center  font-weight-bold text-highlight2 py-1"
+                           [innerHTML]="getScore(tx.bet)"></div>
+                    </div>
+                  </div>
+                  <div class="w-25 text-center font-weight-bold text-white text-uppercase border borderRightRound toWin py-3">
+                    <span class="font11px" [ngClass]="(getWinLose(tx.bet) === 'won') ? 'text-highlight2' : ''">{{getWinLose(tx.bet)}}</span><br>
+                    <ng-container *ngIf="getWinLose(tx.bet) === 'won'">
+                      <span [innerHTML]="getToWin(getWinnings(tx), true, true)"></span>
+                    </ng-container>
+                  </div>
+                </div>
+              </ng-container>
+            </div>
+            <div class="w-100 d-flex flex-row justify-content-center">
+              <pagination [totalItems]="txTotalItems" [(ngModel)]="txCurrentPage" [itemsPerPage]="txSize" [maxSize]="txMaxSize"></pagination>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

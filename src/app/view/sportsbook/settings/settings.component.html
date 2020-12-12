@@ -1,0 +1,181 @@
+<div class="row pb-5 mb-3 pb-sm-0 mb-sm-0 h-sm-100 mr-0">
+  <div id="bets" class="col pt-2 d-md-block d-lg-block pr-2">
+    <ng-container *ngIf="whatOS() !== 'mobile'">
+      <app-sbbalance [topBar]="isTop"></app-sbbalance>
+      <Br>
+    </ng-container>
+    <div class="card bets mb-2">
+      <div class="card-body p-0 position-relative">
+        <div class="overlay position-absolute"></div>
+        <ul class="nav nav-tabs text-uppercase font-weight-bold px-2 py-1" role="tablist">
+          <li class="nav-item w-100 d-flex flex-row">
+            <div class="w-25">
+              Settings
+            </div>
+          </li>
+        </ul>
+        <div class="tab-content">
+          <div class="d-flex flex-column p-3">
+            <div class="w-100 mb-2 settingsBox">
+              <div class="d-flex flex-sm-row flex-column px-4 py-3">
+                <div class="w-100 mt-1">
+                  <div class="d-flex flex-column">
+                    <div class="w-100 font-arboria-bold font15px mb-2">Default Currency</div>
+                    <div class="w-100 d-flex flex-row">
+                      <div class="w-75 btn-group dropflex" dropdown>
+                        <button id="currency-selector" dropdownToggle type="button"
+                                class="w-100 text-left text-uppercase filterTwo btn btn-outline-dark dropdown-toggle d-flex flex-row"
+                                aria-controls="dropdown-currency-selector">
+                          <div class="w-100 pl-2">{{displayFull(user.currency, currency)}}</div>
+                        </button>
+                        <ul id="dropdown-currency-selector" *dropdownMenu class="dropdown-menu filterOne"
+                            role="menu" aria-labelledby="button-container">
+                          <ng-container *ngFor="let set of currency">
+                            <li role="menuitem"><span class="dropdown-item text-uppercase filterOne usePointer"
+                                                      (click)="setUser('currency', set.type)">{{set.full}}</span></li>
+                          </ng-container>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="w-100 mt-1">
+                  <div class="d-flex flex-column">
+                    <div class="w-100 font-arboria-bold font15px mb-2">Odd Display Preference</div>
+                    <div class="w-100 d-flex flex-row">
+                      <div class="w-75 btn-group dropflex" dropdown>
+                        <button id="button-container" dropdownToggle type="button"
+                                class="w-100 text-left text-uppercase filterTwo btn btn-outline-dark dropdown-toggle d-flex flex-row"
+                                aria-controls="dropdown-container">
+                          <div class="w-100 pl-2">{{displayFull(user.odds, odds)}}</div>
+                        </button>
+                        <ul id="dropdown-container" *dropdownMenu class="dropdown-menu filterOne"
+                            role="menu" aria-labelledby="button-container">
+                          <ng-container *ngFor="let set of odds">
+                            <li role="menuitem"><span class="dropdown-item text-uppercase filterOne usePointer"
+                                                      (click)="setUser('odds', set.type)">{{set.full}}</span></li>
+                          </ng-container>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="w-100 mt-1">
+                  <div class="d-flex flex-column">
+                    <div class="w-100 font-arboria-bold font15px mb-2">Default Bet Amount</div>
+                    <div class="w-100 d-flex flex-row">
+                      <div class="w-75">
+                        <input class="w-100 form-control form-control-sm filterTwoNumber" type="number"
+                               [(ngModel)]="user.bet" (change)="checkUserBet()">
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="w-100">
+              <span class="font-arboria-bold font15px pl-3">Advanced Settings</span>
+            </div>
+            <div class="w-100 mb-2 hideBox settingsBox">
+              <div class="d-flex  flex-sm-row flex-column px-4 py-3">
+                <div class="w-100">
+                  <div class="d-flex flex-column">
+                    <div class="w-100 font-arboria-bold font15px mb-2">Wallet Input Minimum</div>
+                    <div class="w-100 d-flex flex-row">
+                      <div class="w-75 btn-group dropflex" dropdown>
+                        <button id="input-min-selector" dropdownToggle type="button"
+                                class="w-100 text-left text-uppercase filterTwo btn btn-outline-dark dropdown-toggle d-flex flex-row"
+                                aria-controls="dropdown-input-min">
+                          <div class="w-100 pl-2">{{displayFull(user.input, input)}}</div>
+                        </button>
+                        <ul id="dropdown-input-min" *dropdownMenu class="dropdown-menu filterOne"
+                            role="menu" aria-labelledby="button-container">
+                          <ng-container *ngFor="let set of input">
+                            <li role="menuitem"><span class="dropdown-item text-uppercase filterOne usePointer"
+                                                      (click)="setUser('currency', set.type)">{{set.full}}</span></li>
+                          </ng-container>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="w-100 mb-2 hideBox settingsBox">
+              <div class="d-flex flex-row px-4 py-3">
+                <div class="w-100">
+                  <div class="d-flex flex-column">
+                    <div class="w-100 font-arboria-bold font15px mb-2">Enable Password Security</div>
+                    <div class="w-100 d-flex flex-row">
+                      <label class="switch">
+                        <input type="checkbox">
+                        <span class="slider round"></span>
+                      </label>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="w-100 mb-2 settingsBox">
+              <div class="d-flex flex-row px-sm-4 py-sm-3 px-2 py-1">
+                <div class="w-100">
+                  <div class="d-flex flex-column">
+                    <div class="w-100 font-arboria-bold font15px ml-3 ml-sm-0 mb-2">Seed Words</div>
+                    <div class="w-100 d-flex flex-sm-row flex-column" *ngIf="showSeed">
+                      <div class="m-sm-2 p-1 p-sm-3 seedDisplay d-flex flex-column" [ngClass]="(whatOS() === 'mobile') ? 'w-100' : 'w-75'">
+                        <div class="w-100 d-flex flex-row mb-1 mb-sm-3">
+                          <div class="w-100 seedWord mx-1 p-1 mx-sm-2 p-sm-2">{{seed.word1}}</div>
+                          <div class="w-100 seedWord mx-1 p-1 mx-sm-2 p-sm-2">{{seed.word2}}</div>
+                          <div class="w-100 seedWord mx-1 p-1 mx-sm-2 p-sm-2">{{seed.word3}}</div>
+                          <div class="w-100 seedWord mx-1 p-1 mx-sm-2 p-sm-2">{{seed.word4}}</div>
+                        </div>
+                        <div class="w-100 d-flex flex-row mb-1 mb-sm-3">
+                          <div class="w-100 seedWord mx-1 p-1 mx-sm-2 p-sm-2">{{seed.word5}}</div>
+                          <div class="w-100 seedWord mx-1 p-1 mx-sm-2 p-sm-2">{{seed.word6}}</div>
+                          <div class="w-100 seedWord mx-1 p-1 mx-sm-2 p-sm-2">{{seed.word7}}</div>
+                          <div class="w-100 seedWord mx-1 p-1 mx-sm-2 p-sm-2">{{seed.word8}}</div>
+                        </div>
+                        <div class="w-100 d-flex flex-row">
+                          <div class="w-100 seedWord mx-1 p-1 mx-sm-2 p-sm-2">{{seed.word9}}</div>
+                          <div class="w-100 seedWord mx-1 p-1 mx-sm-2 p-sm-2">{{seed.word10}}</div>
+                          <div class="w-100 seedWord mx-1 p-1 mx-sm-2 p-sm-2">{{seed.word11}}</div>
+                          <div class="w-100 seedWord mx-1 p-1 mx-sm-2 p-sm-2">{{seed.word12}}</div>
+                        </div>
+                      </div>
+                      <div class="w-auto m-2 p-2 d-flex flex-column">
+                        <div class="w-100">
+                          <button class="btn btn-sportsbook-gray font-arboria-bold" (click)="showSeed = !showSeed" *ngIf="showSeed">Hide
+                            Seed
+                          </button>
+                        </div>
+                        <div class="w-100">
+                          <div id="print-section" class="hideBox">
+                            <app-print-seed-code [seed]="seed"></app-print-seed-code>
+                          </div>
+                          <button class="btn btn-sportsbook-gray font-arboria-bold mt-2"
+                                  [useExistingCss]="true"
+                                  printTitle="Wagerr.com Sportsbook SEED"
+                                  printSectionId="print-section"
+                                  ngxPrint>Print Seed
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="w-100 ml-3 ml-sm-0 ">
+                      <div class="w-200px">
+                        <button class="btn btn-sportsbook font-arboria-bold" (click)="showSeed = !showSeed" *ngIf="!showSeed">Show
+                          Seed
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

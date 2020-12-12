@@ -1,0 +1,52 @@
+<header>
+  <div class="header-overlay overlay"></div>
+  <div class="fixed-top header-bg">
+    <nav class="navbar navbar-expand-sm p-2 pl-3 p-sm-3 container">
+      <a class="navbar-brand" routerLink="/">
+        <img src="/assets/images/wgrlogomodernwiconWhite2.svg" alt="">
+      </a>
+      <div class="navbar-collapse collapse justify-content-end align-content-end navbarMenuPadding">
+        <ul class="navbar-nav navbar-nav-max text-nowrap flex-grow-1 justify-content-between font-arboria-medium">
+          <li class="nav-item position-relative ">
+            <a class="nav-link text-uppercase font-arboria-book" routerLink="/sportsbook">SportsBook</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link text-uppercase font-arboria-book" routerLink="/download">download</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link text-uppercase font-arboria-book" routerLink="/about">About</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link text-uppercase font-arboria-book" [routerLink]=""
+               (click)="openBuyModal()">Buy</a>
+          </li>
+        </ul>
+      </div>
+      <button class="navbar-toggler" type="button" (click)="showMobileNav()">
+        <img src="/assets/images/toggler.svg" alt="">
+      </button>
+    </nav>
+  </div>
+  <div class="mobile-nav d-sm-none font-arboria-book position-fixed w-50 navbar-collapse text-right overflow-auto pt-1 pb-3"
+       [ngClass]="(mobileNav) ? '' : 'collapse'">
+    <ul class="nav-item navbar-nav text-nowrap mx-auto justify-content-between pb-2">
+      <li class="nav-item">
+        <a class="nav-link font-arboria-book" routerLink="/" (click)="closeMobile()">Home</a>
+      </li>
+      <li class="nav-item ">
+        <a class="nav-link text-uppercase font-arboria-book" routerLink="/sportsbook" (click)="closeMobile()">SportsBook</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link font-arboria-book" routerLink="download" (click)="closeMobile()">download</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link font-arboria-book" routerLink="about" (click)="closeMobile()">About</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link font-arboria-book" [routerLink]="" (click)="openBuyModal()"
+           (click)="closeMobile()">Buy</a>
+      </li>
+    </ul>
+    <div class="dropdown-divider"></div>
+  </div>
+</header>

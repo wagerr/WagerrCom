@@ -1,0 +1,133 @@
+<section class="home-feature-1">
+  <div class="container-fluid">
+    <div class="container" *ngIf="slide && eventDisplay.length > 0">
+      <div class="d-none d-sm-flex flex-row">
+        <div class="w-50 text-center mr-2"><img src="https://img.wagerr.com/images/{{getSVG(event.teams.home)}}"
+                                                class="img-fluid   teamLogo"></div>
+        <div class="w-100 d-flex flex-column">
+          <div class="w-100 d-flex flex-row">
+            <div class="w-25"><img src="/assets/images/wgrmoderniconwhite-01.svg" class="img-fluid"></div>
+            <div class="w-100 py-2"><img src="/assets/images/fadethewinja-01.svg" class="img-fluid"></div>
+            <div class="w-25"><img src="/assets/images/winjaicon2.svg" class="img-fluid"></div>
+          </div>
+          <div class="w-100 text-center text-uppercase font-arboria-bold font24px text-white-50 mt-3">THIS WEEK'S
+            BOOSTED ODDS
+          </div>
+          <div class="w-100 text-center mt-2">
+            <div class="teamData font-arboria-bold font42px">{{getTeam(slide.highlightteam)}} <span
+              class="text-highlight">  {{getLine(slide.highlightteam, slide.highlighttype)  | number: '1.1-2' }}</span>
+            </div>
+          </div>
+        </div>
+        <div class="w-50 text-center ml-2"><img src="https://img.wagerr.com/images/{{getSVG(event.teams.away)}}"
+                                                class="img-fluid   teamLogo"></div>
+      </div>
+      <div class="d-flex flex-column d-sm-none">
+        <div class="w-100 d-flex flex-row  mb-3">
+          <div class="w-100 text-center mr-2"><img src="https://img.wagerr.com/images/{{getSVG(event.teams.home)}}"
+                                                   class="img-fluid teamLogomobile"></div>
+          <div class="w-100 text-center ml-2"><img src="https://img.wagerr.com/images/{{getSVG(event.teams.away)}}"
+                                                   class="img-fluid teamLogomobile"></div>
+        </div>
+        <div class="w-100 d-flex flex-column">
+          <div class="w-100 d-flex flex-row">
+            <div class="w-25"><img src="/assets/images/wgrmoderniconwhite-01.svg" class="img-fluid"></div>
+            <div class="w-100 py-2"><img src="/assets/images/fadethewinja-01.svg" class="img-fluid"></div>
+            <div class="w-25"><img src="/assets/images/winjaicon2.svg" class="img-fluid"></div>
+          </div>
+          <div class="w-100 text-center text-uppercase font-arboria-bold font20px text-white-50 mt-3">THIS WEEK'S
+            BOOSTED ODDS
+          </div>
+          <div class="w-100 text-center mt-2">
+            <div class="teamData font-arboria-bold font42px">{{getTeam(slide.highlightteam)}} <span
+              class="text-highlight">  {{getLine(slide.highlightteam, slide.highlighttype) | number: '1.1-2' }}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="d-flex flex-column flex-sm-row mt-5 mb-5 upcoming-events">
+        <div class="w-100 m-2">
+          <div class="card bg-transparent mx-auto h-100 position-relative">
+            <div class="h-100 d-flex flex-column">
+              <div class="">
+                <div class="col-12 p-0 pt-2 text-center font-arboria-medium league-name">
+                  {{event.tournament}}
+                </div>
+              </div>
+              <div class="card-body d-flex align-items-center p-0">
+                <div class="w-100 p-0 font-weight-light d-flex flex-row text-center teams  py-4">
+                  <div class="w-100 d-flex flex-column pt-2 font-weight-bold">
+                    <div class="w-100">{{event.teams.home}}</div>
+                  </div>
+                  <div class="w-auto d-flex align-content-center">
+                    <img
+                    src="/assets/images/{{event.sport.toLowerCase().replace('/\s/g', '')}}.svg"
+                    alt="" class="sportLogo">
+                  </div>
+                  <div class="w-100 d-flex flex-column pt-2 font-weight-bold">
+                    <div class="w-100">{{event.teams.away}}</div>
+                  </div>
+                </div>
+              </div>
+              <app-homemoneyline [odds]="event.odds[0]"></app-homemoneyline>
+            </div>
+          </div>
+        </div>
+        <div class="w-100 m-2">
+          <div class="card bg-transparent mx-auto h-100 position-relative">
+            <div class="h-100 d-flex flex-column">
+              <div class="">
+                <div class="col-12 p-0 pt-2 text-center font-arboria-medium league-name">
+                  {{event.tournament}}
+                </div>
+              </div>
+              <div class="card-body d-flex align-items-center p-0">
+                <div class="w-100 p-0 font-weight-light d-flex flex-row text-center teams  py-4">
+                  <div class="w-100 d-flex flex-column pt-2 font-weight-bold">
+                    <div class="w-100">{{event.teams.home}}</div>
+                  </div>
+                  <div class="w-auto sportLogo d-flex align-content-center"><img
+                    src="/assets/images/{{event.sport.toLowerCase().replace('/\s/g', '')}}.svg"
+                    alt="" class="sportLogo"></div>
+                  <div class="w-100 d-flex flex-column pt-2 font-weight-bold">
+                    <div class="w-100">{{event.teams.away}}</div>
+                  </div>
+                </div>
+              </div>
+              <app-homespread [odds]="event.odds[1]"></app-homespread>
+            </div>
+          </div>
+        </div>
+        <div class="w-100 m-2">
+          <div class="card bg-transparent mx-auto h-100 position-relative">
+            <div class="h-100 d-flex flex-column">
+              <div class="">
+                <div class="col-12 p-0 pt-2 text-center font-arboria-medium league-name">
+                  {{event.tournament}}
+                </div>
+              </div>
+              <div class="card-body d-flex align-items-center p-0">
+                <div class="w-100 p-0 font-weight-light d-flex flex-row text-center teams py-4">
+                  <div class="w-100 d-flex flex-column pt-2 font-weight-bold">
+                    <div class="w-100">{{event.teams.home}}</div>
+                  </div>
+                  <div class="w-auto sportLogo d-flex align-content-center"><img
+                    src="/assets/images/{{event.sport.toLowerCase().replace('/\s/g', '')}}.svg"
+                    alt="" class="sportLogo"></div>
+                  <div class="w-100 d-flex flex-column pt-2 font-weight-bold">
+                    <div class="w-100">{{event.teams.away}}</div>
+                  </div>
+                </div>
+              </div>
+              <app-hometotals [odds]="event.odds[2]"></app-hometotals>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="d-flex flex-row mt-5 mb-5 pb-5">
+        <div class="w-100 text-center font-arboria-bolder font42px mb-5 mt-5" [innerHTML]="slide.fadeinfo">
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,40 @@
+<div id="chat" class="my-2 card sportsbook-card">
+  <div class="card-header py-2 px-3 py-sm-1 d-flex align-items-center">
+    <span class="text-uppercase font-arboria-bold">sportsbook promos</span>
+  </div>
+  <div class="card-body p-0">
+    <div class="tab-content" id="chatTabContent">
+      <div class="tab-pane fade show active position-relative" id="english" role="tabpanel"
+           aria-labelledby="english-tab">
+        <ng-container *ngIf="!notify">
+        <div class="d-flex flex-column">
+          <div class="w-100 text-center font-roboto-condensed font-weight-bold font20px mt-3">SIgn up for Wagerr</div>
+          <div class="w-100 text-center font-roboto-condensed font-weight-bold font20px">promos and email</div>
+          <div class="w-100 text-center font-roboto-condensed font-weight-bold font20px mb-3"> updates.</div>
+<!--          <div class="w-100 text-center font-roboto-condensed font16px mb-3">Sign up to join the beta!</div>-->
+          <form>
+            <div class="w-100 text-center mb-3 px-3">
+              <input
+                class="form-control form-control-sm input-gray"
+                type="email"
+                placeholder="Your Email"
+                name="email"
+                [(ngModel)]="email">
+            </div>
+            <div class="w-100 text-center mb-3 px-3">
+              <button class="btn font-arboria-bold btn-sportsbook-gray mx-auto mt-4 mb-2 d-block text-uppercase" (click)="notifyMe()">Submit Email</button>
+            </div>
+          </form>
+        </div>
+        </ng-container>
+        <ng-container *ngIf="notify">
+          <div class="d-flex flex-column">
+            <div class="w-100 text-center font-roboto-condensed font-weight-bold font20px mt-3">Thank you</div>
+            <div class="w-100 text-center font-roboto-condensed font-weight-bold font20px ">Your email</div>
+            <div class="w-100 text-center font-roboto-condensed font-weight-bold font20px mb-3">has been saved.</div>
+          </div>
+        </ng-container>
+      </div>
+    </div>
+  </div>
+</div>

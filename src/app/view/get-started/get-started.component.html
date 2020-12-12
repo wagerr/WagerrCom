@@ -1,0 +1,141 @@
+<section class="wallet-panel-1">
+  <div class="container">
+    <div class="d-flex">
+      <div class="w-100 d-none d-sm-flex"></div>
+      <div class="w-50 d-flex d-sm-none"></div>
+      <div class="justify-content-center align-content-center">
+        <div class="downloadCard">
+          <div class="card" id="win" *ngIf="selectOs == 'win'">
+            <div class="card-body text-center w-75 mx-auto pt-3">
+              <div><span class="font-weight-bold text-uppercase">os:</span> <span
+                class="font-weight-light">WINDOWS</span>
+              </div>
+              <img class="w-50 mt-3 px-2 mb-1 svg-red" src="/assets/images/windows-logo.svg" alt="">
+              <a href="{{getWalletInfo('win32')}}"
+                 class="font-weight-light btn btn-sm w-100 mt-4 downloadBtn bg-white text-dark steem-keychain-checked">64 bit</a>
+              <a href="{{getWalletInfo('win64')}}"
+                 class="font-weight-light btn btn-sm w-100 mt-2 downloadBtn bg-white text-dark steem-keychain-checked">32 bit</a>
+            </div>
+          </div>
+          <div class="card" id="mac" *ngIf="selectOs == 'mac'">
+            <div class="card-body text-center w-75 mx-auto pt-3">
+              <div><span class="font-weight-bold text-uppercase">os:</span> <span
+                class="font-weight-light">Macintosh</span>
+              </div>
+              <img class="w-50 mt-3 px-2 mb-1 svg-red" src="/assets/images/apple-logo.svg" alt="">
+              <a href="{{getWalletInfo('mac')}}"
+                 class="font-weight-light btn btn-sm w-100 mt-4 downloadBtn bg-white text-dark steem-keychain-checked">MacOS</a>
+            </div>
+          </div>
+          <div class="card" id="linux" *ngIf="selectOs == 'linux'">
+            <div class="card-body text-center w-75 mx-auto pt-3">
+              <div><span class="font-weight-bold text-uppercase">os:</span> <span class="font-weight-light">LINUX</span>
+              </div>
+              <img class="w-50 mt-3 px-2 mb-1 svg-red" src="/assets/images/linux-logo.svg" alt="">
+              <a href="{{getWalletInfo('linuxx86')}}"
+                 class="font-weight-light btn btn-sm w-100 mt-4 downloadBtn bg-white text-dark steem-keychain-checked">x86</a>
+              <a href="{{getWalletInfo('linuxx64')}}"
+                 class="font-weight-light btn btn-sm w-100 mt-2 downloadBtn bg-white text-dark steem-keychain-checked">x64</a>
+            </div>
+          </div>
+          <div class="card" id="android" *ngIf="selectOs == 'android'">
+            <div class="card-body text-center w-75 mx-auto pt-3">
+              <div><span class="font-weight-bold text-uppercase">os:</span> <span
+                class="font-weight-light">Android</span>
+              </div>
+              <img class="w-50 mt-3 px-2 mb-1 svg-red" src="/assets/images/android.svg" alt="">
+              <a href="{{getWalletInfo('android')}}"
+                 class="font-weight-light btn btn-sm w-100 mt-4 downloadBtn bg-white text-dark steem-keychain-checked">Android</a>
+            </div>
+          </div>
+          <div class="card" id="iOS" *ngIf="selectOs == 'ios'">
+            <div class="card-body text-center w-75 mx-auto pt-3">
+              <div><span class="font-weight-bold text-uppercase">os:</span> <span class="font-weight-light">iOS</span>
+              </div>
+              <img class="w-50 mt-3 px-2 mb-1 svg-red" src="/assets/images/apple-logo.svg" alt="">
+              <a href="{{getWalletInfo('ios')}}"
+                 class="font-weight-light btn btn-sm w-100 mt-4 bg-white downloadBtn text-dark steem-keychain-checked">iOS</a>
+            </div>
+          </div>
+          <div class="dropdown mt-2 text-center">
+            <div class="btn-group" dropdown>
+              <button id="button-animated" dropdownToggle type="button" class="btn dropdown-toggle"
+                      aria-controls="dropdown-animated">
+                Select Different OS<span class="caret"></span>
+              </button>
+              <ul id="dropdown-animated" *dropdownMenu class="dropdown-menu"
+                  role="menu" aria-labelledby="button-animated">
+                <li role="menuitem"><a class="dropdown-item" [routerLink]="" (click)="selectOS('win')"><img class="mr-2"
+                                                                                                            src="/assets/images/windows-logo.svg"
+                                                                                                            alt="">
+                  Windows</a>
+                </li>
+                <li role="menuitem"><a class="dropdown-item" [routerLink]="" (click)="selectOS('mac')"><img class="mr-2"
+                                                                                                            src="/assets/images/apple-logo.svg"
+                                                                                                            alt="">
+                  Macintosh</a></li>
+                <li role="menuitem"><a class="dropdown-item" [routerLink]="" (click)="selectOS('linux')"><img
+                  class="mr-2"
+                  src="/assets/images/linux-logo.svg"
+                  alt="">
+                  Linux</a>
+                </li>
+                <li role="menuitem"><a class="dropdown-item" [routerLink]="" (click)="selectOS('android')"><img
+                  id="android-icon" class="mr-2" src="/assets/images/androidicon.svg" alt=""> Android</a></li>
+                <li role="menuitem"><a class="dropdown-item" [routerLink]="" (click)="selectOS('ios')"><img class="mr-2"
+                                                                                                            src="/assets/images/apple-logo.svg"
+                                                                                                            alt="">
+                  iOS</a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="w-50 d-flex d-sm-none"></div>
+      <div class="w-100 d-none d-sm-flex"></div>
+    </div>
+  </div>
+  <div class="bottomsvg">
+    <img src="assets/images/bottomaboutjag-01.svg" class="img-fluid">
+  </div>
+</section>
+<section class="wallet-panel-2 d-none d-sm-block bg-red-triangle">
+  <div class="container">
+    <div class="row align-items-center justify-content-center spacer-wrapper">
+      <div class="col-6 bet-on-the-go-wrapper">
+        <img class="logo mb-4" src="/assets/images/wgrWordsRed.svg" alt="">
+        <div class="bet-on-the-go text-white pt-2 px-3 pb-1 mt-1">
+          <h3 class="font-weight-bold">Bet on the Go</h3>
+          <p>Bet with Wagerr on your mobile wallet. Any place. Any time.</p>
+        </div>
+        <a href="{{getWalletInfo('android')}}" target="_blank"
+           class="btn btn-rounded mt-2 text-uppercase downloadBtn steem-keychain-checked">Android</a>
+        <a href="{{getWalletInfo('ios')}}" target="_blank" class="btn btn-rounded mt-2 downloadBtn text-uppercase steem-keychain-checked">iOS</a>
+      </div>
+      <div class="col-6">
+        <img class="img-fluid how-it-works-img" src="/assets/images/phonewgrappmock.png" alt="">
+      </div>
+    </div>
+  </div>
+</section>
+<section class="wallet-panel-2-mobile d-sm-none text-center">
+  <div class="bg-container">
+    <div class="container">
+      <div class="row">
+        <div class="col">
+          <img class="img-fluid w-75 mx-auto how-it-works-img" src="/assets/images/phonewgrappmock.png" alt="">
+          <img class="logo mb-4" src="/assets/images/wgrWordsRed.svg" alt="">
+          <div class="bet-on-the-go text-white pt-2 px-3 pb-1 mt-1 text-left mx-auto">
+            <h3 class="font-weight-bold">Bet on the Go</h3>
+            <p>Bet with Wagerr on your mobile wallet. Any place. Any time.</p>
+          </div>
+          <a href="https://github.com/wagerr/WagerrWalletAndroid/releases/latest" target="_blank"
+             class="btn btn-rounded mt-2 text-uppercase steem-keychain-checked">Android</a>
+          <a href="https://news.wagerr.com/installing-wagerr-on-ios/" target="_blank"
+             class="btn btn-rounded mt-2 text-uppercase steem-keychain-checked">iOS</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,64 @@
+<div class="modal-header">
+  <h4 class="modal-title font-arboria-bold pull-left">Deposit</h4>
+  <button type="button" class="close pull-right" aria-label="Close" (click)="bsModalRef.hide()">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div class="modal-body">
+  <div class="d-flex flex-row">
+    <div class="w-25"></div>
+    <div class="w-100 font-arboria-medium font16px">Address
+      <ng-container *ngIf="didCopy"><span class="small text-highlight2">Copied Address</span></ng-container>
+    </div>
+    <div class="w-25"></div>
+  </div>
+  <div class="d-flex flex-row">
+    <div class="w-25"></div>
+    <div class="w-100 d-flex flex-row border">
+      <div class="w-100 text-center p-2"><span
+        class="font-arboria-medium font12px">{{getUserBetAddress()}}</span></div>
+      <div class="w-auto p-2 border-left usePointer" (click)="copyMessage(getUserBetAddress())"><i
+        class="fal fa-copy text-highlight"></i></div>
+    </div>
+    <div class="w-25"></div>
+  </div>
+  <div class="d-flex flex-row">
+    <div class="w-100"></div>
+    <div class="w-auto">
+      <ngx-qrcode
+        [elementType]="elementType"
+        value="wgr:{{getUserBetAddress()}}"
+        cssClass="aclass"
+        errorCorrectionLevel="L">
+      </ngx-qrcode>
+    </div>
+    <div class="w-100"></div>
+  </div>
+  <div class="d-flex flex-row">
+    <div class="w-25"></div>
+    <div class="w-100 font-roboto-condensed font11px">By depositing to this address,
+      you acknowledge that only WGR deposited to this
+      address will be credited and you agree to forfeit
+      any asset other than WGR sent to this address.
+      This address is linked to your seed.
+      Only you control your account seed.
+    </div>
+    <div class="w-25"></div>
+  </div>
+  <div class="d-flex flex-row">
+    <div class="w-100 border-top mt-4">
+    </div>
+  </div>
+  <div class="d-flex flex-column">
+    <div class="w-100 font-roboto-condensed font-weight-bold font30px text-center mt-3">Don't have any WGR?</div>
+    <!--      <div class="w-100 font-arboria-bold font16px text-center mt-3"><a-->
+    <!--        href="https://app.instaswap.io/?&giveCoin=USD&getCoin=WGR&giveValue=50" target="_blank"-->
+    <!--        class="btn btn-sportsbook font-arboria-bold widthSize200px">BUY NOW</a></div>-->
+    <div class="w-100 font-arboria-bold font16px text-center mt-3">
+      <button class="btn btn-sportsbook font-arboria-bold widthSize200px" (click)="openModalBuyNow()">BUY NOW</button>
+    </div>
+    <div class="w-100 font-roboto-condensed font-weight-bold font16px text-center mt-4">Buy WGR directly with your debit
+      or credit card
+    </div>
+  </div>
+</div>

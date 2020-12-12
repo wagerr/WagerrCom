@@ -1,0 +1,40 @@
+.scrollList {
+  overflow-y: scroll;
+}
+
+.loggedin {
+  max-height: 80vh;
+}
+
+.loggedout {
+  max-height: 80vh;
+}
+
+@media only screen and (max-width: 575px) {
+  .loggedout {
+    max-height: 60vh !important;
+  }
+  .loggedin {
+    max-height: 55vh !important;
+  }
+}
+
+@media only screen and (max-width: 1200px) {
+  .spread, .total, .totalh, .spreadh {
+    width: 50% !important;
+  }
+  .spread div:first-child,
+  .total div:first-child,
+  {
+    margin-left: 10% !important;
+  }
+  .spread div:last-child,
+  .total div:last-child,
+  {
+    margin-right: 10% !important;
+  }
+}
+
+.team {
+  background: #303030 !important;
+}

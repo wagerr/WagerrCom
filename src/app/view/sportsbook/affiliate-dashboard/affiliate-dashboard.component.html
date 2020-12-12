@@ -1,0 +1,23 @@
+<div class="row pb-5 mb-3 pb-sm-0 mb-sm-0 h-sm-100 mr-0">
+  <div id="bets" class="col pt-2 d-md-block d-lg-block pr-2">
+    <ng-container *ngIf="whatOS() !== 'mobile'">
+      <app-sbbalance [topBar]="isTop"></app-sbbalance>
+      <Br>
+    </ng-container>
+    <div class="card bets mb-2">
+      <div class="card-body p-0 position-relative">
+        <div class="overlay position-absolute"></div>
+        <ul class="nav nav-tabs text-uppercase font-weight-bold px-2 py-1" role="tablist">
+          <li class="nav-item w-100 d-flex flex-row">
+            <div class="w-25">
+              Affiliate Dashboard
+            </div>
+          </li>
+        </ul>
+        <div class="tab-content">
+          <div class="my-5 pt-2 pb-5 text-center h2h-betting-soon">Dashboard tracking and details coming soon.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

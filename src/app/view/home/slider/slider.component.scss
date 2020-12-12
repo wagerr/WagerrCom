@@ -1,0 +1,50 @@
+
+@media only screen  and (max-width: 767px) {
+  .CustomFadeWinja .blankTriangle {
+    width: 275px !important;
+  }
+  .CustomFadeWinja .winja {
+    width: 65px !important;
+  }
+  .CustomFadeWinja .fadeWinja {
+    top: 45px !important;
+    left: 50px !important;
+    width: 180px !important;
+  }
+  .CustomFadeWinja .team {
+    top: 58px !important;
+    left: 48px !important;
+    width: 180px !important;
+  }
+}
+.CustomFadeWinja {
+  width: 100%;
+  height: 150px;
+}
+.CustomFadeWinja .blankTriangle {
+  position: absolute;
+  width: 400px;
+}
+.CustomFadeWinja .winja {
+  position: absolute;
+  width: 100px;
+}
+.CustomFadeWinja .fadeWinja {
+  position: relative;
+  top: 80px;
+  left: 76px;
+  width: 250px;
+}
+.CustomFadeWinja .team {
+  color: #ffffff;
+  position: relative;
+  top: 85px;
+  left: 48px;
+  width: 298px;
+}
+.text-highlight {
+  color: #f40000 !important
+}
+.CustomFadeWinja .team .teamData {
+  font-size: 2.4vh;
+}

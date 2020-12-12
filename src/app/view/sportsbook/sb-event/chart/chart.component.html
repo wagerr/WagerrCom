@@ -1,0 +1,15 @@
+<div class="d-flex flex-row mt-5 mb-5">
+  <div class="w-25"></div>
+  <div class="w-100">
+    <canvas baseChart class="chartSize"
+            [datasets]="lineChartData"
+            [labels]="lineChartLabels"
+            [options]="lineChartOptions"
+            [colors]="lineChartColors"
+            [legend]="lineChartLegend"
+            [chartType]="lineChartType"
+            [plugins]="doughnutChartPlugins"
+            (chartHover)="chartHovered($event)"></canvas>
+  </div>
+  <div class="w-25"></div>
+</div>

@@ -1,0 +1,6 @@
+<div class="d-flex flex-row font-weight-light py-0 text-center border-top">
+  <div class="border-right w-100 font-roboto-condensed font-weight-bold font13px p-1 usePointer bghover  blcorner">{{(odds.favorite === 'home') ? '-' : '+'}} {{(odds.spreadPoints / 10)}} - <span
+    class="text-highlight">{{updateTrueOdds(odds.spreadHome / 10000) | number: '1.2-2'}}</span></div>
+  <div class="w-100 font-roboto-condensed font-weight-bold font13px p-1 usePointer bghover brcorner">{{(odds.favorite === 'away') ? '-' : '+'}} {{(odds.spreadPoints / 10)}} - <span
+    class="text-highlight">{{updateTrueOdds(odds.spreadAway / 10000) | number: '1.2-2'}}</span></div>
+</div>

@@ -1,0 +1,289 @@
+<header>
+  <div class="header-overlay overlay"></div>
+  <div class="fixed-top header-bg">
+    <nav class="navbar navbar-expand-sm p-2 pl-3 p-sm-2 container">
+      <a class="navbar-brand " routerLink="/">
+        <img src="/assets/images/wgrlogomodernwiconWhite2.svg" alt="">
+        <span class="testnet font-arboria-bold font12px text-highlight2" *ngIf="isTestnet()">TESTNET</span>
+      </a>
+      <button class="navbar-toggler" type="button" (click)="showMobileNav()">
+        <img src="/assets/images/toggler.svg" alt="">
+      </button>
+      <div class="navbar-collapse" [ngClass]="isMobileNav ? '' : 'collapse'" id="mobileToggle">
+        <ul class="w-100 navbar-nav font-arboria-book text-nowrap flex-grow-1 justify-content-end">
+          <li class="nav-item pl-2 d-none d-sm-block">
+            <a class="nav-link text-uppercase text-right"
+               routerLink="/sportsbook">SportsBook</a>
+          </li>
+          <ng-container *ngIf="!isLoggedIn()">
+            <li class="nav-item ">
+              <a class="nav-link text-uppercase text-right" [routerLink]="" (click)="openModalAddDevice()">Scan QR Code</a>
+            </li>
+          </ng-container>
+          <ng-container *ngIf="isLoggedIn()">
+            <li class="nav-item pl-2  d-none d-sm-block">
+              <a class="nav-link text-uppercase text-right" routerLink="/sportsbook/history">History</a>
+            </li>
+            <li class="nav-item pl-2">
+              <a class="nav-link text-uppercase text-right" [routerLink]="" (click)="openModalDeposit()">Deposit</a>
+            </li>
+            <li class="nav-item pl-2">
+              <a class="nav-link text-uppercase text-right" [routerLink]="" (click)="openModalWithdraw()">Withdraw</a>
+            </li>
+          </ng-container>
+          <li class="nav-item pl-2">
+            <a [routerLink]="" class="nav-link text-uppercase text-right">
+              <ng-container *ngIf="isLoggedIn()">
+                <div class="accountbtn" dropdown>
+                  <span dropdownToggle class="dropdown-toggle text-right">Account</span>
+                  <ul id="dropdown-container" *dropdownMenu class="dropdown-menu headerDropDown"
+                      role="menu" aria-labelledby="button-container">
+                    <li role="menuitem">
+                      <span class="dropdown-item text-uppercase headerDropDown usePointer"
+                            (click)="openModalAddDeviceQR()">add device</span>
+                    </li>
+                    <li role="menuitem" *ngIf="whatOS() !== 'mobile'">
+                      <span class="dropdown-item text-uppercase headerDropDown usePointer"
+                            routerLink="/sportsbook/settings">Settings</span>
+                    </li>
+                    <li role="menuitem" *ngIf="whatOS() !== 'mobile'">
+                      <span class="dropdown-item text-uppercase headerDropDown usePointer"
+                            routerLink="/sportsbook/affiliate">Affiliate</span>
+                    </li>
+                    <div class="dropdown-divider"></div>
+                    <li role="menuitem">
+                      <span class="dropdown-item text-uppercase headerDropDown usePointer" (click)="logOut()">LOGOUT</span>
+                    </li>
+                  </ul>
+                </div>
+              </ng-container>
+              <span class="text-truncate" *ngIf="!isLoggedIn()" (click)="openModalAccount()">get started</span>
+            </a>
+          </li>
+          <ng-container *ngIf="isLoggedIn()">
+            <li class="nav-item pl-2">
+              <div class="text-right">
+              <button class="btn btn-sportsbook-earn my-1 lineheight1" (click)="openModalEarn()">
+                EARN&nbsp;&nbsp;<img src="/assets/images/reddollar.svg" class="img-fluid widthSize20px">
+              </button>
+              </div>
+            </li>
+          </ng-container>
+        </ul>
+      </div>
+    </nav>
+  </div>
+</header>
+<nav class="sportsbook-bottom-nav d-flex d-sm-none position-fixed w-100" (click)="checkMobileNav()">
+  <a data-show="sportlist" id="sportlist-tab" class="nav-link w-100 text-center p-3 d-flex justify-content-center align-content-center"
+     [ngClass]="mobileNavIsActive('sportlist')" (click)="setMobileNav('sportlist')">
+    <img class="img-fluid" src="/assets/images/toggler.svg" alt="">
+  </a>
+  <a data-show="betslip" id="betslip-tab" class="nav-link w-100 text-center p-3 d-flex justify-content-center align-content-center"
+     [ngClass]="mobileNavIsActive('sportsbook')" (click)="setMobileNav('sportsbook')">
+    <img class="img-fluid" src="/assets/images/{{sport.toLowerCase().split('/').join('').split(' ').join('')}}.svg" alt="">
+  </a>
+  <a data-show="bets" id="bets-tab" class="nav-link position-relative w-100 text-center p-3 d-flex justify-content-center align-content-center"
+     [ngClass]="mobileNavIsActive('betslip')" (click)="setMobileNav('betslip')">
+    <img class="img-fluid" src="/assets/images/shopping-list.svg" alt="">
+    <span class="update-count font-roboto-condensed font-weight-bold position-absolute text-white"
+          *ngIf="bets > 0">{{bets}}</span>
+  </a>
+  <a data-show="history" id="history-tab" class="nav-link w-100 text-center p-3 d-flex justify-content-center align-content-center"
+     [ngClass]="mobileNavIsActive('history')" (click)="setMobileNav('history')">
+    <img class="img-fluid" src="/assets/images/historyfixed.svg" alt="">
+  </a>
+  <a data-show="history" id="settings-tab"
+     class="nav-link w-100 text-center p-3 d-flex flex-row justify-content-center align-content-center"
+     [ngClass]="mobileNavIsActive('settings')" (click)="setMobileNav('settings')">
+    <i class="fal fa-cog fa-lg fa-mobile-center"></i>
+  </a>
+  <!--  <a data-show="chat" id="chat-tab" class="nav-link w-100 text-center p-3 d-flex" [ngClass]="mobileNavIsActive('chat')"-->
+  <!--     (click)="setMobileNav('chat')">-->
+  <!--    <img class="img-fluid" src="/assets/images/chat.svg" alt="">-->
+  <!--  </a>-->
+</nav>
+<div class="flex-grow-0 sportsbook-0">
+</div>
+
+<div class="flex-grow-1 sportsbook-1" (click)="checkMobileNav()">
+  <div class="container content-bg h-100">
+    <ng-container *ngIf="whatOS() === 'mobile'">
+      <app-sbbalance *ngIf="isLoggedIn()"></app-sbbalance>
+      <div class="row pb-5 mb-3 pb-sm-0 mb-sm-0 h-sm-100">
+        <aside id="sportlist" class="col-sm-auto px-0 pr-0 order-1 order-sm-0 mt-2 mt-sm-0 d-md-block d-lg-block"
+               [ngClass]="mobileNavIsActive('sportlist', 'active', 'd-none')">
+          <ul class="nav flex-column h-100 sport-list list-unstyled font-weight-light m-0">
+            <li class="nav-item d-flex p-0 sportItem"
+                [ngClass]="(sport == 'all') ? 'active font-arboria-bold' : ' font-arboria-light'">
+              <a class="nav-link w-100 d-flex align-items-center p-3" [routerLink]=""
+                 (click)="getSport('all')"><img
+                class="img-fluid mr-3"
+                src="/assets/images/list.svg"
+                alt="">UPCOMING</a>
+            </li>
+            <ng-container *ngFor="let item of sportsDisplay">
+              <ng-container *ngIf="item.active">
+                <li class="nav-item d-flex p-0 sportItem"
+                    [ngClass]="(sport == item.name.toLowerCase()) ? 'active font-arboria-bold' : ' font-arboria-light'">
+                  <a class="nav-link w-100 d-flex align-items-center p-3" [routerLink]=""
+                     (click)="getSport(item.name.toLowerCase())"><img
+                    class="img-fluid mr-3"
+                    src="/assets/images/{{item.name.toLowerCase().split('/').join('').split(' ').join('')}}.svg"
+                    alt="">{{item.name}}</a>
+<!--                  <a class="d-flex align-items-center d-sm-none h-100 p-3 pr-4" href="javascript:"><span-->
+<!--                    class="d-block d-sm-none img-like ml-auto"></span></a>-->
+                </li>
+              </ng-container>
+              <ng-container *ngIf="!item.active">
+                <li class="nav-item d-flex p-0 opacity50">
+                  <a class="nav-link w-100 d-flex align-items-center p-3" [routerLink]="">
+                    <img class="img-fluid mr-3"
+                         src="/assets/images/{{item.name.toLowerCase().split('/').join('').split(' ').join('')}}.svg"
+                         alt="">
+                    <div class="d-flex flex-column">
+                      <div>{{item.name}}</div>
+                      <div class="font-arboria-light font11px">No Upcoming Events</div>
+                    </div>
+                  </a>
+<!--                  <a class="d-flex align-items-center d-sm-none h-100 p-3 pr-4" href="javascript:"><span-->
+<!--                    class="d-block d-sm-none img-like ml-auto"></span></a>-->
+                </li>
+              </ng-container>
+            </ng-container>
+          </ul>
+        </aside>
+        <section class="col order-1 order-sm-0 pr-sm-0 pl-sm-2 mobile-sportsbook">
+          <ng-container *ngIf="getMobileNav('sportsbook')">
+            <div class="row pb-5 mb-3 pb-sm-0 mb-sm-0 h-sm-100 mr-0">
+              <div id="bets" class="col pt-2 d-md-block d-lg-block pr-0">
+                <div class="card bets">
+                  <div class="card-body p-0 position-relative">
+                    <div class="d-flex flex-row py-1">
+                      <div class="w-100 font-arboria-bold text-uppercase pl-3 py-1">sportsbook</div>
+                      <div class="w-100 text-right py-1 align-middle">
+                        <input type="text" class="widthSize140px searchInput" placeholder="Search" #searchText (keyup)="searchIt(searchText.value)"><i class="far fa-search px-1"></i>
+                      </div>
+                    </div>
+<!--                    <ul class="nav nav-tabs text-uppercase font-weight-bold text-center" role="tablist">-->
+<!--                      <li class="nav-item w-50">-->
+<!--                        <a class="h-100 nav-link rounded-0 py-3 py-sm-1" [ngClass]="(showBet) ? 'active' : '' "-->
+<!--                           id="home-tab"-->
+<!--                           data-toggle="tab" [routerLink]="" (click)="setShowBet()" role="tab" aria-controls="bet"-->
+<!--                           aria-selected="true">sportsbook</a>-->
+<!--                      </li>-->
+<!--                      <li class="nav-item w-50">-->
+<!--                        <a class="h-100 nav-link rounded-0 py-3 py-sm-1" [ngClass]="(showBet) ? '' : 'active' "-->
+<!--                           id="profile-tab" data-toggle="tab" [routerLink]="" (click)="setShowBet()" role="tab"-->
+<!--                           aria-controls="bet-exchange" aria-selected="false">fantasy</a>-->
+<!--                      </li>-->
+<!--                    </ul>-->
+                    <div class="tab-content">
+                      <app-sbbetdisplay [sport]="sport" [search]="searchBox"></app-sbbetdisplay>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </ng-container>
+          <ng-container *ngIf="getMobileNav('history')">
+            <app-sbhistory></app-sbhistory>
+          </ng-container>
+          <ng-container *ngIf="getMobileNav('settings')">
+            <app-settings></app-settings>
+          </ng-container>
+          <ng-container *ngIf="getMobileNav('event')">
+            <app-sb-event></app-sb-event>
+          </ng-container>
+          <ng-container *ngIf="getMobileNav('affiliate')">
+            <app-affiliate-dashboard></app-affiliate-dashboard>
+          </ng-container>
+          <ng-container *ngIf="getMobileNav('betslip')">
+            <aside class="col-12 order-0 order-sm-1 px-sm-2 d-md-block d-lg-block">
+              <div class="d-md-block d-lg-block" [ngClass]="mobileNavIsActive('betslip', 'active', 'd-none')">
+                <app-sbbetslip></app-sbbetslip>
+              </div>
+            </aside>
+          </ng-container>
+        </section>
+      </div>
+    </ng-container>
+    <ng-container *ngIf="whatOS() !== 'mobile'">
+      <div class="d-none d-sm-flex d-xl-none flex-row sportTopBox">
+        <ng-container *ngFor="let item of sportsDisplay">
+          <ng-container *ngIf="item.active">
+            <div class="w-100 sportTopItem d-flex flex-column usePointer"
+                 (click)="getSport(item.name.toLowerCase())"
+                 [ngClass]="(sport == item.name.toLowerCase()) ? 'active font-arboria-bold' : ' font-arboria-light'">
+                <div class="w-100 text-center">
+                <img class="img-fluid"
+                     src="/assets/images/{{item.name.toLowerCase().split('/').join('').split(' ').join('')}}.svg"
+                      alt="">
+                </div>
+                <div class="w-100 font11px  text-center">
+                {{item.name}}
+                </div>
+            </div>
+          </ng-container>
+          <ng-container *ngIf="!item.active">
+            <div class="w-100 sportTopItem d-flex flex-column usePointer opacity50"
+                 [ngClass]="(sport == item.name.toLowerCase()) ? 'active font-arboria-bold' : ' font-arboria-light'">
+              <div class="w-100 text-center">
+                <img class="img-fluid"
+                     src="/assets/images/{{item.name.toLowerCase().split('/').join('').split(' ').join('')}}.svg"
+                     alt="">
+              </div>
+              <div class="w-100 font11px  text-center">
+                {{item.name}}
+              </div>
+            </div>
+          </ng-container>
+        </ng-container>
+      </div>
+      <div class="row pb-5 mb-3 pb-sm-0 mb-sm-0 h-sm-100">
+        <aside id="sportlist" class="col-sm-auto px-0 pr-0 order-1 order-sm-0 mt-2 mt-sm-0 d-none d-xl-block"
+               [ngClass]="mobileNavIsActive('sportlist', 'active', 'd-none')">
+          <ul class="nav flex-column h-100 sport-list list-unstyled font-weight-light m-0">
+            <li class="nav-item d-flex p-0 sportItem" [ngClass]="(sport == 'all') ? 'active font-arboria-bold' : ' font-arboria-light'">
+              <a class="nav-link w-100 d-flex align-items-center p-3" [routerLink]="" (click)="getSport('all')"><img
+                class="img-fluid mr-3" src="/assets/images/list.svg"
+                alt="">UPCOMING</a>
+              <a class="d-flex align-items-center d-sm-none h-100 p-3 pr-4" href="javascript:"><span
+                class="d-block d-sm-none img-like ml-auto"></span></a>
+            </li>
+            <ng-container *ngFor="let item of sportsDisplay">
+              <ng-container *ngIf="item.active">
+                <li class="nav-item d-flex p-0 sportItem" [ngClass]="(sport == item.name.toLowerCase()) ? 'active font-arboria-bold' : ' font-arboria-light'">
+                  <a class="nav-link w-100 d-flex align-items-center p-3" [routerLink]="" (click)="getSport(item.name.toLowerCase())"><img
+                    class="img-fluid mr-3" src="/assets/images/{{item.name.toLowerCase().split('/').join('').split(' ').join('')}}.svg"
+                    alt="">{{item.name}}</a>
+                  <a class="d-flex align-items-center d-sm-none h-100 p-3 pr-4" href="javascript:"><span
+                    class="d-block d-sm-none img-like ml-auto"></span></a>
+                </li>
+              </ng-container>
+              <ng-container *ngIf="!item.active">
+                <li class="nav-item d-flex p-0 opacity50">
+                  <a class="nav-link w-100 d-flex align-items-center p-3" [routerLink]="">
+                    <img class="img-fluid mr-3"
+                         src="/assets/images/{{item.name.toLowerCase().split('/').join('').split(' ').join('')}}.svg"
+                         alt="">
+                    <div class="d-flex flex-column">
+                      <div class="font-arboria-light">{{item.name}}</div>
+                      <div class="font-arboria-light font11px">No Upcoming Events</div>
+                    </div>
+                  </a>
+                  <a class="d-flex align-items-center d-sm-none h-100 p-3 pr-4" href="javascript:"><span
+                    class="d-block d-sm-none img-like ml-auto"></span></a>
+
+                </li>
+              </ng-container>
+            </ng-container>
+          </ul>
+        </aside>
+        <section class="col order-1 order-sm-0 pr-sm-0 pl-sm-2 mobile-sportsbook">
+          <router-outlet></router-outlet>
+        </section>
+      </div>
+    </ng-container>
+  </div>
+</div>
