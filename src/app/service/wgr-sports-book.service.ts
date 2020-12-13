@@ -83,6 +83,11 @@ export class WgrSportsBookService {
         }
       });
     this.socket
+      .fromEvent<any[]>('betpushed')
+      .subscribe((data: any) => {
+        this.updateBets(data);
+      });
+    this.socket
       .fromEvent<any[]>('getEvent')
       .subscribe((data: any) => {
         this.eventData.next(data);
@@ -97,6 +102,16 @@ export class WgrSportsBookService {
     } else {
       this.coinNetwork = this.wgrNetwork;
     }
+  }
+
+  updateBets(updateBet: any) {
+    const allBets = this.placedBets.getValue();
+    allBets.forEach((bet: any) => {
+      if (bet.created === updateBet.txid) {
+        bet.nodetxid = updateBet.sendData;
+      }
+    });
+    this.placedBets.next(allBets);
   }
 
   getEventID(eventID: number): void {

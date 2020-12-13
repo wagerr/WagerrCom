@@ -1,4 +1,4 @@
-import {Component, OnInit, TemplateRef} from '@angular/core';
+import {Component, OnDestroy, OnInit, TemplateRef} from '@angular/core';
 import {BsModalRef, BsModalService} from 'ngx-bootstrap/modal';
 
 import {WgrSportsBookService} from '../../../service/wgr-sports-book.service';
@@ -13,7 +13,7 @@ import {CoreFunc} from '../../../service/Corefunc';
   templateUrl: './sbbetslip.component.html',
   styleUrls: ['./sbbetslip.component.scss']
 })
-export class SbbetslipComponent implements OnInit {
+export class SbbetslipComponent implements OnInit, OnDestroy {
   modalRef: BsModalRef;
   accountSettings: any;
   bets: any = [];
@@ -27,11 +27,13 @@ export class SbbetslipComponent implements OnInit {
   availableBalance = 0;
   openEvents: any;
   allPlacedBets: any = [];
+  allUpdatedPlacedBets: any = [];
   betsPlaced = false;
   preBalance = 0;
   allBetsComplete = false;
   version = +environment[environment.access].ver;
   isTestnet = environment[environment.access].testnet;
+  intervalId = setInterval(this.processUpdate, 15000);
 
   constructor(private modalService: BsModalService,
               public wsb: WgrSportsBookService,
@@ -67,6 +69,18 @@ export class SbbetslipComponent implements OnInit {
     return this.allPlacedBets;
   }
 
+  processUpdate() {
+    if (this.allUpdatedPlacedBets && this.allUpdatedPlacedBets.length > 0 &&
+      this.allPlacedBets && this.allPlacedBets.length > 0 &&
+      this.allUpdatedPlacedBets.length === this.allPlacedBets.length) {
+      this.wsb.placedBets.next(this.allUpdatedPlacedBets);
+      this.allUpdatedPlacedBets = [];
+    }
+  }
+
+  ngOnDestroy() {
+    clearInterval(this.intervalId);
+  }
   ngOnInit(): void {
     this.wsb.bets.subscribe((data: any) => {
       this.bets = data;
@@ -111,27 +125,20 @@ export class SbbetslipComponent implements OnInit {
   }
 
   updatePlacedBets(bet: any, key: number): void {
-    this.allPlacedBets[key] = bet;
-    this.wsb.placedBets.next(this.allPlacedBets);
+    this.allUpdatedPlacedBets[key] = bet;
   }
 
   updateBet(gotBet: any, key: number): void {
     if (gotBet.created !== false && gotBet.status !== 'completed') {
-      // if (gotBet.height < this.wsb.blockheight && this.onBetsDisplay(gotBet.created)) {
+      if (gotBet.nodetxid === gotBet.created) {
         gotBet.time = Math.floor(Date.now() / 1000);
         gotBet.status = 'completed';
-        this.updatePlacedBets(gotBet, key);
-      // }
+      } else if (gotBet.nodetxid && gotBet.nodetxid.code) {
+        gotBet.created = false;
+      }
     }
+    this.updatePlacedBets(gotBet, key);
     return gotBet;
-    // const betsCount = this.bets.length;
-    // const betsCompleted = this.bets.filter((item) => (item.status === 'completed')).length;
-    // if (betsCount === betsCompleted) {
-    //   this.allBetsComplete = true;
-    // this.allPlacedBets = [];
-    // this.wsb.placedBets.next([]);
-    // this.wsb.bets.next([]);
-    // }
   }
 
   onBetsDisplay(txid: string): boolean {

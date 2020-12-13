@@ -58,8 +58,6 @@ export class SbEventComponent implements OnInit, OnDestroy {
       .filter((item) => (item.odds[0].mlHome > 0))
       .filter((item) => ((item.starting * 1000) > (+new Date() + (20 * 60000))));
     this.eventData = (eventData[0]) ? eventData[0] : [];
-    console.log('eventId', eventId);
-    console.log('eventData', this.eventData);
   }
 
   getStartTime(item: any): any {
