@@ -64,7 +64,6 @@ export class SbbetslipComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    clearInterval(this.intervalId);
   }
 
   ngOnInit(): void {
