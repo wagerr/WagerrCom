@@ -11,7 +11,8 @@ export class Corefunc {
   }
 
   getSpreadNumber(item: any, type: any): any {
-    if (item.odds[1].spreadPoints) {
+    console.log('item.odds', item.odds[1]);
+    if (item.odds[1].spreadPoints || (this.version === 2 && item.odds[1].spreadPoints >= 0)) {
       const set = (item.odds[1].favorite === type) ? '-' : '+';
       if (this.version === 2) {
         let points = 0;
@@ -20,7 +21,7 @@ export class Corefunc {
         } else {
           points = (item.odds[1].spreadPoints / 100);
         }
-        if (points > 0) {
+        if (points >= 0) {
           return '+' + points;
         }
         return points;
@@ -31,7 +32,7 @@ export class Corefunc {
   }
 
   getSpreadPoints(item: any, type: string): any {
-    if (item.odds[1].spreadPoints && item.odds[1]['spread' + type]) {
+    if ((item.odds[1].spreadPoints || (this.version === 2 && item.odds[1].spreadPoints >= 0)) && item.odds[1]['spread' + type]) {
       return this.updateTrueOdds((item.odds[1]['spread' + type] / 10000));
     }
     return '—';
