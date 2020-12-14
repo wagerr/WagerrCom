@@ -24,7 +24,6 @@ export class SbbetslipComponent implements OnInit, OnDestroy {
   totalStake = 0;
   totalPotential = 0;
   balance = 0;
-  availableBalance = 0;
   openEvents: any;
   allPlacedBets: any = [];
   allUpdatedPlacedBets: any = [];
@@ -33,7 +32,6 @@ export class SbbetslipComponent implements OnInit, OnDestroy {
   allBetsComplete = false;
   version = +environment[environment.access].ver;
   isTestnet = environment[environment.access].testnet;
-  intervalId = setInterval(this.processUpdate, 15000);
 
   constructor(private modalService: BsModalService,
               public wsb: WgrSportsBookService,
@@ -47,12 +45,8 @@ export class SbbetslipComponent implements OnInit, OnDestroy {
     });
     this.wsb.placedBets.subscribe((data: any) => {
       if (data.length > 0) {
-        data.forEach((eachBet: any, key: number) => {
-          this.updateBet(eachBet, key);
-        });
         this.allPlacedBets = data;
       }
-      // this.updateBalance();
     });
   }
 
@@ -69,18 +63,10 @@ export class SbbetslipComponent implements OnInit, OnDestroy {
     return this.allPlacedBets;
   }
 
-  processUpdate() {
-    if (this.allUpdatedPlacedBets && this.allUpdatedPlacedBets.length > 0 &&
-      this.allPlacedBets && this.allPlacedBets.length > 0 &&
-      this.allUpdatedPlacedBets.length === this.allPlacedBets.length) {
-      this.wsb.placedBets.next(this.allUpdatedPlacedBets);
-      this.allUpdatedPlacedBets = [];
-    }
-  }
-
   ngOnDestroy() {
     clearInterval(this.intervalId);
   }
+
   ngOnInit(): void {
     this.wsb.bets.subscribe((data: any) => {
       this.bets = data;
@@ -109,46 +95,6 @@ export class SbbetslipComponent implements OnInit, OnDestroy {
 
   processAvailableBalance(): void {
     this.wsb.processAvailableBalance();
-  }
-
-  updateBalance(): void {
-    let unspentBal = 0;
-    if (this.wsb.userAccount.betUnspent) {
-      unspentBal = this.wsb.openUnspentBalance(this.wsb.userAccount.betUnspent);
-    }
-    this.allPlacedBets.forEach((eachBet: any) => {
-      if (eachBet.status !== 'completed') {
-        unspentBal -= eachBet.bet.userBet;
-      }
-    });
-    this.wsb.updateAccountBalance(unspentBal);
-  }
-
-  updatePlacedBets(bet: any, key: number): void {
-    this.allUpdatedPlacedBets[key] = bet;
-  }
-
-  updateBet(gotBet: any, key: number): void {
-    if (gotBet.created !== false && gotBet.status !== 'completed') {
-      if (gotBet.nodetxid === gotBet.created) {
-        gotBet.time = Math.floor(Date.now() / 1000);
-        gotBet.status = 'completed';
-      } else if (gotBet.nodetxid && gotBet.nodetxid.code) {
-        gotBet.created = false;
-      }
-    }
-    this.updatePlacedBets(gotBet, key);
-    return gotBet;
-  }
-
-  onBetsDisplay(txid: string): boolean {
-    let found = false;
-    this.betList.forEach((eachBet: any) => {
-      if (eachBet[0].txid === txid) {
-        found = true;
-      }
-    });
-    return found;
   }
 
   closeBetView(): void {
