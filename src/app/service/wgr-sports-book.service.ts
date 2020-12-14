@@ -106,9 +106,19 @@ export class WgrSportsBookService {
 
   updateBets(updateBet: any) {
     const allBets = this.placedBets.getValue();
-    allBets.forEach((bet: any) => {
-      if (bet.created === updateBet.txid) {
-        bet.nodetxid = updateBet.sendData;
+    allBets.forEach((gotBet: any) => {
+      if (gotBet.created === updateBet.txid) {
+        gotBet.nodetxid = updateBet.sendData;
+        if (gotBet.created !== false && gotBet.status !== 'completed') {
+          if (gotBet.nodetxid === gotBet.created) {
+            gotBet.time = Math.floor(Date.now() / 1000);
+            gotBet.status = 'completed';
+          } else if (gotBet.nodetxid && gotBet.nodetxid.code) {
+            gotBet.created = false;
+            gotBet.errors.push(updateBet.sendData);
+            gotBet.nodetxid = '';
+          }
+        }
       }
     });
     this.placedBets.next(allBets);
