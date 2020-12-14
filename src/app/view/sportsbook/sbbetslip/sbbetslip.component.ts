@@ -32,7 +32,6 @@ export class SbbetslipComponent implements OnInit, OnDestroy {
   allBetsComplete = false;
   version = +environment[environment.access].ver;
   isTestnet = environment[environment.access].testnet;
-  intervalId = setInterval(this.processUpdate, 15000);
 
   constructor(private modalService: BsModalService,
               public wsb: WgrSportsBookService,
@@ -62,15 +61,6 @@ export class SbbetslipComponent implements OnInit, OnDestroy {
       }
     });
     return this.allPlacedBets;
-  }
-
-  processUpdate() {
-    if (this.allUpdatedPlacedBets && this.allUpdatedPlacedBets.length > 0 &&
-      this.allPlacedBets && this.allPlacedBets.length > 0 &&
-      this.allUpdatedPlacedBets.length === this.allPlacedBets.length) {
-      this.wsb.placedBets.next(this.allUpdatedPlacedBets);
-      this.allUpdatedPlacedBets = [];
-    }
   }
 
   ngOnDestroy() {
