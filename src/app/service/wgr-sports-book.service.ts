@@ -77,10 +77,6 @@ export class WgrSportsBookService {
       .fromEvent<any[]>('getAddressData')
       .subscribe((data: any) => {
         this.gotAddressData(data);
-        const allBets = this.placedBets.getValue();
-        if (allBets.length > 0) {
-          this.createRawTX(allBets);
-        }
       });
     this.socket
       .fromEvent<any[]>('betpushed')
@@ -585,6 +581,10 @@ export class WgrSportsBookService {
 
   gotAddressData(data: any): void {
     if (data.height > this.blockheight) {
+      const allBets = this.placedBets.getValue();
+      if (allBets.length > 0) {
+        this.createRawTX(allBets);
+      }
       this.blockheight = data.height;
       this.exchangeRates.next(data.exchangeRate);
       this.userAccount.betBalance = data.balance - 0.01 < 0 ? 0 : data.balance - 0.01;
