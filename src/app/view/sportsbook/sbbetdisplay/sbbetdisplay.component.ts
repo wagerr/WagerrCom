@@ -282,19 +282,29 @@ export class SbbetdisplayComponent implements OnInit {
         const getBets: any = this.wsb.bets.getValue();
         if (points > 0 && this.availableBets(getBets)) {
           getBets.forEach((eachBet) => {
-            if (eachBet.type === bet.type
-              && eachBet.selected.toLowerCase() === bet.selected
-              && eachBet.points === bet.points
-              && eachBet.eventid === bet.eventid
-            ) {
-              addBet = false;
+            if (this.wsb.betType === 'parlay') {
+              if (eachBet.eventid === bet.eventid) {
+                addBet = false;
+              }
+            } else {
+              if (eachBet.type === bet.type
+                && eachBet.selected.toLowerCase() === bet.selected
+                && eachBet.points === bet.points
+                && eachBet.eventid === bet.eventid
+              ) {
+                addBet = false;
+              }
             }
           });
           if (addBet && this.wsb.availableBalance > this.accountSettings.bet) {
             getBets.push(bet);
             this.wsb.bets.next(getBets);
           } else if (!addBet) {
-            this.alertModal('Duplicate bets are not allowed in the same bet slip');
+            if (this.wsb.betType === 'parlay') {
+              this.alertModal('Duplicate events on the same Parlay bet slip is not allowed.');
+            } else {
+              this.alertModal('Duplicate bets are not allowed in the same bet slip');
+            }
           } else {
             this.alertModal('Not enough available balance to add this bet');
           }

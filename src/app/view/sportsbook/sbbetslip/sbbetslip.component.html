@@ -10,15 +10,15 @@
   <div
     class="card-header d-flex justify-content-between p-0 align-items-center font-weight-bold text-uppercase">
     <div class="bettype usePointer w-100 font-arboria-bold text-center border-right-gray font13px py-1"
-         [ngClass]="(betType === 'single') ? 'bt-active' : ''"
+         [ngClass]="(wsb.betType === 'single') ? 'bt-active' : ''"
          (click)="slipType('single')">
       SINGLE
     </div>
     <div class="bettype w-100 usePointer font-arboria-bold text-center font13px  py-1"
-         [ngClass]="(betType === 'parlay') ? 'bt-active' : ''"
+         [ngClass]="(wsb.betType === 'parlay') ? 'bt-active' : ''"
          (click)="slipType('parlay')">PARLAY</div>
   </div>
-  <div class="card-body pt-0 px-2" *ngIf="betType === 'single'">
+  <div class="card-body pt-0 px-2" *ngIf="wsb.betType === 'single'">
     <ng-container *ngFor="let bet of wsb.bets | async; let i = index">
       <div class="mt-2 card bg-transparent" *ngIf="!bet.txid">
         <div class="pl-2 pr-1 pt-1 card-header d-flex justify-content-between border-0 pb-0">
@@ -115,7 +115,7 @@
       <button class="btn btn-sportsbook mb-3">view sports</button>
     </div>
   </div>
-  <div class="card-body pt-0 px-2" *ngIf="betType === 'parlay'">
+  <div class="card-body pt-0 px-2" *ngIf="wsb.betType === 'parlay'">
     <ng-container *ngFor="let bet of wsb.bets | async; let i = index">
       <div class="mt-2 card bg-transparent" *ngIf="!bet.txid">
         <div class="pl-2 pr-1 pt-1 card-header d-flex justify-content-between border-0 pb-0">

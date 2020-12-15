@@ -20,7 +20,6 @@ export class SbbetslipComponent implements OnInit, OnDestroy {
     odds: 'euro',
     bet: 25
   };
-  betType = 'single';
   bets: any = [];
   curCode = 'USD';
   exchangeRates: any;
@@ -66,11 +65,13 @@ export class SbbetslipComponent implements OnInit, OnDestroy {
   }
 
   slipType(type: string): void {
-    this.betType = type;
-    if (type === 'parlay') {
-      this.parlayBet = this.accountSettings.bet;
+    if (this.version === 2) {
+      this.clearAll();
+      this.wsb.betType = type;
+      if (type === 'parlay') {
+        this.parlayBet = this.accountSettings.bet;
+      }
     }
-
   }
 
   getAllPlacedBets(): any {

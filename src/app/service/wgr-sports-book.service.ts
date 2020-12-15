@@ -20,6 +20,7 @@ export class WgrSportsBookService {
   mobileEvent = 0;
   getMyBalance: Subscription;
   source = interval(30000);
+  betType = 'single';
   mnemonic: any;
   account = new BehaviorSubject([]);
   bets = new BehaviorSubject([]);
