@@ -11,7 +11,6 @@ export class Corefunc {
   }
 
   getSpreadNumber(item: any, type: any): any {
-    console.log('item.odds', item.odds[1]);
     if (item.odds[1].spreadPoints || (this.version === 2 && item.odds[1].spreadPoints >= 0)) {
       const set = (item.odds[1].favorite === type) ? '-' : '+';
       if (this.version === 2) {

@@ -15,15 +15,22 @@ import {CoreFunc} from '../../../service/Corefunc';
 })
 export class SbbetslipComponent implements OnInit, OnDestroy {
   modalRef: BsModalRef;
-  accountSettings: any;
+  accountSettings: any = {
+    currency: 'usd',
+    odds: 'euro',
+    bet: 25
+  };
   bets: any = [];
   curCode = 'USD';
   exchangeRates: any;
   betList: any;
   coinData: any;
+  totalMatches = 0;
   totalStake = 0;
   totalPotential = 0;
   balance = 0;
+  parlayBet = 0;
+  parlayPoints = 0;
   openEvents: any;
   allPlacedBets: any = [];
   allUpdatedPlacedBets: any = [];
@@ -32,6 +39,8 @@ export class SbbetslipComponent implements OnInit, OnDestroy {
   allBetsComplete = false;
   version = +environment[environment.access].ver;
   isTestnet = environment[environment.access].testnet;
+  prefix = '42';
+  verNumber = '01';
 
   constructor(private modalService: BsModalService,
               public wsb: WgrSportsBookService,
@@ -48,6 +57,21 @@ export class SbbetslipComponent implements OnInit, OnDestroy {
         this.allPlacedBets = data;
       }
     });
+    this.wsb.account.subscribe((gotAccount: any) => {
+      if (gotAccount && gotAccount.settings) {
+        this.accountSettings = gotAccount.settings;
+      }
+    });
+  }
+
+  slipType(type: string): void {
+    if (this.version === 2) {
+      this.clearAll();
+      this.wsb.betType = type;
+      if (type === 'parlay') {
+        this.parlayBet = this.accountSettings.bet;
+      }
+    }
   }
 
   getAllPlacedBets(): any {
@@ -137,49 +161,148 @@ export class SbbetslipComponent implements OnInit, OnDestroy {
     return CoreFunc.getTotalsNumber(item);
   }
 
-  getUpdatedBetPoints(bet: any): number {
-    bet.selected = bet.selected.charAt(0).toUpperCase() + bet.selected.slice(1);
-    const event = this.getEventData(bet.event.event_id);
-    if (bet.type === 'moneyline') {
-      return this.getMLPoints(event, bet.selected);
-    }
-    if (bet.type === 'total') {
-      return this.getTotalsPoints(event, bet.selected);
-    }
-    if (bet.type === 'spread') {
-      return this.getSpreadPoints(event, bet.selected);
+  getPotentialReturn(bet: any): number {
+    bet.potential = bet.userBet * bet.points;
+    return bet.potential;
+  }
+
+  getPotentialReturnParlay(): number {
+    return this.parlayBet * this.parlayPoints;
+  }
+
+  getUpdatedBetPointsParlay(bets: any): number {
+    let amount = 1;
+    bets.forEach((bet: any) => {
+      let odds = 0;
+      bet.selected = bet.selected.charAt(0).toUpperCase() + bet.selected.slice(1);
+      const event = this.getEventData(bet.event.event_id);
+      if (bet.type === 'moneyline') {
+        odds = this.getMoneylineOdds(event, bet.selected);
+      }
+      if (bet.type === 'total') {
+        odds = this.getTotalsOdds(event, bet.selected);
+      }
+      if (bet.type === 'spread') {
+        odds = this.getSpreadOdds(event, bet.selected);
+      }
+      amount = amount * odds;
+    });
+    if (bets.length > 0) {
+      this.parlayPoints = amount;
+      return amount;
     }
     return 0;
   }
 
-  getMLPoints(item: any, type: string): any {
+  getUpdatedBetPoints(bet: any): number {
+    bet.selected = bet.selected.charAt(0).toUpperCase() + bet.selected.slice(1);
+    const event = this.getEventData(bet.event.event_id);
+    if (bet.type === 'moneyline') {
+      return this.getMoneylineOdds(event, bet.selected);
+    }
+    if (bet.type === 'total') {
+      return this.getTotalsOdds(event, bet.selected);
+    }
+    if (bet.type === 'spread') {
+      return this.getSpreadOdds(event, bet.selected);
+    }
+    return 0;
+  }
+
+  getMoneylineOdds(item: any, type: string): any {
     return CoreFunc.getMLPoints(item, type);
   }
 
-  getSpreadPoints(item: any, type: string): any {
+  getSpreadOdds(item: any, type: string): any {
     return CoreFunc.getSpreadPoints(item, type);
   }
 
-  getTotalsPoints(item: any, type: string): any {
+  getTotalsOdds(item: any, type: string): any {
     return CoreFunc.getTotalsPoints(item, type);
   }
 
-  placeBets(): void {
+  placeBetsSingle(): void {
     this.modalRef.hide();
     const allPlacedBets = [];
     this.bets.forEach((eachBet: any, key: number) => {
       const betData = {
         bet: eachBet,
+        betAmt: eachBet.userBet,
+        type: 'single',
         status: 'processing',
         hide: false,
         created: false,
-        opCode: this.createOPCode(eachBet)
+        opCode: this.createOPCodeSingle(eachBet)
       };
       this.balance -= eachBet.userBet;
       allPlacedBets.push(betData);
     });
     this.wsb.processBets(allPlacedBets);
     // this.clearAll();
+  }
+
+  createOPCodeSingle(eachBet: any): string {
+    const eId = eachBet.event.event_id;
+    const txType = '03';
+    const eventID = this.convertEventId(eId);
+    const outcome = this.getOutcomeHex(eachBet);
+    return this.prefix + this.verNumber + txType + eventID + outcome;
+  }
+
+  placeBetsParley(): void {
+    this.modalRef.hide();
+    const allPlacedBets = [];
+    const betData = {
+      bet: this.bets,
+      betAmt: this.parlayBet,
+      points: this.parlayPoints,
+      type: 'parlay',
+      status: 'processing',
+      hide: false,
+      created: false,
+      opCode: this.createOPCodeParley(this.bets)
+    };
+    console.log('opcode', betData.opCode);
+    this.balance -= this.parlayBet;
+    allPlacedBets.push(betData);
+    this.wsb.processBets(allPlacedBets);
+    this.parlayBet = this.accountSettings.bet;
+    this.parlayPoints = 0;
+  }
+
+  createOPCodeParley(allBets: any): string {
+    const txType = '0c';
+    const legCount = ('0' + allBets.length).slice(-2);
+    let eventLegs = '';
+    allBets.forEach((bet: any) => {
+      const eventID = this.convertEventId(bet.event.event_id);
+      const outcome = this.getOutcomeHex(bet);
+      eventLegs = eventLegs + eventID + outcome;
+    })
+    return this.prefix + this.verNumber + txType + legCount + eventLegs;
+
+  }
+
+  convertEventId(val): any {
+    // tslint:disable-next-line:no-bitwise
+    val &= 0xFFFFFFFF;
+    const hex = val.toString(16).toUpperCase();
+    const a = ('00000000' + hex).slice(-8);
+    const array = a.toString().match(/.{1,2}/g);
+    return array[3] + array[2] + array[1] + array[0];
+  }
+
+  getOutcomeHex(eachBet: any): string {
+    if (eachBet.type.toLowerCase() === 'moneyline') {
+      return (eachBet.selected.toLowerCase() === 'home') ? '01' : ((eachBet.selected.toLowerCase() === 'away') ? '02' : '03');
+    }
+    if (eachBet.type.toLowerCase() === 'spread') {
+      return (eachBet.selected.toLowerCase() === 'home') ? '04' : '05';
+    }
+    if (eachBet.type.toLowerCase() === 'total') {
+      return (eachBet.selected.toLowerCase() === 'over') ? '06' : '07';
+    }
+    return '';
   }
 
   getBetTeam(bet: any): string {
@@ -236,38 +359,6 @@ export class SbbetslipComponent implements OnInit, OnDestroy {
     return (this.bets.length === 0) || (this.totalStake > (this.balance + this.preBalance));
   }
 
-  createOPCode(eachBet: any): string {
-    const eId = eachBet.event.event_id;
-    const prefix = '42';
-    const verNumber = '01';
-    const txType = '03';
-    const eventID = this.convertEventId(eId);
-    const outcome = this.getOutcomeHex(eachBet);
-    return prefix + verNumber + txType + eventID + outcome;
-  }
-
-  convertEventId(val): any {
-    // tslint:disable-next-line:no-bitwise
-    val &= 0xFFFFFFFF;
-    const hex = val.toString(16).toUpperCase();
-    const a = ('00000000' + hex).slice(-8);
-    const array = a.toString().match(/.{1,2}/g);
-    return array[3] + array[2] + array[1] + array[0];
-  }
-
-  getOutcomeHex(eachBet: any): string {
-    if (eachBet.type.toLowerCase() === 'moneyline') {
-      return (eachBet.selected.toLowerCase() === 'home') ? '01' : ((eachBet.selected.toLowerCase() === 'away') ? '02' : '03');
-    }
-    if (eachBet.type.toLowerCase() === 'spread') {
-      return (eachBet.selected.toLowerCase() === 'home') ? '04' : '05';
-    }
-    if (eachBet.type.toLowerCase() === 'total') {
-      return (eachBet.selected.toLowerCase() === 'over') ? '06' : '07';
-    }
-    return '';
-  }
-
   getHomeTeam(event: any): string {
     return event.teams.home;
   }
@@ -318,43 +409,56 @@ export class SbbetslipComponent implements OnInit, OnDestroy {
     this.wsb.bets.next(allBets);
   }
 
-  checkBet(bet: any): void {
-    if (isNaN(bet.userBet)) {
-      bet.userBet = 25;
-    } else if (bet.userBet < 25) {
-      bet.userBet = 25;
-    } else if (bet.userBet > 10000) {
-      bet.userBet = 10000;
+  checkBetParlay(): void {
+    this.parlayBet = this.checkBetAmount(+this.parlayBet, 3000);
+  }
+
+  checkBetAmount(amt: number, max = 10000): number {
+    if (isNaN(amt)) {
+      amt = 25;
+    } else if (amt < 25) {
+      amt = 25;
+    } else if (amt > max) {
+      amt = max;
     }
-    const userBet = bet.userBet.toString();
+    const userBet = amt.toString();
     const betSplice = userBet.split('.');
-    if (betSplice.lenght > 1) {
-      bet.userBet = +(betSplice[0] + '.' + betSplice[1].substring(0, 2));
+    if (betSplice.length > 1) {
+      amt = +(betSplice[0] + '.' + betSplice[1].substring(0, 2));
     }
+    return amt;
+  }
+
+  checkBet(bet: any): void {
+    bet.userBet = this.checkBetAmount(bet.userBet);
     this.getTotalStake();
     this.getTotalReturn();
     this.wsb.processAvailableBalance();
+  }
+
+  betMaxParlay(): void {
+    this.parlayBet = this.betMaxAmount(this.parlayBet, 3000);
+  }
+
+  betMaxAmount(amt: number, max = 10000): number {
+    const orgBet = +amt;
+    amt = (+this.wsb.availableBalance + orgBet);
+    if (amt > max) {
+      amt = max;
+    }
+    const userBet = amt.toString();
+    const betSplice = userBet.split('.');
+    if (betSplice.length > 1) {
+      amt = +(betSplice[0] + '.' + betSplice[1].substring(0, 2));
+    }
+    return amt;
   }
 
   betMax(bet: any): void {
-    const orgBet = +bet.userBet;
-    bet.userBet = (+this.wsb.availableBalance + orgBet);
-    if (bet.userBet > 10000) {
-      bet.userBet = 10000;
-    }
-    const userBet = bet.userBet.toString();
-    const betSplice = userBet.split('.');
-    if (betSplice.length > 1) {
-      bet.userBet = +(betSplice[0] + '.' + betSplice[1].substring(0, 2));
-    }
+    bet.userBet = this.betMaxAmount(bet.userBet);
     this.getTotalStake();
     this.getTotalReturn();
     this.wsb.processAvailableBalance();
-  }
-
-  getPotentialReturn(bet: any): number {
-    bet.potential = bet.userBet * bet.points;
-    return bet.potential;
   }
 
   getTotalStake(): void {
@@ -362,6 +466,7 @@ export class SbbetslipComponent implements OnInit, OnDestroy {
     this.bets.forEach((eachBet) => {
       total = total + (+eachBet.userBet);
     });
+    this.totalMatches = this.bets.length;
     this.totalStake = total;
   }
 

@@ -20,6 +20,7 @@ export class WgrSportsBookService {
   mobileEvent = 0;
   getMyBalance: Subscription;
   source = interval(30000);
+  betType = 'single';
   mnemonic: any;
   account = new BehaviorSubject([]);
   bets = new BehaviorSubject([]);
@@ -104,6 +105,7 @@ export class WgrSportsBookService {
     const allBets = this.placedBets.getValue();
     allBets.forEach((gotBet: any) => {
       if (gotBet.created === updateBet.txid) {
+        gotBet.errors = [];
         gotBet.nodetxid = updateBet.sendData;
         if (gotBet.created !== false && gotBet.status !== 'completed') {
           if (gotBet.nodetxid === gotBet.created) {
@@ -305,7 +307,7 @@ export class WgrSportsBookService {
     const betPrivKey = this.getUserBetAddressPrivKey();
     bets.filter((item) => (item.created === false)).forEach((bet: any) => {
       if (unSpent.length > 0) {
-        newBalance = newBalance - bet.bet.userBet;
+        newBalance = newBalance - bet.betAmt;
         bet = this.createRawBetTransaction(bet, unSpent, betPrivKey);
       }
     });
@@ -324,9 +326,9 @@ export class WgrSportsBookService {
     let unspentAmt = 0;
     const unspent = [];
     bet.created = false;
-    if (bet.bet.userBet >= 25 && bet.bet.userBet <= 10000) {
+    if (bet.betAmt >= 25 && bet.betAmt <= 10000) {
       unSpent.forEach((eachUnspent: any) => {
-        if (unspentAmt <= bet.bet.userBet) {
+        if (unspentAmt <= bet.betAmt) {
           if (eachUnspent.used && eachUnspent.used === true) {
 
           } else {
@@ -341,9 +343,9 @@ export class WgrSportsBookService {
           }
         }
       });
-      if (unspentAmt > bet.bet.userBet) {
+      if (unspentAmt > bet.betAmt) {
         const changeUnSpent = +(unspentAmt * 100000000).toFixed(0);
-        const userBet = +(bet.bet.userBet * 100000000).toFixed(0);
+        const userBet = +(bet.betAmt * 100000000).toFixed(0);
         const changeFee = +(0.001 * 100000000).toFixed(0);
         const change = (changeUnSpent - userBet) - changeFee;
         const changeFinal = change / 100000000;
