@@ -271,7 +271,9 @@ export class SbbetdisplayComponent implements OnInit {
 
   addToBetSlip(event: any, type: string, selected: string, points: any, extra: any = ''): void {
     if (this.wsb.isLoggedIn()) {
-      this.wsb.processAvailableBalance();
+      if (this.wsb.betType === 'single') {
+        this.wsb.processAvailableBalance();
+      }
       if (points !== 'NA') {
         let addBet = true;
         const bet: any = {
@@ -286,7 +288,7 @@ export class SbbetdisplayComponent implements OnInit {
           potential: 0
         };
         const getBets: any = this.wsb.bets.getValue();
-        if (points > 0 && this.availableBets(getBets)) {
+        if ((points > 0 && this.availableBets(getBets))) {
           getBets.forEach((eachBet) => {
             if (this.wsb.betType === 'parlay') {
               if (eachBet.eventid === bet.eventid) {
@@ -303,6 +305,9 @@ export class SbbetdisplayComponent implements OnInit {
             }
           });
           if (addBet && this.wsb.availableBalance > this.accountSettings.bet) {
+            getBets.push(bet);
+            this.wsb.bets.next(getBets);
+          } else if (addBet && this.wsb.betType === 'parlay' && this.wsb.userAccount.betBalance > this.wsb.parlayBet) {
             getBets.push(bet);
             this.wsb.bets.next(getBets);
           } else if (!addBet) {

@@ -148,7 +148,7 @@
       <div class="px-2 pb-1 pt-0 card-body">
         <div class="d-flex flex-row mt-2">
           <div class="w-50 d-flex flex-column">
-            <input class="w-100 form-control form-control-sm betslipNumber" type="number" [(ngModel)]="parlayBet"
+            <input class="w-100 form-control form-control-sm betslipNumber" type="number" [(ngModel)]="wsb.parlayBet"
                    (focusout)="checkBetParlay()">
             <span
               class="font-weight-bold text-underline text-uppercase usePointer font16px"
@@ -183,13 +183,13 @@
         <div class="w-100 d-flex justify-content-between total-stake font-roboto-condensed pt-2">Total Stake</div>
         <div class="w-100 d-flex flex-column justify-content-end total-stake font-roboto-condensed">
           <div class="w-100 d-flex justify-content-end">
-            <span class="font16px"> {{parlayBet | number: '1.2-2'}}
+            <span class="font16px"> {{wsb.parlayBet | number: '1.2-2'}}
               <span class="font-weight-bold font12px text-highlight">{{((isTestnet) ? 'tWGR' : 'WGR')}}</span>
             </span>
           </div>
           <div class="w-100 d-flex justify-content-end">
             <span
-              class="align-self-end font10px opacity60">({{convertToUSD(parlayBet) | currency: curCode}} {{curCode}}
+              class="align-self-end font10px opacity60">({{convertToUSD(wsb.parlayBet) | currency: curCode}} {{curCode}}
               )</span>
           </div>
         </div>
@@ -232,7 +232,7 @@
 </div>
 
 <ng-container *ngFor="let bet of getAllPlacedBets()">
-  <div id="betslip" class="betslip card sportsbook-card mt-2 d-block" *ngIf="!bet.hide">
+  <div id="betslipPlaced" class="betslip card sportsbook-card mt-2 d-block" *ngIf="!bet.hide">
     <div class="card-body p-0 d-flex flex-row slipBox"
          tooltip="Your bet has been broadcast to the Wagerr network. It will display in bet history upon network acceptance and confirmation.">
       <div class="w-auto p-1 d-flex flex-column align-content-center justify-content-center">
@@ -449,13 +449,13 @@
             <div class="w-100  font-roboto-condensed  font-weight-bold">Total Stake</div>
             <div class="w-100 d-flex flex-column font-roboto-condensed font-weight-bold">
               <div class="w-100 d-flex justify-content-end">
-            <span class="font16px"> {{parlayBet | number: '1.2-2'}}
+            <span class="font16px"> {{wsb.parlayBet | number: '1.2-2'}}
               <span class="font-weight-bold font12px text-highlight">{{((isTestnet) ? 'tWGR' : 'WGR')}}</span>
             </span>
               </div>
               <div class="w-100 d-flex justify-content-end">
             <span
-              class="align-self-end font10px opacity60">({{convertToUSD(parlayBet) | currency: curCode}} {{curCode}}
+              class="align-self-end font10px opacity60">({{convertToUSD(wsb.parlayBet) | currency: curCode}} {{curCode}}
               )</span>
               </div>
             </div>

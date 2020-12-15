@@ -12,12 +12,14 @@ import {environment} from '../../environments/environment';
   providedIn: 'root'
 })
 export class WgrSportsBookService {
+  version = +environment[environment.access].ver;
   authID = 'nottoday';
   shareQrCode = '';
   availableBalance = 0;
   blockheight = 0;
   mobileNav = 'sportlist';
   mobileEvent = 0;
+  parlayBet = 0;
   getMyBalance: Subscription;
   source = interval(30000);
   betType = 'single';
@@ -139,9 +141,13 @@ export class WgrSportsBookService {
     this.availableBalance = (this.userAccount.betBalance + this.userAccount.depBalance) - 0.01;
     const bets = this.bets.getValue();
     let betBalance = 0;
-    bets.forEach((eachBet: any) => {
-      betBalance += (+eachBet.userBet + 0.01);
-    });
+    if (this.betType === 'parlay' && this.parlayBet > 0) {
+      betBalance = (+this.parlayBet + 0.01);
+    } else {
+      bets.forEach((eachBet: any) => {
+        betBalance += (+eachBet.userBet + 0.01);
+      });
+    }
     this.availableBalance = this.availableBalance - betBalance;
   }
 
