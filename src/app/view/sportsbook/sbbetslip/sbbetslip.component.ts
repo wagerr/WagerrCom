@@ -29,7 +29,6 @@ export class SbbetslipComponent implements OnInit, OnDestroy {
   totalStake = 0;
   totalPotential = 0;
   balance = 0;
-  parlayBet = 0;
   parlayPoints = 0;
   openEvents: any;
   allPlacedBets: any = [];
@@ -69,7 +68,7 @@ export class SbbetslipComponent implements OnInit, OnDestroy {
       this.clearAll();
       this.wsb.betType = type;
       if (type === 'parlay') {
-        this.parlayBet = this.accountSettings.bet;
+        this.wsb.parlayBet = this.accountSettings.bet;
       }
     }
   }
@@ -167,7 +166,7 @@ export class SbbetslipComponent implements OnInit, OnDestroy {
   }
 
   getPotentialReturnParlay(): number {
-    return this.parlayBet * this.parlayPoints;
+    return this.wsb.parlayBet * this.parlayPoints;
   }
 
   getUpdatedBetPointsParlay(bets: any): number {
@@ -254,7 +253,7 @@ export class SbbetslipComponent implements OnInit, OnDestroy {
     const allPlacedBets = [];
     const betData = {
       bet: this.bets,
-      betAmt: this.parlayBet,
+      betAmt: this.wsb.parlayBet,
       points: this.parlayPoints,
       type: 'parlay',
       status: 'processing',
@@ -262,11 +261,10 @@ export class SbbetslipComponent implements OnInit, OnDestroy {
       created: false,
       opCode: this.createOPCodeParley(this.bets)
     };
-    console.log('opcode', betData.opCode);
-    this.balance -= this.parlayBet;
+    this.balance -= this.wsb.parlayBet;
     allPlacedBets.push(betData);
     this.wsb.processBets(allPlacedBets);
-    this.parlayBet = this.accountSettings.bet;
+    this.wsb.parlayBet = this.accountSettings.bet;
     this.parlayPoints = 0;
   }
 
@@ -410,7 +408,7 @@ export class SbbetslipComponent implements OnInit, OnDestroy {
   }
 
   checkBetParlay(): void {
-    this.parlayBet = this.checkBetAmount(+this.parlayBet, 3000);
+    this.wsb.parlayBet = this.checkBetAmount(+this.wsb.parlayBet, 3000);
   }
 
   checkBetAmount(amt: number, max = 10000): number {
@@ -437,7 +435,8 @@ export class SbbetslipComponent implements OnInit, OnDestroy {
   }
 
   betMaxParlay(): void {
-    this.parlayBet = this.betMaxAmount(this.parlayBet, 3000);
+    this.wsb.parlayBet = this.betMaxAmount(this.wsb.parlayBet, 3000);
+    this.wsb.processAvailableBalance();
   }
 
   betMaxAmount(amt: number, max = 10000): number {
@@ -479,6 +478,8 @@ export class SbbetslipComponent implements OnInit, OnDestroy {
   }
 
   clearAll(): void {
+    this.wsb.parlayBet = this.accountSettings.bet;
+    this.parlayPoints = 0;
     this.wsb.bets.next([]);
   }
 
