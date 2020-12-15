@@ -132,7 +132,7 @@ export class SbhistoryComponent implements OnInit {
     const list = this.txlist;
     list.forEach((value: any, key: number) => {
       list[key].bet = [];
-      if (value.type === 'bet') {
+      if (value.type === 'bet' || value.type === 'parlay') {
         list[key].bet = this.getBet(value.txid);
       }
       if (value.type === 'betpayout') {
@@ -142,11 +142,14 @@ export class SbhistoryComponent implements OnInit {
     const filter = list
       .filter((thing: any) => {
         return (thing.type !== 'bet' || (thing.bet && thing.bet.betResultType === 'lose'));
+      })
+      .filter((thing: any) => {
+        return (thing.type !== 'parlay' || (thing.bet && thing.bet.betResultType === 'lose'));
       });
     let filterFinal = filter;
     if (this.getSortHistory === 'bets only') {
       filterFinal = filter.filter((thing: any) => {
-        return (thing.type === 'bet' || thing.type === 'betpayout');
+        return (thing.type === 'bet' || thing.type === 'parlay' || thing.type === 'betpayout');
       });
     } else if (this.getSortHistory === 'moneyline') {
       filterFinal = filter.filter((thing: any) => {

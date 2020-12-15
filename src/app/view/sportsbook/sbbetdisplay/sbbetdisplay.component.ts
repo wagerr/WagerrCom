@@ -252,8 +252,14 @@ export class SbbetdisplayComponent implements OnInit {
 
   availableBets(betSlip: any): boolean {
     let ret = false;
-    if ((this.unspent.length > 0) && betSlip.length < this.unspent.length && betSlip.length < 5) {
-      ret = true;
+    if (this.wsb.betType === 'parlay') {
+      if (betSlip.length < 5) {
+        ret = true;
+      }
+    } else {
+      if ((this.unspent.length > 0) && betSlip.length < this.unspent.length && betSlip.length < 5) {
+        ret = true;
+      }
     }
     return ret;
   }
