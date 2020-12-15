@@ -12,6 +12,7 @@ import {environment} from '../../environments/environment';
   providedIn: 'root'
 })
 export class WgrSportsBookService {
+  version = +environment[environment.access].ver;
   authID = 'nottoday';
   shareQrCode = '';
   availableBalance = 0;
@@ -139,9 +140,11 @@ export class WgrSportsBookService {
     this.availableBalance = (this.userAccount.betBalance + this.userAccount.depBalance) - 0.01;
     const bets = this.bets.getValue();
     let betBalance = 0;
-    bets.forEach((eachBet: any) => {
-      betBalance += (+eachBet.userBet + 0.01);
-    });
+      bets.forEach((eachBet: any) => {
+        if (this.betType === 'single') {
+          betBalance += (+eachBet.userBet + 0.01);
+        }
+      });
     this.availableBalance = this.availableBalance - betBalance;
   }
 
