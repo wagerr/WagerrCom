@@ -102,7 +102,7 @@
                     class="w-25 text-center font-weight-bold text-white border borderRightRound py-p35 toWin"
                     [innerHTML]="getToWin((bet.amount * getOdds(bet)).toFixed(2), false, true)"></div>
                   <div class="w-25 text-center text-uppercase px-1">
-                    <a href="https://explorer.wagerr.com/#/tx/{{bet.betTxHash}}" target="_blank"
+                    <a href="https://{{getExplorer()}}.wagerr.com/#/tx/{{bet.betTxHash}}" target="_blank"
                        class="btn btn-sportsbook3"><i class="far fa-search"></i></a></div>
                 </div>
                 <div class="w-100 d-flex d-sm-none flex-row item mb-2 px-2">
@@ -277,7 +277,7 @@
                       </ng-container>
                   </div>
                   <div class="w-25 text-center text-uppercase px-1">
-                    <a href="https://explorer.wagerr.com/#/tx/{{tx.txid}}" target="_blank"
+                    <a href="https://{{getExplorer()}}.wagerr.com/#/tx/{{tx.txid}}" target="_blank"
                        class="btn btn-sportsbook3"><i class="far fa-search"></i></a>
                   </div>
                 </div>

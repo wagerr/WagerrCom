@@ -71,6 +71,13 @@ export class SbhistoryComponent implements OnInit {
     });
   }
 
+  getExplorer(): string {
+    if (this.isTestnet) {
+      return 'explorer2';
+    }
+    return 'explorer';
+  }
+
   updatePendingMaxSize(amt: number): void {
     this.pendingMaxSize = amt;
     this.pendingCurrentPage = 1;
