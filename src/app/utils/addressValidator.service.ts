@@ -40,48 +40,35 @@ export class AddressValidatorService {
 
   validateWgrAddress(control: AbstractControl): {[key: string]: any} | null {
     const address = control.value;
-
     if (!address) {
       return { wgr: true };
     }
-
     let decoded: Buffer;
-
     try {
       decoded = this.base58.decode(address);
     } catch (error) {
       return { wgr: true };
     }
-
     const { length } = decoded;
-
     if (length !== 25) {
       return { wgr: true };
     }
-
     const version = decoded.readUInt8(0);
-
     const checksum = decoded.slice(length - 4, length);
     const body = decoded.slice(0, length - 4);
-
     const expectedChecksum = this.sha256(this.sha256(body)).slice(0, 4);
-
     if (!checksum.equals(expectedChecksum)) {
       return { wgr: true };
     }
-
     const addressType = this.addressTypes[version];
-
     if (!addressType) {
       return { wgr: true };
     }
-
     if (environment[environment.access].testnet && addressType.network !== 'testnet') {
       return { wgr: true };
-    } else if (addressType.network !== 'mainnet') {
+    } else if (!environment[environment.access].testnet &&addressType.network !== 'mainnet') {
       return { wgr: true };
     }
-
     return null;
   }
 }
