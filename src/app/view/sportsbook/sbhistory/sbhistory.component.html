@@ -68,13 +68,19 @@
               <ng-container *ngFor="let bet of filterPendingBets()">
                 <div class="w-100 d-none d-sm-flex flex-row item mb-2 pl-2">
                   <div class="text-center text-uppercase border borderLeftRound w-eventLink">
+                    <ng-container *ngIf="bet.type === 'bet'">
                     <a [routerLink]="['/sportsbook/event/' + bet.legs[0]['event-id']]"
                        class="btn btn-sportsbook4"><i class="fal fa-info-circle"></i></a>
+                    </ng-container>
+                    <ng-container *ngIf="bet.type === 'parlay'">
+                      <span class="btn btn-sportsbook4 usePointer" (click)="parlayModal(bet)"><i class="fal fa-info-circle"></i></span>
+                    </ng-container>
                   </div>
                   <div class="w-35 text-center text-uppercase border py-2">
                     {{bet.time * 1000 | date: 'MMM d, y, h:mm a'}}
                   </div>
                   <div class="w-100 text-center text-uppercase border pt-2">
+                    <ng-container *ngIf="bet.type === 'bet'">
                     <ng-container *ngIf="getTeamType(bet) === 'home'">
                       <app-teamlogo [teamname]="getTeam(bet, 'home')" getClass="rowTeamLogo pr-2"></app-teamlogo>
                       {{getTeam(bet, 'home')}}
@@ -87,6 +93,10 @@
                       <app-teamlogo [teamname]="getTeam(bet, 'home')" getClass="rowTeamLogo pr-2"></app-teamlogo>
                       {{getTeam(bet, 'home')}} <span class="px-1 text-highlight2">vs.</span> {{getTeam(bet, 'away')}}
                       <app-teamlogo [teamname]="getTeam(bet, 'away')" getClass="rowTeamLogo pl-2"></app-teamlogo>
+                    </ng-container>
+                    </ng-container>
+                    <ng-container *ngIf="bet.type === 'parlay'">
+                      Multiple <button class=" ml-2 btn btn-sportsbook-small font-arboria-bold font12px" (click)="parlayModal(parlayView, bet)">VIEW</button>
                     </ng-container>
                   </div>
                   <div class="w-35 text-center font-weight-bold text-white text-uppercase border py-2"
@@ -242,6 +252,7 @@
                   <div class="w-35 text-center text-uppercase border borderLeftRound py-2">
                     {{tx.time * 1000 | date: 'MMM d, y, h:mm a'}}</div>
                   <div class="w-100 text-center text-uppercase border pt-2">
+                    <ng-container *ngIf="tx.bet.type === 'bet'">
                     <ng-container *ngIf="getTeamType(tx.bet) === 'home'">
                       <app-teamlogo [teamname]="getTeam(tx.bet, 'home')" getClass="rowTeamLogo pr-2"></app-teamlogo>
                       {{getTeam(tx.bet, 'home')}}
@@ -255,6 +266,10 @@
                       {{getTeam(tx.bet, 'home')}} <span
                       class="px-2 text-highlight2">vs.</span> {{getTeam(tx.bet, 'away')}}
                       <app-teamlogo [teamname]="getTeam(tx.bet, 'away')" getClass="rowTeamLogo pl-2"></app-teamlogo>
+                    </ng-container>
+                    </ng-container>
+                    <ng-container *ngIf="tx.bet.type === 'parlay'">
+                      Multiple <button class=" ml-2 btn btn-sportsbook-small font-arboria-bold font12px" (click)="parlayModal(parlayView, tx.bet)">VIEW</button>
                     </ng-container>
                   </div>
                   <div class="w-35 text-center font-weight-bold text-white  text-uppercase border py-2"
@@ -331,3 +346,48 @@
     </div>
   </div>
 </div>
+
+<ng-template #parlayView>
+  <div class="modal-header">
+    <h4 class="modal-title pull-left font-arboria-bold font26px text-title-gray">Parlay Information</h4>
+    <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <div class="d-flex flex-column">
+      <ng-container *ngIf="parlayModalBets.legs.length > 0">
+        <ng-container *ngFor="let bet of parlayModalBets.legs; let i=index">
+          <div class="w-100 pb-2 pt-2 border-bottom bg-white d-flex flex-row">
+            <div class="w-auto text-center font-roboto-condensed px-3">
+              Match {{i + 1}}
+            </div>
+            <div class="w-100 d-flex flex-column">
+              <div class="w-100 d-flex flex-row">
+                <div class="w-100">
+                  <div class="w-100 d-flex flex-row">
+                    <div class="w-100 font-roboto-condensed font16px" [innerHTML]="getParlayTeam(bet)"></div>
+                  </div>
+                  <div class="w-100 d-flex flex-row">
+                    <div
+                      class="w-100 text-uppercase font-weight-bold font-roboto-condensed font12px" [innerHTML]="getBetOutcome(bet, true)"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="w-50 d-flex flex-row">
+              <div class="w-75 text-uppercase text-right font-weight-bold font-roboto-condensed font14px">
+                <app-eurousodds [points]="getParlayOdds(bet)" [type]="accountSettings?.odds"></app-eurousodds>
+              </div>
+            </div>
+            <div class="w-50 d-flex flex-row">
+              <div
+                class="w-75 text-uppercase text-right font-weight-bold font-roboto-condensed font14px"
+                [innerHTML]="getParlayData(bet)"></div>
+            </div>
+          </div>
+        </ng-container>
+      </ng-container>
+    </div>
+  </div>
+</ng-template>

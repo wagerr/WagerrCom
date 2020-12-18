@@ -1,7 +1,8 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, TemplateRef} from '@angular/core';
 import {WgrSportsBookService} from '../../../service/wgr-sports-book.service';
 import {SocketConnService} from '../../../service/socket-conn.service';
 import {environment} from '../../../../environments/environment';
+import {BsModalRef, BsModalService} from "ngx-bootstrap/modal";
 
 @Component({
   selector: 'app-sbhistory',
@@ -9,6 +10,8 @@ import {environment} from '../../../../environments/environment';
   styleUrls: ['./sbhistory.component.scss']
 })
 export class SbhistoryComponent implements OnInit {
+  parlayModalBets: any;
+  modalRef: BsModalRef;
   accountSettings: any;
   txlist: any;
   getSortHistory = 'all';
@@ -32,6 +35,7 @@ export class SbhistoryComponent implements OnInit {
   isTestnet = environment[environment.access].testnet;
 
   constructor(private wsb: WgrSportsBookService,
+              private modalService: BsModalService,
               private SC: SocketConnService) {
     this.wsb.account.subscribe((gotAccount: any) => {
       if (gotAccount && gotAccount.settings) {
@@ -207,7 +211,7 @@ export class SbhistoryComponent implements OnInit {
     return toWinSplit[0] + '<span class="secondNumber">.' + ((toWinSplit[1]) ? toWinSplit[1].substr(0, 2) : '00') + '</span>' +
       ((mobile) ? '<br>' : '&nbsp;') +
       '<span class="text-white-50 font-weight-bold font10px">' + ((this.isTestnet) ? 'tWGR' : 'WGR') + '</span>' +
-      ((usd) ? '<br><span class="secondNumber font-weight-normal font10px">(' + this.convertToUSD(+towin).toFixed(2) +  ' ' + this.curCode + ')</span>' : '');
+      ((usd) ? '<br><span class="secondNumber font-weight-normal font10px">(' + this.convertToUSD(+towin).toFixed(2) + ' ' + this.curCode + ')</span>' : '');
   }
 
   convertToUSD(bet: number): number {
@@ -222,8 +226,8 @@ export class SbhistoryComponent implements OnInit {
   filterPenBets(): any {
     const bets = [];
     this.betList.forEach((value: any) => {
-      if (value[0] && value[0].data && value[0].data.completed === 'no') {
-        bets.push(value[0].data);
+      if (value && value.data && value.data.completed === 'no') {
+        bets.push(value.data);
       }
     });
     this.pendingTotalItems = bets.length;
@@ -249,69 +253,96 @@ export class SbhistoryComponent implements OnInit {
     return amt.toFixed(2);
   }
 
+  parlayModal(template: TemplateRef<any>, bet: any) {
+    console.log('bet', bet);
+    this.parlayModalBets = bet;
+    this.modalRef = this.modalService.show(template);
+  }
+
+  getBetOutcome(leg: any, type = false): any {
+    const id = leg.outcome;
+    return this.getOutcome(id, leg, type);
+  }
+
+  getOutcome(id: number, leg: any, type = true) {
+    if (id === 1) {
+      if (type) {
+        return 'Moneyline &nbsp;<span class="text-highlight2">-</span>&nbsp;<span class="text-gray">Home</span>';
+      }
+      return {
+        team: 'home',
+        odds: 'homeOdds'
+      };
+    } else if (id === 2) {
+      if (type) {
+        return 'Moneyline &nbsp;<span class="text-highlight2">-</span>&nbsp;<span class="text-gray">Away</span>';
+      }
+      return {
+        team: 'away',
+        odds: 'awayOdds'
+      };
+    } else if (id === 3) {
+      if (type) {
+        return 'Moneyline &nbsp;<span class="text-highlight2">-</span> Draw';
+      }
+      return {
+        team: 'draw',
+        odds: 'drawOdds'
+      };
+    } else if (id === 4) {
+      if (type) {
+        return 'Spread &nbsp;<span class="text-highlight2">-</span>&nbsp;<span class="text-gray">Home</span> ' +
+          '<span class="text-highlight2">' + (leg.lockedEvent.spreadPoints / ((this.version === 2) ? 100 : 10)) + '</span>';
+      }
+      return {
+        team: 'home',
+        odds: 'spreadHomeOdds'
+      };
+    } else if (id === 5) {
+      if (type) {
+        return 'Spread &nbsp;<span class="text-highlight2">-</span>&nbsp;<span class="text-gray">Away</span> ' +
+          '<span class="text-highlight2">' + (leg.lockedEvent.spreadPoints / ((this.version === 2) ? 100 : 10)) + '</span>';
+      }
+      return {
+        team: 'away',
+        odds: 'spreadAwayOdds'
+      };
+    } else if (id === 6) {
+      if (type) {
+        return 'Total &nbsp;<span class="text-highlight2">-</span> Over ' +
+          '<span class="text-highlight2">' + (leg.lockedEvent.totalPoints / ((this.version === 2) ? 100 : 10)) + '</span>';
+      }
+      return {
+        team: 'over',
+        odds: 'totalOverOdds'
+      };
+    } else if (id === 7) {
+      if (type) {
+        return 'Total &nbsp;<span class="text-highlight2">-</span> Under ' +
+          '<span class="text-highlight2">' + (leg.lockedEvent.totalPoints / ((this.version === 2) ? 100 : 10)) + '</span>';
+      }
+      return {
+        team: 'under',
+        odds: 'totalUnderOdds'
+      };
+    }
+
+  }
+
   getBetType(bet: any, type = true): any {
     if (bet && bet.legs && bet.legs[0]) {
-      const id = bet.legs[0].outcome;
-      if (id === 1) {
+      if (bet.type === 'parlay') {
         if (type) {
-          return 'Moneyline &nbsp;<span class="text-highlight2">-</span>&nbsp;<span class="text-white-50">Home</span>';
+          return 'parlay';
         }
         return {
           team: 'home',
           odds: 'homeOdds'
         };
-      } else if (id === 2) {
-        if (type) {
-          return 'Moneyline &nbsp;<span class="text-highlight2">-</span>&nbsp;<span class="text-white-50">Away</span>';
-        }
-        return {
-          team: 'away',
-          odds: 'awayOdds'
-        };
-      } else if (id === 3) {
-        if (type) {
-          return 'Moneyline &nbsp;<span class="text-highlight2">-</span> Draw';
-        }
-        return {
-          team: 'draw',
-          odds: 'drawOdds'
-        };
-      } else if (id === 4) {
-        if (type) {
-          return 'Spread &nbsp;<span class="text-highlight2">-</span>&nbsp;<span class="text-white-50">Home</span> ' +
-            '<span class="text-highlight2">' + (bet.legs[0].lockedEvent.spreadPoints / ((this.version === 2) ? 100 : 10) ) + '</span>';
-        }
-        return {
-          team: 'home',
-          odds: 'spreadHomeOdds'
-        };
-      } else if (id === 5) {
-        if (type) {
-          return 'Spread &nbsp;<span class="text-highlight2">-</span>&nbsp;<span class="text-white-50">Away</span> ' +
-            '<span class="text-highlight2">' + (bet.legs[0].lockedEvent.spreadPoints / ((this.version === 2) ? 100 : 10)) + '</span>';
-        }
-        return {
-          team: 'away',
-          odds: 'spreadAwayOdds'
-        };
-      } else if (id === 6) {
-        if (type) {
-          return 'Total &nbsp;<span class="text-highlight2">-</span> Over ' +
-            '<span class="text-highlight2">' + (bet.legs[0].lockedEvent.totalPoints / ((this.version === 2) ? 100 : 10)) + '</span>';
-        }
-        return {
-          team: 'over',
-          odds: 'totalOverOdds'
-        };
-      } else if (id === 7) {
-        if (type) {
-          return 'Total &nbsp;<span class="text-highlight2">-</span> Under ' +
-            '<span class="text-highlight2">' + (bet.legs[0].lockedEvent.totalPoints / ((this.version === 2) ? 100 : 10)) + '</span>';
-        }
-        return {
-          team: 'under',
-          odds: 'totalUnderOdds'
-        };
+
+      } else {
+        const id = bet.legs[0].outcome;
+        return this.getOutcome(id, bet.legs[0], type);
       }
     }
   }
@@ -341,6 +372,29 @@ export class SbhistoryComponent implements OnInit {
     return 'none';
   }
 
+  getParlayTeam(leg: any): string {
+    const outcome = this.getBetOutcome(leg);
+    return leg.lockedEvent[outcome.team];
+  }
+
+  getParlayOdds(leg: any): string {
+    console.log('leg', leg);
+    const outcome = this.getBetOutcome(leg);
+    const odds = leg.lockedEvent[outcome.odds] / 10000;
+    return this.updateTrueOdds(odds).toFixed(2);
+  }
+
+  getParlayData(leg: any): string {
+    if (leg.lockedEvent.homeScore !== "undefined") {
+      return '<span class="text-highlight2">' + leg.legResultType + '</span><br>' +
+        '<span>' + leg.lockedEvent.homeScore / ((this.version === 2) ? 100 : 10) + '</span>' +
+        '&nbsp;<span class="text-highlight2">-</span>&nbsp;' +
+        '<span>' + leg.lockedEvent.awayScore / ((this.version === 2) ? 100 : 10) + '</span>';
+    } else {
+      return '<span class="text-highlight2">' + leg.legResultType + '</span><br>';
+    }
+  }
+
   getTeam(bet: any, type: string): string {
     if (bet && bet.legs) {
       if (type === 'home') {
@@ -354,18 +408,29 @@ export class SbhistoryComponent implements OnInit {
 
   getOdds(bet: any): any {
     if (bet && bet.legs) {
+      let odds = 0;
       const betType = this.getBetType(bet, false);
-      return this.updateTrueOdds(bet.legs[0].lockedEvent[betType.odds] / 10000).toFixed(2);
+      if (bet.type === 'bet') {
+        odds = bet.legs[0].lockedEvent[betType.odds] / 10000;
+        return this.updateTrueOdds(odds).toFixed(2);
+      } else if (bet.type === 'parlay') {
+        odds = 1;
+        bet.legs.forEach((eachLeg: any) => {
+          const outcome = this.getBetOutcome(eachLeg);
+          odds = odds * +this.updateTrueOdds((eachLeg.lockedEvent[outcome.odds] / 10000)).toFixed(2);
+        });
+        return odds;
+      }
     }
     return '';
   }
 
   getScore(bet: any): string {
-    if (bet && bet.completed === 'yes') {
+    if (bet && bet.type === 'bet' && bet.completed === 'yes') {
       let homeClass = 'text-white';
       let awayClass = 'text-white-50';
-      const homeScore = (bet.legs[0].lockedEvent.homeScore / 10);
-      const awayScore = (bet.legs[0].lockedEvent.awayScore / 10);
+      const homeScore = (bet.legs[0].lockedEvent.homeScore / ((this.version === 2) ? 100 : 10) );
+      const awayScore = (bet.legs[0].lockedEvent.awayScore / ((this.version === 2) ? 100 : 10));
       if (homeScore < awayScore) {
         homeClass = 'text-white-50';
         awayClass = 'text-white';
@@ -393,8 +458,8 @@ export class SbhistoryComponent implements OnInit {
   getBet(txid: string): any {
     let bet: any = '';
     this.betList.forEach((value: any) => {
-      if (value[0] && value[0].txid === txid) {
-        bet = value[0].data;
+      if (value && value.txid === txid) {
+        bet = value.data;
       }
     });
     return bet;
@@ -403,8 +468,8 @@ export class SbhistoryComponent implements OnInit {
   getCompleteBet(txid: string, vout: number): any {
     let bet: any = '';
     this.betList.forEach((value: any) => {
-      if (value[0] && value[0].data && value[0].payouttxid === txid && value[0].data.payoutTxOut === vout) {
-        bet = value[0].data;
+      if (value && value.data && value.payouttxid === txid && value.data.payoutTxOut === vout) {
+        bet = value.data;
       }
     });
     return bet;
