@@ -198,6 +198,7 @@ export class SbhistoryComponent implements OnInit {
     this.txTotalItems = filterFinal.length;
     if (this.txTotalItems > 0) {
       const txFinalFitler = filterFinal.slice((this.txCurrentPage - 1) * this.txSize, this.txCurrentPage * this.txSize);
+      console.log('txFinal', txFinalFitler);
       return txFinalFitler;
     }
     return [];
@@ -378,7 +379,6 @@ export class SbhistoryComponent implements OnInit {
   }
 
   getParlayOdds(leg: any): string {
-    console.log('leg', leg);
     const outcome = this.getBetOutcome(leg);
     const odds = leg.lockedEvent[outcome.odds] / 10000;
     return this.updateTrueOdds(odds).toFixed(2);
@@ -486,7 +486,7 @@ export class SbhistoryComponent implements OnInit {
     const type = (tx.type) ? tx.type.toLowerCase() : 'none';
     if (type === 'deposit') {
       return tx.value;
-    } else if (type === 'bet' || type === 'betpayout') {
+    } else if (type === 'bet' || type === 'betpayout' || type === 'parlay') {
       return (tx.bet.amount) ? tx.bet.amount : 0;
     }
     return -tx.debit;
