@@ -2080,6 +2080,22 @@ caret25
   color: #fff;
 }
 
+.btn-sportsbook-small {
+  color: #fff;
+  border-color: red;
+  background: #af0000;
+  width: 50px;
+  padding: 0px;
+  line-height: 1;
+  border-radius: 7px
+}
+
+.btn-sportsbook-small:hover {
+  background: red;
+  color: #fff;
+}
+
+
 .btn-sportsbook3 {
   color: #fff;
   border-color: red;
