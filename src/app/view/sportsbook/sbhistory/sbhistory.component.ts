@@ -198,7 +198,6 @@ export class SbhistoryComponent implements OnInit {
     this.txTotalItems = filterFinal.length;
     if (this.txTotalItems > 0) {
       const txFinalFitler = filterFinal.slice((this.txCurrentPage - 1) * this.txSize, this.txCurrentPage * this.txSize);
-      console.log('txFinal', txFinalFitler);
       return txFinalFitler;
     }
     return [];
@@ -255,7 +254,6 @@ export class SbhistoryComponent implements OnInit {
   }
 
   parlayModal(template: TemplateRef<any>, bet: any) {
-    console.log('bet', bet);
     this.parlayModalBets = bet;
     this.modalRef = this.modalService.show(template);
   }

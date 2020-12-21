@@ -107,21 +107,17 @@ export class SbbetdisplayComponent implements OnInit {
   getEvents(): any {
     let filteredEvents: any = [];
     if (this.openEvents && this.openEvents.length > 0) {
+      const allEvents = this.openEvents
+        .filter((item) => (item.odds[0].mlHome > 0))
+        .filter((item) => ((item.starting * 1000) > (+new Date() + (20 * 60000))));
+      allEvents.sort((a: any, b: any) => (a.starting < b.starting) ? -1 : 1);
       if (this.gotSport !== '' && this.gotSport !== 'all') {
-        filteredEvents = this.openEvents
-          .filter((item) => (item.odds[0].mlHome > 0))
-          .filter((item) => (item.sport.toLowerCase() === this.gotSport))
-          .filter((item) => ((item.starting * 1000) > (+new Date() + (20 * 60000))));
+        filteredEvents = allEvents
+          .filter((item) => (item.sport.toLowerCase() === this.gotSport));
       } else if (this.gotSport === 'all') {
-        const allEvents = this.openEvents
-          .filter((item) => (item.odds[0].mlHome > 0))
-          .filter((item) => ((item.starting * 1000) > (+new Date() + (20 * 60000))));
-        allEvents.sort((a: any, b: any) => (a.starting < b.starting) ? -1 : 1);
         filteredEvents = allEvents.slice(0, 25);
       } else {
-        filteredEvents = this.openEvents
-          .filter((item) => (item.odds[0].mlHome > 0))
-          .filter((item) => ((item.starting * 1000) > (+new Date() + (20 * 60000))));
+        filteredEvents = allEvents;
       }
     }
     if (this.getSearch !== undefined && this.getSearch !== '') {
