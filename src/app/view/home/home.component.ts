@@ -3,7 +3,7 @@ import {SocketConnService} from '../../service/socket-conn.service';
 import {interval} from 'rxjs';
 import {animate, state, style, transition, trigger} from '@angular/animations';
 import {WgrSportsBookService} from '../../service/wgr-sports-book.service';
-import {ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -44,6 +44,8 @@ export class HomeComponent implements OnInit {
   sub: any;
 
   constructor(private SC: SocketConnService,
+              private wsb: WgrSportsBookService,
+              private router: Router,
               private route: ActivatedRoute) {
     const refAddress = this.route.snapshot.paramMap.get('refAddress');
     if (refAddress) {
@@ -91,6 +93,13 @@ export class HomeComponent implements OnInit {
     //     this.activePane = 'pane' + this.featureStep;
     //   });
     this.selectOs = this.whatOS();
+  }
+
+  gotoEvent(eventId: string): void {
+    this.router.navigate(['/sportsbook/event/' + eventId]);
+    window.scrollTo(0, 0);
+    this.wsb.mobileNav = 'event';
+    this.wsb.mobileEvent = +eventId;
   }
 
   compareStartTime(a: any, b: any): number {

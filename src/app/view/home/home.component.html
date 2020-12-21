@@ -38,7 +38,7 @@
       </div>
       <div class="row upcoming-events mb-3 mt-4">
         <ng-container *ngFor="let item of eventDisplay">
-          <div class="col-12 col-md mb-3 mb-md-0 event-item" routerLink="/sportsbook/event/{{item.event_id}}">
+          <div class="col-12 col-md mb-3 mb-md-0 event-item" (click)="gotoEvent(item.event_id)">
             <div class="text-center font-weight-bold font-arboria-book text-white-50 font12px p-0 pt-2 m-0 mb-2">Event
               starts
               in {{ getDate(item.starting) | dateAgo}}
