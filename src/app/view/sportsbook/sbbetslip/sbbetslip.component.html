@@ -337,8 +337,10 @@
                     <div
                       class="w-100 text-uppercase font-weight-bold font-roboto-condensed font12px">{{getBetType(bet)}}</div>
                     <div
-                      class="w-75 text-uppercase text-highlight2 text-right font-weight-bold font-roboto-condensed font14px"
-                      [innerHTML]="getBetPoints(bet)"></div>
+                      class="w-75 text-uppercase text-highlight2 text-right font-weight-bold font-roboto-condensed font14px">
+                      <span [innerHTML]="getBetPoints(bet)"></span>
+                      <app-eurousodds [points]="bet.points" [type]="accountSettings?.odds"></app-eurousodds>
+                    </div>
                   </div>
                 </div>
                 <div class="w-25 d-flex flex-column">

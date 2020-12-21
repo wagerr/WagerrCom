@@ -333,11 +333,10 @@ export class SbbetslipComponent implements OnInit, OnDestroy {
 
   getBetPoints(bet: any): string {
     if (bet.type.toLowerCase() === 'total') {
-      return '<span class="text-black">' + bet.selected + ' ' + bet.extra + '</span> ' + bet.points;
+      return '<span class="text-black">' + bet.selected + ' ' + bet.extra + '</span>';
     } else if (bet.type.toLowerCase() === 'spread') {
-      return '<span class="text-black"> ' + bet.extra + 'pts</span> ' + bet.points;
+      return '<span class="text-black"> ' + bet.extra + 'pts</span>';
     }
-    return bet.points;
   }
 
   isLoggedIn(): boolean {
