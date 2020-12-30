@@ -73,7 +73,7 @@
                        class="btn btn-sportsbook4"><i class="fal fa-info-circle"></i></a>
                     </ng-container>
                     <ng-container *ngIf="bet.type === 'parlay'">
-                      <span class="btn btn-sportsbook4 usePointer" (click)="parlayModal(bet)"><i class="fal fa-info-circle"></i></span>
+                      <span class="btn btn-sportsbook4 usePointer" (click)="parlayModal(parlayView, bet)"><i class="fal fa-info-circle"></i></span>
                     </ng-container>
                   </div>
                   <div class="w-35 text-center text-uppercase border py-2">
