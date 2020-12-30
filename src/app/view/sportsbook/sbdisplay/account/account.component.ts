@@ -8,6 +8,7 @@ import {AuthService} from '../../../../service/auth.service';
 import * as CryptoJS from 'crypto-js';
 import {BuyModalComponent} from '../../../buy-modal/buy-modal.component';
 import {SbAddDeviceComponent} from '../../sb-add-device/sb-add-device.component';
+import {DepositComponent} from "../deposit/deposit.component";
 
 @Component({
   selector: 'app-account',
@@ -109,6 +110,12 @@ export class AccountComponent implements OnInit {
     this.modalRef.hide();
     this.modalRef = this.modalService.show(BuyModalComponent,
       Object.assign({}, {class: 'modal-lg'}));
+  }
+
+  depositWagerr(): void {
+    this.modalRef.hide();
+    this.modalRef = this.modalService.show(DepositComponent,
+      Object.assign({}, {class: ''}));
   }
 
   setSeedCookie(seedWords): void {
