@@ -77,7 +77,7 @@
                     </ng-container>
                   </div>
                   <div class="w-35 text-center text-uppercase border py-2">
-                    {{bet.time * 1000 | date: 'MMM d, y, h:mm a'}}
+                    {{bet.legs[0].lockedEvent.starting * 1000 | date: 'MMM d, y, h:mm a'}}
                   </div>
                   <div class="w-100 text-center text-uppercase border pt-2">
                     <ng-container *ngIf="bet.type === 'bet'">
