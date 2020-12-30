@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { BsModalRef } from 'ngx-bootstrap/modal';
+import {BsModalRef, BsModalService} from 'ngx-bootstrap/modal';
 import { WgrSportsBookService } from '../../../../service/wgr-sports-book.service';
 import { AddressValidatorService } from '../../../../utils';
+import {Subscription} from "rxjs";
 
 @Component({
   selector: 'app-withdraw',
@@ -13,6 +14,7 @@ export class WithdrawComponent implements OnInit {
   balance = 0;
   fee = 0.01;
   withAddr: string;
+  subscriptions: Subscription[] = [];
   verifyWithdraw = false;
   withdrawForm = new FormGroup({
     address: new FormControl('', [Validators.required, this.addressValidatorService.validateWgrAddress]),
@@ -23,6 +25,7 @@ export class WithdrawComponent implements OnInit {
 
   constructor(
     public bsModalRef: BsModalRef,
+    private modalService: BsModalService,
     private wsb: WgrSportsBookService,
     private addressValidatorService: AddressValidatorService
   ) {
@@ -35,6 +38,23 @@ export class WithdrawComponent implements OnInit {
   get address(): any { return this.withdrawForm.get('address'); }
 
   ngOnInit(): void {
+    this.subscriptions.push(
+      this.modalService.onHidden.subscribe((reason: string) => {
+        this.verifyWithdraw = false;
+        this.withdrawForm.get('address').setValue('');
+        this.withdrawForm.get('amount').setValue('');
+        this.withdrawForm.get('total').setValue(0);
+        this.unsubscribe();
+      })
+    );
+  }
+
+
+  unsubscribe() {
+    this.subscriptions.forEach((subscription: Subscription) => {
+      subscription.unsubscribe();
+    });
+    this.subscriptions = [];
   }
 
   setMax(): void {
@@ -63,10 +83,6 @@ export class WithdrawComponent implements OnInit {
   }
 
   cancel(): any {
-    this.verifyWithdraw = false;
-    this.withdrawForm.get('address').setValue('');
-    this.withdrawForm.get('amount').setValue('');
-    this.withdrawForm.get('total').setValue(0);
     this.bsModalRef.hide();
   }
 
