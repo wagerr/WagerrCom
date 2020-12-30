@@ -6,7 +6,7 @@ Wagerr.com
 [![GitHub issues-closed](https://img.shields.io/github/issues-closed/wagerr/WagerrCom.svg)](https://GitHub.com/wagerr/WagerrCom/issues?q=is%3Aissue+is%3Aclosed) 
 [![GitHub forks](https://img.shields.io/github/forks/wagerr/WagerrCom.svg)](https://github.com/wagerr/WagerrCom/network) 
 [![GitHub stars](https://img.shields.io/github/stars/wagerr/WagerrCom.svg)](https://github.com/wagerr/WagerrCom/stargazers) 
-[![GitHub license](https://img.shields.io/github/license/wagerr/WagerrCom.svg)](https://github.com/wagerr/wagerr/blob/master/COPYING) 
+[![GitHub license](https://img.shields.io/github/license/wagerr/WagerrCom.svg)](https://github.com/wagerr/WagerrCom/blob/master/COPYING) 
 [![Twitter](https://img.shields.io/twitter/url/http/github.com/wagerr/WagerrCom.svg?style=social)](https://twitter.com/intent/tweet?text=Wow:&url=http%3A%2F%2Fgithub.com%2Fwagerr%2FWagerrCom)
 
 More information at [wagerr.com](http://www.wagerr.com/)
