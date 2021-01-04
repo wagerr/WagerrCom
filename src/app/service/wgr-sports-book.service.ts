@@ -328,6 +328,8 @@ export class WgrSportsBookService {
     psbt.setVersion(1);
     const data = Buffer.from(bet.opCode, 'hex');
     const embed = payments.embed({data: [data]});
+    // const dataTwo = Buffer.from(bet.opCodeTwo, 'hex');
+    // const embedTwo = payments.embed({data: [data]});
     const wgrWif = ECPair.fromWIF(key, this.coinNetwork);
     let unspentAmt = 0;
     const unspent = [];
@@ -359,6 +361,9 @@ export class WgrSportsBookService {
           script: embed.output,
           value: userBet
         });
+        // psbt.addOutput({
+        //   script: embedTwo.output,
+        // });
         if (changeFinal >= 200 && unSpent.length <= this.userAccount.settings.input) {
           let count = +(changeFinal / 26).toFixed(0);
           let eachChange = 26;
