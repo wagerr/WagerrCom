@@ -39,6 +39,7 @@ export class SbbetslipComponent implements OnInit, OnDestroy {
   version = +environment[environment.access].ver;
   isTestnet = environment[environment.access].testnet;
   prefix = '42';
+  prefixTwo = '43';
   verNumber = '01';
 
   constructor(private modalService: BsModalService,
@@ -231,7 +232,8 @@ export class SbbetslipComponent implements OnInit, OnDestroy {
         status: 'processing',
         hide: false,
         created: false,
-        opCode: this.createOPCodeSingle(eachBet)
+        opCode: this.createOPCodeSingle(eachBet),
+        opCodeTwo: this.createOPCodeSingle(eachBet, 1)
       };
       this.balance -= eachBet.userBet;
       allPlacedBets.push(betData);
@@ -240,12 +242,18 @@ export class SbbetslipComponent implements OnInit, OnDestroy {
     // this.clearAll();
   }
 
-  createOPCodeSingle(eachBet: any): string {
+  createOPCodeSingle(eachBet: any, id: number = 0): string {
     const eId = eachBet.event.event_id;
     const txType = '03';
     const eventID = this.convertEventId(eId);
     const outcome = this.getOutcomeHex(eachBet);
-    return this.prefix + this.verNumber + txType + eventID + outcome;
+    let output = txType + eventID + outcome;
+    if (id > 0) {
+      output = '43' + '02' + output + this.convertEventId(id);
+    } else {
+      output = this.prefix + this.verNumber + output;
+    }
+    return output
   }
 
   placeBetsParley(): void {
