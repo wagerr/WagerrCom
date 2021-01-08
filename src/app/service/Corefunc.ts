@@ -20,7 +20,7 @@ export class Corefunc {
         } else {
           points = (item.odds[1].spreadPoints / 100);
         }
-        if (points >= 0) {
+        if (points > 0) {
           return '+' + points;
         }
         return points;
