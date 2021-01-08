@@ -417,7 +417,7 @@ export class SbhistoryComponent implements OnInit {
           const outcome = this.getBetOutcome(eachLeg);
           odds = odds * +this.updateTrueOdds((eachLeg.lockedEvent[outcome.odds] / 10000)).toFixed(2);
         });
-        return odds;
+        return odds.toFixed(2);
       }
     }
     return '';
