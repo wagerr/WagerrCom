@@ -214,7 +214,7 @@
       <ng-container *ngIf="isLoggedIn()">
         <button class="btn font-arboria-bold btn-sportsbook mx-auto mt-4 mb-2 d-block text-uppercase" type="button"
                 (click)="openModal(betSlipParlayModal)"
-                [disabled]="placeBetsDisabled()">place parlay
+                [disabled]="placeParleyBetsDisabled()">place parlay
         </button>
       </ng-container>
       <ng-container *ngIf="!isLoggedIn()">

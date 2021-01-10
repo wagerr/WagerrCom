@@ -363,7 +363,9 @@ export class SbbetslipComponent implements OnInit, OnDestroy {
   placeBetsDisabled(): boolean {
     return (this.bets.length === 0) || (this.totalStake > (this.balance + this.preBalance));
   }
-
+  placeParleyBetsDisabled(): boolean {
+    return (this.bets.length < 2) || (this.totalStake > (this.balance + this.preBalance));
+  }
   getHomeTeam(event: any): string {
     return event.teams.home;
   }
@@ -442,8 +444,10 @@ export class SbbetslipComponent implements OnInit, OnDestroy {
   }
 
   betMaxParlay(): void {
-    this.wsb.parlayBet = this.betMaxAmount(this.wsb.parlayBet, 3000);
-    this.wsb.processAvailableBalance();
+    if (!this.placeParleyBetsDisabled()) {
+      this.wsb.parlayBet = this.betMaxAmount(this.wsb.parlayBet, 3000);
+      this.wsb.processAvailableBalance();
+    }
   }
 
   betMaxAmount(amt: number, max = 10000): number {
