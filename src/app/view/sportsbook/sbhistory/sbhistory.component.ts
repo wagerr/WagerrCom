@@ -423,12 +423,16 @@ export class SbhistoryComponent implements OnInit {
     return '';
   }
 
+  isVersionTwo(bet: any) {
+    return (this.version === 2 && bet.betBlockHeight > 1501000);
+  }
+
   getScore(bet: any): string {
     if (bet && bet.type === 'bet' && bet.completed === 'yes') {
       let homeClass = 'text-white';
       let awayClass = 'text-white-50';
-      const homeScore = (bet.legs[0].lockedEvent.homeScore / ((this.version === 2) ? 100 : 10) );
-      const awayScore = (bet.legs[0].lockedEvent.awayScore / ((this.version === 2) ? 100 : 10));
+      const homeScore = (bet.legs[0].lockedEvent.homeScore / ((this.isVersionTwo(bet)) ? 100 : 10) );
+      const awayScore = (bet.legs[0].lockedEvent.awayScore / ((this.isVersionTwo(bet)) ? 100 : 10));
       if (homeScore < awayScore) {
         homeClass = 'text-white-50';
         awayClass = 'text-white';
