@@ -49,7 +49,7 @@ export class SbbetslipComponent implements OnInit, OnDestroy {
     this.wsb.betList.subscribe((response: any) => {
       this.betList = response
         .filter((thing: any) => {
-          return (thing[0].payout === false);
+          return (thing[0] && thing[0].payout === false);
         });
     });
     this.wsb.placedBets.subscribe((data: any) => {
@@ -363,9 +363,11 @@ export class SbbetslipComponent implements OnInit, OnDestroy {
   placeBetsDisabled(): boolean {
     return (this.bets.length === 0) || (this.totalStake > (this.balance + this.preBalance));
   }
+
   placeParleyBetsDisabled(): boolean {
-    return (this.bets.length < 2) || (this.totalStake > (this.balance + this.preBalance));
+    return (this.bets.length < 2) || (this.wsb.parlayBet > (this.balance + this.preBalance));
   }
+
   getHomeTeam(event: any): string {
     return event.teams.home;
   }
