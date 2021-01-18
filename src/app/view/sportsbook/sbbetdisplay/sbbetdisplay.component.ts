@@ -109,7 +109,7 @@ export class SbbetdisplayComponent implements OnInit {
     if (this.openEvents && this.openEvents.length > 0) {
       const allEvents = this.openEvents
         .filter((item) => (item.odds[0].mlHome > 0))
-        .filter((item) => ((item.starting * 1000) > (+new Date() + (20 * 60000))));
+        .filter((item) => ((item.starting * 1000) > (+new Date() + (12 * 60000))));
       allEvents.sort((a: any, b: any) => (a.starting < b.starting) ? -1 : 1);
       if (this.gotSport !== '' && this.gotSport !== 'all') {
         filteredEvents = allEvents
@@ -123,7 +123,7 @@ export class SbbetdisplayComponent implements OnInit {
     if (this.getSearch !== undefined && this.getSearch !== '') {
       const preSearch = this.openEvents
         .filter((item) => (item.odds[0].mlHome > 0))
-        .filter((item) => ((item.starting * 1000) > (+new Date() + (20 * 60000))));
+        .filter((item) => ((item.starting * 1000) > (+new Date() + (12 * 60000))));
       return preSearch.filter((event: any) => {
         return (event.tournament.toLowerCase().includes(this.getSearch.toLowerCase()) ||
           event.teams.home.toLowerCase().includes(this.getSearch.toLowerCase()) ||

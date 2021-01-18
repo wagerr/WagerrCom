@@ -56,7 +56,7 @@ export class SbEventComponent implements OnInit, OnDestroy {
     const eventData = data
       .filter((item) => (item.event_id === eventId))
       .filter((item) => (item.odds[0].mlHome > 0))
-      .filter((item) => ((item.starting * 1000) > (+new Date() + (20 * 60000))));
+      .filter((item) => ((item.starting * 1000) > (+new Date() + (12 * 60000))));
     this.eventData = (eventData[0]) ? eventData[0] : [];
   }
 
@@ -67,7 +67,7 @@ export class SbEventComponent implements OnInit, OnDestroy {
   getEvents(data: any): any {
     return data.events
       .filter((item) => (item.odds[0].mlHome > 0))
-      .filter((item) => ((item.starting * 1000) > (+new Date() + (20 * 60000))));
+      .filter((item) => ((item.starting * 1000) > (+new Date() + (12 * 60000))));
   }
 
   mobileNavIsActive(type, set = 'active', seta = ''): string {

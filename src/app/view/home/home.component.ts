@@ -154,7 +154,7 @@ export class HomeComponent implements OnInit {
       }
       filter = this.openEvents
         .filter((item) => (item.odds[0].mlHome > 0))
-        .filter((item) => ((item.starting) > ((+new Date() + (20 * 60000)) / 1000)))
+        .filter((item) => ((item.starting) > ((+new Date() + (12 * 60000)) / 1000)))
         .filter((item, index) => (index >= this.eventSet && index < (this.eventSet + final)));
       this.eventSet = this.eventSet + 3;
       if (this.eventSet > 15) {
