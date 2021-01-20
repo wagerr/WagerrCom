@@ -21,7 +21,7 @@
     </div>
     <div class="scrollList" [ngClass]="(isLoggedIn()) ? 'loggedin' : 'loggedout'">
     <ng-container *ngFor="let league of finalEvents; let i = index">
-      <div class="LeagueName pl-3 pt-2 d-flex flex-row leagueHeaders">
+      <div class="LeagueName pl-3 pb-0 d-flex flex-row leagueHeaders border-top mt-1">
         <div class="w-100">
           {{league.name}}
           <ng-container *ngIf="league.show">
@@ -31,18 +31,21 @@
             <i class="far fa-chevron-right" (click)="showLeague(i)"></i>
           </ng-container>
         </div>
+      </div>
+      <div class="LeagueName py-0 d-flex flex-row leagueHeaders">
+        <div class="w-100"></div>
         <ng-container *ngIf="league.show">
           <div class="money-line w-100  d-sm-flex d-none flex-row  text-uppercase text-center"
                [ngClass]="(mobileSet == 'moneyline') ? 'd-flex' : ''">
-          <span class="w-100 justify-content-center pl-1 pt-2">
+          <span class="w-100 justify-content-center pl-1 pt-1">
             <span class="titleItem">1</span>
           </span>
             <ng-container *ngIf="isThreeWay(league.data[0])">
-            <span class="w-100 justify-content-center pt-2">
+            <span class="w-100 justify-content-center pt-1">
               <span class="titleItem">X</span>
             </span>
             </ng-container>
-            <span class="w-100 justify-content-center pr-2  pt-2">
+            <span class="w-100 justify-content-center pr-2  pt-1">
               <span class="titleItem">2</span>
             </span>
           </div>
