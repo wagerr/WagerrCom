@@ -28,7 +28,7 @@
   <div id="winBalance" [ngClass]="(topBar) ? 'mx-1' : ''"
        class="w-100 card depBalance-wrapper d-none activated mt-3 mt-sm-2" *ngIf="winBalance > 0">
     <div class="card-body d-flex justify-content-between text-white p-2 px-3"
-         tooltip="Winnings become spendable after 100 confirmations on the Wagerr network.">
+         tooltip="Winnings become spendable after 60 confirmations on the Wagerr network.">
       <span class="w-100 font-arboria-bold font-weight-bold text-uppercase">Payout Pending</span>
       <span class="w-75 text-right font-roboto-condensed">
       <span class="balance-value">{{getWinBal(0)}}.<span
