@@ -33,5 +33,5 @@ Run `npm run start` for a dev server. Navigate to `http://localhost:5100/`. The 
 
 ## White Label
 
-https://github.com/wagerr/WagerrCom/blob/main/src/app/view/sportsbook/sportsbook.component.ts#L33
+https://github.com/wagerr/WagerrCom/blob/main/src/app/view/sportsbook/sportsbook.component.ts#L33 <br>
 refAddress = your referal address
