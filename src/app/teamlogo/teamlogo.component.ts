@@ -26,22 +26,24 @@ export class TeamlogoComponent implements OnInit {
 
   getSVG(teamname: string): string {
     if (this.type === 'left') {
-      return 'https://img.wagerr.com/left.php?team=' + this.processTeamName(teamname);
+      return 'https://img.wagerr.com/left/' + this.processTeamName(teamname);
     } else if (this.type === 'right') {
-      return 'https://img.wagerr.com/right.php?team=' + this.processTeamName(teamname);
+      return 'https://img.wagerr.com/right/' + this.processTeamName(teamname);
+    } else if (this.type === 'away') {
+      return 'https://img.wagerr.com/away/' + this.processTeamName(teamname);
     }
-    return 'https://img.wagerr.com/getImages.php?team=' + this.processTeamName(teamname);
+    return 'https://img.wagerr.com/home/' + this.processTeamName(teamname);
   }
 
   getPNG(teamname: string): string {
     if (this.type === 'left') {
-      return 'https://img.wagerr.com/left.php?team=' + this.processTeamName(teamname);
+      return 'https://img.wagerr.com/left/' + this.processTeamName(teamname);
     } else if (this.type === 'right') {
-      return 'https://img.wagerr.com/right.php?team=' + this.processTeamName(teamname);
+      return 'https://img.wagerr.com/right/' + this.processTeamName(teamname);
     } else if (this.type === 'away') {
-      return 'https://img.wagerr.com/getImagesAway.php?team=' + this.processTeamName(teamname);
+      return 'https://img.wagerr.com/away/' + this.processTeamName(teamname);
     }
-    return 'https://img.wagerr.com/getImages.php?team=' + this.processTeamName(teamname);
+    return 'https://img.wagerr.com/home/' + this.processTeamName(teamname);
   }
 
 }
