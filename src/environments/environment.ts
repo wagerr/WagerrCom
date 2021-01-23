@@ -3,6 +3,7 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
+  version: require('../package.json').version,
   production: false,
   access: 'beta',
   testnet: {
@@ -14,21 +15,21 @@ export const environment = {
   },
   beta: {
     accountEnabled: true,
-    ver: 1,
+    ver: 2,
     testnet: false,
     socketUrl: 'https://choctaw.wagerr.com/wgr',
     socketPath: '/ws',
   },
   prod: {
     accountEnabled: false,
-    ver: 1,
+    ver: 2,
     testnet: false,
     socketUrl: '/wgr',
     socketPath: '/ws',
   },
   dev: {
     accountEnabled: true,
-    ver: 1,
+    ver: 2,
     testnet: false,
     socketUrl: 'http://10.5.0.222:3000/wgr',
     socketPath: '/socket.io',
