@@ -300,7 +300,7 @@ export class SbhistoryComponent implements OnInit {
     } else if (id === 5) {
       if (type) {
         return 'Spread &nbsp;<span class="text-highlight2">-</span>&nbsp;<span class="text-gray">Away</span> ' +
-          '<span class="text-highlight2">' + (leg.lockedEvent.spreadPoints / ((this.version === 2) ? 100 : 10)) + '</span>';
+          '<span class="text-highlight2">' + ((leg.lockedEvent.spreadPoints * -1) / ((this.version === 2) ? 100 : 10)) + '</span>';
       }
       return {
         team: 'away',
