@@ -1,9 +1,5 @@
 <div class="row pb-5 mb-3 pb-sm-0 mb-sm-0 h-sm-100 mr-0">
   <div id="bets" class="col pt-2 d-md-block d-lg-block pr-2">
-    <ng-container *ngIf="whatOS() !== 'mobile'">
-      <app-sbbalance [topBar]="isTop"></app-sbbalance>
-      <Br>
-    </ng-container>
     <div class="card bets mb-2">
       <div class="card-body p-0 position-relative">
         <div class="overlay position-absolute"></div>
@@ -14,8 +10,39 @@
             </div>
           </li>
         </ul>
-        <div class="tab-content">
-          <div class="my-5 pt-2 pb-5 text-center h2h-betting-soon">Dashboard tracking and details coming soon.</div>
+        <div class="tab-content d-flex flex-column" *ngIf="refData">
+          <div class="w-100 d-flex flex-column flex-sm-row">
+            <div class="w-100 mx-2 my-3 settingsBox d-flex flex-column">
+              <div class="w-100 font-arboria-bold font16px text-center mt-3">Total Signups</div>
+              <div class="w-100 font-arboria-thin font48px text-center pt-1 mb-2">{{refData.count}}</div>
+            </div>
+            <div class="w-100 mx-2 my-3 settingsBox d-flex flex-column">
+              <div class="w-100 font-arboria-bold font16px text-center mt-3">Total WGR Earned</div>
+              <div class="w-100 font-arboria-thin font48px text-center pt-1 mb-2">{{refData.payouts.completeTotal.toFixed(2)}}</div>
+            </div>
+            <div class="w-100 mx-2 my-3 settingsBox d-flex flex-column">
+              <div class="w-100 font-arboria-bold font16px text-center mt-3"> Current Pending Payouts</div>
+              <div class="w-100 font-arboria-thin font48px text-center pt-1 mb-2">{{refData.payouts.pendingTotal.toFixed(2)}}</div>
+            </div>
+          </div>
+<!--          <div class="w-100 text-uppercase font-weight-bold border-top border-bottom px-2 py-1">PAYOUT HISTORY</div>-->
+<!--          <div class="w-100"></div>-->
+          <div class="w-100 text-uppercase font-weight-bold border-top border-bottom px-2 py-1">Affiliate Accounts</div>
+          <div class="w-100 d-flex flex-column pb-2 pt-2">
+            <ng-container *ngFor="let ref of refData.referrals">
+              <div class="w-100 d-flex flex-row mt-2 ">
+                <div class="w-100 settingsBox mx-2 d-flex flex-row">
+                  <div class="w-25 font-roboto-condensed font12px pt-2 text-center border-right borderLeftRound">{{ref.created | date: 'MMM d, y, h:mm a'}}</div>
+                  <div class="w-100 border-right"></div>
+                  <div class="w-50 font-roboto-condensed font14px pt-2 text-center borderRightRound">{{ref.address}}</div>
+                </div>
+                <div class="w-auto mr-2"><a href="https://explorer.wagerr.com/#/address/{{ref.address}}" target="_blank" class="btn btn-sportsbook3 font-roboto-condensed font14px"> VIEW </a></div>
+              </div>
+            </ng-container>
+          </div>
+        </div>
+        <div class="tab-content d-flex flex-column" *ngIf="!refData">
+          <div class="w-100"> Loading Data </div>
         </div>
       </div>
     </div>

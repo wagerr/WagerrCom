@@ -622,6 +622,7 @@ export class WgrSportsBookService {
     } else if (data.settings) {
       this.userAccount.settings = data.settings;
     }
+    this.userAccount.refData = data.refData;
     this.userAccount.uid = data.uid;
     this.account.next(this.userAccount);
   }
