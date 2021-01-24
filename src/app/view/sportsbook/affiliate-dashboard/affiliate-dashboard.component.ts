@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {WgrSportsBookService} from "../../../service/wgr-sports-book.service";
 
 @Component({
   selector: 'app-affiliate-dashboard',
@@ -7,10 +8,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AffiliateDashboardComponent implements OnInit {
   isTop = true;
+  refData: any;
 
-  constructor() { }
+  constructor(private SB: WgrSportsBookService) { }
 
   ngOnInit(): void {
+    this.SB.account.subscribe((resolve: any) => {
+      if (resolve && resolve.refData) {
+        this.refData = resolve.refData;
+      }
+    })
   }
 
   whatOS(): string {
