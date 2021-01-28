@@ -163,6 +163,10 @@ export class WgrSportsBookService {
   public logOut(): void {
     this.cookieService.delete('asdfl3k-12u9clkjaslj');
     this.userAccount = [];
+    this.bets.next([]);
+    this.placedBets.next([]);
+    this.transactionList.next([]);
+    this.betList.next([]);
     this.account.next(this.userAccount);
   }
 
