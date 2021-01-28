@@ -11,21 +11,23 @@ export class Corefunc {
   }
 
   getSpreadNumber(item: any, type: any): any {
-    if (item.odds[1].spreadPoints || (this.version === 2 && item.odds[1].spreadPoints >= 0)) {
-      const set = (item.odds[1].favorite === type) ? '-' : '+';
-      if (this.version === 2) {
-        let points = 0;
-        if (type.toLowerCase() === 'away') {
-          points = ( (item.odds[1].spreadPoints / 100) * -1);
-        } else {
-          points = (item.odds[1].spreadPoints / 100);
+    if (item.odds[1].spreadHome > 0 || item.odds[1].spreadAway > 0) {
+      if (item.odds[1].spreadPoints || (this.version === 2 && item.odds[1].spreadPoints >= 0)) {
+        const set = (item.odds[1].favorite === type) ? '-' : '+';
+        if (this.version === 2) {
+          let points = 0;
+          if (type.toLowerCase() === 'away') {
+            points = ((item.odds[1].spreadPoints / 100) * -1);
+          } else {
+            points = (item.odds[1].spreadPoints / 100);
+          }
+          if (points > 0) {
+            return '+' + points;
+          }
+          return points;
         }
-        if (points > 0) {
-          return '+' + points;
-        }
-        return points;
+        return set + (item.odds[1].spreadPoints / 10);
       }
-      return set + (item.odds[1].spreadPoints / 10);
     }
     return '—';
   }
