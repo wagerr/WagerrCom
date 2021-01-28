@@ -30,7 +30,7 @@ export class AffiliateComponent implements OnInit {
   }
 
   getUserBetAddress(): string {
-     return 'http://' + this.hostname + '/sb/ref/' + this.userID;
+     return 'https://' + this.hostname + '/sb/ref/' + this.userID;
   }
 
   copyMessage(val: string): void {
