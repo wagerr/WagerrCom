@@ -24,7 +24,7 @@ export const environment = {
     ver: 2,
     testnet: false,
     socketUrl: 'https://wagerr.com/wgr',
-    socketPath: 'https://wagerr.com/ws',
+    socketPath: '/ws',
   },
   dev: {
     accountEnabled: true,
