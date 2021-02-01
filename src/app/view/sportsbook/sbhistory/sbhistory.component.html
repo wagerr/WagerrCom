@@ -1,7 +1,8 @@
 <div class="row pb-5 mb-3 pb-sm-0 mb-sm-0 h-sm-100 mr-0">
   <div id="bets" class="col pt-2 d-md-block d-lg-block pr-2">
     <ng-container *ngIf="whatOS() !== 'mobile'">
-    <app-sbbalance [topBar]="isTop"></app-sbbalance><Br>
+      <app-sbbalance [topBar]="isTop"></app-sbbalance>
+      <Br>
     </ng-container>
     <div class="card bets mb-2">
       <div class="card-body p-0 position-relative">
@@ -69,11 +70,12 @@
                 <div class="w-100 d-none d-sm-flex flex-row item mb-2 pl-2">
                   <div class="text-center text-uppercase border borderLeftRound w-eventLink">
                     <ng-container *ngIf="bet.type === 'bet'">
-                    <a [routerLink]="['/sportsbook/event/' + bet.legs[0]['event-id']]"
-                       class="btn btn-sportsbook4"><i class="fal fa-info-circle"></i></a>
+                      <a [routerLink]="['/sportsbook/event/' + bet.legs[0]['event-id']]"
+                         class="btn btn-sportsbook4"><i class="fal fa-info-circle"></i></a>
                     </ng-container>
                     <ng-container *ngIf="bet.type === 'parlay'">
-                      <span class="btn btn-sportsbook4 usePointer" (click)="parlayModal(parlayView, bet)"><i class="fal fa-info-circle"></i></span>
+                      <span class="btn btn-sportsbook4 usePointer" (click)="parlayModal(parlayView, bet)"><i
+                        class="fal fa-info-circle"></i></span>
                     </ng-container>
                   </div>
                   <div class="w-35 text-center text-uppercase border py-2">
@@ -81,22 +83,25 @@
                   </div>
                   <div class="w-100 text-center text-uppercase border pt-2">
                     <ng-container *ngIf="bet.type === 'bet'">
-                    <ng-container *ngIf="getTeamType(bet) === 'home'">
-                      <app-teamlogo [teamname]="getTeam(bet, 'home')" getClass="rowTeamLogo pr-2"></app-teamlogo>
-                      {{getTeam(bet, 'home')}}
-                    </ng-container>
-                    <ng-container *ngIf="getTeamType(bet) === 'away'">
-                      <app-teamlogo [teamname]="getTeam(bet, 'away')" getClass="rowTeamLogo pr-2"></app-teamlogo>
-                      {{getTeam(bet, 'away')}}
-                    </ng-container>
-                    <ng-container *ngIf="getTeamType(bet) === 'all'">
-                      <app-teamlogo [teamname]="getTeam(bet, 'home')" getClass="rowTeamLogo pr-2"></app-teamlogo>
-                      {{getTeam(bet, 'home')}} <span class="px-1 text-highlight2">vs.</span> {{getTeam(bet, 'away')}}
-                      <app-teamlogo [teamname]="getTeam(bet, 'away')" getClass="rowTeamLogo pl-2"></app-teamlogo>
-                    </ng-container>
+                      <ng-container *ngIf="getTeamType(bet) === 'home'">
+                        <app-teamlogo [teamname]="getTeam(bet, 'home')" getClass="rowTeamLogo pr-2"></app-teamlogo>
+                        {{getTeam(bet, 'home')}}
+                      </ng-container>
+                      <ng-container *ngIf="getTeamType(bet) === 'away'">
+                        <app-teamlogo [teamname]="getTeam(bet, 'away')" getClass="rowTeamLogo pr-2"></app-teamlogo>
+                        {{getTeam(bet, 'away')}}
+                      </ng-container>
+                      <ng-container *ngIf="getTeamType(bet) === 'all'">
+                        <app-teamlogo [teamname]="getTeam(bet, 'home')" getClass="rowTeamLogo pr-2"></app-teamlogo>
+                        {{getTeam(bet, 'home')}} <span class="px-1 text-highlight2">vs.</span> {{getTeam(bet, 'away')}}
+                        <app-teamlogo [teamname]="getTeam(bet, 'away')" getClass="rowTeamLogo pl-2"></app-teamlogo>
+                      </ng-container>
                     </ng-container>
                     <ng-container *ngIf="bet.type === 'parlay'">
-                      Multiple <button class=" ml-2 btn btn-sportsbook-small font-arboria-bold font12px" (click)="parlayModal(parlayView, bet)">VIEW</button>
+                      Multiple
+                      <button class=" ml-2 btn btn-sportsbook-small font-arboria-bold font12px"
+                              (click)="parlayModal(parlayView, bet)">VIEW
+                      </button>
                     </ng-container>
                   </div>
                   <div class="w-35 text-center font-weight-bold text-white text-uppercase border py-2"
@@ -146,7 +151,8 @@
               </ng-container>
             </div>
             <div class="w-100 d-flex flex-row justify-content-center">
-              <pagination [totalItems]="pendingTotalItems" [(ngModel)]="pendingCurrentPage" [itemsPerPage]="pendingMaxSize" [maxSize]="txMaxSize"></pagination>
+              <pagination [totalItems]="pendingTotalItems" [(ngModel)]="pendingCurrentPage"
+                          [itemsPerPage]="pendingMaxSize" [maxSize]="txMaxSize"></pagination>
             </div>
           </div>
         </div>
@@ -253,23 +259,26 @@
                     {{tx.time * 1000 | date: 'MMM d, y, h:mm a'}}</div>
                   <div class="w-100 text-center text-uppercase border pt-2">
                     <ng-container *ngIf="tx.bet.type === 'bet'">
-                    <ng-container *ngIf="getTeamType(tx.bet) === 'home'">
-                      <app-teamlogo [teamname]="getTeam(tx.bet, 'home')" getClass="rowTeamLogo pr-2"></app-teamlogo>
-                      {{getTeam(tx.bet, 'home')}}
-                    </ng-container>
-                    <ng-container *ngIf="getTeamType(tx.bet) === 'away'">
-                      <app-teamlogo [teamname]="getTeam(tx.bet, 'away')" getClass="rowTeamLogo pr-2"></app-teamlogo>
-                      {{getTeam(tx.bet, 'away')}}
-                    </ng-container>
-                    <ng-container *ngIf="getTeamType(tx.bet) === 'all'">
-                      <app-teamlogo [teamname]="getTeam(tx.bet, 'home')" getClass="rowTeamLogo pr-2"></app-teamlogo>
-                      {{getTeam(tx.bet, 'home')}} <span
-                      class="px-2 text-highlight2">vs.</span> {{getTeam(tx.bet, 'away')}}
-                      <app-teamlogo [teamname]="getTeam(tx.bet, 'away')" getClass="rowTeamLogo pl-2"></app-teamlogo>
-                    </ng-container>
+                      <ng-container *ngIf="getTeamType(tx.bet) === 'home'">
+                        <app-teamlogo [teamname]="getTeam(tx.bet, 'home')" getClass="rowTeamLogo pr-2"></app-teamlogo>
+                        {{getTeam(tx.bet, 'home')}}
+                      </ng-container>
+                      <ng-container *ngIf="getTeamType(tx.bet) === 'away'">
+                        <app-teamlogo [teamname]="getTeam(tx.bet, 'away')" getClass="rowTeamLogo pr-2"></app-teamlogo>
+                        {{getTeam(tx.bet, 'away')}}
+                      </ng-container>
+                      <ng-container *ngIf="getTeamType(tx.bet) === 'all'">
+                        <app-teamlogo [teamname]="getTeam(tx.bet, 'home')" getClass="rowTeamLogo pr-2"></app-teamlogo>
+                        {{getTeam(tx.bet, 'home')}} <span
+                        class="px-2 text-highlight2">vs.</span> {{getTeam(tx.bet, 'away')}}
+                        <app-teamlogo [teamname]="getTeam(tx.bet, 'away')" getClass="rowTeamLogo pl-2"></app-teamlogo>
+                      </ng-container>
                     </ng-container>
                     <ng-container *ngIf="tx.bet.type === 'parlay'">
-                      Multiple <button class=" ml-2 btn btn-sportsbook-small font-arboria-bold font12px" (click)="parlayModal(parlayView, tx.bet)">VIEW</button>
+                      Multiple
+                      <button class=" ml-2 btn btn-sportsbook-small font-arboria-bold font12px"
+                              (click)="parlayModal(parlayView, tx.bet)">VIEW
+                      </button>
                     </ng-container>
                   </div>
                   <div class="w-35 text-center font-weight-bold text-white  text-uppercase border py-2"
@@ -286,10 +295,11 @@
                     [innerHTML]="getScore(tx.bet)"></div>
                   <div
                     class="w-50 text-center font-weight-bold text-white border borderRightRound toWin py-p35">
-                      <span class="font11px" [ngClass]="(getWinLose(tx.bet) === 'won') ? 'text-highlight2' : ''">{{getWinLose(tx.bet)}}</span>&nbsp;
-                      <ng-container *ngIf="getWinLose(tx.bet) === 'won'">
-                        <span [innerHTML]="getToWin(getWinnings(tx), false, true)"></span>
-                      </ng-container>
+                    <span class="font11px"
+                          [ngClass]="(isWin(tx.bet)) ? 'text-highlight2' : ''">{{getWinLose(tx.bet)}}</span>&nbsp;
+                    <ng-container *ngIf="isWin(tx.bet)">
+                      <span [innerHTML]="getToWin(getWinnings(tx), false, true)"></span>
+                    </ng-container>
                   </div>
                   <div class="w-25 text-center text-uppercase px-1">
                     <a href="https://{{getExplorer()}}.wagerr.com/#/tx/{{tx.txid}}" target="_blank"
@@ -328,9 +338,11 @@
                            [innerHTML]="getScore(tx.bet)"></div>
                     </div>
                   </div>
-                  <div class="w-25 text-center font-weight-bold text-white text-uppercase border borderRightRound toWin py-3">
-                    <span class="font11px" [ngClass]="(getWinLose(tx.bet) === 'won') ? 'text-highlight2' : ''">{{getWinLose(tx.bet)}}</span><br>
-                    <ng-container *ngIf="getWinLose(tx.bet) === 'won'">
+                  <div
+                    class="w-25 text-center font-weight-bold text-white text-uppercase border borderRightRound toWin py-3">
+                    <span class="font11px"
+                          [ngClass]="(isWin(tx.bet)) ? 'text-highlight2' : ''">{{getWinLose(tx.bet)}}</span><br>
+                    <ng-container *ngIf="isWin(tx.bet)">
                       <span [innerHTML]="getToWin(getWinnings(tx), true, true)"></span>
                     </ng-container>
                   </div>
@@ -338,7 +350,8 @@
               </ng-container>
             </div>
             <div class="w-100 d-flex flex-row justify-content-center">
-              <pagination [totalItems]="txTotalItems" [(ngModel)]="txCurrentPage" [itemsPerPage]="txSize" [maxSize]="txMaxSize"></pagination>
+              <pagination [totalItems]="txTotalItems" [(ngModel)]="txCurrentPage" [itemsPerPage]="txSize"
+                          [maxSize]="txMaxSize"></pagination>
             </div>
           </div>
         </div>
@@ -370,7 +383,8 @@
                   </div>
                   <div class="w-100 d-flex flex-row">
                     <div
-                      class="w-100 text-uppercase font-weight-bold font-roboto-condensed font12px" [innerHTML]="getBetOutcome(bet, true)"></div>
+                      class="w-100 text-uppercase font-weight-bold font-roboto-condensed font12px"
+                      [innerHTML]="getBetOutcome(bet, true)"></div>
                   </div>
                 </div>
               </div>
