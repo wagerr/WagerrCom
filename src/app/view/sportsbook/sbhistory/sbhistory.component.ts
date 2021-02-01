@@ -444,12 +444,26 @@ export class SbhistoryComponent implements OnInit {
     return '';
   }
 
+  isWin(bet: any): boolean {
+    if (bet && bet.completed && bet.completed === 'yes') {
+      const resType = bet.betResultType.toLowerCase();
+      if (resType === 'win' || resType === 'partial-lose' || resType === 'partial-win') {
+        return true;
+      }
+    }
+    return false;
+  }
+
   getWinLose(bet: any): string {
     if (bet && bet.completed && bet.completed === 'yes') {
       if (bet.betResultType.toLowerCase() === 'lose') {
-        return 'lost';
+        return 'Lost';
       } else if (bet.betResultType.toLowerCase() === 'win') {
-        return 'won';
+        return 'Won';
+      } else if (bet.betResultType.toLowerCase() === 'partial-lose') {
+        return 'Partial Lost';
+      } else if (bet.betResultType.toLowerCase() === 'partial-win') {
+        return 'Partial Win';
       } else {
         return bet.betResultType.toLowerCase();
       }
