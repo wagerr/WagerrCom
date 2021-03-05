@@ -1,0 +1,21 @@
+<section class="about-panel-1">
+  <div class="container">
+    <div class="d-sm-flex flex-sm-row d-flex flex-column">
+      <div class="w-100 pl-5 pl-sm-0 text-center">
+        <h1 class="m-0 p-0 text-uppercase font-arboria-book font48px">March <span class="text-highlight font-arboria-bold">madness</span></h1>
+        <h1 class="m-0 p-0 text-uppercase font-arboria-bolder font48px">
+          <span class="text-highlight">WAGERR</span> PICK'EM</h1>
+        <h5 class="text-uppercase font-arboria-book font16px pt-3"><span class="text-highlight">Wagerr Exclusive!!!</span> ALL Brackets will be written on-chain</h5>
+      </div>
+    </div>
+  </div>
+  <div class="bottomsvg">
+    <img src="assets/images/bottomaboutjag-01.svg" class="img-fluid">
+  </div>
+</section>
+<ng-container *ngIf="!loggedin || brakets === 0">
+  <app-mmsplash></app-mmsplash>
+</ng-container>
+<ng-container *ngIf="loggedin">
+  <app-mmdashboard></app-mmdashboard>
+</ng-container>
