@@ -1,0 +1,42 @@
+<div class="d-flex flex-row pt-2">
+  <div class="w-100"></div>
+  <div class="w-100 text-center">
+    <button class="btn round-btn btn-sportsbook3 w-50 text-uppercase font-arboria-bold" *ngIf="!loggedin">Sign Up</button>
+    <button class="btn round-btn btn-sportsbook3 w-50 text-uppercase font-arboria-bold" *ngIf="loggedin" [ngClass]="this.createBracket ? 'active' : ''" (click)="toggleCreateBracket()">Create Bracket</button>
+  </div>
+  <div class="w-100 text-center">
+    <button class="btn round-btn btn-sportsbook3 w-50 text-uppercase font-arboria-bold" [ngClass]="this.leaderboard ? 'active' : ''" (click)="toggleLeaderBoard()">
+      Leaderboard
+    </button>
+  </div>
+  <div class="w-100"></div>
+</div>
+<ng-container *ngIf="leaderboard">
+  <app-mmleaderboard></app-mmleaderboard>
+</ng-container>
+<ng-container *ngIf="!leaderboard">
+  <ng-container *ngIf="createBracket">
+    <app-mmnewviewbracket [new]="true"></app-mmnewviewbracket>
+  </ng-container>
+  <ng-container *ngIf="!createBracket">
+  <div class="d-flex flex-row">
+    <div class="w-100"></div>
+    <div class="w-100 text-center"><img src="assets/images/MMfirst.svg" class="img-fluid widthSize300px"></div>
+    <div class="w-100 text-center"><img src="assets/images/MMsecond.svg" class="img-fluid widthSize300px"></div>
+    <div class="w-100 text-center"><img src="assets/images/MMthird.svg" class="img-fluid widthSize300px"></div>
+    <div class="w-100"></div>
+  </div>
+  <div class="d-flex flex-column">
+    <div class="w-100 text-center font-arboria-book text-black font48px">PERFECT BRACKET WINS</div>
+    <div class="w-100 text-center font-arboria-book text-black font48px">1 MILLION WAGERR & 1 BITCOIN</div>
+    <div class="w-100 d-flex flex-row">
+      <div class="100"></div>
+      <div class="100 text-center font-arboria-book text-black">Owning a Wagerr Oracle is like “Being the House” or owning a
+        sportsbook. The Wagerr network distributes a portion of all winning bets to the Oracles. While bettors place
+        money on uncertain events, bookkeepers bet on a sure thing: fees. Steady fees provide reliable income. The
+        more betting action there is, the larger the Oracle rewards. Be the house!</div>
+      <div class="100"></div>
+      </div>
+  </div>
+  </ng-container>
+</ng-container>

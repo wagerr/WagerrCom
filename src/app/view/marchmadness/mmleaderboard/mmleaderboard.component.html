@@ -1,0 +1,12 @@
+<div class="d-flex flex-column pt-5">
+  <ng-container *ngFor="let each of leaderboard">
+  <div class="w-100 d-flex flex-row text-black font24px font-arboria-bold">
+    <div class="w-100"></div>
+    <div class="w-50 d-flex flex-row">
+      <div class="w-25">{{each.rank}}.</div>
+      <div class="w-50">{{each.screenname}}</div>
+      <div class="w-50">{{each.points}} pts</div>
+    </div>
+    <div class="w-100"></div>
+  </div></ng-container>
+</div>

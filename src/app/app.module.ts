@@ -72,6 +72,11 @@ import { LogoutModalComponent } from './view/sportsbook/logout-modal/logout-moda
 import { TooltipModule } from 'ngx-bootstrap/tooltip';
 import { AddressValidatorService } from './utils';
 import { AlertModalComponent } from './view/sportsbook/alert-modal/alert-modal.component';
+import { MarchmadnessComponent } from './view/marchmadness/marchmadness.component';
+import { MmsplashComponent } from './view/marchmadness/mmsplash/mmsplash.component';
+import { MmleaderboardComponent } from './view/marchmadness/mmleaderboard/mmleaderboard.component';
+import { MmdashboardComponent } from './view/marchmadness/mmdashboard/mmdashboard.component';
+import { MmnewviewbracketComponent } from './view/marchmadness/mmnewviewbracket/mmnewviewbracket.component';
 
 @NgModule({
   declarations: [
@@ -118,6 +123,11 @@ import { AlertModalComponent } from './view/sportsbook/alert-modal/alert-modal.c
     AffiliateDashboardComponent,
     LogoutModalComponent,
     AlertModalComponent,
+    MarchmadnessComponent,
+    MmsplashComponent,
+    MmleaderboardComponent,
+    MmdashboardComponent,
+    MmnewviewbracketComponent,
   ],
   imports: [
     BrowserModule,

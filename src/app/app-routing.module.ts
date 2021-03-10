@@ -15,6 +15,7 @@ import {SbcoreComponent} from './view/sportsbook/sbcore/sbcore.component';
 import {SbEventComponent} from './view/sportsbook/sb-event/sb-event.component';
 import {SettingsComponent} from './view/sportsbook/settings/settings.component';
 import {AffiliateDashboardComponent} from './view/sportsbook/affiliate-dashboard/affiliate-dashboard.component';
+import {MarchmadnessComponent} from "./view/marchmadness/marchmadness.component";
 
 const sportsbookDisplay: Routes = [
   { path: '', component: SbcoreComponent },
@@ -33,6 +34,7 @@ const home: Routes = [
   { path: 'fadethewinja', component: FadethewinjaComponent },
   { path: 'fadethedegen', component: FadethedegenComponent },
   { path: 'fadethedgen', component: FadethedegenComponent },
+  { path: 'marchmadness', component: MarchmadnessComponent },
   { path: 'about', component: AboutComponent},
   { path: 'download', component: GetStartedComponent},
   { path: 'teamlogo/:team', component: TestTeamlogoComponent }
