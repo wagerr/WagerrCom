@@ -216,6 +216,10 @@ export class WgrSportsBookService {
     return 0.00000000;
   }
 
+  public MarchMadnessFaucet(): void {
+    this.socket.emit('marchMadnessFaucet', this.userAccount.betAddress);
+  }
+
   withdraw(amount: any, address: string): void {
     const account: any = this.account.getValue();
     const unSpent = account.betUnspent;

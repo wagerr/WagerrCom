@@ -11,7 +11,7 @@ import {WgrSportsBookService} from "../../../service/wgr-sports-book.service";
 export class MmsplashComponent implements OnInit {
   bsModalRef: BsModalRef;
   leaderboard = false;
-  createBracket = true;
+  createBracket = false;
   constructor(
     private wsb: WgrSportsBookService,
     private modalService: BsModalService,) { }
@@ -20,9 +20,11 @@ export class MmsplashComponent implements OnInit {
   }
 
   toggleLeaderBoard() {
+    this.createBracket = false;
     this.leaderboard = !this.leaderboard;
   }
   toggleCreateBracket() {
+    this.leaderboard = false;
     this.createBracket = !this.createBracket;
   }
 

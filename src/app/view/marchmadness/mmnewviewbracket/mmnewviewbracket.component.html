@@ -1,7 +1,7 @@
 <ng-container *ngFor="let bracket of baseBracket; let basei = index">
   <div class="d-flex flex-row mt-4">
     <div class="w-25"></div>
-    <div class="w-100 text-uppercase font-arboria-bold text-black font26px">{{bracket.name}} Bracket</div>
+    <div class="w-100 text-uppercase font-arboria-bold text-black font26px">{{bracket.name}}</div>
     <div class="w-25"></div>
   </div>
   <div class="d-flex flex-row">
@@ -34,7 +34,7 @@
       <div class="w-25"></div>
       <div class="w-100 d-flex flex-column text-black round32pt">
         <div class="w-100 font-arboria-book font16px text-center">Round of 32</div>
-        <ng-container *ngFor="let base of userBracket[bracket.name].roundTwo; let i = index">
+        <ng-container *ngFor="let base of userBracket.bracket[bracket.name].roundTwo; let i = index">
           <div class="w-100 border border-bottom-0 border-dark" [ngClass]="i > 0 ? 'round32mm' : ''">
             <ng-container *ngFor="let set of base.set; let ti = index">
               <div class="w-100 font-arboria-bold font16px border-dark border-bottom p-1"
@@ -47,7 +47,7 @@
       <div class="w-25"></div>
       <div class="w-100 d-flex flex-column text-black round16pt">
         <div class="w-100 font-arboria-book font16px text-center">Round of 16</div>
-        <ng-container *ngFor="let base of userBracket[bracket.name].roundThree; let i = index">
+        <ng-container *ngFor="let base of userBracket.bracket[bracket.name].roundThree; let i = index">
           <div class="w-100 border border-bottom-0 border-dark" [ngClass]="i > 0 ? 'round16mm' : ''">
             <ng-container *ngFor="let set of base.set; let ti = index">
               <div class="w-100 font-arboria-bold font16px border-dark border-bottom p-1"
@@ -60,7 +60,7 @@
       <div class="w-25"></div>
       <div class="w-100 d-flex flex-column text-black round8pt">
         <div class="w-100 font-arboria-book font16px text-center">Round of 8</div>
-        <ng-container *ngFor="let base of userBracket[bracket.name].roundFour; let i = index">
+        <ng-container *ngFor="let base of userBracket.bracket[bracket.name].roundFour; let i = index">
           <div class="w-100 border border-bottom-0 border-dark">
             <ng-container *ngFor="let set of base.set; let ti = index">
               <div
@@ -90,7 +90,7 @@
   <div class="w-100 d-flex flex-column flex-sm-row">
     <div class="w-100 d-flex flex-column text-black">
       <div class="w-100 font-arboria-book font16px text-center">Round of 4</div>
-      <ng-container *ngFor="let base of userBracket.finalFour.roundFive; let i = index">
+      <ng-container *ngFor="let base of userBracket.bracket.finalFour.roundFive; let i = index">
         <div class="w-100 my-2 border border-bottom-0 border-dark" [ngClass]="i > 0 ? 'round4mm' : ''">
           <ng-container *ngFor="let set of base.set; let ti = index">
             <div
@@ -104,7 +104,7 @@
     <div class="w-25"></div>
     <div class="w-100 d-flex flex-column text-black round2pt">
       <div class="w-100 font-arboria-book font16px text-center">Championship</div>
-      <ng-container *ngFor="let base of userBracket.finalFour.roundSix; let i = index">
+      <ng-container *ngFor="let base of userBracket.bracket.finalFour.roundSix; let i = index">
         <ng-container *ngFor="let set of base.set; let ti = index">
           <div class="w-100 d-flex flex-row">
             <div
@@ -126,7 +126,7 @@
 <div class="d-flex flex-row mt-4">
   <div class="w-25"></div>
   <div class="w-100 text-center">
-    <button class="btn btn-sportsbook3 widthSize140px" (click)="openSubmitBracket()">Submit Bracket</button>
+    <button class="btn btn-sportsbook3 widthSize140px" (click)="openSubmitBracket()" [disabled]="!userCanSubmit()">Submit Bracket</button>
   </div>
   <div class="w-25"></div>
 </div>

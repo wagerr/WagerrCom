@@ -1,6 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {BsModalRef, BsModalService} from "ngx-bootstrap/modal";
 import {SubmitModalComponent} from "../submit-modal/submit-modal.component";
+import {WgrSportsBookService} from "../../../service/wgr-sports-book.service";
 
 @Component({
   selector: 'app-mmnewviewbracket',
@@ -533,537 +534,562 @@ export class MmnewviewbracketComponent implements OnInit {
   finalScore: any = [];
 
   userBracket = {
-    west: {
-      roundOne: [
-        {
-          set: [
-            {
-              rank: '',
-              name: '',
-              wgrteamid: '',
-            }
-          ]
-        },
-      ],
-      roundTwo: [
-        {
-          set: [
-            {
-              rank: '',
-              name: '',
-              wgrteamid: '',
-            },
-            {
-              rank: '',
-              name: '',
-              wgrteamid: '',
-            }
-          ]
-        },
-        {
-          set: [
-            {
-              rank: '',
-              name: '',
-              wgrteamid: '',
-            },
-            {
-              rank: '',
-              name: '',
-              wgrteamid: '',
-            }
-          ]
-        },
-        {
-          set: [
-            {
-              rank: '',
-              name: '',
-              wgrteamid: '',
-            },
-            {
-              rank: '',
-              name: '',
-              wgrteamid: '',
-            }
-          ]
-        },
-        {
-          set: [
-            {
-              rank: '',
-              name: '',
-              wgrteamid: '',
-            },
-            {
-              rank: '',
-              name: '',
-              wgrteamid: '',
-            }
-          ]
-        }
-      ],
-      roundThree: [
-        {
-          set: [
-            {
-              rank: '',
-              name: '',
-              wgrteamid: '',
-            },
-            {
-              rank: '',
-              name: '',
-              wgrteamid: '',
-            }
-          ]
-        },
-        {
-          set: [
-            {
-              rank: '',
-              name: '',
-              wgrteamid: '',
-            },
-            {
-              rank: '',
-              name: '',
-              wgrteamid: '',
-            }
-          ]
-        },
-      ],
-      roundFour: [
-        {
-          set: [
-            {
-              rank: '',
-              name: '',
-              wgrteamid: '',
-            },
-            {
-              rank: '',
-              name: '',
-              wgrteamid: '',
-            }
-          ]
-        }
-      ]
+    bracket: {
+      west: {
+        roundOne: [
+          {
+            set: [
+              {
+                rank: '',
+                name: '',
+                wgrteamid: '',
+              }
+            ]
+          },
+        ],
+        roundTwo: [
+          {
+            set: [
+              {
+                rank: '',
+                name: '',
+                wgrteamid: '',
+              },
+              {
+                rank: '',
+                name: '',
+                wgrteamid: '',
+              }
+            ]
+          },
+          {
+            set: [
+              {
+                rank: '',
+                name: '',
+                wgrteamid: '',
+              },
+              {
+                rank: '',
+                name: '',
+                wgrteamid: '',
+              }
+            ]
+          },
+          {
+            set: [
+              {
+                rank: '',
+                name: '',
+                wgrteamid: '',
+              },
+              {
+                rank: '',
+                name: '',
+                wgrteamid: '',
+              }
+            ]
+          },
+          {
+            set: [
+              {
+                rank: '',
+                name: '',
+                wgrteamid: '',
+              },
+              {
+                rank: '',
+                name: '',
+                wgrteamid: '',
+              }
+            ]
+          }
+        ],
+        roundThree: [
+          {
+            set: [
+              {
+                rank: '',
+                name: '',
+                wgrteamid: '',
+              },
+              {
+                rank: '',
+                name: '',
+                wgrteamid: '',
+              }
+            ]
+          },
+          {
+            set: [
+              {
+                rank: '',
+                name: '',
+                wgrteamid: '',
+              },
+              {
+                rank: '',
+                name: '',
+                wgrteamid: '',
+              }
+            ]
+          },
+        ],
+        roundFour: [
+          {
+            set: [
+              {
+                rank: '',
+                name: '',
+                wgrteamid: '',
+              },
+              {
+                rank: '',
+                name: '',
+                wgrteamid: '',
+              }
+            ]
+          }
+        ]
+      },
+      south: {
+        roundOne: [
+          {
+            set: [
+              {
+                rank: '',
+                name: '',
+                wgrteamid: '',
+              }
+            ]
+          },
+        ],
+        roundTwo: [
+          {
+            set: [
+              {
+                rank: '',
+                name: '',
+                wgrteamid: '',
+              },
+              {
+                rank: '',
+                name: '',
+                wgrteamid: '',
+              }
+            ]
+          },
+          {
+            set: [
+              {
+                rank: '',
+                name: '',
+                wgrteamid: '',
+              },
+              {
+                rank: '',
+                name: '',
+                wgrteamid: '',
+              }
+            ]
+          },
+          {
+            set: [
+              {
+                rank: '',
+                name: '',
+                wgrteamid: '',
+              },
+              {
+                rank: '',
+                name: '',
+                wgrteamid: '',
+              }
+            ]
+          },
+          {
+            set: [
+              {
+                rank: '',
+                name: '',
+                wgrteamid: '',
+              },
+              {
+                rank: '',
+                name: '',
+                wgrteamid: '',
+              }
+            ]
+          }
+        ],
+        roundThree: [
+          {
+            set: [
+              {
+                rank: '',
+                name: '',
+                wgrteamid: '',
+              },
+              {
+                rank: '',
+                name: '',
+                wgrteamid: '',
+              }
+            ]
+          },
+          {
+            set: [
+              {
+                rank: '',
+                name: '',
+                wgrteamid: '',
+              },
+              {
+                rank: '',
+                name: '',
+                wgrteamid: '',
+              }
+            ]
+          },
+        ],
+        roundFour: [
+          {
+            set: [
+              {
+                rank: '',
+                name: '',
+                wgrteamid: '',
+              },
+              {
+                rank: '',
+                name: '',
+                wgrteamid: '',
+              }
+            ]
+          }
+        ]
+      },
+      east: {
+        roundOne: [
+          {
+            set: [
+              {
+                rank: '',
+                name: '',
+                wgrteamid: '',
+              }
+            ]
+          },
+        ],
+        roundTwo: [
+          {
+            set: [
+              {
+                rank: '',
+                name: '',
+                wgrteamid: '',
+              },
+              {
+                rank: '',
+                name: '',
+                wgrteamid: '',
+              }
+            ]
+          },
+          {
+            set: [
+              {
+                rank: '',
+                name: '',
+                wgrteamid: '',
+              },
+              {
+                rank: '',
+                name: '',
+                wgrteamid: '',
+              }
+            ]
+          },
+          {
+            set: [
+              {
+                rank: '',
+                name: '',
+                wgrteamid: '',
+              },
+              {
+                rank: '',
+                name: '',
+                wgrteamid: '',
+              }
+            ]
+          },
+          {
+            set: [
+              {
+                rank: '',
+                name: '',
+                wgrteamid: '',
+              },
+              {
+                rank: '',
+                name: '',
+                wgrteamid: '',
+              }
+            ]
+          }
+        ],
+        roundThree: [
+          {
+            set: [
+              {
+                rank: '',
+                name: '',
+                wgrteamid: '',
+              },
+              {
+                rank: '',
+                name: '',
+                wgrteamid: '',
+              }
+            ]
+          },
+          {
+            set: [
+              {
+                rank: '',
+                name: '',
+                wgrteamid: '',
+              },
+              {
+                rank: '',
+                name: '',
+                wgrteamid: '',
+              }
+            ]
+          },
+        ],
+        roundFour: [
+          {
+            set: [
+              {
+                rank: '',
+                name: '',
+                wgrteamid: '',
+              },
+              {
+                rank: '',
+                name: '',
+                wgrteamid: '',
+              }
+            ]
+          }
+        ]
+      },
+      midwest: {
+        roundOne: [
+          {
+            set: [
+              {
+                rank: '',
+                name: '',
+                wgrteamid: '',
+              }
+            ]
+          },
+        ],
+        roundTwo: [
+          {
+            set: [
+              {
+                rank: '',
+                name: '',
+                wgrteamid: '',
+              },
+              {
+                rank: '',
+                name: '',
+                wgrteamid: '',
+              }
+            ]
+          },
+          {
+            set: [
+              {
+                rank: '',
+                name: '',
+                wgrteamid: '',
+              },
+              {
+                rank: '',
+                name: '',
+                wgrteamid: '',
+              }
+            ]
+          },
+          {
+            set: [
+              {
+                rank: '',
+                name: '',
+                wgrteamid: '',
+              },
+              {
+                rank: '',
+                name: '',
+                wgrteamid: '',
+              }
+            ]
+          },
+          {
+            set: [
+              {
+                rank: '',
+                name: '',
+                wgrteamid: '',
+              },
+              {
+                rank: '',
+                name: '',
+                wgrteamid: '',
+              }
+            ]
+          }
+        ],
+        roundThree: [
+          {
+            set: [
+              {
+                rank: '',
+                name: '',
+                wgrteamid: '',
+              },
+              {
+                rank: '',
+                name: '',
+                wgrteamid: '',
+              }
+            ]
+          },
+          {
+            set: [
+              {
+                rank: '',
+                name: '',
+                wgrteamid: '',
+              },
+              {
+                rank: '',
+                name: '',
+                wgrteamid: '',
+              }
+            ]
+          },
+        ],
+        roundFour: [
+          {
+            set: [
+              {
+                rank: '',
+                name: '',
+                wgrteamid: '',
+              },
+              {
+                rank: '',
+                name: '',
+                wgrteamid: '',
+              }
+            ]
+          }
+        ]
+      },
+      finalFour: {
+        roundFive: [
+          {
+            set: [
+              {
+                rank: '',
+                name: '',
+                wgrteamid: '',
+              },
+              {
+                rank: '',
+                name: '',
+                wgrteamid: '',
+              }
+            ]
+          },
+          {
+            set: [
+              {
+                rank: '',
+                name: '',
+                wgrteamid: '',
+              },
+              {
+                rank: '',
+                name: '',
+                wgrteamid: '',
+              }
+            ]
+          }
+        ],
+        roundSix: [
+          {
+            set: [
+              {
+                rank: '',
+                name: '',
+                wgrteamid: '',
+              },
+              {
+                rank: '',
+                name: '',
+                wgrteamid: '',
+              }
+            ]
+          }
+        ]
+      }
     },
-    south: {
-      roundOne: [
-        {
-          set: [
-            {
-              rank: '',
-              name: '',
-              wgrteamid: '',
-            }
-          ]
-        },
-      ],
-      roundTwo: [
-        {
-          set: [
-            {
-              rank: '',
-              name: '',
-              wgrteamid: '',
-            },
-            {
-              rank: '',
-              name: '',
-              wgrteamid: '',
-            }
-          ]
-        },
-        {
-          set: [
-            {
-              rank: '',
-              name: '',
-              wgrteamid: '',
-            },
-            {
-              rank: '',
-              name: '',
-              wgrteamid: '',
-            }
-          ]
-        },
-        {
-          set: [
-            {
-              rank: '',
-              name: '',
-              wgrteamid: '',
-            },
-            {
-              rank: '',
-              name: '',
-              wgrteamid: '',
-            }
-          ]
-        },
-        {
-          set: [
-            {
-              rank: '',
-              name: '',
-              wgrteamid: '',
-            },
-            {
-              rank: '',
-              name: '',
-              wgrteamid: '',
-            }
-          ]
-        }
-      ],
-      roundThree: [
-        {
-          set: [
-            {
-              rank: '',
-              name: '',
-              wgrteamid: '',
-            },
-            {
-              rank: '',
-              name: '',
-              wgrteamid: '',
-            }
-          ]
-        },
-        {
-          set: [
-            {
-              rank: '',
-              name: '',
-              wgrteamid: '',
-            },
-            {
-              rank: '',
-              name: '',
-              wgrteamid: '',
-            }
-          ]
-        },
-      ],
-      roundFour: [
-        {
-          set: [
-            {
-              rank: '',
-              name: '',
-              wgrteamid: '',
-            },
-            {
-              rank: '',
-              name: '',
-              wgrteamid: '',
-            }
-          ]
-        }
-      ]
-    },
-    east: {
-      roundOne: [
-        {
-          set: [
-            {
-              rank: '',
-              name: '',
-              wgrteamid: '',
-            }
-          ]
-        },
-      ],
-      roundTwo: [
-        {
-          set: [
-            {
-              rank: '',
-              name: '',
-              wgrteamid: '',
-            },
-            {
-              rank: '',
-              name: '',
-              wgrteamid: '',
-            }
-          ]
-        },
-        {
-          set: [
-            {
-              rank: '',
-              name: '',
-              wgrteamid: '',
-            },
-            {
-              rank: '',
-              name: '',
-              wgrteamid: '',
-            }
-          ]
-        },
-        {
-          set: [
-            {
-              rank: '',
-              name: '',
-              wgrteamid: '',
-            },
-            {
-              rank: '',
-              name: '',
-              wgrteamid: '',
-            }
-          ]
-        },
-        {
-          set: [
-            {
-              rank: '',
-              name: '',
-              wgrteamid: '',
-            },
-            {
-              rank: '',
-              name: '',
-              wgrteamid: '',
-            }
-          ]
-        }
-      ],
-      roundThree: [
-        {
-          set: [
-            {
-              rank: '',
-              name: '',
-              wgrteamid: '',
-            },
-            {
-              rank: '',
-              name: '',
-              wgrteamid: '',
-            }
-          ]
-        },
-        {
-          set: [
-            {
-              rank: '',
-              name: '',
-              wgrteamid: '',
-            },
-            {
-              rank: '',
-              name: '',
-              wgrteamid: '',
-            }
-          ]
-        },
-      ],
-      roundFour: [
-        {
-          set: [
-            {
-              rank: '',
-              name: '',
-              wgrteamid: '',
-            },
-            {
-              rank: '',
-              name: '',
-              wgrteamid: '',
-            }
-          ]
-        }
-      ]
-    },
-    midwest: {
-      roundOne: [
-        {
-          set: [
-            {
-              rank: '',
-              name: '',
-              wgrteamid: '',
-            }
-          ]
-        },
-      ],
-      roundTwo: [
-        {
-          set: [
-            {
-              rank: '',
-              name: '',
-              wgrteamid: '',
-            },
-            {
-              rank: '',
-              name: '',
-              wgrteamid: '',
-            }
-          ]
-        },
-        {
-          set: [
-            {
-              rank: '',
-              name: '',
-              wgrteamid: '',
-            },
-            {
-              rank: '',
-              name: '',
-              wgrteamid: '',
-            }
-          ]
-        },
-        {
-          set: [
-            {
-              rank: '',
-              name: '',
-              wgrteamid: '',
-            },
-            {
-              rank: '',
-              name: '',
-              wgrteamid: '',
-            }
-          ]
-        },
-        {
-          set: [
-            {
-              rank: '',
-              name: '',
-              wgrteamid: '',
-            },
-            {
-              rank: '',
-              name: '',
-              wgrteamid: '',
-            }
-          ]
-        }
-      ],
-      roundThree: [
-        {
-          set: [
-            {
-              rank: '',
-              name: '',
-              wgrteamid: '',
-            },
-            {
-              rank: '',
-              name: '',
-              wgrteamid: '',
-            }
-          ]
-        },
-        {
-          set: [
-            {
-              rank: '',
-              name: '',
-              wgrteamid: '',
-            },
-            {
-              rank: '',
-              name: '',
-              wgrteamid: '',
-            }
-          ]
-        },
-      ],
-      roundFour: [
-        {
-          set: [
-            {
-              rank: '',
-              name: '',
-              wgrteamid: '',
-            },
-            {
-              rank: '',
-              name: '',
-              wgrteamid: '',
-            }
-          ]
-        }
-      ]
-    },
-    finalFour: {
-      roundFive: [
-        {
-          set: [
-            {
-              rank: '',
-              name: '',
-              wgrteamid: '',
-            },
-            {
-              rank: '',
-              name: '',
-              wgrteamid: '',
-            }
-          ]
-        },
-        {
-          set: [
-            {
-              rank: '',
-              name: '',
-              wgrteamid: '',
-            },
-            {
-              rank: '',
-              name: '',
-              wgrteamid: '',
-            }
-          ]
-        }
-      ],
-      roundSix: [
-        {
-          set: [
-            {
-              rank: '',
-              name: '',
-              wgrteamid: '',
-            },
-            {
-              rank: '',
-              name: '',
-              wgrteamid: '',
-            }
-          ]
-        }
-      ]
+    final: {
+      bracketString: '',
+      bracketHash: '',
+      submitHash: '',
+      home: 0,
+      away: 0
     }
   }
 
-  constructor(private modalService: BsModalService,) {
+  constructor(
+    private wsb: WgrSportsBookService,
+    private modalService: BsModalService,) {
   }
 
   ngOnInit(): void {
+    this.getUserBalance();
+  }
+
+  getUserBalance(): void {
+    const userBalance = this.wsb.getUserBalance();
+    console.log('userBalance', userBalance);
+    if (userBalance == 0) {
+      this.wsb.MarchMadnessFaucet();
+    }
+  }
+
+  userCanSubmit(): boolean {
+    const userBalance = this.wsb.getUserBalance();
+    return (userBalance > 0);
   }
 
   isSelected(round, i, ti, bracket) {
     let ret = false;
     const roundLook = Math.floor(i / 2);
-    if (this.userBracket[bracket][round][roundLook].set[0] === ti) {
+    if (this.userBracket.bracket[bracket][round][roundLook].set[0] === ti) {
       ret = true;
     }
-    if (this.userBracket[bracket][round][roundLook].set[1] === ti) {
+    if (this.userBracket.bracket[bracket][round][roundLook].set[1] === ti) {
       ret = true;
     }
     return ret;
@@ -1073,7 +1099,7 @@ export class MmnewviewbracketComponent implements OnInit {
     const set1 = this.baseBracket[basei].preSet.markSet;
     const set2 = this.baseBracket[basei].preSet.position;
     this.baseBracket[basei].set[set1].set[set2] = this.baseBracket[basei].preSet.set[ti];
-    this.userBracket[bracket].roundOne[0].set[0] = this.baseBracket[basei].preSet.set[ti];
+    this.userBracket.bracket[bracket].roundOne[0].set[0] = this.baseBracket[basei].preSet.set[ti];
   }
 
   baseSelect(basei, i, ti, bracket) {
@@ -1084,7 +1110,7 @@ export class MmnewviewbracketComponent implements OnInit {
     } else {
       set = 0
     }
-    this.userBracket[bracket].roundTwo[round].set[set] = this.baseBracket[basei].set[i].set[ti]
+    this.userBracket.bracket[bracket].roundTwo[round].set[set] = this.baseBracket[basei].set[i].set[ti]
   }
 
   roundTwo(i, ti, bracket) {
@@ -1096,8 +1122,8 @@ export class MmnewviewbracketComponent implements OnInit {
     } else {
       set = 0
     }
-    if (this.verifyBracket(this.userBracket[bracket].roundTwo[i].set)) {
-      this.userBracket[bracket].roundThree[round].set[set] = this.userBracket[bracket].roundTwo[i].set[ti]
+    if (this.verifyBracket(this.userBracket.bracket[bracket].roundTwo[i].set)) {
+      this.userBracket.bracket[bracket].roundThree[round].set[set] = this.userBracket.bracket[bracket].roundTwo[i].set[ti]
     }
   }
 
@@ -1109,8 +1135,8 @@ export class MmnewviewbracketComponent implements OnInit {
     } else {
       set = 0
     }
-    if (this.verifyBracket(this.userBracket[bracket].roundThree[i].set)) {
-      this.userBracket[bracket].roundFour[round].set[set] = this.userBracket[bracket].roundThree[i].set[ti]
+    if (this.verifyBracket(this.userBracket.bracket[bracket].roundThree[i].set)) {
+      this.userBracket.bracket[bracket].roundFour[round].set[set] = this.userBracket.bracket[bracket].roundThree[i].set[ti]
     }
   }
 
@@ -1122,8 +1148,8 @@ export class MmnewviewbracketComponent implements OnInit {
     } else {
       set = 0
     }
-    if (this.verifyBracket(this.userBracket[bracket].roundFour[i].set)) {
-      this.userBracket.finalFour.roundFive[round].set[set] = this.userBracket[bracket].roundFour[i].set[ti]
+    if (this.verifyBracket(this.userBracket.bracket[bracket].roundFour[i].set)) {
+      this.userBracket.bracket.finalFour.roundFive[round].set[set] = this.userBracket.bracket[bracket].roundFour[i].set[ti]
     }
   }
 
@@ -1134,18 +1160,17 @@ export class MmnewviewbracketComponent implements OnInit {
     } else {
       set = 0
     }
-    if (this.verifyBracket(this.userBracket.finalFour.roundFive[i].set)) {
-      this.userBracket.finalFour.roundSix[0].set[set] = this.userBracket.finalFour.roundFive[i].set[ti]
+    if (this.verifyBracket(this.userBracket.bracket.finalFour.roundFive[i].set)) {
+      this.userBracket.bracket.finalFour.roundSix[0].set[set] = this.userBracket.bracket.finalFour.roundFive[i].set[ti]
     }
   }
 
-  roundSix() {
-    const final: any = this.userBracket.finalFour.roundSix[0].set[0];
-    final.score = this.finalScore[0];
-    const finalOne: any = this.userBracket.finalFour.roundSix[0].set[1];
-    finalOne.score = this.finalScore[1];
-    this.userBracket.finalFour.roundSix[0].set[0] = final;
-    this.userBracket.finalFour.roundSix[0].set[1] = finalOne;
+  async roundSix() {
+    this.userBracket.final.bracketString = JSON.stringify(this.userBracket.bracket);
+    this.userBracket.final.bracketHash = await this.sha256(JSON.stringify(this.userBracket.bracket));
+    this.userBracket.final.submitHash = this.userBracket.final.bracketHash;
+    this.userBracket.final.home = this.finalScore[0];
+    this.userBracket.final.away = this.finalScore[1];
   }
 
   verifyBracket(set): boolean {
@@ -1161,8 +1186,25 @@ export class MmnewviewbracketComponent implements OnInit {
 
   openSubmitBracket(): void {
     this.roundSix();
-    this.bsModalRef = this.modalService.show(SubmitModalComponent,
-      // @ts-ignore
-      Object.assign({}, { class: 'modal-lg', backdrop: 'static' }));
+    console.log('final', this.userBracket.final);
+    // this.bsModalRef = this.modalService.show(SubmitModalComponent,
+    //   // @ts-ignore
+    //   Object.assign({}, { class: 'modal-lg', backdrop: 'static' }));
   }
+
+  async sha256(message) {
+    // encode as UTF-8
+    const msgBuffer = new TextEncoder().encode(message);
+
+    // hash the message
+    const hashBuffer = await crypto.subtle.digest('SHA-256', msgBuffer);
+
+    // convert ArrayBuffer to Array
+    const hashArray = Array.from(new Uint8Array(hashBuffer));
+
+    // convert bytes to hex string
+    const hashHex = hashArray.map(b => ('00' + b.toString(16)).slice(-2)).join('');
+    return hashHex;
+  }
+
 }
