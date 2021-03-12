@@ -1049,13 +1049,23 @@ export class MmnewviewbracketComponent implements OnInit {
               }
             ]
           }
+        ],
+        roundSeven: [
+          {
+            set: [
+              {
+                rank: '',
+                name: '',
+                wgrteamid: '',
+              }
+            ]
+          }
         ]
       }
     },
     final: {
       bracketString: '',
       bracketHash: '',
-      submitHash: '',
       home: 0,
       away: 0
     }
@@ -1067,6 +1077,8 @@ export class MmnewviewbracketComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.finalScore[0] = 0;
+    this.finalScore[1] = 0;
     this.getUserBalance();
   }
 
@@ -1079,8 +1091,17 @@ export class MmnewviewbracketComponent implements OnInit {
   }
 
   userCanSubmit(): boolean {
+    const winnerSelected = +this.userBracket.bracket.finalFour.roundSeven[0].set[0].wgrteamid;
     const userBalance = this.wsb.getUserBalance();
-    return (userBalance > 0);
+    return (userBalance > 0 && winnerSelected > 0 && this.validateScore());
+  }
+
+  validateScore(): boolean {
+    const whoIsWinner = (this.userBracket.bracket.finalFour.roundSeven[0].set[0] === this.userBracket.bracket.finalFour.roundSix[0].set[0]);
+    if (whoIsWinner) {
+      return (this.finalScore[0] >= this.finalScore[1]);
+    }
+    return (this.finalScore[1] >= this.finalScore[0])
   }
 
   isSelected(round, i, ti, bracket) {
@@ -1165,10 +1186,31 @@ export class MmnewviewbracketComponent implements OnInit {
     }
   }
 
-  async roundSix() {
+  roundSix(i, ti) {
+    let set = 0;
+    if (i & 1) {
+      set = 1
+    } else {
+      set = 0
+    }
+    if (this.verifyBracket(this.userBracket.bracket.finalFour.roundSix[i].set)) {
+      this.userBracket.bracket.finalFour.roundSeven[0].set[set] = this.userBracket.bracket.finalFour.roundSix[i].set[ti]
+    }
+  }
+
+  async roundFinal() {
+    const homeFinalScore = this.finalScore[0];
+    const awayFinalScore = this.finalScore[1];
+    let finalHome: any = this.userBracket.bracket.finalFour.roundSix[0].set[0];
+    finalHome.score = homeFinalScore;
+    finalHome.winner = (homeFinalScore > awayFinalScore);
+    let finalAway: any = this.userBracket.bracket.finalFour.roundSix[0].set[1];
+    finalAway.score = awayFinalScore;
+    finalHome.winner = (homeFinalScore < awayFinalScore);
+    this.userBracket.bracket.finalFour.roundSix[0].set[0] = finalHome;
+    this.userBracket.bracket.finalFour.roundSix[0].set[1] = finalAway;
     this.userBracket.final.bracketString = JSON.stringify(this.userBracket.bracket);
     this.userBracket.final.bracketHash = await this.sha256(JSON.stringify(this.userBracket.bracket));
-    this.userBracket.final.submitHash = this.userBracket.final.bracketHash;
     this.userBracket.final.home = this.finalScore[0];
     this.userBracket.final.away = this.finalScore[1];
   }
@@ -1185,11 +1227,12 @@ export class MmnewviewbracketComponent implements OnInit {
   }
 
   openSubmitBracket(): void {
-    this.roundSix();
+    this.roundFinal();
     console.log('final', this.userBracket.final);
-    // this.bsModalRef = this.modalService.show(SubmitModalComponent,
-    //   // @ts-ignore
-    //   Object.assign({}, { class: 'modal-lg', backdrop: 'static' }));
+    this.wsb.marchMadness = this.userBracket.final;
+    this.bsModalRef = this.modalService.show(SubmitModalComponent,
+      // @ts-ignore
+      Object.assign({}, { class: 'modal-lg', backdrop: 'static' }));
   }
 
   async sha256(message) {

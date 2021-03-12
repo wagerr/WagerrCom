@@ -35,6 +35,7 @@ export class WgrSportsBookService {
   authorization = new BehaviorSubject([]);
   exchangeRates = new BehaviorSubject([]);
   qrCodeChannelSet = false;
+  marchMadness: any;
 
   public userAccount: any = {
     mnemonicSeed: '',
