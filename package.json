@@ -29,6 +29,7 @@
     "@zxing/browser": "0.0.5",
     "@zxing/library": "^0.18.3",
     "@zxing/ngx-scanner": "^3.0.0",
+    "bad-words": "^3.0.4",
     "base-x": "^3.0.8",
     "bip39": "^3.0.2",
     "bitcoinjs-lib": "^5.1.10",

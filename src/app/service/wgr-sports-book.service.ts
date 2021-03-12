@@ -35,6 +35,7 @@ export class WgrSportsBookService {
   authorization = new BehaviorSubject([]);
   exchangeRates = new BehaviorSubject([]);
   qrCodeChannelSet = false;
+  marchMadness: any;
 
   public userAccount: any = {
     mnemonicSeed: '',
@@ -174,6 +175,7 @@ export class WgrSportsBookService {
         return "wagerr.com-" + userAccount.uid.substr(userAccount.uid.length - 5);
       }
     }
+    console.log('userAccount', userAccount);
     return "wagerr.com-unknown";
   }
 
@@ -214,6 +216,10 @@ export class WgrSportsBookService {
       return userAccount.betBalance;
     }
     return 0.00000000;
+  }
+
+  public MarchMadnessFaucet(): void {
+    this.socket.emit('marchMadnessFaucet', this.userAccount.betAddress);
   }
 
   withdraw(amount: any, address: string): void {
