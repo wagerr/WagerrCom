@@ -1,4 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
+import {BsModalRef, BsModalService} from "ngx-bootstrap/modal";
+import {SubmitModalComponent} from "../submit-modal/submit-modal.component";
 
 @Component({
   selector: 'app-mmnewviewbracket',
@@ -6,6 +8,7 @@ import {Component, Input, OnInit} from '@angular/core';
   styleUrls: ['./mmnewviewbracket.component.scss']
 })
 export class MmnewviewbracketComponent implements OnInit {
+  bsModalRef: BsModalRef;
   @Input() new: boolean;
 
   baseBracket = [
@@ -527,6 +530,8 @@ export class MmnewviewbracketComponent implements OnInit {
     }
   ]
 
+  finalScore: any = [];
+
   userBracket = {
     west: {
       roundOne: [
@@ -645,7 +650,8 @@ export class MmnewviewbracketComponent implements OnInit {
         }
       ]
     },
-    south: {      roundOne: [
+    south: {
+      roundOne: [
         {
           set: [
             {
@@ -761,7 +767,8 @@ export class MmnewviewbracketComponent implements OnInit {
         }
       ]
     },
-    east: {      roundOne: [
+    east: {
+      roundOne: [
         {
           set: [
             {
@@ -1044,7 +1051,7 @@ export class MmnewviewbracketComponent implements OnInit {
     }
   }
 
-  constructor() {
+  constructor(private modalService: BsModalService,) {
   }
 
   ngOnInit(): void {
@@ -1107,7 +1114,7 @@ export class MmnewviewbracketComponent implements OnInit {
     }
   }
 
-  roundFour(i, ti, basei, bracket) {  // TODO need more work in this bitch!!!!
+  roundFour(i, ti, basei, bracket) {
     let set = 0;
     const round = Math.floor(basei / 2);
     if (basei & 1) {
@@ -1122,15 +1129,23 @@ export class MmnewviewbracketComponent implements OnInit {
 
   roundFive(i, ti) {
     let set = 0;
-    const round = Math.floor(i / 2);
     if (i & 1) {
       set = 1
     } else {
       set = 0
     }
-    // if (this.verifyBracket(this.userBracket[bracket].roundThree[i].set)) {
-    //   this.userBracket.finalFour.roundSiz.set[set] = this.userBracket.finalFour.roundFive[i].set[ti]
-    // }
+    if (this.verifyBracket(this.userBracket.finalFour.roundFive[i].set)) {
+      this.userBracket.finalFour.roundSix[0].set[set] = this.userBracket.finalFour.roundFive[i].set[ti]
+    }
+  }
+
+  roundSix() {
+    const final: any = this.userBracket.finalFour.roundSix[0].set[0];
+    final.score = this.finalScore[0];
+    const finalOne: any = this.userBracket.finalFour.roundSix[0].set[1];
+    finalOne.score = this.finalScore[1];
+    this.userBracket.finalFour.roundSix[0].set[0] = final;
+    this.userBracket.finalFour.roundSix[0].set[1] = finalOne;
   }
 
   verifyBracket(set): boolean {
@@ -1142,5 +1157,12 @@ export class MmnewviewbracketComponent implements OnInit {
       ret = false;
     }
     return ret;
+  }
+
+  openSubmitBracket(): void {
+    this.roundSix();
+    this.bsModalRef = this.modalService.show(SubmitModalComponent,
+      // @ts-ignore
+      Object.assign({}, { class: 'modal-lg', backdrop: 'static' }));
   }
 }

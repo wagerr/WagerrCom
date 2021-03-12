@@ -10,52 +10,52 @@ export class MmleaderboardComponent implements OnInit {
   leaderboard = [
     {
       rank: 1,
-      screenname: 'kevinsucks',
+      screenname: 'user',
       points: 12
     },
     {
       rank: 2,
-      screenname: 'kevinsucks',
+      screenname: 'user',
       points: 12
     },
     {
       rank: 3,
-      screenname: 'kevinsucks',
+      screenname: 'user',
       points: 12
     },
     {
       rank: 4,
-      screenname: 'kevinsucks',
+      screenname: 'user',
       points: 12
     },
     {
       rank: 5,
-      screenname: 'kevinsucks',
+      screenname: 'user',
       points: 12
     },
     {
       rank: 6,
-      screenname: 'kevinsucks',
+      screenname: 'user',
       points: 12
     },
     {
       rank: 7,
-      screenname: 'kevinsucks',
+      screenname: 'user',
       points: 12
     },
     {
       rank: 8,
-      screenname: 'kevinsucks',
+      screenname: 'user',
       points: 12
     },
     {
       rank: 9,
-      screenname: 'kevinsucks',
+      screenname: 'user',
       points: 12
     },
     {
       rank: 10,
-      screenname: 'kevinsucks',
+      screenname: 'user',
       points: 12
     }
   ]

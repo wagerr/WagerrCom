@@ -77,6 +77,7 @@ import { MmsplashComponent } from './view/marchmadness/mmsplash/mmsplash.compone
 import { MmleaderboardComponent } from './view/marchmadness/mmleaderboard/mmleaderboard.component';
 import { MmdashboardComponent } from './view/marchmadness/mmdashboard/mmdashboard.component';
 import { MmnewviewbracketComponent } from './view/marchmadness/mmnewviewbracket/mmnewviewbracket.component';
+import { SubmitModalComponent } from './view/marchmadness/submit-modal/submit-modal.component';
 
 @NgModule({
   declarations: [
@@ -128,6 +129,7 @@ import { MmnewviewbracketComponent } from './view/marchmadness/mmnewviewbracket/
     MmleaderboardComponent,
     MmdashboardComponent,
     MmnewviewbracketComponent,
+    SubmitModalComponent,
   ],
   imports: [
     BrowserModule,
