@@ -160,6 +160,23 @@ export class WgrSportsBookService {
     }
   }
 
+  public getMarchMadnessBracketCount(): number {
+    return 0;
+  }
+
+  public getUserName(): string {
+    const userAccount: any = this.account.getValue();
+    if (userAccount) {
+      if (userAccount && userAccount.uid) {
+        if (userAccount.settings && userAccount.settings.username) {
+          return userAccount.settings.username;
+        }
+        return "wagerr.com-" + userAccount.uid.substr(userAccount.uid.length - 5);
+      }
+    }
+    return "wagerr.com-unknown";
+  }
+
   public logOut(): void {
     this.cookieService.delete('asdfl3k-12u9clkjaslj');
     this.userAccount = [];

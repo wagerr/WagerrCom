@@ -6,7 +6,7 @@
   </div>
   <div class="d-flex flex-row">
     <div class="w-25"></div>
-    <div class="w-100 d-flex flex-row">
+    <div class="w-100 d-flex flex-column flex-sm-row">
       <div class="w-100 d-flex flex-column text-black">
         <div class="w-100 font-arboria-book font16px text-center" style="margin-top: {{bracket.preSet.mh}}">First Four
         </div>
@@ -65,7 +65,7 @@
             <ng-container *ngFor="let set of base.set; let ti = index">
               <div
                 class="w-100 font-arboria-bold font16px border-dark border-bottom p-1"
-                [ngClass]="isSelected('roundFive', i, set,  'finalFour') ? 'mmSelected': ''"
+                [ngClass]="isSelected('roundFive', basei, set,  'finalFour') ? 'mmSelected': ''"
                 (click)="roundFour(i, ti, basei, bracket.name)">{{set.rank}}&nbsp;{{set.name}}</div>
             </ng-container>
           </div>
@@ -87,15 +87,15 @@
 </div>
 <div class="d-flex flex-row">
   <div class="w-25"></div>
-  <div class="w-100 d-flex flex-row">
+  <div class="w-100 d-flex flex-column flex-sm-row">
     <div class="w-100 d-flex flex-column text-black">
       <div class="w-100 font-arboria-book font16px text-center">Round of 4</div>
       <ng-container *ngFor="let base of userBracket.finalFour.roundFive; let i = index">
-        <div class="w-100 border border-bottom-0 border-dark" [ngClass]="i > 0 ? 'round4mm' : ''">
+        <div class="w-100 my-2 border border-bottom-0 border-dark" [ngClass]="i > 0 ? 'round4mm' : ''">
           <ng-container *ngFor="let set of base.set; let ti = index">
             <div
               class="w-100 font-arboria-bold font16px border-dark border-bottom p-1"
-              [ngClass]="isSelected('roundFive', i, set,  'finalFour') ? 'mmSelected': ''"
+              [ngClass]="isSelected('roundSix', i, set,  'finalFour') ? 'mmSelected': ''"
               (click)="roundFive(i, ti)">{{set.rank}}&nbsp;{{set.name}}</div>
           </ng-container>
         </div>
@@ -105,14 +105,13 @@
     <div class="w-100 d-flex flex-column text-black round2pt">
       <div class="w-100 font-arboria-book font16px text-center">Championship</div>
       <ng-container *ngFor="let base of userBracket.finalFour.roundSix; let i = index">
-        <div class="w-100 border border-bottom-0 border-dark">
-          <ng-container *ngFor="let set of base.set; let ti = index">
+        <ng-container *ngFor="let set of base.set; let ti = index">
+          <div class="w-100 d-flex flex-row">
             <div
-              class="w-100 font-arboria-bold font16px border-dark border-bottom p-1"
-              [ngClass]="isSelected('roundFive', i, set,  'finalFour') ? 'mmSelected': ''"
-              (click)="roundFive(i, ti)">{{set.rank}}&nbsp;{{set.name}}</div>
-          </ng-container>
-        </div>
+              class="w-100 font-arboria-bold font16px border  border-dark border-bottom p-1">{{set.rank}}&nbsp;{{set.name}}</div>
+            <div class="w-auto"><input [(ngModel)]="finalScore[ti]" type="number" class="score ml-1"></div>
+          </div>
+        </ng-container>
       </ng-container>
     </div>
     <div class="w-25"></div>
@@ -126,6 +125,8 @@
 </div>
 <div class="d-flex flex-row mt-4">
   <div class="w-25"></div>
-  <div class="w-100 border-bottom border-dark"></div>
+  <div class="w-100 text-center">
+    <button class="btn btn-sportsbook3 widthSize140px" (click)="openSubmitBracket()">Submit Bracket</button>
+  </div>
   <div class="w-25"></div>
 </div>

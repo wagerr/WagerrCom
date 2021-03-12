@@ -1,8 +1,11 @@
-<div class="d-flex flex-row pt-2">
+<div class="d-flex flex-column flex-sm-row pt-2">
   <div class="w-100"></div>
   <div class="w-100 text-center">
-    <button class="btn round-btn btn-sportsbook3 w-50 text-uppercase font-arboria-bold" *ngIf="!loggedin">Sign Up</button>
-    <button class="btn round-btn btn-sportsbook3 w-50 text-uppercase font-arboria-bold" *ngIf="loggedin" [ngClass]="this.createBracket ? 'active' : ''" (click)="toggleCreateBracket()">Create Bracket</button>
+    <button class="btn round-btn btn-sportsbook3 w-50 text-uppercase font-arboria-bold" (click)="openModalAccount()" *ngIf="!isLoggedIn()">Sign Up</button>
+    <button class="btn round-btn btn-sportsbook3 w-50 text-uppercase font-arboria-bold" *ngIf="isLoggedIn()" [ngClass]="this.createBracket ? 'active' : ''" (click)="toggleCreateBracket()">Create Bracket</button>
+  </div>
+  <div class="w-100 text-center font-arboria-bold text-black" *ngIf="isLoggedIn()">
+    {{getUserName()}}
   </div>
   <div class="w-100 text-center">
     <button class="btn round-btn btn-sportsbook3 w-50 text-uppercase font-arboria-bold" [ngClass]="this.leaderboard ? 'active' : ''" (click)="toggleLeaderBoard()">
