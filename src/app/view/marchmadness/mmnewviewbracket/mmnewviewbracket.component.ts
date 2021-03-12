@@ -15,36 +15,16 @@ export class MmnewviewbracketComponent implements OnInit {
   baseBracket = [
     {
       name: 'west',
-      preSet: {
-        markSet: 0,
-        position: 0,
-        mh: '0px',
-        set:
-          [
-            {
-              rank: '16',
-              name: 'FDU',
-              wgrteamid: '0',
-            },
-            {
-              rank: '1',
-              name: 'Gonzaga',
-              wgrteamid: '1',
-            }
-          ],
-      },
       set: [
         {
           set: [
             {
-              rank: '',
-              name: '',
-              wgrteamid: '',
+              rank: '16',
+              name: 'FDU/Batman',
             },
             {
               rank: '1',
               name: 'Gonzaga',
-              wgrteamid: '1',
             },
           ]
         },
@@ -53,12 +33,10 @@ export class MmnewviewbracketComponent implements OnInit {
             {
               rank: '9',
               name: 'Baylor',
-              wgrteamid: '2',
             },
             {
               rank: '8',
               name: 'Syracuse',
-              wgrteamid: '3',
             },]
         },
         {
@@ -66,12 +44,10 @@ export class MmnewviewbracketComponent implements OnInit {
             {
               rank: '13',
               name: 'Vermont',
-              wgrteamid: '4',
             },
             {
               rank: '4',
               name: 'Florida',
-              wgrteamid: '5',
             },]
         },
         {
@@ -79,12 +55,10 @@ export class MmnewviewbracketComponent implements OnInit {
             {
               rank: '12',
               name: 'Murray',
-              wgrteamid: '6',
             },
             {
               rank: '5',
               name: 'Marquette',
-              wgrteamid: '7',
             },]
         },
         {
@@ -92,12 +66,10 @@ export class MmnewviewbracketComponent implements OnInit {
             {
               rank: '11',
               name: 'Arizona State Sun Devils',
-              wgrteamid: '8',
             },
             {
               rank: '6',
               name: 'Buffalo Bulls',
-              wgrteamid: '9',
             },]
         },
         {
@@ -105,12 +77,10 @@ export class MmnewviewbracketComponent implements OnInit {
             {
               rank: '14',
               name: 'Nothern',
-              wgrteamid: '10',
             },
             {
               rank: '3',
               name: 'Texas Tech',
-              wgrteamid: '11',
             },]
         },
         {
@@ -118,12 +88,10 @@ export class MmnewviewbracketComponent implements OnInit {
             {
               rank: '10',
               name: 'Florida Gators',
-              wgrteamid: '8',
             },
             {
               rank: '6',
               name: 'Navada',
-              wgrteamid: '9',
             },]
         },
         {
@@ -131,12 +99,10 @@ export class MmnewviewbracketComponent implements OnInit {
             {
               rank: '14',
               name: 'Montana',
-              wgrteamid: '10',
             },
             {
               rank: '3',
               name: 'Michigan',
-              wgrteamid: '11',
             },
           ]
         },
@@ -144,36 +110,16 @@ export class MmnewviewbracketComponent implements OnInit {
     },
     {
       name: 'south',
-      preSet: {
-        markSet: 0,
-        position: 0,
-        mh: '0px',
-        set:
-          [
-            {
-              rank: '16',
-              name: 'FDU',
-              wgrteamid: '0',
-            },
-            {
-              rank: '1',
-              name: 'Gonzaga',
-              wgrteamid: '1',
-            }
-          ],
-      },
       set: [
         {
           set: [
             {
-              rank: '',
-              name: '',
-              wgrteamid: '',
+              rank: '16',
+              name: 'FDU/Batman',
             },
             {
               rank: '1',
               name: 'Gonzaga',
-              wgrteamid: '1',
             },
           ]
         },
@@ -182,12 +128,10 @@ export class MmnewviewbracketComponent implements OnInit {
             {
               rank: '9',
               name: 'Baylor',
-              wgrteamid: '2',
             },
             {
               rank: '8',
               name: 'Syracuse',
-              wgrteamid: '3',
             },]
         },
         {
@@ -195,12 +139,10 @@ export class MmnewviewbracketComponent implements OnInit {
             {
               rank: '13',
               name: 'Vermont',
-              wgrteamid: '4',
             },
             {
               rank: '4',
               name: 'Florida',
-              wgrteamid: '5',
             },]
         },
         {
@@ -208,12 +150,10 @@ export class MmnewviewbracketComponent implements OnInit {
             {
               rank: '12',
               name: 'Murray',
-              wgrteamid: '6',
             },
             {
               rank: '5',
               name: 'Marquette',
-              wgrteamid: '7',
             },]
         },
         {
@@ -221,12 +161,10 @@ export class MmnewviewbracketComponent implements OnInit {
             {
               rank: '11',
               name: 'Arizona State Sun Devils',
-              wgrteamid: '8',
             },
             {
               rank: '6',
               name: 'Buffalo Bulls',
-              wgrteamid: '9',
             },]
         },
         {
@@ -234,12 +172,10 @@ export class MmnewviewbracketComponent implements OnInit {
             {
               rank: '14',
               name: 'Nothern',
-              wgrteamid: '10',
             },
             {
               rank: '3',
               name: 'Texas Tech',
-              wgrteamid: '11',
             },]
         },
         {
@@ -247,12 +183,10 @@ export class MmnewviewbracketComponent implements OnInit {
             {
               rank: '10',
               name: 'Florida Gators',
-              wgrteamid: '8',
             },
             {
               rank: '6',
               name: 'Navada',
-              wgrteamid: '9',
             },]
         },
         {
@@ -260,12 +194,10 @@ export class MmnewviewbracketComponent implements OnInit {
             {
               rank: '14',
               name: 'Montana',
-              wgrteamid: '10',
             },
             {
               rank: '3',
               name: 'Michigan',
-              wgrteamid: '11',
             },
           ]
         },
@@ -273,36 +205,16 @@ export class MmnewviewbracketComponent implements OnInit {
     },
     {
       name: 'east',
-      preSet: {
-        markSet: 0,
-        position: 0,
-        mh: '0px',
-        set:
-          [
-            {
-              rank: '16',
-              name: 'FDU',
-              wgrteamid: '0',
-            },
-            {
-              rank: '1',
-              name: 'Gonzaga',
-              wgrteamid: '1',
-            }
-          ],
-      },
       set: [
         {
           set: [
             {
-              rank: '',
-              name: '',
-              wgrteamid: '',
+              rank: '16',
+              name: 'FDU/Batman',
             },
             {
               rank: '1',
               name: 'Gonzaga',
-              wgrteamid: '1',
             },
           ]
         },
@@ -311,12 +223,10 @@ export class MmnewviewbracketComponent implements OnInit {
             {
               rank: '9',
               name: 'Baylor',
-              wgrteamid: '2',
             },
             {
               rank: '8',
               name: 'Syracuse',
-              wgrteamid: '3',
             },]
         },
         {
@@ -324,12 +234,10 @@ export class MmnewviewbracketComponent implements OnInit {
             {
               rank: '13',
               name: 'Vermont',
-              wgrteamid: '4',
             },
             {
               rank: '4',
               name: 'Florida',
-              wgrteamid: '5',
             },]
         },
         {
@@ -337,12 +245,10 @@ export class MmnewviewbracketComponent implements OnInit {
             {
               rank: '12',
               name: 'Murray',
-              wgrteamid: '6',
             },
             {
               rank: '5',
               name: 'Marquette',
-              wgrteamid: '7',
             },]
         },
         {
@@ -350,12 +256,10 @@ export class MmnewviewbracketComponent implements OnInit {
             {
               rank: '11',
               name: 'Arizona State Sun Devils',
-              wgrteamid: '8',
             },
             {
               rank: '6',
               name: 'Buffalo Bulls',
-              wgrteamid: '9',
             },]
         },
         {
@@ -363,12 +267,10 @@ export class MmnewviewbracketComponent implements OnInit {
             {
               rank: '14',
               name: 'Nothern',
-              wgrteamid: '10',
             },
             {
               rank: '3',
               name: 'Texas Tech',
-              wgrteamid: '11',
             },]
         },
         {
@@ -376,12 +278,10 @@ export class MmnewviewbracketComponent implements OnInit {
             {
               rank: '10',
               name: 'Florida Gators',
-              wgrteamid: '8',
             },
             {
               rank: '6',
               name: 'Navada',
-              wgrteamid: '9',
             },]
         },
         {
@@ -389,12 +289,10 @@ export class MmnewviewbracketComponent implements OnInit {
             {
               rank: '14',
               name: 'Montana',
-              wgrteamid: '10',
             },
             {
               rank: '3',
               name: 'Michigan',
-              wgrteamid: '11',
             },
           ]
         },
@@ -402,36 +300,16 @@ export class MmnewviewbracketComponent implements OnInit {
     },
     {
       name: 'midwest',
-      preSet: {
-        markSet: 0,
-        position: 0,
-        mh: '0px',
-        set:
-          [
-            {
-              rank: '16',
-              name: 'FDU',
-              wgrteamid: '0',
-            },
-            {
-              rank: '1',
-              name: 'Gonzaga',
-              wgrteamid: '1',
-            }
-          ],
-      },
       set: [
         {
           set: [
             {
-              rank: '',
-              name: '',
-              wgrteamid: '',
+              rank: '16',
+              name: 'FDU/Batman'
             },
             {
               rank: '1',
               name: 'Gonzaga',
-              wgrteamid: '1',
             },
           ]
         },
@@ -440,12 +318,10 @@ export class MmnewviewbracketComponent implements OnInit {
             {
               rank: '9',
               name: 'Baylor',
-              wgrteamid: '2',
             },
             {
               rank: '8',
               name: 'Syracuse',
-              wgrteamid: '3',
             },]
         },
         {
@@ -453,12 +329,10 @@ export class MmnewviewbracketComponent implements OnInit {
             {
               rank: '13',
               name: 'Vermont',
-              wgrteamid: '4',
             },
             {
               rank: '4',
               name: 'Florida',
-              wgrteamid: '5',
             },]
         },
         {
@@ -466,12 +340,10 @@ export class MmnewviewbracketComponent implements OnInit {
             {
               rank: '12',
               name: 'Murray',
-              wgrteamid: '6',
             },
             {
               rank: '5',
               name: 'Marquette',
-              wgrteamid: '7',
             },]
         },
         {
@@ -479,12 +351,10 @@ export class MmnewviewbracketComponent implements OnInit {
             {
               rank: '11',
               name: 'Arizona State Sun Devils',
-              wgrteamid: '8',
             },
             {
               rank: '6',
               name: 'Buffalo Bulls',
-              wgrteamid: '9',
             },]
         },
         {
@@ -492,12 +362,10 @@ export class MmnewviewbracketComponent implements OnInit {
             {
               rank: '14',
               name: 'Nothern',
-              wgrteamid: '10',
             },
             {
               rank: '3',
               name: 'Texas Tech',
-              wgrteamid: '11',
             },]
         },
         {
@@ -505,12 +373,10 @@ export class MmnewviewbracketComponent implements OnInit {
             {
               rank: '10',
               name: 'Florida Gators',
-              wgrteamid: '8',
             },
             {
               rank: '6',
               name: 'Navada',
-              wgrteamid: '9',
             },]
         },
         {
@@ -518,12 +384,10 @@ export class MmnewviewbracketComponent implements OnInit {
             {
               rank: '14',
               name: 'Montana',
-              wgrteamid: '10',
             },
             {
               rank: '3',
               name: 'Michigan',
-              wgrteamid: '11',
             },
           ]
         },
@@ -533,32 +397,21 @@ export class MmnewviewbracketComponent implements OnInit {
 
   finalScore: any = [];
 
+  bracket = '{"bracket":{"west":{"roundOne":[{"set":[{"rank":"16","name":"FDU","wgrteamid":"0"}]}],"roundTwo":[{"set":[{"rank":"16","name":"FDU","wgrteamid":"0"},{"rank":"9","name":"Baylor","wgrteamid":"2"}]},{"set":[{"rank":"13","name":"Vermont","wgrteamid":"4"},{"rank":"12","name":"Murray","wgrteamid":"6"}]},{"set":[{"rank":"6","name":"Buffalo Bulls","wgrteamid":"9"},{"rank":"3","name":"Texas Tech","wgrteamid":"11","score":300,"winner":false}]},{"set":[{"rank":"6","name":"Navada","wgrteamid":"9"},{"rank":"3","name":"Michigan","wgrteamid":"11"}]}],"roundThree":[{"set":[{"rank":"16","name":"FDU","wgrteamid":"0"},{"rank":"13","name":"Vermont","wgrteamid":"4"}]},{"set":[{"rank":"3","name":"Texas Tech","wgrteamid":"11","score":300,"winner":false},{"rank":"3","name":"Michigan","wgrteamid":"11"}]}],"roundFour":[{"set":[{"rank":"13","name":"Vermont","wgrteamid":"4"},{"rank":"3","name":"Texas Tech","wgrteamid":"11","score":300,"winner":false}]}]},"south":{"roundOne":[{"set":[{"rank":"16","name":"FDU","wgrteamid":"0"}]}],"roundTwo":[{"set":[{"rank":"16","name":"FDU","wgrteamid":"0"},{"rank":"9","name":"Baylor","wgrteamid":"2"}]},{"set":[{"rank":"13","name":"Vermont","wgrteamid":"4"},{"rank":"12","name":"Murray","wgrteamid":"6"}]},{"set":[{"rank":"11","name":"Arizona State Sun Devils","wgrteamid":"8"},{"rank":"14","name":"Nothern","wgrteamid":"10"}]},{"set":[{"rank":"10","name":"Florida Gators","wgrteamid":"8"},{"rank":"14","name":"Montana","wgrteamid":"10"}]}],"roundThree":[{"set":[{"rank":"16","name":"FDU","wgrteamid":"0"},{"rank":"13","name":"Vermont","wgrteamid":"4"}]},{"set":[{"rank":"11","name":"Arizona State Sun Devils","wgrteamid":"8"},{"rank":"10","name":"Florida Gators","wgrteamid":"8"}]}],"roundFour":[{"set":[{"rank":"16","name":"FDU","wgrteamid":"0"},{"rank":"11","name":"Arizona State Sun Devils","wgrteamid":"8"}]}]},"east":{"roundOne":[{"set":[{"rank":"16","name":"FDU","wgrteamid":"0"}]}],"roundTwo":[{"set":[{"rank":"1","name":"Gonzaga","wgrteamid":"1"},{"rank":"8","name":"Syracuse","wgrteamid":"3"}]},{"set":[{"rank":"4","name":"Florida","wgrteamid":"5"},{"rank":"5","name":"Marquette","wgrteamid":"7"}]},{"set":[{"rank":"6","name":"Buffalo Bulls","wgrteamid":"9"},{"rank":"3","name":"Texas Tech","wgrteamid":"11"}]},{"set":[{"rank":"6","name":"Navada","wgrteamid":"9"},{"rank":"3","name":"Michigan","wgrteamid":"11"}]}],"roundThree":[{"set":[{"rank":"8","name":"Syracuse","wgrteamid":"3"},{"rank":"5","name":"Marquette","wgrteamid":"7"}]},{"set":[{"rank":"3","name":"Texas Tech","wgrteamid":"11"},{"rank":"3","name":"Michigan","wgrteamid":"11"}]}],"roundFour":[{"set":[{"rank":"5","name":"Marquette","wgrteamid":"7"},{"rank":"3","name":"Texas Tech","wgrteamid":"11"}]}]},"midwest":{"roundOne":[{"set":[{"rank":"16","name":"FDU","wgrteamid":"0"}]}],"roundTwo":[{"set":[{"rank":"16","name":"FDU","wgrteamid":"0"},{"rank":"8","name":"Syracuse","wgrteamid":"3"}]},{"set":[{"rank":"13","name":"Vermont","wgrteamid":"4"},{"rank":"5","name":"Marquette","wgrteamid":"7"}]},{"set":[{"rank":"11","name":"Arizona State Sun Devils","wgrteamid":"8","score":0},{"rank":"3","name":"Texas Tech","wgrteamid":"11"}]},{"set":[{"rank":"10","name":"Florida Gators","wgrteamid":"8"},{"rank":"3","name":"Michigan","wgrteamid":"11"}]}],"roundThree":[{"set":[{"rank":"16","name":"FDU","wgrteamid":"0"},{"rank":"13","name":"Vermont","wgrteamid":"4"}]},{"set":[{"rank":"11","name":"Arizona State Sun Devils","wgrteamid":"8","score":0},{"rank":"10","name":"Florida Gators","wgrteamid":"8"}]}],"roundFour":[{"set":[{"rank":"16","name":"FDU","wgrteamid":"0"},{"rank":"11","name":"Arizona State Sun Devils","wgrteamid":"8","score":0}]}]},"finalFour":{"roundFive":[{"set":[{"rank":"3","name":"Texas Tech","wgrteamid":"11","score":300,"winner":false},{"rank":"16","name":"FDU","wgrteamid":"0"}]},{"set":[{"rank":"5","name":"Marquette","wgrteamid":"7"},{"rank":"11","name":"Arizona State Sun Devils","wgrteamid":"8","score":0}]}],"roundSix":[{"set":[{"rank":"3","name":"Texas Tech","wgrteamid":"11","score":300,"winner":false},{"rank":"11","name":"Arizona State Sun Devils","wgrteamid":"8","score":0}]}],"roundSeven":[{"set":[{"rank":"3","name":"Texas Tech","wgrteamid":"11","score":300,"winner":false}]}]}},"final":{"bracketString":"{\\"west\\":{\\"roundOne\\":[{\\"set\\":[{\\"rank\\":\\"16\\",\\"name\\":\\"FDU\\",\\"wgrteamid\\":\\"0\\"}]}],\\"roundTwo\\":[{\\"set\\":[{\\"rank\\":\\"16\\",\\"name\\":\\"FDU\\",\\"wgrteamid\\":\\"0\\"},{\\"rank\\":\\"9\\",\\"name\\":\\"Baylor\\",\\"wgrteamid\\":\\"2\\"}]},{\\"set\\":[{\\"rank\\":\\"13\\",\\"name\\":\\"Vermont\\",\\"wgrteamid\\":\\"4\\"},{\\"rank\\":\\"12\\",\\"name\\":\\"Murray\\",\\"wgrteamid\\":\\"6\\"}]},{\\"set\\":[{\\"rank\\":\\"6\\",\\"name\\":\\"Buffalo Bulls\\",\\"wgrteamid\\":\\"9\\"},{\\"rank\\":\\"3\\",\\"name\\":\\"Texas Tech\\",\\"wgrteamid\\":\\"11\\",\\"score\\":300,\\"winner\\":false}]},{\\"set\\":[{\\"rank\\":\\"6\\",\\"name\\":\\"Navada\\",\\"wgrteamid\\":\\"9\\"},{\\"rank\\":\\"3\\",\\"name\\":\\"Michigan\\",\\"wgrteamid\\":\\"11\\"}]}],\\"roundThree\\":[{\\"set\\":[{\\"rank\\":\\"16\\",\\"name\\":\\"FDU\\",\\"wgrteamid\\":\\"0\\"},{\\"rank\\":\\"13\\",\\"name\\":\\"Vermont\\",\\"wgrteamid\\":\\"4\\"}]},{\\"set\\":[{\\"rank\\":\\"3\\",\\"name\\":\\"Texas Tech\\",\\"wgrteamid\\":\\"11\\",\\"score\\":300,\\"winner\\":false},{\\"rank\\":\\"3\\",\\"name\\":\\"Michigan\\",\\"wgrteamid\\":\\"11\\"}]}],\\"roundFour\\":[{\\"set\\":[{\\"rank\\":\\"13\\",\\"name\\":\\"Vermont\\",\\"wgrteamid\\":\\"4\\"},{\\"rank\\":\\"3\\",\\"name\\":\\"Texas Tech\\",\\"wgrteamid\\":\\"11\\",\\"score\\":300,\\"winner\\":false}]}]},\\"south\\":{\\"roundOne\\":[{\\"set\\":[{\\"rank\\":\\"16\\",\\"name\\":\\"FDU\\",\\"wgrteamid\\":\\"0\\"}]}],\\"roundTwo\\":[{\\"set\\":[{\\"rank\\":\\"16\\",\\"name\\":\\"FDU\\",\\"wgrteamid\\":\\"0\\"},{\\"rank\\":\\"9\\",\\"name\\":\\"Baylor\\",\\"wgrteamid\\":\\"2\\"}]},{\\"set\\":[{\\"rank\\":\\"13\\",\\"name\\":\\"Vermont\\",\\"wgrteamid\\":\\"4\\"},{\\"rank\\":\\"12\\",\\"name\\":\\"Murray\\",\\"wgrteamid\\":\\"6\\"}]},{\\"set\\":[{\\"rank\\":\\"11\\",\\"name\\":\\"Arizona State Sun Devils\\",\\"wgrteamid\\":\\"8\\"},{\\"rank\\":\\"14\\",\\"name\\":\\"Nothern\\",\\"wgrteamid\\":\\"10\\"}]},{\\"set\\":[{\\"rank\\":\\"10\\",\\"name\\":\\"Florida Gators\\",\\"wgrteamid\\":\\"8\\"},{\\"rank\\":\\"14\\",\\"name\\":\\"Montana\\",\\"wgrteamid\\":\\"10\\"}]}],\\"roundThree\\":[{\\"set\\":[{\\"rank\\":\\"16\\",\\"name\\":\\"FDU\\",\\"wgrteamid\\":\\"0\\"},{\\"rank\\":\\"13\\",\\"name\\":\\"Vermont\\",\\"wgrteamid\\":\\"4\\"}]},{\\"set\\":[{\\"rank\\":\\"11\\",\\"name\\":\\"Arizona State Sun Devils\\",\\"wgrteamid\\":\\"8\\"},{\\"rank\\":\\"10\\",\\"name\\":\\"Florida Gators\\",\\"wgrteamid\\":\\"8\\"}]}],\\"roundFour\\":[{\\"set\\":[{\\"rank\\":\\"16\\",\\"name\\":\\"FDU\\",\\"wgrteamid\\":\\"0\\"},{\\"rank\\":\\"11\\",\\"name\\":\\"Arizona State Sun Devils\\",\\"wgrteamid\\":\\"8\\"}]}]},\\"east\\":{\\"roundOne\\":[{\\"set\\":[{\\"rank\\":\\"16\\",\\"name\\":\\"FDU\\",\\"wgrteamid\\":\\"0\\"}]}],\\"roundTwo\\":[{\\"set\\":[{\\"rank\\":\\"1\\",\\"name\\":\\"Gonzaga\\",\\"wgrteamid\\":\\"1\\"},{\\"rank\\":\\"8\\",\\"name\\":\\"Syracuse\\",\\"wgrteamid\\":\\"3\\"}]},{\\"set\\":[{\\"rank\\":\\"4\\",\\"name\\":\\"Florida\\",\\"wgrteamid\\":\\"5\\"},{\\"rank\\":\\"5\\",\\"name\\":\\"Marquette\\",\\"wgrteamid\\":\\"7\\"}]},{\\"set\\":[{\\"rank\\":\\"6\\",\\"name\\":\\"Buffalo Bulls\\",\\"wgrteamid\\":\\"9\\"},{\\"rank\\":\\"3\\",\\"name\\":\\"Texas Tech\\",\\"wgrteamid\\":\\"11\\"}]},{\\"set\\":[{\\"rank\\":\\"6\\",\\"name\\":\\"Navada\\",\\"wgrteamid\\":\\"9\\"},{\\"rank\\":\\"3\\",\\"name\\":\\"Michigan\\",\\"wgrteamid\\":\\"11\\"}]}],\\"roundThree\\":[{\\"set\\":[{\\"rank\\":\\"8\\",\\"name\\":\\"Syracuse\\",\\"wgrteamid\\":\\"3\\"},{\\"rank\\":\\"5\\",\\"name\\":\\"Marquette\\",\\"wgrteamid\\":\\"7\\"}]},{\\"set\\":[{\\"rank\\":\\"3\\",\\"name\\":\\"Texas Tech\\",\\"wgrteamid\\":\\"11\\"},{\\"rank\\":\\"3\\",\\"name\\":\\"Michigan\\",\\"wgrteamid\\":\\"11\\"}]}],\\"roundFour\\":[{\\"set\\":[{\\"rank\\":\\"5\\",\\"name\\":\\"Marquette\\",\\"wgrteamid\\":\\"7\\"},{\\"rank\\":\\"3\\",\\"name\\":\\"Texas Tech\\",\\"wgrteamid\\":\\"11\\"}]}]},\\"midwest\\":{\\"roundOne\\":[{\\"set\\":[{\\"rank\\":\\"16\\",\\"name\\":\\"FDU\\",\\"wgrteamid\\":\\"0\\"}]}],\\"roundTwo\\":[{\\"set\\":[{\\"rank\\":\\"16\\",\\"name\\":\\"FDU\\",\\"wgrteamid\\":\\"0\\"},{\\"rank\\":\\"8\\",\\"name\\":\\"Syracuse\\",\\"wgrteamid\\":\\"3\\"}]},{\\"set\\":[{\\"rank\\":\\"13\\",\\"name\\":\\"Vermont\\",\\"wgrteamid\\":\\"4\\"},{\\"rank\\":\\"5\\",\\"name\\":\\"Marquette\\",\\"wgrteamid\\":\\"7\\"}]},{\\"set\\":[{\\"rank\\":\\"11\\",\\"name\\":\\"Arizona State Sun Devils\\",\\"wgrteamid\\":\\"8\\",\\"score\\":0},{\\"rank\\":\\"3\\",\\"name\\":\\"Texas Tech\\",\\"wgrteamid\\":\\"11\\"}]},{\\"set\\":[{\\"rank\\":\\"10\\",\\"name\\":\\"Florida Gators\\",\\"wgrteamid\\":\\"8\\"},{\\"rank\\":\\"3\\",\\"name\\":\\"Michigan\\",\\"wgrteamid\\":\\"11\\"}]}],\\"roundThree\\":[{\\"set\\":[{\\"rank\\":\\"16\\",\\"name\\":\\"FDU\\",\\"wgrteamid\\":\\"0\\"},{\\"rank\\":\\"13\\",\\"name\\":\\"Vermont\\",\\"wgrteamid\\":\\"4\\"}]},{\\"set\\":[{\\"rank\\":\\"11\\",\\"name\\":\\"Arizona State Sun Devils\\",\\"wgrteamid\\":\\"8\\",\\"score\\":0},{\\"rank\\":\\"10\\",\\"name\\":\\"Florida Gators\\",\\"wgrteamid\\":\\"8\\"}]}],\\"roundFour\\":[{\\"set\\":[{\\"rank\\":\\"16\\",\\"name\\":\\"FDU\\",\\"wgrteamid\\":\\"0\\"},{\\"rank\\":\\"11\\",\\"name\\":\\"Arizona State Sun Devils\\",\\"wgrteamid\\":\\"8\\",\\"score\\":0}]}]},\\"finalFour\\":{\\"roundFive\\":[{\\"set\\":[{\\"rank\\":\\"3\\",\\"name\\":\\"Texas Tech\\",\\"wgrteamid\\":\\"11\\",\\"score\\":300,\\"winner\\":false},{\\"rank\\":\\"16\\",\\"name\\":\\"FDU\\",\\"wgrteamid\\":\\"0\\"}]},{\\"set\\":[{\\"rank\\":\\"5\\",\\"name\\":\\"Marquette\\",\\"wgrteamid\\":\\"7\\"},{\\"rank\\":\\"11\\",\\"name\\":\\"Arizona State Sun Devils\\",\\"wgrteamid\\":\\"8\\",\\"score\\":0}]}],\\"roundSix\\":[{\\"set\\":[{\\"rank\\":\\"3\\",\\"name\\":\\"Texas Tech\\",\\"wgrteamid\\":\\"11\\",\\"score\\":300,\\"winner\\":false},{\\"rank\\":\\"11\\",\\"name\\":\\"Arizona State Sun Devils\\",\\"wgrteamid\\":\\"8\\",\\"score\\":0}]}],\\"roundSeven\\":[{\\"set\\":[{\\"rank\\":\\"3\\",\\"name\\":\\"Texas Tech\\",\\"wgrteamid\\":\\"11\\",\\"score\\":300,\\"winner\\":false}]}]}}","bracketHash":"1bf656c3d37c09864533eb8109b00305a5df7e83c27b14868569ddceeb8b73ca","home":300,"away":0}}';
+
   userBracket = {
     bracket: {
       west: {
-        roundOne: [
-          {
-            set: [
-              {
-                rank: '',
-                name: '',
-                wgrteamid: '',
-              }
-            ]
-          },
-        ],
         roundTwo: [
           {
             set: [
               {
                 rank: '',
                 name: '',
-                wgrteamid: '',
               },
               {
                 rank: '',
                 name: '',
-                wgrteamid: '',
               }
             ]
           },
@@ -567,12 +420,10 @@ export class MmnewviewbracketComponent implements OnInit {
               {
                 rank: '',
                 name: '',
-                wgrteamid: '',
               },
               {
                 rank: '',
                 name: '',
-                wgrteamid: '',
               }
             ]
           },
@@ -581,12 +432,12 @@ export class MmnewviewbracketComponent implements OnInit {
               {
                 rank: '',
                 name: '',
-                wgrteamid: '',
+
               },
               {
                 rank: '',
                 name: '',
-                wgrteamid: '',
+
               }
             ]
           },
@@ -595,12 +446,12 @@ export class MmnewviewbracketComponent implements OnInit {
               {
                 rank: '',
                 name: '',
-                wgrteamid: '',
+
               },
               {
                 rank: '',
                 name: '',
-                wgrteamid: '',
+
               }
             ]
           }
@@ -611,12 +462,12 @@ export class MmnewviewbracketComponent implements OnInit {
               {
                 rank: '',
                 name: '',
-                wgrteamid: '',
+
               },
               {
                 rank: '',
                 name: '',
-                wgrteamid: '',
+
               }
             ]
           },
@@ -625,12 +476,12 @@ export class MmnewviewbracketComponent implements OnInit {
               {
                 rank: '',
                 name: '',
-                wgrteamid: '',
+
               },
               {
                 rank: '',
                 name: '',
-                wgrteamid: '',
+
               }
             ]
           },
@@ -641,41 +492,29 @@ export class MmnewviewbracketComponent implements OnInit {
               {
                 rank: '',
                 name: '',
-                wgrteamid: '',
+
               },
               {
                 rank: '',
                 name: '',
-                wgrteamid: '',
+
               }
             ]
           }
         ]
       },
       south: {
-        roundOne: [
-          {
-            set: [
-              {
-                rank: '',
-                name: '',
-                wgrteamid: '',
-              }
-            ]
-          },
-        ],
         roundTwo: [
           {
             set: [
               {
                 rank: '',
                 name: '',
-                wgrteamid: '',
               },
               {
                 rank: '',
                 name: '',
-                wgrteamid: '',
+
               }
             ]
           },
@@ -684,12 +523,12 @@ export class MmnewviewbracketComponent implements OnInit {
               {
                 rank: '',
                 name: '',
-                wgrteamid: '',
+
               },
               {
                 rank: '',
                 name: '',
-                wgrteamid: '',
+
               }
             ]
           },
@@ -698,12 +537,12 @@ export class MmnewviewbracketComponent implements OnInit {
               {
                 rank: '',
                 name: '',
-                wgrteamid: '',
+
               },
               {
                 rank: '',
                 name: '',
-                wgrteamid: '',
+
               }
             ]
           },
@@ -712,12 +551,12 @@ export class MmnewviewbracketComponent implements OnInit {
               {
                 rank: '',
                 name: '',
-                wgrteamid: '',
+
               },
               {
                 rank: '',
                 name: '',
-                wgrteamid: '',
+
               }
             ]
           }
@@ -728,12 +567,12 @@ export class MmnewviewbracketComponent implements OnInit {
               {
                 rank: '',
                 name: '',
-                wgrteamid: '',
+
               },
               {
                 rank: '',
                 name: '',
-                wgrteamid: '',
+
               }
             ]
           },
@@ -742,12 +581,12 @@ export class MmnewviewbracketComponent implements OnInit {
               {
                 rank: '',
                 name: '',
-                wgrteamid: '',
+
               },
               {
                 rank: '',
                 name: '',
-                wgrteamid: '',
+
               }
             ]
           },
@@ -758,41 +597,30 @@ export class MmnewviewbracketComponent implements OnInit {
               {
                 rank: '',
                 name: '',
-                wgrteamid: '',
+
               },
               {
                 rank: '',
                 name: '',
-                wgrteamid: '',
+
               }
             ]
           }
         ]
       },
       east: {
-        roundOne: [
-          {
-            set: [
-              {
-                rank: '',
-                name: '',
-                wgrteamid: '',
-              }
-            ]
-          },
-        ],
         roundTwo: [
           {
             set: [
               {
                 rank: '',
                 name: '',
-                wgrteamid: '',
+
               },
               {
                 rank: '',
                 name: '',
-                wgrteamid: '',
+
               }
             ]
           },
@@ -801,12 +629,12 @@ export class MmnewviewbracketComponent implements OnInit {
               {
                 rank: '',
                 name: '',
-                wgrteamid: '',
+
               },
               {
                 rank: '',
                 name: '',
-                wgrteamid: '',
+
               }
             ]
           },
@@ -815,12 +643,12 @@ export class MmnewviewbracketComponent implements OnInit {
               {
                 rank: '',
                 name: '',
-                wgrteamid: '',
+
               },
               {
                 rank: '',
                 name: '',
-                wgrteamid: '',
+
               }
             ]
           },
@@ -829,12 +657,12 @@ export class MmnewviewbracketComponent implements OnInit {
               {
                 rank: '',
                 name: '',
-                wgrteamid: '',
+
               },
               {
                 rank: '',
                 name: '',
-                wgrteamid: '',
+
               }
             ]
           }
@@ -845,12 +673,12 @@ export class MmnewviewbracketComponent implements OnInit {
               {
                 rank: '',
                 name: '',
-                wgrteamid: '',
+
               },
               {
                 rank: '',
                 name: '',
-                wgrteamid: '',
+
               }
             ]
           },
@@ -859,12 +687,12 @@ export class MmnewviewbracketComponent implements OnInit {
               {
                 rank: '',
                 name: '',
-                wgrteamid: '',
+
               },
               {
                 rank: '',
                 name: '',
-                wgrteamid: '',
+
               }
             ]
           },
@@ -875,41 +703,30 @@ export class MmnewviewbracketComponent implements OnInit {
               {
                 rank: '',
                 name: '',
-                wgrteamid: '',
+
               },
               {
                 rank: '',
                 name: '',
-                wgrteamid: '',
+
               }
             ]
           }
         ]
       },
       midwest: {
-        roundOne: [
-          {
-            set: [
-              {
-                rank: '',
-                name: '',
-                wgrteamid: '',
-              }
-            ]
-          },
-        ],
         roundTwo: [
           {
             set: [
               {
                 rank: '',
                 name: '',
-                wgrteamid: '',
+
               },
               {
                 rank: '',
                 name: '',
-                wgrteamid: '',
+
               }
             ]
           },
@@ -918,12 +735,12 @@ export class MmnewviewbracketComponent implements OnInit {
               {
                 rank: '',
                 name: '',
-                wgrteamid: '',
+
               },
               {
                 rank: '',
                 name: '',
-                wgrteamid: '',
+
               }
             ]
           },
@@ -932,12 +749,12 @@ export class MmnewviewbracketComponent implements OnInit {
               {
                 rank: '',
                 name: '',
-                wgrteamid: '',
+
               },
               {
                 rank: '',
                 name: '',
-                wgrteamid: '',
+
               }
             ]
           },
@@ -946,12 +763,12 @@ export class MmnewviewbracketComponent implements OnInit {
               {
                 rank: '',
                 name: '',
-                wgrteamid: '',
+
               },
               {
                 rank: '',
                 name: '',
-                wgrteamid: '',
+
               }
             ]
           }
@@ -962,12 +779,12 @@ export class MmnewviewbracketComponent implements OnInit {
               {
                 rank: '',
                 name: '',
-                wgrteamid: '',
+
               },
               {
                 rank: '',
                 name: '',
-                wgrteamid: '',
+
               }
             ]
           },
@@ -976,12 +793,12 @@ export class MmnewviewbracketComponent implements OnInit {
               {
                 rank: '',
                 name: '',
-                wgrteamid: '',
+
               },
               {
                 rank: '',
                 name: '',
-                wgrteamid: '',
+
               }
             ]
           },
@@ -992,12 +809,12 @@ export class MmnewviewbracketComponent implements OnInit {
               {
                 rank: '',
                 name: '',
-                wgrteamid: '',
+
               },
               {
                 rank: '',
                 name: '',
-                wgrteamid: '',
+
               }
             ]
           }
@@ -1010,12 +827,12 @@ export class MmnewviewbracketComponent implements OnInit {
               {
                 rank: '',
                 name: '',
-                wgrteamid: '',
+
               },
               {
                 rank: '',
                 name: '',
-                wgrteamid: '',
+
               }
             ]
           },
@@ -1024,12 +841,12 @@ export class MmnewviewbracketComponent implements OnInit {
               {
                 rank: '',
                 name: '',
-                wgrteamid: '',
+
               },
               {
                 rank: '',
                 name: '',
-                wgrteamid: '',
+
               }
             ]
           }
@@ -1040,12 +857,12 @@ export class MmnewviewbracketComponent implements OnInit {
               {
                 rank: '',
                 name: '',
-                wgrteamid: '',
+
               },
               {
                 rank: '',
                 name: '',
-                wgrteamid: '',
+
               }
             ]
           }
@@ -1056,7 +873,7 @@ export class MmnewviewbracketComponent implements OnInit {
               {
                 rank: '',
                 name: '',
-                wgrteamid: '',
+
               }
             ]
           }
@@ -1084,16 +901,16 @@ export class MmnewviewbracketComponent implements OnInit {
 
   getUserBalance(): void {
     const userBalance = this.wsb.getUserBalance();
-    console.log('userBalance', userBalance);
     if (userBalance == 0) {
       this.wsb.MarchMadnessFaucet();
     }
   }
 
   userCanSubmit(): boolean {
-    const winnerSelected = +this.userBracket.bracket.finalFour.roundSeven[0].set[0].wgrteamid;
+    const winnerSelected = (this.userBracket.bracket.finalFour.roundSeven[0].set[0].rank != '');
+    const hasChampionshp = (this.userBracket.bracket.finalFour.roundSix[0].set[0].rank != '' && this.userBracket.bracket.finalFour.roundSix[0].set[1].rank != '')
     const userBalance = this.wsb.getUserBalance();
-    return (userBalance > 0 && winnerSelected > 0 && this.validateScore());
+    return (userBalance > 0 && winnerSelected && hasChampionshp && this.validateScore());
   }
 
   validateScore(): boolean {
@@ -1116,11 +933,47 @@ export class MmnewviewbracketComponent implements OnInit {
     return ret;
   }
 
-  firstFour(basei, ti, bracket) {
-    const set1 = this.baseBracket[basei].preSet.markSet;
-    const set2 = this.baseBracket[basei].preSet.position;
-    this.baseBracket[basei].set[set1].set[set2] = this.baseBracket[basei].preSet.set[ti];
-    this.userBracket.bracket[bracket].roundOne[0].set[0] = this.baseBracket[basei].preSet.set[ti];
+  roundChangeClear(bracket: string, startRound: string, oldTi: any) {
+    const getBracket = this.userBracket.bracket[bracket];
+    const finalFour = this.userBracket.bracket.finalFour;
+    if (startRound === 'roundTwo') {
+      this.clearSet(getBracket.roundThree, oldTi);
+      this.clearSet(getBracket.roundFour, oldTi);
+      this.clearSet(finalFour.roundFive, oldTi);
+      this.clearSet(finalFour.roundSix, oldTi);
+      this.clearSet(finalFour.roundSeven, oldTi);
+    }
+    if (startRound === 'roundThree') {
+      this.clearSet(getBracket.roundFour, oldTi);
+      this.clearSet(finalFour.roundFive, oldTi);
+      this.clearSet(finalFour.roundSix, oldTi);
+      this.clearSet(finalFour.roundSeven, oldTi);
+    }
+    if (startRound === 'roundFour') {
+      this.clearSet(finalFour.roundFive, oldTi);
+      this.clearSet(finalFour.roundSix, oldTi);
+      this.clearSet(finalFour.roundSeven, oldTi);
+    }
+    if (startRound === 'roundFive') {
+      this.clearSet(finalFour.roundSix, oldTi);
+      this.clearSet(finalFour.roundSeven, oldTi);
+    }
+    if (startRound === 'roundSix') {
+      this.clearSet(finalFour.roundSeven, oldTi);
+    }
+    console.log('gotBracket', getBracket);
+
+  }
+
+  clearSet(brackets, oldTi) {
+    for ( let i = 0; i < brackets.length; i++) {
+      console.log('set', brackets[i].set)
+      for (let bi = 0; bi < brackets[i].set.length; bi++) {
+        if (brackets[i].set[bi] === oldTi) {
+          brackets[i].set[bi] = {rank: '', name: ''};
+        }
+      }
+    }
   }
 
   baseSelect(basei, i, ti, bracket) {
@@ -1131,6 +984,7 @@ export class MmnewviewbracketComponent implements OnInit {
     } else {
       set = 0
     }
+    this.roundChangeClear(bracket, 'roundTwo', this.userBracket.bracket[bracket].roundTwo[round].set[set]);
     this.userBracket.bracket[bracket].roundTwo[round].set[set] = this.baseBracket[basei].set[i].set[ti]
   }
 
@@ -1144,6 +998,7 @@ export class MmnewviewbracketComponent implements OnInit {
       set = 0
     }
     if (this.verifyBracket(this.userBracket.bracket[bracket].roundTwo[i].set)) {
+      this.roundChangeClear(bracket, 'roundThree', this.userBracket.bracket[bracket].roundThree[round].set[set]);
       this.userBracket.bracket[bracket].roundThree[round].set[set] = this.userBracket.bracket[bracket].roundTwo[i].set[ti]
     }
   }
@@ -1157,6 +1012,7 @@ export class MmnewviewbracketComponent implements OnInit {
       set = 0
     }
     if (this.verifyBracket(this.userBracket.bracket[bracket].roundThree[i].set)) {
+      this.roundChangeClear(bracket, 'roundFour', this.userBracket.bracket[bracket].roundFour[round].set[set]);
       this.userBracket.bracket[bracket].roundFour[round].set[set] = this.userBracket.bracket[bracket].roundThree[i].set[ti]
     }
   }
@@ -1170,6 +1026,7 @@ export class MmnewviewbracketComponent implements OnInit {
       set = 0
     }
     if (this.verifyBracket(this.userBracket.bracket[bracket].roundFour[i].set)) {
+      this.roundChangeClear('finalFour', 'roundFive', this.userBracket.bracket.finalFour.roundFive[round].set[set]);
       this.userBracket.bracket.finalFour.roundFive[round].set[set] = this.userBracket.bracket[bracket].roundFour[i].set[ti]
     }
   }
@@ -1182,6 +1039,7 @@ export class MmnewviewbracketComponent implements OnInit {
       set = 0
     }
     if (this.verifyBracket(this.userBracket.bracket.finalFour.roundFive[i].set)) {
+      this.roundChangeClear('finalFour', 'roundSix', this.userBracket.bracket.finalFour.roundSix[0].set[set]);
       this.userBracket.bracket.finalFour.roundSix[0].set[set] = this.userBracket.bracket.finalFour.roundFive[i].set[ti]
     }
   }
@@ -1228,11 +1086,11 @@ export class MmnewviewbracketComponent implements OnInit {
 
   openSubmitBracket(): void {
     this.roundFinal();
-    console.log('final', this.userBracket.final);
+    console.log('userBracket', this.userBracket);
     this.wsb.marchMadness = this.userBracket.final;
     this.bsModalRef = this.modalService.show(SubmitModalComponent,
       // @ts-ignore
-      Object.assign({}, { class: 'modal-lg', backdrop: 'static' }));
+      Object.assign({}, {class: 'modal-lg', backdrop: 'static'}));
   }
 
   async sha256(message) {

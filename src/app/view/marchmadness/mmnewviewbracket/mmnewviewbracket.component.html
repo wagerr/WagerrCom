@@ -8,18 +8,6 @@
     <div class="w-25"></div>
     <div class="w-100 d-flex flex-column flex-sm-row">
       <div class="w-100 d-flex flex-column text-black">
-        <div class="w-100 font-arboria-book font16px text-center" style="margin-top: {{bracket.preSet.mh}}">First Four
-        </div>
-        <div class="w-100 my-2 border border-bottom-0 border-dark">
-          <ng-container *ngFor="let set of bracket.preSet.set; let ti = index">
-            <div class="w-100 font-arboria-bold font16px border-dark border-bottom p-1"
-                 [ngClass]="isSelected('roundOne', 0, set,  bracket.name) ? 'mmSelected': ''"
-                 (click)="firstFour(basei, ti, bracket.name)">{{set.rank}}&nbsp;{{set.name}}</div>
-          </ng-container>
-        </div>
-      </div>
-      <div class="w-25"></div>
-      <div class="w-100 d-flex flex-column text-black">
         <div class="w-100 font-arboria-book font16px text-center">Round of 64</div>
         <ng-container *ngFor="let base of bracket.set; let i = index">
           <div class="w-100 my-2 border border-bottom-0 border-dark">

@@ -175,6 +175,7 @@ export class WgrSportsBookService {
         return "wagerr.com-" + userAccount.uid.substr(userAccount.uid.length - 5);
       }
     }
+    console.log('userAccount', userAccount);
     return "wagerr.com-unknown";
   }
 
