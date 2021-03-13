@@ -1,1 +1,41 @@
-<p>mmdashboard works!</p>
+<div class="d-flex flex-column flex-sm-row pt-2">
+  <div class="w-100"></div>
+  <div class="w-100 text-center pt-4">
+    <button class="btn round-btn btn-sportsbook3 w-50 text-uppercase font-arboria-bold" *ngIf="isLoggedIn()"
+            [ngClass]="this.createBracket ? 'active' : ''" (click)="toggleCreateBracket()">Create Bracket
+    </button>
+  </div>
+  <div class="w-100 d-flex flex-column" *ngIf="isLoggedIn()">
+    <div class="w-100 font-arboria-bold text-black text-uppercase text-center">your leaderboard username</div>
+    <div class="w-100 font-arboria-bold text-black text-center border border-dark mt-1">
+      <input class="border-0 text-center w-100 font-arboria-bold text-black" type="text" [(ngModel)]="username"  (keyup)="filterName()" [disabled]="!editUserName">
+    </div>
+    <div class="w-100 text-center text-uppercase mt-1">
+      <button class="btn btn-sportsbook3 font-arboria-book text-uppercase round-btn font12px widthSize140px"
+              (click)="editUsername()">
+        <ng-container *ngIf="!editUserName">Edit Username</ng-container>
+        <ng-container *ngIf="editUserName">save username</ng-container>
+      </button>
+    </div>
+  </div>
+  <div class="w-100 text-center pt-4">
+  </div>
+  <div class="w-100"></div>
+</div>
+<ng-container *ngIf="createBracket">
+  <app-mmnewviewbracket [new]="true"></app-mmnewviewbracket>
+</ng-container>
+<ng-container *ngIf="!createBracket">
+  <div class="d-flex flex-row">
+    <div class="w-100"></div>
+    <div class="w-100 font-arboria-bold text-black">
+      <ng-container *ngFor="let bracket of brackets">
+        <div class="">found</div>
+      </ng-container>
+    </div>
+    <div class="w-100">
+      <app-mmleaderboard></app-mmleaderboard>
+    </div>
+    <div class="w-100"></div>
+  </div>
+</ng-container>

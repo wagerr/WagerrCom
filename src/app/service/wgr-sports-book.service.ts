@@ -34,6 +34,7 @@ export class WgrSportsBookService {
   eventData = new BehaviorSubject([]);
   authorization = new BehaviorSubject([]);
   exchangeRates = new BehaviorSubject([]);
+  marchMadnessUser: any = new BehaviorSubject([]);
   qrCodeChannelSet = false;
   marchMadness: any;
 
@@ -48,6 +49,10 @@ export class WgrSportsBookService {
     betBalance: 0,
     betFullBalance: 0,
     allAddresses: []
+  };
+
+  public marchMadnessAccount: any = {
+    brackets: []
   };
 
   private coinNetwork: any;
@@ -81,6 +86,11 @@ export class WgrSportsBookService {
       .fromEvent<any[]>('getAddressData')
       .subscribe((data: any) => {
         this.gotAddressData(data);
+      });
+    this.socket
+      .fromEvent<any[]>('getMarchMadnessData')
+      .subscribe((data: any) => {
+        this.marchMadnessUser.next(data);
       });
     this.socket
       .fromEvent<any[]>('betpushed')
@@ -161,10 +171,6 @@ export class WgrSportsBookService {
     }
   }
 
-  public getMarchMadnessBracketCount(): number {
-    return 0;
-  }
-
   public getUserName(): string {
     const userAccount: any = this.account.getValue();
     if (userAccount) {
@@ -218,8 +224,35 @@ export class WgrSportsBookService {
     return 0.00000000;
   }
 
+  getMarchMadnessAccount(): any {
+    this.socket.emit('getMarchMadnessData', this.userAccount.betAddress);
+  }
+
+  public getMarchMadnessBracketCount(): number {
+    const marchMadnessUser: any = this.marchMadnessUser.getValue();
+    if (marchMadnessUser && marchMadnessUser.brackets) {
+      return marchMadnessUser.brackets.length;
+    }
+    return 0;
+  }
+
   public MarchMadnessFaucet(): void {
     this.socket.emit('marchMadnessFaucet', this.userAccount.betAddress);
+  }
+
+  async submitMarchMadnessBracket(final: any) {
+    final.txid = await this.submitBracket(final.bracketHash);
+    final.address = this.userAccount.betAddress;
+    final.uid = this.userAccount.uid;
+    console.log('submitFinal', final);
+    this.socket.emit('submitMarchMadnessBracket', final);
+  }
+
+  async submitBracket(bracketHash: any) {
+    const account: any = this.account.getValue();
+    const unSpent = account.betUnspent;
+    const betPrivKey = this.getUserBetAddressPrivKey();
+    return await this.createRawBracketTransaction(bracketHash, unSpent, betPrivKey);
   }
 
   withdraw(amount: any, address: string): void {
@@ -227,6 +260,94 @@ export class WgrSportsBookService {
     const unSpent = account.betUnspent;
     const betPrivKey = this.getUserBetAddressPrivKey();
     this.createRawTransaction(address, amount, unSpent, betPrivKey);
+  }
+
+  createRawBracketTransaction(bracketHash: string, unSpent: any, key: any): any {
+    const bet: any = [];
+    const userBetAddress = this.getUserBetAddress();
+    const psbt = this.getPsbt({network: this.coinNetwork});
+    psbt.setVersion(1);
+    const data = Buffer.from(bracketHash, 'utf8');
+    const embed = payments.embed({data: [data]});
+    const wgrWif = ECPair.fromWIF(key, this.coinNetwork);
+    let unspentAmt = 0;
+    const unspent = [];
+    unSpent.forEach((eachUnspent: any) => {
+      if (unspentAmt <= 0.001) {
+        if (eachUnspent.used && eachUnspent.used === true) {
+        } else {
+          psbt.addInput({
+            hash: eachUnspent.txid,
+            index: eachUnspent.vout,
+            nonWitnessUtxo: Buffer.from(eachUnspent.hex, 'hex')
+          });
+          eachUnspent.used = true;
+          unspent.push(eachUnspent);
+          unspentAmt += (eachUnspent.value);
+        }
+      }
+    });
+    if (unspentAmt > 0.001) {
+      const changeUnSpent = +(unspentAmt * 100000000).toFixed(0);
+      const changeFee = +(0.001 * 100000000).toFixed(0);
+      const change = (changeUnSpent) - changeFee;
+      const changeFinal = change / 100000000;
+      psbt.addOutput({
+        script: embed.output,
+        value: 0
+      });
+      if (changeFinal >= 200 && unSpent.length <= this.userAccount.settings.input) {
+        let count = +(changeFinal / 26).toFixed(0);
+        let eachChange = 26;
+        if (changeFinal >= 500) {
+          count = +(changeFinal / 100).toFixed(0);
+          eachChange = 100;
+        }
+        if (changeFinal >= 6000) {
+          count = +(changeFinal / 1000).toFixed(0);
+          eachChange = 1000;
+        }
+        if ((eachChange * count) > changeFinal) {
+          count -= 1;
+        }
+        const leftChange = +(changeFinal - (eachChange * count)).toFixed(8);
+        for (let j = 0; j < count; j++) {
+          psbt.addOutput({
+            address: userBetAddress,
+            value: (eachChange * 100000000)
+          });
+        }
+        psbt.addOutput({
+          address: userBetAddress,
+          value: +(leftChange * 100000000).toFixed(0)
+        });
+      } else {
+        psbt.addOutput({
+          address: userBetAddress,
+          value: change
+        });
+      }
+      unspent.forEach((gotUnspent: any, index: number) => {
+        psbt.signInput(index, wgrWif);
+        psbt.validateSignaturesOfInput(index);
+      });
+      psbt.finalizeAllInputs();
+      const transaction = psbt.extractTransaction();
+      const signedTransaction = transaction.toHex();
+      const transactionId = transaction.getId();
+      const pushTX = {
+        address: userBetAddress,
+        txid: transactionId,
+        rawtx: signedTransaction,
+      };
+      if (typeof transactionId === 'string') {
+        this.socket.emit('pushTX', pushTX);
+        this.getAddressData();
+        bet.height = this.blockheight;
+        bet.created = transactionId;
+      }
+    }
+    return bet.created;
   }
 
   createRawTransaction(sendAddress: string, amount: any, unSpent: any, key: any): boolean {

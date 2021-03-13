@@ -11,7 +11,8 @@
   <div class="w-100 d-flex flex-column" *ngIf="isLoggedIn()">
     <div class="w-100 font-arboria-bold text-black text-uppercase text-center">your leaderboard username</div>
     <div class="w-100 font-arboria-bold text-black text-center border border-dark mt-1">
-        <input class="border-0 text-center w-100 font-arboria-bold text-black" type="text" [(ngModel)]="username"  (keyup)="filterName()" [disabled]="!editUserName">
+      <input class="border-0 text-center w-100 font-arboria-bold text-black" type="text" [(ngModel)]="username"
+             (keyup)="filterName()" [disabled]="!editUserName">
     </div>
     <div class="w-100 text-center text-uppercase mt-1">
       <button class="btn btn-sportsbook3 font-arboria-book text-uppercase round-btn font12px widthSize140px"
@@ -30,7 +31,13 @@
   <div class="w-100"></div>
 </div>
 <ng-container *ngIf="leaderboard">
-  <app-mmleaderboard></app-mmleaderboard>
+  <div class="d-flex flex-column flex-sm-row pt-2">
+    <div class="w-100"></div>
+    <div class="w-100">
+    <app-mmleaderboard></app-mmleaderboard>
+    </div>
+    <div class="w-100"></div>
+  </div>
 </ng-container>
 <ng-container *ngIf="!leaderboard">
   <ng-container *ngIf="createBracket">

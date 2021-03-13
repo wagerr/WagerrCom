@@ -18,4 +18,8 @@ export class SubmitModalComponent implements OnInit {
   this.final = this.wsb.marchMadness;
   }
 
+  submitBracket() {
+    this.wsb.submitMarchMadnessBracket(this.final);
+  }
+
 }

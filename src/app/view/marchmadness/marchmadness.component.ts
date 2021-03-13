@@ -22,6 +22,7 @@ export class MarchmadnessComponent implements OnInit {
       const seedWords = this.decryptData(getSeed);
       // this.sc.getSportBookAccountLogin(seedWords);
       this.wsb.getMnemonicData(seedWords.replace(/\s+$/, ''));
+      this.wsb.getMarchMadnessAccount();
     }
   }
 

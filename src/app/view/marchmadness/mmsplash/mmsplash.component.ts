@@ -13,7 +13,7 @@ export class MmsplashComponent implements OnInit {
   userAccount: any;
   bsModalRef: BsModalRef;
   leaderboard = false;
-  createBracket = true;
+  createBracket = false;
   editUserName = false;
   username = '';
   constructor(
