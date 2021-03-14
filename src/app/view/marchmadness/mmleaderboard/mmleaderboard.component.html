@@ -3,7 +3,7 @@
     <div class="w-100 d-flex flex-row text-black font24px font-arboria-bold">
       <div class="w-25">{{(i+1)}}.</div>
       <div class="w-50">{{each.username}}</div>
-      <div class="w-50">{{each.points}} pts</div>
+      <div class="w-50">{{(each.points > 0) ? each.points : 0}} pts</div>
     </div>
   </ng-container>
 </div>

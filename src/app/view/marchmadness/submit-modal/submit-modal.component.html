@@ -19,10 +19,10 @@
     <div class="d-flex flex-column">
       <div class="w-100 text-center text-uppercase font-arboria-bold font33px py-4">your brakcet is submitted</div>
       <div class="w-100 text-center text-uppercase font-arboria-medium font20px pb-2">your on chain submission</div>
-      <div class="w-100 text-center text-uppercase font-arboria-medium font12px pb-2">{{final.bracketHash}}</div>
+      <div class="w-100 text-center text-uppercase font-arboria-medium font12px pb-2"><a href="https://explorer.wagerr.com/#/tx/{{final.txid}}" target="_blank">{{final.bracketHash}}</a></div>
       <div class="w-100 text-center text-uppercase font-arboria-medium font33px pb-1"><span class="fontColorE6">share</span> a post on social</div>
-      <div class="w-100 text-center text-uppercase font-arboria-medium font33px pb-2">to get a second <span class="fontColorE6">free</span> submission</div>
-      <div class="w-100 text-center pb-2"></div>
+      <div class="w-100 text-center text-uppercase font-arboria-medium font33px pb-2" *ngIf="getBracketCount() < 2">to get a second <span class="fontColorE6">free</span> submission</div>
+      <div class="w-100 text-center pb-2"><img src="assets/images/wgrmadness.png" class="img-fluid widthSize300px"></div>
       <div class="w-100 d-flex flex-row pt-3">
         <div class="w-25"></div>
         <div class="w-100 text-center font-arboria-bold text-uppercase font12px"><button class="btn round-btn btn-facebook widthSize200px" (click)="goFacebook()">FACEBOOK</button></div>

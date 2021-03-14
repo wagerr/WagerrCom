@@ -854,12 +854,12 @@ export class MmnewviewbracketComponent implements OnInit {
             set: [
               {
                 rank: '',
-                name: 'Texas Tech',
+                name: '',
 
               },
               {
                 rank: '',
-                name: 'Duke',
+                name: '',
 
               }
             ]
@@ -870,7 +870,7 @@ export class MmnewviewbracketComponent implements OnInit {
             set: [
               {
                 rank: '',
-                name: 'Texas Tech',
+                name: '',
 
               }
             ]
@@ -882,7 +882,8 @@ export class MmnewviewbracketComponent implements OnInit {
       bracketString: {},
       bracketHash: '',
       home: 0,
-      away: 0
+      away: 0,
+      txid: ''
     }
   }
 
@@ -895,11 +896,11 @@ export class MmnewviewbracketComponent implements OnInit {
     this.finalScore[0] = 0;
     this.finalScore[1] = 0;
     this.getUserBalance();
-    this.roundFinal();
-    this.wsb.marchMadness = this.userBracket.final;
-    this.bsModalRef = this.modalService.show(SubmitModalComponent,
-      // @ts-ignore
-      Object.assign({}, {class: 'modal-lg', backdrop: 'static'}));
+    // this.roundFinal();
+    // this.wsb.marchMadness = this.userBracket.final;
+    // this.bsModalRef = this.modalService.show(SubmitModalComponent,
+    //   // @ts-ignore
+    //   Object.assign({}, {class: 'modal-lg', backdrop: 'static'}));
   }
 
   getBracketCount(): number {

@@ -13,12 +13,13 @@ export class MmdashboardComponent implements OnInit {
   username = '';
   oldusername = '';
   userAccount: any;
-  brackets = [];
+  brackets: any = {};
 
   constructor(
     private wsb: WgrSportsBookService,) { }
 
   ngOnInit(): void {
+    this.wsb.getMarchMadnessLeaderboard();
     this.wsb.account.subscribe((data: any) => {
       if (data && data.uid) {
         this.userAccount = data;
@@ -66,7 +67,6 @@ export class MmdashboardComponent implements OnInit {
   }
 
   getBracketChamp(bracket): string {
-    const bracketDone = JSON.parse(bracket);
-    return bracketDone.finalFour.roundSeven[0].set[0].name;
+    return bracket[0].finalFour.roundSeven[0].set[0].name;
   }
 }

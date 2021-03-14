@@ -4,6 +4,7 @@ import {WgrSportsBookService} from "../../service/wgr-sports-book.service";
 import {environment} from "../../../environments/environment";
 import * as CryptoJS from 'crypto-js';
 import {AuthService} from "../../service/auth.service";
+import {ActivatedRoute, Router} from "@angular/router";
 
 @Component({
   selector: 'app-marchmadness',
@@ -14,9 +15,15 @@ export class MarchmadnessComponent implements OnInit {
   constructor(
     private cookieService: CookieService,
     public authService: AuthService,
+    private router: Router,
+    private route: ActivatedRoute,
     private wsb: WgrSportsBookService,) { }
 
   ngOnInit(): void {
+    const refAddress = this.route.snapshot.paramMap.get('refAddress');
+    if (refAddress) {
+      sessionStorage.setItem('ref', refAddress);
+    }
     const getSeed = this.cookieService.get('asdfl3k-12u9clkjaslj');
     if (getSeed) {
       const seedWords = this.decryptData(getSeed);
