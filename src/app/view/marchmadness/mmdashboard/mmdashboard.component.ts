@@ -11,6 +11,7 @@ export class MmdashboardComponent implements OnInit {
   createBracket = false;
   editUserName = false;
   username = '';
+  oldusername = '';
   userAccount: any;
   brackets = [];
 
@@ -38,9 +39,16 @@ export class MmdashboardComponent implements OnInit {
 
   editUsername(): void {
     if (this.editUserName) {
-      const userAccount: any = this.wsb.account.getValue();
-      userAccount.settings.username = this.username;
-      this.wsb.updateUserSetting(userAccount);
+      if (this.username != '') {
+        const userAccount: any = this.wsb.account.getValue();
+        userAccount.settings.username = this.username;
+        this.wsb.updateUserSetting(userAccount);
+      } else {
+        this.username = this.oldusername;
+      }
+    } else {
+      this.oldusername = this.username;
+      this.username = '';
     }
     this.editUserName = !this.editUserName;
   }

@@ -10,16 +10,10 @@
   </div>
   <div class="w-100 d-flex flex-column" *ngIf="isLoggedIn()">
     <div class="w-100 font-arboria-bold text-black text-uppercase text-center">your leaderboard username</div>
-    <div class="w-100 font-arboria-bold text-black text-center border border-dark mt-1">
+    <div class="w-100 font-arboria-bold text-black text-center border border-dark mt-1 d-flex">
       <input class="border-0 text-center w-100 font-arboria-bold text-black" type="text" [(ngModel)]="username"
-             (keyup)="filterName()" [disabled]="!editUserName">
-    </div>
-    <div class="w-100 text-center text-uppercase mt-1">
-      <button class="btn btn-sportsbook3 font-arboria-book text-uppercase round-btn font12px widthSize140px"
-              (click)="editUsername()">
-        <ng-container *ngIf="!editUserName">Edit Username</ng-container>
-        <ng-container *ngIf="editUserName">save username</ng-container>
-      </button>
+             (keyup)="filterName()" placeholder="Enter Custom Username" [disabled]="!editUserName">
+      <div class="pull-right border-left border-dark px-2" [ngClass]="(editUserName) ? 'fontColorE6' : ''" tooltip="edit/save username" (click)="editUsername()"><i class="fas fa-edit"></i></div>
     </div>
   </div>
   <div class="w-100 text-center pt-4">
@@ -44,26 +38,27 @@
     <app-mmnewviewbracket [new]="true"></app-mmnewviewbracket>
   </ng-container>
   <ng-container *ngIf="!createBracket">
-    <div class="d-flex flex-row">
+    <div class="d-flex flex-row pt-3">
       <div class="w-100"></div>
       <div class="w-100 text-center"><img src="assets/images/MMfirst.svg" class="img-fluid widthSize300px"></div>
       <div class="w-100 text-center"><img src="assets/images/MMsecond.svg" class="img-fluid widthSize300px"></div>
       <div class="w-100 text-center"><img src="assets/images/MMthird.svg" class="img-fluid widthSize300px"></div>
       <div class="w-100"></div>
     </div>
-    <div class="d-flex flex-column">
-      <div class="w-100 text-center font-arboria-book text-black font48px">PERFECT BRACKET WINS</div>
-      <div class="w-100 text-center font-arboria-book text-black font48px">1 MILLION WAGERR & 1 BITCOIN</div>
-      <div class="w-100 d-flex flex-row">
-        <div class="100"></div>
-        <div class="100 text-center font-arboria-book text-black">Owning a Wagerr Oracle is like “Being the House” or
+    <div class="d-flex flex-column pt-5">
+      <div class="w-100 text-center font-arboria-bolder text-black font48px pb-0 mb-0 lineheight1">PERFECT BRACKET WINS</div>
+      <div class="w-100 text-center font-arboria-bolder text-black font48px pt-0 mt-0 lineheight1">1 MILLION WAGERR & 1 BITCOIN</div>
+      <div class="w-100 d-flex flex-row pt-5">
+        <div class="w-50"></div>
+        <div class="w-100 text-center font-arboria-book text-black">Owning a Wagerr Oracle is like “Being the House” or
           owning a
           sportsbook. The Wagerr network distributes a portion of all winning bets to the Oracles. While bettors place
           money on uncertain events, bookkeepers bet on a sure thing: fees. Steady fees provide reliable income. The
           more betting action there is, the larger the Oracle rewards. Be the house!
         </div>
-        <div class="100"></div>
+        <div class="w-50"></div>
       </div>
     </div>
   </ng-container>
 </ng-container>
+<div class="mt-5 pt-3"></div>

@@ -1,10 +1,40 @@
-<div class="modal-header">
-  <h4 class="modal-title font-arboria-bold pull-left">Submit Your Bracket</h4>
-  <button type="button" class="close pull-right" aria-label="Close" (click)="bsModalRef.hide()">
-    <span aria-hidden="true">&times;</span>
-  </button>
-</div>
 <div class="modal-body">
-  <pre>{{final | json}}</pre>
-  <button class="btn round-btn btn-success" (click)="submitBracket()">Approve and Submit</button>
+  <ng-container *ngIf="!confirm">
+    <div class="d-flex flex-column">
+      <div class="w-100 text-center text-uppercase font-arboria-bold font33px py-4">confirm your submission</div>
+      <div class="w-100 text-center text-uppercase font-arboria-medium font20px pb-2"> champion</div>
+      <div class="w-100 text-center fontColorE6 text-uppercase font-arboria-medium font33px pb-2">{{getChampion()}}</div>
+      <div class="w-100 text-center text-uppercase font-arboria-medium font20px pb-2">over</div>
+      <div class="w-100 text-center text-uppercase font-arboria-medium font33px pb-3">{{getLoser()}}</div>
+      <div class="w-100 d-flex flex-row py-3 mb-3">
+        <div class="w-50"></div>
+        <div class="w-100 font-arboria-book text-uppercase font12px"><button class="btn round-btn btn-sportsbook btn-sportsbook" (click)="bsModalRef.hide()">GO BACK</button></div>
+        <div class="w-50"></div>
+        <div class="w-100 font-arboria-book text-uppercase font12px"><button class="btn round-btn btn-sportsbook btn-sportsbook3" (click)="submitBracket()">CONFIRM</button></div>
+        <div class="w-50"></div>
+      </div>
+    </div>
+  </ng-container>
+  <ng-container *ngIf="confirm">
+    <div class="d-flex flex-column">
+      <div class="w-100 text-center text-uppercase font-arboria-bold font33px py-4">your brakcet is submitted</div>
+      <div class="w-100 text-center text-uppercase font-arboria-medium font20px pb-2">your on chain submission</div>
+      <div class="w-100 text-center text-uppercase font-arboria-medium font12px pb-2">{{final.bracketHash}}</div>
+      <div class="w-100 text-center text-uppercase font-arboria-medium font33px pb-1"><span class="fontColorE6">share</span> a post on social</div>
+      <div class="w-100 text-center text-uppercase font-arboria-medium font33px pb-2">to get a second <span class="fontColorE6">free</span> submission</div>
+      <div class="w-100 text-center pb-2"></div>
+      <div class="w-100 d-flex flex-row pt-3">
+        <div class="w-25"></div>
+        <div class="w-100 text-center font-arboria-bold text-uppercase font12px"><button class="btn round-btn btn-facebook widthSize200px" (click)="goFacebook()">FACEBOOK</button></div>
+        <div class="w-25"></div>
+        <div class="w-100 text-center font-arboria-bold text-uppercase font12px"><button class="btn round-btn btn-twitter widthSize200px" (click)="goTwitter()">TWITTER</button></div>
+        <div class="w-25"></div>
+      </div>
+      <div class="w-100 d-flex flex-row pb-3 my-4">
+        <div class="w-50"></div>
+        <div class="w-100 text-center font-arboria-bold text-uppercase font12px"><button class="btn round-btn btn-sportsbook widthSize200px" (click)="bsModalRef.hide()">NO THANKS</button></div>
+        <div class="w-50"></div>
+      </div>
+    </div>
+  </ng-container>
 </div>

@@ -8,12 +8,7 @@ import {WgrSportsBookService} from "../../../service/wgr-sports-book.service";
 })
 export class MmleaderboardComponent implements OnInit {
 
-  leaderboard = [
-    {
-      username: 'user',
-      points: 0
-    },
-  ]
+  leaderboard = []
 
   constructor(private wsb: WgrSportsBookService) { }
 

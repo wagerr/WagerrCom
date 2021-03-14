@@ -854,12 +854,12 @@ export class MmnewviewbracketComponent implements OnInit {
             set: [
               {
                 rank: '',
-                name: '',
+                name: 'Texas Tech',
 
               },
               {
                 rank: '',
-                name: '',
+                name: 'Duke',
 
               }
             ]
@@ -870,7 +870,7 @@ export class MmnewviewbracketComponent implements OnInit {
             set: [
               {
                 rank: '',
-                name: '',
+                name: 'Texas Tech',
 
               }
             ]
@@ -879,7 +879,7 @@ export class MmnewviewbracketComponent implements OnInit {
       }
     },
     final: {
-      bracketString: '',
+      bracketString: {},
       bracketHash: '',
       home: 0,
       away: 0
@@ -895,6 +895,15 @@ export class MmnewviewbracketComponent implements OnInit {
     this.finalScore[0] = 0;
     this.finalScore[1] = 0;
     this.getUserBalance();
+    this.roundFinal();
+    this.wsb.marchMadness = this.userBracket.final;
+    this.bsModalRef = this.modalService.show(SubmitModalComponent,
+      // @ts-ignore
+      Object.assign({}, {class: 'modal-lg', backdrop: 'static'}));
+  }
+
+  getBracketCount(): number {
+    return this.wsb.getMarchMadnessBracketCount();
   }
 
   getUserBalance(): void {
@@ -1063,7 +1072,7 @@ export class MmnewviewbracketComponent implements OnInit {
     finalHome.winner = (homeFinalScore < awayFinalScore);
     this.userBracket.bracket.finalFour.roundSix[0].set[0] = finalHome;
     this.userBracket.bracket.finalFour.roundSix[0].set[1] = finalAway;
-    this.userBracket.final.bracketString = JSON.stringify(this.userBracket.bracket);
+    this.userBracket.final.bracketString = this.userBracket.bracket;
     this.userBracket.final.bracketHash = await this.sha256(JSON.stringify(this.userBracket.bracket));
     this.userBracket.final.home = this.finalScore[0];
     this.userBracket.final.away = this.finalScore[1];
@@ -1071,10 +1080,10 @@ export class MmnewviewbracketComponent implements OnInit {
 
   verifyBracket(set): boolean {
     let ret = true
-    if (set[0].wgrteamid === '') {
+    if (set[0].name === '') {
       ret = false;
     }
-    if (set[1].wgrteamid === '') {
+    if (set[1].name === '') {
       ret = false;
     }
     return ret;
@@ -1101,6 +1110,14 @@ export class MmnewviewbracketComponent implements OnInit {
     // convert bytes to hex string
     const hashHex = hashArray.map(b => ('00' + b.toString(16)).slice(-2)).join('');
     return hashHex;
+  }
+
+  canSubmit(): boolean {
+    const canSubmit = Date.now();
+    if (canSubmit < 1616169600000) {
+      return true;
+    }
+    return false;
   }
 
 }

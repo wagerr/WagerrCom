@@ -13,8 +13,9 @@ export class MmsplashComponent implements OnInit {
   userAccount: any;
   bsModalRef: BsModalRef;
   leaderboard = false;
-  createBracket = false;
+  createBracket = true;
   editUserName = false;
+  oldusername = '';
   username = '';
   constructor(
     private wsb: WgrSportsBookService,
@@ -36,9 +37,16 @@ export class MmsplashComponent implements OnInit {
 
   editUsername(): void {
     if (this.editUserName) {
-      const userAccount: any = this.wsb.account.getValue();
-      userAccount.settings.username = this.username;
-      this.wsb.updateUserSetting(userAccount);
+      if (this.username != '') {
+        const userAccount: any = this.wsb.account.getValue();
+        userAccount.settings.username = this.username;
+        this.wsb.updateUserSetting(userAccount);
+      } else {
+        this.username = this.oldusername;
+      }
+    } else {
+      this.oldusername = this.username;
+      this.username = '';
     }
     this.editUserName = !this.editUserName;
   }

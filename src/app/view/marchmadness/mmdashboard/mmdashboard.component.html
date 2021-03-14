@@ -7,15 +7,10 @@
   </div>
   <div class="w-100 d-flex flex-column" *ngIf="isLoggedIn()">
     <div class="w-100 font-arboria-bold text-black text-uppercase text-center">your leaderboard username</div>
-    <div class="w-100 font-arboria-bold text-black text-center border border-dark mt-1">
-      <input class="border-0 text-center w-100 font-arboria-bold text-black" type="text" [(ngModel)]="username"  (keyup)="filterName()" [disabled]="!editUserName">
-    </div>
-    <div class="w-100 text-center text-uppercase mt-1">
-      <button class="btn btn-sportsbook3 font-arboria-book text-uppercase round-btn font12px widthSize140px"
-              (click)="editUsername()">
-        <ng-container *ngIf="!editUserName">Edit Username</ng-container>
-        <ng-container *ngIf="editUserName">save username</ng-container>
-      </button>
+    <div class="w-100 font-arboria-bold text-black text-center border border-dark mt-1 d-flex">
+      <input class="border-0 text-center w-100 font-arboria-bold text-black" type="text" [(ngModel)]="username"
+             (keyup)="filterName()" placeholder="Enter Custom Username" [disabled]="!editUserName">
+      <div class="pull-right border-left border-dark px-2" [ngClass]="(editUserName) ? 'fontColorE6' : ''" tooltip="edit/save username" (click)="editUsername()"><i class="fas fa-edit"></i></div>
     </div>
   </div>
   <div class="w-100 text-center pt-4">
