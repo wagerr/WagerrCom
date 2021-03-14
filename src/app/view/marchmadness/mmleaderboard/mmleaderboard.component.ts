@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {WgrSportsBookService} from "../../../service/wgr-sports-book.service";
 
 @Component({
   selector: 'app-mmleaderboard',
@@ -9,60 +10,19 @@ export class MmleaderboardComponent implements OnInit {
 
   leaderboard = [
     {
-      rank: 1,
-      screenname: 'user',
-      points: 12
+      username: 'user',
+      points: 0
     },
-    {
-      rank: 2,
-      screenname: 'user',
-      points: 12
-    },
-    {
-      rank: 3,
-      screenname: 'user',
-      points: 12
-    },
-    {
-      rank: 4,
-      screenname: 'user',
-      points: 12
-    },
-    {
-      rank: 5,
-      screenname: 'user',
-      points: 12
-    },
-    {
-      rank: 6,
-      screenname: 'user',
-      points: 12
-    },
-    {
-      rank: 7,
-      screenname: 'user',
-      points: 12
-    },
-    {
-      rank: 8,
-      screenname: 'user',
-      points: 12
-    },
-    {
-      rank: 9,
-      screenname: 'user',
-      points: 12
-    },
-    {
-      rank: 10,
-      screenname: 'user',
-      points: 12
-    }
   ]
 
-  constructor() { }
+  constructor(private wsb: WgrSportsBookService) { }
 
   ngOnInit(): void {
+    this.wsb.marchMadnessLeaderboard.subscribe((data: any) => {
+      if (data && data.length > 0) {
+        this.leaderboard = data;
+      }
+    });
   }
 
 }

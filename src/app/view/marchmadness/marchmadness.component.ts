@@ -24,6 +24,7 @@ export class MarchmadnessComponent implements OnInit {
       this.wsb.getMnemonicData(seedWords.replace(/\s+$/, ''));
       this.wsb.getMarchMadnessAccount();
     }
+    this.wsb.getMarchMadnessLeaderboard();
   }
 
   getBracketCount(): number {

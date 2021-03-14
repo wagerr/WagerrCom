@@ -1,8 +1,8 @@
-<div class="d-flex flex-column pt-5">
-  <ng-container *ngFor="let each of leaderboard">
+<div class="d-flex flex-column">
+  <ng-container *ngFor="let each of leaderboard; let i = index">
     <div class="w-100 d-flex flex-row text-black font24px font-arboria-bold">
-      <div class="w-25">{{each.rank}}.</div>
-      <div class="w-50">{{each.screenname}}</div>
+      <div class="w-25">{{(i+1)}}.</div>
+      <div class="w-50">{{each.username}}</div>
       <div class="w-50">{{each.points}} pts</div>
     </div>
   </ng-container>

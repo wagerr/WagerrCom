@@ -28,13 +28,17 @@
 <ng-container *ngIf="!createBracket">
   <div class="d-flex flex-row">
     <div class="w-100"></div>
-    <div class="w-100 font-arboria-bold text-black">
-      <ng-container *ngFor="let bracket of brackets">
-        <div class="">found</div>
+    <div class="w-100 font-arboria-bold text-black d-flex flex-column">
+      <div class="w-100 font20px text-center">Brackets</div>
+      <ng-container *ngFor="let bracket of brackets; let i = index">
+        <div class="w-100">{{(i + 1)}}. {{getBracketChamp(bracket.bracketString)}}</div>
       </ng-container>
     </div>
-    <div class="w-100">
-      <app-mmleaderboard></app-mmleaderboard>
+    <div class="w-100 font-arboria-bold text-black d-flex flex-column border-left pl-3">
+      <div class="w-100 font20px text-center">Leaderboard</div>
+      <div class="w-100">
+        <app-mmleaderboard></app-mmleaderboard>
+      </div>
     </div>
     <div class="w-100"></div>
   </div>

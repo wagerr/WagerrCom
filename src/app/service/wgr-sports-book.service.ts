@@ -35,6 +35,7 @@ export class WgrSportsBookService {
   authorization = new BehaviorSubject([]);
   exchangeRates = new BehaviorSubject([]);
   marchMadnessUser: any = new BehaviorSubject([]);
+  marchMadnessLeaderboard: any = new BehaviorSubject([]);
   qrCodeChannelSet = false;
   marchMadness: any;
 
@@ -91,6 +92,11 @@ export class WgrSportsBookService {
       .fromEvent<any[]>('getMarchMadnessData')
       .subscribe((data: any) => {
         this.marchMadnessUser.next(data);
+      });
+    this.socket
+      .fromEvent<any[]>('marchMadnessLeaderboard')
+      .subscribe((data: any) => {
+        this.marchMadnessLeaderboard.next(data);
       });
     this.socket
       .fromEvent<any[]>('betpushed')
@@ -226,6 +232,10 @@ export class WgrSportsBookService {
 
   getMarchMadnessAccount(): any {
     this.socket.emit('getMarchMadnessData', this.userAccount.betAddress);
+  }
+
+  getMarchMadnessLeaderboard(): any {
+    this.socket.emit('marchMadnessLeaderboard');
   }
 
   public getMarchMadnessBracketCount(): number {

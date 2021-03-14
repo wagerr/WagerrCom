@@ -56,4 +56,9 @@ export class MmdashboardComponent implements OnInit {
   isLoggedIn(): boolean {
     return this.wsb.isLoggedIn();
   }
+
+  getBracketChamp(bracket): string {
+    const bracketDone = JSON.parse(bracket);
+    return bracketDone.finalFour.roundSeven[0].set[0].name;
+  }
 }

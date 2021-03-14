@@ -959,13 +959,11 @@ export class MmnewviewbracketComponent implements OnInit {
     if (startRound === 'roundSix') {
       this.clearSet(finalFour.roundSeven, oldTi);
     }
-    console.log('gotBracket', getBracket);
 
   }
 
   clearSet(brackets, oldTi) {
     for ( let i = 0; i < brackets.length; i++) {
-      console.log('set', brackets[i].set)
       for (let bi = 0; bi < brackets[i].set.length; bi++) {
         if (brackets[i].set[bi] === oldTi) {
           brackets[i].set[bi] = {rank: '', name: ''};
