@@ -397,8 +397,6 @@ export class MmnewviewbracketComponent implements OnInit {
 
   finalScore: any = [];
 
-  bracket = '{"bracket":{"west":{"roundOne":[{"set":[{"rank":"16","name":"FDU","wgrteamid":"0"}]}],"roundTwo":[{"set":[{"rank":"16","name":"FDU","wgrteamid":"0"},{"rank":"9","name":"Baylor","wgrteamid":"2"}]},{"set":[{"rank":"13","name":"Vermont","wgrteamid":"4"},{"rank":"12","name":"Murray","wgrteamid":"6"}]},{"set":[{"rank":"6","name":"Buffalo Bulls","wgrteamid":"9"},{"rank":"3","name":"Texas Tech","wgrteamid":"11","score":300,"winner":false}]},{"set":[{"rank":"6","name":"Navada","wgrteamid":"9"},{"rank":"3","name":"Michigan","wgrteamid":"11"}]}],"roundThree":[{"set":[{"rank":"16","name":"FDU","wgrteamid":"0"},{"rank":"13","name":"Vermont","wgrteamid":"4"}]},{"set":[{"rank":"3","name":"Texas Tech","wgrteamid":"11","score":300,"winner":false},{"rank":"3","name":"Michigan","wgrteamid":"11"}]}],"roundFour":[{"set":[{"rank":"13","name":"Vermont","wgrteamid":"4"},{"rank":"3","name":"Texas Tech","wgrteamid":"11","score":300,"winner":false}]}]},"south":{"roundOne":[{"set":[{"rank":"16","name":"FDU","wgrteamid":"0"}]}],"roundTwo":[{"set":[{"rank":"16","name":"FDU","wgrteamid":"0"},{"rank":"9","name":"Baylor","wgrteamid":"2"}]},{"set":[{"rank":"13","name":"Vermont","wgrteamid":"4"},{"rank":"12","name":"Murray","wgrteamid":"6"}]},{"set":[{"rank":"11","name":"Arizona State Sun Devils","wgrteamid":"8"},{"rank":"14","name":"Nothern","wgrteamid":"10"}]},{"set":[{"rank":"10","name":"Florida Gators","wgrteamid":"8"},{"rank":"14","name":"Montana","wgrteamid":"10"}]}],"roundThree":[{"set":[{"rank":"16","name":"FDU","wgrteamid":"0"},{"rank":"13","name":"Vermont","wgrteamid":"4"}]},{"set":[{"rank":"11","name":"Arizona State Sun Devils","wgrteamid":"8"},{"rank":"10","name":"Florida Gators","wgrteamid":"8"}]}],"roundFour":[{"set":[{"rank":"16","name":"FDU","wgrteamid":"0"},{"rank":"11","name":"Arizona State Sun Devils","wgrteamid":"8"}]}]},"east":{"roundOne":[{"set":[{"rank":"16","name":"FDU","wgrteamid":"0"}]}],"roundTwo":[{"set":[{"rank":"1","name":"Gonzaga","wgrteamid":"1"},{"rank":"8","name":"Syracuse","wgrteamid":"3"}]},{"set":[{"rank":"4","name":"Florida","wgrteamid":"5"},{"rank":"5","name":"Marquette","wgrteamid":"7"}]},{"set":[{"rank":"6","name":"Buffalo Bulls","wgrteamid":"9"},{"rank":"3","name":"Texas Tech","wgrteamid":"11"}]},{"set":[{"rank":"6","name":"Navada","wgrteamid":"9"},{"rank":"3","name":"Michigan","wgrteamid":"11"}]}],"roundThree":[{"set":[{"rank":"8","name":"Syracuse","wgrteamid":"3"},{"rank":"5","name":"Marquette","wgrteamid":"7"}]},{"set":[{"rank":"3","name":"Texas Tech","wgrteamid":"11"},{"rank":"3","name":"Michigan","wgrteamid":"11"}]}],"roundFour":[{"set":[{"rank":"5","name":"Marquette","wgrteamid":"7"},{"rank":"3","name":"Texas Tech","wgrteamid":"11"}]}]},"midwest":{"roundOne":[{"set":[{"rank":"16","name":"FDU","wgrteamid":"0"}]}],"roundTwo":[{"set":[{"rank":"16","name":"FDU","wgrteamid":"0"},{"rank":"8","name":"Syracuse","wgrteamid":"3"}]},{"set":[{"rank":"13","name":"Vermont","wgrteamid":"4"},{"rank":"5","name":"Marquette","wgrteamid":"7"}]},{"set":[{"rank":"11","name":"Arizona State Sun Devils","wgrteamid":"8","score":0},{"rank":"3","name":"Texas Tech","wgrteamid":"11"}]},{"set":[{"rank":"10","name":"Florida Gators","wgrteamid":"8"},{"rank":"3","name":"Michigan","wgrteamid":"11"}]}],"roundThree":[{"set":[{"rank":"16","name":"FDU","wgrteamid":"0"},{"rank":"13","name":"Vermont","wgrteamid":"4"}]},{"set":[{"rank":"11","name":"Arizona State Sun Devils","wgrteamid":"8","score":0},{"rank":"10","name":"Florida Gators","wgrteamid":"8"}]}],"roundFour":[{"set":[{"rank":"16","name":"FDU","wgrteamid":"0"},{"rank":"11","name":"Arizona State Sun Devils","wgrteamid":"8","score":0}]}]},"finalFour":{"roundFive":[{"set":[{"rank":"3","name":"Texas Tech","wgrteamid":"11","score":300,"winner":false},{"rank":"16","name":"FDU","wgrteamid":"0"}]},{"set":[{"rank":"5","name":"Marquette","wgrteamid":"7"},{"rank":"11","name":"Arizona State Sun Devils","wgrteamid":"8","score":0}]}],"roundSix":[{"set":[{"rank":"3","name":"Texas Tech","wgrteamid":"11","score":300,"winner":false},{"rank":"11","name":"Arizona State Sun Devils","wgrteamid":"8","score":0}]}],"roundSeven":[{"set":[{"rank":"3","name":"Texas Tech","wgrteamid":"11","score":300,"winner":false}]}]}},"final":{"bracketString":"{\\"west\\":{\\"roundOne\\":[{\\"set\\":[{\\"rank\\":\\"16\\",\\"name\\":\\"FDU\\",\\"wgrteamid\\":\\"0\\"}]}],\\"roundTwo\\":[{\\"set\\":[{\\"rank\\":\\"16\\",\\"name\\":\\"FDU\\",\\"wgrteamid\\":\\"0\\"},{\\"rank\\":\\"9\\",\\"name\\":\\"Baylor\\",\\"wgrteamid\\":\\"2\\"}]},{\\"set\\":[{\\"rank\\":\\"13\\",\\"name\\":\\"Vermont\\",\\"wgrteamid\\":\\"4\\"},{\\"rank\\":\\"12\\",\\"name\\":\\"Murray\\",\\"wgrteamid\\":\\"6\\"}]},{\\"set\\":[{\\"rank\\":\\"6\\",\\"name\\":\\"Buffalo Bulls\\",\\"wgrteamid\\":\\"9\\"},{\\"rank\\":\\"3\\",\\"name\\":\\"Texas Tech\\",\\"wgrteamid\\":\\"11\\",\\"score\\":300,\\"winner\\":false}]},{\\"set\\":[{\\"rank\\":\\"6\\",\\"name\\":\\"Navada\\",\\"wgrteamid\\":\\"9\\"},{\\"rank\\":\\"3\\",\\"name\\":\\"Michigan\\",\\"wgrteamid\\":\\"11\\"}]}],\\"roundThree\\":[{\\"set\\":[{\\"rank\\":\\"16\\",\\"name\\":\\"FDU\\",\\"wgrteamid\\":\\"0\\"},{\\"rank\\":\\"13\\",\\"name\\":\\"Vermont\\",\\"wgrteamid\\":\\"4\\"}]},{\\"set\\":[{\\"rank\\":\\"3\\",\\"name\\":\\"Texas Tech\\",\\"wgrteamid\\":\\"11\\",\\"score\\":300,\\"winner\\":false},{\\"rank\\":\\"3\\",\\"name\\":\\"Michigan\\",\\"wgrteamid\\":\\"11\\"}]}],\\"roundFour\\":[{\\"set\\":[{\\"rank\\":\\"13\\",\\"name\\":\\"Vermont\\",\\"wgrteamid\\":\\"4\\"},{\\"rank\\":\\"3\\",\\"name\\":\\"Texas Tech\\",\\"wgrteamid\\":\\"11\\",\\"score\\":300,\\"winner\\":false}]}]},\\"south\\":{\\"roundOne\\":[{\\"set\\":[{\\"rank\\":\\"16\\",\\"name\\":\\"FDU\\",\\"wgrteamid\\":\\"0\\"}]}],\\"roundTwo\\":[{\\"set\\":[{\\"rank\\":\\"16\\",\\"name\\":\\"FDU\\",\\"wgrteamid\\":\\"0\\"},{\\"rank\\":\\"9\\",\\"name\\":\\"Baylor\\",\\"wgrteamid\\":\\"2\\"}]},{\\"set\\":[{\\"rank\\":\\"13\\",\\"name\\":\\"Vermont\\",\\"wgrteamid\\":\\"4\\"},{\\"rank\\":\\"12\\",\\"name\\":\\"Murray\\",\\"wgrteamid\\":\\"6\\"}]},{\\"set\\":[{\\"rank\\":\\"11\\",\\"name\\":\\"Arizona State Sun Devils\\",\\"wgrteamid\\":\\"8\\"},{\\"rank\\":\\"14\\",\\"name\\":\\"Nothern\\",\\"wgrteamid\\":\\"10\\"}]},{\\"set\\":[{\\"rank\\":\\"10\\",\\"name\\":\\"Florida Gators\\",\\"wgrteamid\\":\\"8\\"},{\\"rank\\":\\"14\\",\\"name\\":\\"Montana\\",\\"wgrteamid\\":\\"10\\"}]}],\\"roundThree\\":[{\\"set\\":[{\\"rank\\":\\"16\\",\\"name\\":\\"FDU\\",\\"wgrteamid\\":\\"0\\"},{\\"rank\\":\\"13\\",\\"name\\":\\"Vermont\\",\\"wgrteamid\\":\\"4\\"}]},{\\"set\\":[{\\"rank\\":\\"11\\",\\"name\\":\\"Arizona State Sun Devils\\",\\"wgrteamid\\":\\"8\\"},{\\"rank\\":\\"10\\",\\"name\\":\\"Florida Gators\\",\\"wgrteamid\\":\\"8\\"}]}],\\"roundFour\\":[{\\"set\\":[{\\"rank\\":\\"16\\",\\"name\\":\\"FDU\\",\\"wgrteamid\\":\\"0\\"},{\\"rank\\":\\"11\\",\\"name\\":\\"Arizona State Sun Devils\\",\\"wgrteamid\\":\\"8\\"}]}]},\\"east\\":{\\"roundOne\\":[{\\"set\\":[{\\"rank\\":\\"16\\",\\"name\\":\\"FDU\\",\\"wgrteamid\\":\\"0\\"}]}],\\"roundTwo\\":[{\\"set\\":[{\\"rank\\":\\"1\\",\\"name\\":\\"Gonzaga\\",\\"wgrteamid\\":\\"1\\"},{\\"rank\\":\\"8\\",\\"name\\":\\"Syracuse\\",\\"wgrteamid\\":\\"3\\"}]},{\\"set\\":[{\\"rank\\":\\"4\\",\\"name\\":\\"Florida\\",\\"wgrteamid\\":\\"5\\"},{\\"rank\\":\\"5\\",\\"name\\":\\"Marquette\\",\\"wgrteamid\\":\\"7\\"}]},{\\"set\\":[{\\"rank\\":\\"6\\",\\"name\\":\\"Buffalo Bulls\\",\\"wgrteamid\\":\\"9\\"},{\\"rank\\":\\"3\\",\\"name\\":\\"Texas Tech\\",\\"wgrteamid\\":\\"11\\"}]},{\\"set\\":[{\\"rank\\":\\"6\\",\\"name\\":\\"Navada\\",\\"wgrteamid\\":\\"9\\"},{\\"rank\\":\\"3\\",\\"name\\":\\"Michigan\\",\\"wgrteamid\\":\\"11\\"}]}],\\"roundThree\\":[{\\"set\\":[{\\"rank\\":\\"8\\",\\"name\\":\\"Syracuse\\",\\"wgrteamid\\":\\"3\\"},{\\"rank\\":\\"5\\",\\"name\\":\\"Marquette\\",\\"wgrteamid\\":\\"7\\"}]},{\\"set\\":[{\\"rank\\":\\"3\\",\\"name\\":\\"Texas Tech\\",\\"wgrteamid\\":\\"11\\"},{\\"rank\\":\\"3\\",\\"name\\":\\"Michigan\\",\\"wgrteamid\\":\\"11\\"}]}],\\"roundFour\\":[{\\"set\\":[{\\"rank\\":\\"5\\",\\"name\\":\\"Marquette\\",\\"wgrteamid\\":\\"7\\"},{\\"rank\\":\\"3\\",\\"name\\":\\"Texas Tech\\",\\"wgrteamid\\":\\"11\\"}]}]},\\"midwest\\":{\\"roundOne\\":[{\\"set\\":[{\\"rank\\":\\"16\\",\\"name\\":\\"FDU\\",\\"wgrteamid\\":\\"0\\"}]}],\\"roundTwo\\":[{\\"set\\":[{\\"rank\\":\\"16\\",\\"name\\":\\"FDU\\",\\"wgrteamid\\":\\"0\\"},{\\"rank\\":\\"8\\",\\"name\\":\\"Syracuse\\",\\"wgrteamid\\":\\"3\\"}]},{\\"set\\":[{\\"rank\\":\\"13\\",\\"name\\":\\"Vermont\\",\\"wgrteamid\\":\\"4\\"},{\\"rank\\":\\"5\\",\\"name\\":\\"Marquette\\",\\"wgrteamid\\":\\"7\\"}]},{\\"set\\":[{\\"rank\\":\\"11\\",\\"name\\":\\"Arizona State Sun Devils\\",\\"wgrteamid\\":\\"8\\",\\"score\\":0},{\\"rank\\":\\"3\\",\\"name\\":\\"Texas Tech\\",\\"wgrteamid\\":\\"11\\"}]},{\\"set\\":[{\\"rank\\":\\"10\\",\\"name\\":\\"Florida Gators\\",\\"wgrteamid\\":\\"8\\"},{\\"rank\\":\\"3\\",\\"name\\":\\"Michigan\\",\\"wgrteamid\\":\\"11\\"}]}],\\"roundThree\\":[{\\"set\\":[{\\"rank\\":\\"16\\",\\"name\\":\\"FDU\\",\\"wgrteamid\\":\\"0\\"},{\\"rank\\":\\"13\\",\\"name\\":\\"Vermont\\",\\"wgrteamid\\":\\"4\\"}]},{\\"set\\":[{\\"rank\\":\\"11\\",\\"name\\":\\"Arizona State Sun Devils\\",\\"wgrteamid\\":\\"8\\",\\"score\\":0},{\\"rank\\":\\"10\\",\\"name\\":\\"Florida Gators\\",\\"wgrteamid\\":\\"8\\"}]}],\\"roundFour\\":[{\\"set\\":[{\\"rank\\":\\"16\\",\\"name\\":\\"FDU\\",\\"wgrteamid\\":\\"0\\"},{\\"rank\\":\\"11\\",\\"name\\":\\"Arizona State Sun Devils\\",\\"wgrteamid\\":\\"8\\",\\"score\\":0}]}]},\\"finalFour\\":{\\"roundFive\\":[{\\"set\\":[{\\"rank\\":\\"3\\",\\"name\\":\\"Texas Tech\\",\\"wgrteamid\\":\\"11\\",\\"score\\":300,\\"winner\\":false},{\\"rank\\":\\"16\\",\\"name\\":\\"FDU\\",\\"wgrteamid\\":\\"0\\"}]},{\\"set\\":[{\\"rank\\":\\"5\\",\\"name\\":\\"Marquette\\",\\"wgrteamid\\":\\"7\\"},{\\"rank\\":\\"11\\",\\"name\\":\\"Arizona State Sun Devils\\",\\"wgrteamid\\":\\"8\\",\\"score\\":0}]}],\\"roundSix\\":[{\\"set\\":[{\\"rank\\":\\"3\\",\\"name\\":\\"Texas Tech\\",\\"wgrteamid\\":\\"11\\",\\"score\\":300,\\"winner\\":false},{\\"rank\\":\\"11\\",\\"name\\":\\"Arizona State Sun Devils\\",\\"wgrteamid\\":\\"8\\",\\"score\\":0}]}],\\"roundSeven\\":[{\\"set\\":[{\\"rank\\":\\"3\\",\\"name\\":\\"Texas Tech\\",\\"wgrteamid\\":\\"11\\",\\"score\\":300,\\"winner\\":false}]}]}}","bracketHash":"1bf656c3d37c09864533eb8109b00305a5df7e83c27b14868569ddceeb8b73ca","home":300,"away":0}}';
-
   userBracket = {
     bracket: {
       west: {
@@ -881,10 +879,11 @@ export class MmnewviewbracketComponent implements OnInit {
       }
     },
     final: {
-      bracketString: '',
+      bracketString: {},
       bracketHash: '',
       home: 0,
-      away: 0
+      away: 0,
+      txid: ''
     }
   }
 
@@ -897,6 +896,15 @@ export class MmnewviewbracketComponent implements OnInit {
     this.finalScore[0] = 0;
     this.finalScore[1] = 0;
     this.getUserBalance();
+    // this.roundFinal();
+    // this.wsb.marchMadness = this.userBracket.final;
+    // this.bsModalRef = this.modalService.show(SubmitModalComponent,
+    //   // @ts-ignore
+    //   Object.assign({}, {class: 'modal-lg', backdrop: 'static'}));
+  }
+
+  getBracketCount(): number {
+    return this.wsb.getMarchMadnessBracketCount();
   }
 
   getUserBalance(): void {
@@ -961,13 +969,11 @@ export class MmnewviewbracketComponent implements OnInit {
     if (startRound === 'roundSix') {
       this.clearSet(finalFour.roundSeven, oldTi);
     }
-    console.log('gotBracket', getBracket);
 
   }
 
   clearSet(brackets, oldTi) {
     for ( let i = 0; i < brackets.length; i++) {
-      console.log('set', brackets[i].set)
       for (let bi = 0; bi < brackets[i].set.length; bi++) {
         if (brackets[i].set[bi] === oldTi) {
           brackets[i].set[bi] = {rank: '', name: ''};
@@ -1067,7 +1073,7 @@ export class MmnewviewbracketComponent implements OnInit {
     finalHome.winner = (homeFinalScore < awayFinalScore);
     this.userBracket.bracket.finalFour.roundSix[0].set[0] = finalHome;
     this.userBracket.bracket.finalFour.roundSix[0].set[1] = finalAway;
-    this.userBracket.final.bracketString = JSON.stringify(this.userBracket.bracket);
+    this.userBracket.final.bracketString = this.userBracket.bracket;
     this.userBracket.final.bracketHash = await this.sha256(JSON.stringify(this.userBracket.bracket));
     this.userBracket.final.home = this.finalScore[0];
     this.userBracket.final.away = this.finalScore[1];
@@ -1075,10 +1081,10 @@ export class MmnewviewbracketComponent implements OnInit {
 
   verifyBracket(set): boolean {
     let ret = true
-    if (set[0].wgrteamid === '') {
+    if (set[0].name === '') {
       ret = false;
     }
-    if (set[1].wgrteamid === '') {
+    if (set[1].name === '') {
       ret = false;
     }
     return ret;
@@ -1086,7 +1092,6 @@ export class MmnewviewbracketComponent implements OnInit {
 
   openSubmitBracket(): void {
     this.roundFinal();
-    console.log('userBracket', this.userBracket);
     this.wsb.marchMadness = this.userBracket.final;
     this.bsModalRef = this.modalService.show(SubmitModalComponent,
       // @ts-ignore
@@ -1106,6 +1111,14 @@ export class MmnewviewbracketComponent implements OnInit {
     // convert bytes to hex string
     const hashHex = hashArray.map(b => ('00' + b.toString(16)).slice(-2)).join('');
     return hashHex;
+  }
+
+  canSubmit(): boolean {
+    const canSubmit = Date.now();
+    if (canSubmit < 1616169600000) {
+      return true;
+    }
+    return false;
   }
 
 }

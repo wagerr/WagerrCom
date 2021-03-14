@@ -1,1 +1,40 @@
-<p>mmdashboard works!</p>
+<div class="d-flex flex-column flex-sm-row pt-2">
+  <div class="w-100"></div>
+  <div class="w-100 text-center pt-4">
+    <button class="btn round-btn btn-sportsbook3 w-50 text-uppercase font-arboria-bold" *ngIf="isLoggedIn()"
+            [ngClass]="this.createBracket ? 'active' : ''" (click)="toggleCreateBracket()">Create Bracket
+    </button>
+  </div>
+  <div class="w-100 d-flex flex-column" *ngIf="isLoggedIn()">
+    <div class="w-100 font-arboria-bold text-black text-uppercase text-center">your leaderboard username</div>
+    <div class="w-100 font-arboria-bold text-black text-center border border-dark mt-1 d-flex">
+      <input class="border-0 text-center w-100 font-arboria-bold text-black" type="text" [(ngModel)]="username"
+             (keyup)="filterName()" placeholder="Enter Custom Username" [disabled]="!editUserName">
+      <div class="pull-right border-left border-dark px-2" [ngClass]="(editUserName) ? 'fontColorE6' : ''" tooltip="edit/save username" (click)="editUsername()"><i class="fas fa-edit"></i></div>
+    </div>
+  </div>
+  <div class="w-100 text-center pt-4">
+  </div>
+  <div class="w-100"></div>
+</div>
+<ng-container *ngIf="createBracket">
+  <app-mmnewviewbracket [new]="true"></app-mmnewviewbracket>
+</ng-container>
+<ng-container *ngIf="!createBracket">
+  <div class="d-flex flex-row">
+    <div class="w-100"></div>
+    <div class="w-100 font-arboria-bold text-black d-flex flex-column">
+      <div class="w-100 font20px text-center">Brackets</div>
+      <ng-container *ngFor="let bracket of brackets; let i = index">
+        <div class="w-100">{{(i + 1)}}. {{getBracketChamp(bracket.bracketString)}}</div>
+      </ng-container>
+    </div>
+    <div class="w-100 font-arboria-bold text-black d-flex flex-column border-left pl-3">
+      <div class="w-100 font20px text-center">Leaderboard</div>
+      <div class="w-100">
+        <app-mmleaderboard></app-mmleaderboard>
+      </div>
+    </div>
+    <div class="w-100"></div>
+  </div>
+</ng-container>

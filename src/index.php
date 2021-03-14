@@ -12,7 +12,7 @@
 //   <meta name="twitter:creator" content="@betlikeaninja">
 //   <meta name="twitter:title" content="I Bet 1000 WGR on Norte Dame to Win">
 //   <meta name="twitter:description" content="Notre Dame vs Florida State">
-//   <meta name="twitter:image" content="https://img.wagerr.com/hotprice.php?type=moneyline&select=draw&hometeam=Notre%20Dame&awayteam=Florida&title=-17.5&price=20.01&boost=1.25&view=true">
+  <meta name="twitter:image" content="https://img.wagerr.com/hotprice.php?type=moneyline&select=draw&hometeam=Notre%20Dame&awayteam=Florida&title=-17.5&price=20.01&boost=1.25&view=true">
 </head>
 <body class="bodyStart">
   <app-root></app-root>

@@ -1,3 +1,4 @@
+<ng-container *ngIf="getBracketCount() < 2">
 <ng-container *ngFor="let bracket of baseBracket; let basei = index">
   <div class="d-flex flex-row mt-4">
     <div class="w-25"></div>
@@ -138,9 +139,17 @@
       <span class="font20px">Invalid score submission.</span><br>
       Winner's score must be higher than loser's.
     </ng-container><br>
-    <button class="btn btn-sportsbook3 widthSize140px" (click)="openSubmitBracket()" [disabled]="!userCanSubmit()">
+    <button class="btn btn-sportsbook3 widthSize140px" (click)="openSubmitBracket()" [disabled]="!userCanSubmit()" *ngIf="canSubmit()">
       Submit Bracket
     </button>
   </div>
   <div class="w-25"></div>
 </div>
+</ng-container>
+<ng-container *ngIf="getBracketCount() >= 2">
+  <div class="d-flex flex-row my-5 py-5">
+    <div class="w-100"></div>
+    <div class="w-50 font-arboria-book text-black">You have submitted 2 brackets.</div>
+    <div class="w-100"></div>
+  </div>
+</ng-container>

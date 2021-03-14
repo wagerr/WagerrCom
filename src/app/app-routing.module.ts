@@ -35,6 +35,7 @@ const home: Routes = [
   { path: 'fadethedegen', component: FadethedegenComponent },
   { path: 'fadethedgen', component: FadethedegenComponent },
   { path: 'marchmadness', component: MarchmadnessComponent },
+  { path: 'marchmadness/ref/:refAddress', component: MarchmadnessComponent },
   { path: 'about', component: AboutComponent},
   { path: 'download', component: GetStartedComponent},
   { path: 'teamlogo/:team', component: TestTeamlogoComponent }
