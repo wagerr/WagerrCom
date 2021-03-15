@@ -1,0 +1,43 @@
+<div class="modal-body">
+  <div class="d-flex flex-row">
+    <div class="w-25"></div>
+    <div class="w-100 d-flex flex-column">
+      <div class="w-100 text-center text-uppercase font-arboria-bold font33px py-4">BEFORE YOU START</div>
+      <form [formGroup]="questionThis">
+        <div class="w-100 d-flex flex-row py-1">
+          <div class="w-50 text-uppercase font-arboria-bold pt-1">Email</div>
+          <div class="w-100"><input type="email" class="form-control"
+                                    placeholder="Enter your email" formControlName="Email"
+                                    [class.is-invalid] = "questionThis.get('Email').invalid && questionThis.get('Email').touched"
+          /></div>
+        </div>
+        <div class="w-100 d-flex flex-row py-1">
+          <div class="w-50 text-uppercase font-arboria-bold pt-1">Favorite sport</div>
+          <div class="w-100"><input type="email" class="form-control" placeholder="Enter your favorite sport" formControlName="Sport"></div>
+        </div>
+        <div class="w-100 d-flex flex-row py-1">
+          <div class="w-50 text-uppercase font-arboria-bold pt-1">favorite team</div>
+          <div class="w-100"><input type="email" class="form-control" placeholder="Enter your favorite team" formControlName="Team"/></div>
+        </div>
+        <div class="w-100 d-flex flex-row py-1">
+          <div class="w-auto text-uppercase font-arboria-bold ml-2">
+            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" formControlName="Marketing">
+          </div>
+          <div class="w-100 font-arboria-medium font16px">I would like to receive 1 to 2 relavant marketing emails a month</div>
+        </div>
+      </form>
+      <div class="w-100 d-flex flex-row py-3 mb-3">
+        <div class="w-50"></div>
+        <div class="w-100 font-arboria-book text-uppercase font12px">
+          <button class="btn round-btn btn-sportsbook btn-sportsbook" (click)="goBackHome()">GO BACK</button>
+        </div>
+        <div class="w-50"></div>
+        <div class="w-100 font-arboria-book text-uppercase font12px">
+          <button class="btn round-btn btn-sportsbook btn-sportsbook3" (click)="start()" [disabled]="questionThis.invalid">Start</button>
+        </div>
+        <div class="w-50"></div>
+      </div>
+    </div>
+    <div class="w-25"></div>
+  </div>
+</div>

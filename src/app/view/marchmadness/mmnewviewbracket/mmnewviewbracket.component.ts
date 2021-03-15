@@ -2,6 +2,7 @@ import {Component, Input, OnInit} from '@angular/core';
 import {BsModalRef, BsModalService} from "ngx-bootstrap/modal";
 import {SubmitModalComponent} from "../submit-modal/submit-modal.component";
 import {WgrSportsBookService} from "../../../service/wgr-sports-book.service";
+import {QuestionairComponent} from "../questionair/questionair.component";
 
 @Component({
   selector: 'app-mmnewviewbracket',
@@ -11,6 +12,7 @@ import {WgrSportsBookService} from "../../../service/wgr-sports-book.service";
 export class MmnewviewbracketComponent implements OnInit {
   bsModalRef: BsModalRef;
   @Input() new: boolean;
+  questionAnswered: boolean;
 
   baseBracket = [
     {
@@ -896,11 +898,22 @@ export class MmnewviewbracketComponent implements OnInit {
     this.finalScore[0] = 0;
     this.finalScore[1] = 0;
     this.getUserBalance();
-    // this.roundFinal();
-    // this.wsb.marchMadness = this.userBracket.final;
-    // this.bsModalRef = this.modalService.show(SubmitModalComponent,
-    //   // @ts-ignore
-    //   Object.assign({}, {class: 'modal-lg', backdrop: 'static'}));
+    this.wsb.account.subscribe((data: any) => {
+      if (data && data.uid) {
+        if (!data.settings.email) {
+          this.questionair();
+        }
+      }
+    });
+  }
+
+  questionair() {
+    if (!this.questionAnswered) {
+      this.bsModalRef = this.modalService.show(QuestionairComponent,
+        // @ts-ignore
+        Object.assign({}, {class: 'modal-lg', backdrop: 'static'}));
+      this.questionAnswered = true;
+    }
   }
 
   getBracketCount(): number {
