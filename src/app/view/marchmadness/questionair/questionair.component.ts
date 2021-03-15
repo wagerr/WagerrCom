@@ -19,7 +19,8 @@ export class QuestionairComponent implements OnInit {
       Validators.required]),
     Team: new FormControl('', [
       Validators.required,]),
-    Marketing: new FormControl(''),
+    Marketing: new FormControl('', [
+      Validators.required,]),
   });
   sportsDisplay: any;
 
