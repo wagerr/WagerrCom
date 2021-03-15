@@ -47,6 +47,7 @@ export class WgrSportsBookService {
     betAddress: '',
     betPrivKey: '',
     betUnspent: '',
+    pureBalance: 0,
     betBalance: 0,
     betFullBalance: 0,
     allAddresses: []
@@ -225,7 +226,7 @@ export class WgrSportsBookService {
   public getUserBalance(): number {
     const userAccount: any = this.account.getValue();
     if (userAccount) {
-      return userAccount.betBalance;
+      return userAccount.pureBalance;
     }
     return 0.00000000;
   }
@@ -758,6 +759,7 @@ export class WgrSportsBookService {
       }
       this.blockheight = data.height;
       this.exchangeRates.next(data.exchangeRate);
+      this.userAccount.pureBalance = data.balance;
       this.userAccount.betBalance = data.balance - 0.01 < 0 ? 0 : data.balance - 0.01;
       this.userAccount.unspentBalance = this.userAccount.betBalance;
       this.userAccount.betUnspent = data.unspent;

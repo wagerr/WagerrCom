@@ -929,9 +929,9 @@ export class MmnewviewbracketComponent implements OnInit {
 
   userCanSubmit(): boolean {
     const winnerSelected = (this.userBracket.bracket.finalFour.roundSeven[0].set[0].rank != '');
-    const hasChampionshp = (this.userBracket.bracket.finalFour.roundSix[0].set[0].rank != '' && this.userBracket.bracket.finalFour.roundSix[0].set[1].rank != '')
+    const hasChampionship = (this.userBracket.bracket.finalFour.roundSix[0].set[0].rank != '' && this.userBracket.bracket.finalFour.roundSix[0].set[1].rank != '')
     const userBalance = this.wsb.getUserBalance();
-    return (userBalance > 0 && winnerSelected && hasChampionshp && this.validateScore());
+    return (userBalance > 0 && winnerSelected && hasChampionship && this.validateScore());
   }
 
   validateScore(): boolean {
