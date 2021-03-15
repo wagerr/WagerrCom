@@ -111,6 +111,101 @@ export class MmnewviewbracketComponent implements OnInit {
       ]
     },
     {
+      name: 'East Region',
+      set: [
+        {
+          set: [
+            {
+              rank: '1',
+              name: 'Michigan'
+            },
+            {
+              rank: '16',
+              name: 'Mount St Mary\'s/Texas Southern',
+            },
+          ]
+        },
+        {
+          set: [
+            {
+              rank: '8',
+              name: 'LSU',
+            },
+            {
+              rank: '9',
+              name: 'St. Bonaventure',
+            },]
+        },
+        {
+          set: [
+            {
+              rank: '5',
+              name: 'Colorado',
+            },
+            {
+              rank: '12',
+              name: 'Georgetown',
+            },]
+        },
+        {
+          set: [
+            {
+              rank: '4',
+              name: 'Florida St.',
+            },
+            {
+              rank: '13',
+              name: 'UNC Greensboro',
+            },]
+        },
+        {
+          set: [
+            {
+              rank: '6',
+              name: 'BYU',
+            },
+            {
+              rank: '11',
+              name: 'Michigan St./UCLA',
+            },]
+        },
+        {
+          set: [
+            {
+              rank: '3',
+              name: 'Texas',
+            },
+            {
+              rank: '14',
+              name: 'Abilene Christian',
+            },]
+        },
+        {
+          set: [
+            {
+              rank: '7',
+              name: 'UConn',
+            },
+            {
+              rank: '10',
+              name: 'Maryland',
+            },]
+        },
+        {
+          set: [
+            {
+              rank: '2',
+              name: 'Alabama',
+            },
+            {
+              rank: '15',
+              name: 'Iona',
+            },
+          ]
+        },
+      ]
+    },
+    {
       name: 'South Region',
       set: [
         {
@@ -299,101 +394,6 @@ export class MmnewviewbracketComponent implements OnInit {
           ]
         },
       ]
-    },
-    {
-      name: 'East Region',
-      set: [
-        {
-          set: [
-            {
-              rank: '1',
-              name: 'Michigan'
-            },
-            {
-              rank: '16',
-              name: 'Mount St Mary\'s/Texas Southern',
-            },
-          ]
-        },
-        {
-          set: [
-            {
-              rank: '8',
-              name: 'LSU',
-            },
-            {
-              rank: '9',
-              name: 'St. Bonaventure',
-            },]
-        },
-        {
-          set: [
-            {
-              rank: '5',
-              name: 'Colorado',
-            },
-            {
-              rank: '12',
-              name: 'Georgetown',
-            },]
-        },
-        {
-          set: [
-            {
-              rank: '4',
-              name: 'Florida St.',
-            },
-            {
-              rank: '13',
-              name: 'UNC Greensboro',
-            },]
-        },
-        {
-          set: [
-            {
-              rank: '6',
-              name: 'BYU',
-            },
-            {
-              rank: '11',
-              name: 'Michigan St./UCLA',
-            },]
-        },
-        {
-          set: [
-            {
-              rank: '3',
-              name: 'Texas',
-            },
-            {
-              rank: '14',
-              name: 'Abilene Christian',
-            },]
-        },
-        {
-          set: [
-            {
-              rank: '7',
-              name: 'UConn',
-            },
-            {
-              rank: '10',
-              name: 'Maryland',
-            },]
-        },
-        {
-          set: [
-            {
-              rank: '2',
-              name: 'Alabama',
-            },
-            {
-              rank: '15',
-              name: 'Iona',
-            },
-          ]
-        },
-      ]
     }
   ]
 
@@ -424,6 +424,112 @@ export class MmnewviewbracketComponent implements OnInit {
               {
                 rank: '',
                 name: '',
+              }
+            ]
+          },
+          {
+            set: [
+              {
+                rank: '',
+                name: '',
+
+              },
+              {
+                rank: '',
+                name: '',
+
+              }
+            ]
+          },
+          {
+            set: [
+              {
+                rank: '',
+                name: '',
+
+              },
+              {
+                rank: '',
+                name: '',
+
+              }
+            ]
+          }
+        ],
+        roundThree: [
+          {
+            set: [
+              {
+                rank: '',
+                name: '',
+
+              },
+              {
+                rank: '',
+                name: '',
+
+              }
+            ]
+          },
+          {
+            set: [
+              {
+                rank: '',
+                name: '',
+
+              },
+              {
+                rank: '',
+                name: '',
+
+              }
+            ]
+          },
+        ],
+        roundFour: [
+          {
+            set: [
+              {
+                rank: '',
+                name: '',
+
+              },
+              {
+                rank: '',
+                name: '',
+
+              }
+            ]
+          }
+        ]
+      },
+      'East Region': {
+        roundTwo: [
+          {
+            set: [
+              {
+                rank: '',
+                name: '',
+
+              },
+              {
+                rank: '',
+                name: '',
+
+              }
+            ]
+          },
+          {
+            set: [
+              {
+                rank: '',
+                name: '',
+
+              },
+              {
+                rank: '',
+                name: '',
+
               }
             ]
           },
@@ -609,112 +715,6 @@ export class MmnewviewbracketComponent implements OnInit {
         ]
       },
       'Midwest Region': {
-        roundTwo: [
-          {
-            set: [
-              {
-                rank: '',
-                name: '',
-
-              },
-              {
-                rank: '',
-                name: '',
-
-              }
-            ]
-          },
-          {
-            set: [
-              {
-                rank: '',
-                name: '',
-
-              },
-              {
-                rank: '',
-                name: '',
-
-              }
-            ]
-          },
-          {
-            set: [
-              {
-                rank: '',
-                name: '',
-
-              },
-              {
-                rank: '',
-                name: '',
-
-              }
-            ]
-          },
-          {
-            set: [
-              {
-                rank: '',
-                name: '',
-
-              },
-              {
-                rank: '',
-                name: '',
-
-              }
-            ]
-          }
-        ],
-        roundThree: [
-          {
-            set: [
-              {
-                rank: '',
-                name: '',
-
-              },
-              {
-                rank: '',
-                name: '',
-
-              }
-            ]
-          },
-          {
-            set: [
-              {
-                rank: '',
-                name: '',
-
-              },
-              {
-                rank: '',
-                name: '',
-
-              }
-            ]
-          },
-        ],
-        roundFour: [
-          {
-            set: [
-              {
-                rank: '',
-                name: '',
-
-              },
-              {
-                rank: '',
-                name: '',
-
-              }
-            ]
-          }
-        ]
-      },
-      'East Region': {
         roundTwo: [
           {
             set: [
