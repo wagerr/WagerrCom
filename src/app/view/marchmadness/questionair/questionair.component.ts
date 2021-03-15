@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {WgrSportsBookService} from "../../../service/wgr-sports-book.service";
 import {BsModalRef} from "ngx-bootstrap/modal";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
+import {SocketConnService} from "../../../service/socket-conn.service";
 
 @Component({
   selector: 'app-questionair',
@@ -20,13 +21,27 @@ export class QuestionairComponent implements OnInit {
       Validators.required,]),
     Marketing: new FormControl(''),
   });
+  sportsDisplay: any;
 
   constructor(
+    private sc: SocketConnService,
     private wsb: WgrSportsBookService,
     public bsModalRef: BsModalRef) {
   }
 
   ngOnInit(): void {
+    this.sc.allSports.subscribe((data: any) => {
+      this.sportsDisplay = data;
+    });
+  }
+
+  changeSport(e) {
+    this.SportName.setValue(e.target.value, {
+      onlySelf: true
+    })
+  }
+  get SportName() {
+    return this.questionThis.get('Sport');
   }
 
   goBackHome() {
@@ -40,6 +55,7 @@ export class QuestionairComponent implements OnInit {
     userAccount.settings.team = this.questionThis.get('Team').value;
     userAccount.settings.marketing = this.questionThis.get('Marketing').value;
     this.wsb.updateUserSetting(userAccount);
+    this.bsModalRef.hide();
   }
 
 }

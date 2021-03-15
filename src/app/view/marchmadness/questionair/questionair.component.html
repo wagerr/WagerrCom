@@ -13,11 +13,16 @@
         </div>
         <div class="w-100 d-flex flex-row py-1">
           <div class="w-50 text-uppercase font-arboria-bold pt-1">Favorite sport</div>
-          <div class="w-100"><input type="email" class="form-control" placeholder="Enter your favorite sport" formControlName="Sport"></div>
+          <div class="w-100">
+            <select class="custom-select" (change)="changeSport($event)" formControlName="Sport">
+              <option value="" disabled>Choose  your favorite sport</option>
+              <option *ngFor="let sport of sportsDisplay" [ngValue]="sport">{{sport}}</option>
+            </select>
+          </div>
         </div>
         <div class="w-100 d-flex flex-row py-1">
           <div class="w-50 text-uppercase font-arboria-bold pt-1">favorite team</div>
-          <div class="w-100"><input type="email" class="form-control" placeholder="Enter your favorite team" formControlName="Team"/></div>
+          <div class="w-100"><input type="text" class="form-control" placeholder="Enter your favorite team" formControlName="Team"/></div>
         </div>
         <div class="w-100 d-flex flex-row py-1">
           <div class="w-auto text-uppercase font-arboria-bold ml-2">
