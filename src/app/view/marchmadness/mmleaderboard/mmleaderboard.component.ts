@@ -18,6 +18,7 @@ export class MmleaderboardComponent implements OnInit {
         this.leaderboard = data;
       }
     });
+    this.wsb.getMarchMadnessLeaderboard();
   }
 
 }
