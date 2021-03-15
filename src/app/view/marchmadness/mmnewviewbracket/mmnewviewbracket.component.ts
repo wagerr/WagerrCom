@@ -25,7 +25,7 @@ export class MmnewviewbracketComponent implements OnInit {
               name: 'Gonzaga',
             },
             {
-              rank: '1',
+              rank: '16',
               name: 'Norfolk St./Appalachian St.',
             },
           ]

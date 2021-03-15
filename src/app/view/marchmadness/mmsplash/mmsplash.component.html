@@ -13,7 +13,8 @@
     <div class="w-100 font-arboria-bold text-black text-center border border-dark mt-1 d-flex">
       <input class="border-0 text-center w-100 font-arboria-bold text-black" type="text" [(ngModel)]="username"
              (keyup)="filterName()" placeholder="Enter Custom Username" [disabled]="!editUserName">
-      <div class="pull-right border-left border-dark px-2" [ngClass]="(editUserName) ? 'fontColorE6' : ''" tooltip="edit/save username" (click)="editUsername()"><i class="fas fa-edit"></i></div>
+      <div class="pull-right border-left border-dark px-2" [ngClass]="(editUserName) ? 'fontColorE6' : ''"
+           tooltip="edit/save username" (click)="editUsername()"><i class="fas fa-edit"></i></div>
     </div>
   </div>
   <div class="w-100 text-center pt-4">
@@ -28,7 +29,7 @@
   <div class="d-flex flex-column flex-sm-row pt-2">
     <div class="w-100"></div>
     <div class="w-50 pt-3">
-    <app-mmleaderboard></app-mmleaderboard>
+      <app-mmleaderboard></app-mmleaderboard>
     </div>
     <div class="w-100"></div>
   </div>
@@ -46,15 +47,27 @@
       <div class="w-100"></div>
     </div>
     <div class="d-flex flex-column pt-5">
-      <div class="w-100 text-center font-arboria-bolder text-black font48px pb-0 mb-0 lineheight1">PERFECT BRACKET WINS</div>
-      <div class="w-100 text-center font-arboria-bolder text-black font48px pt-0 mt-0 lineheight1">1 MILLION WAGERR & 1 BITCOIN</div>
+      <div class="w-100 text-center font-arboria-bolder text-black font48px pb-0 mb-0 lineheight1">PERFECT BRACKET
+        WINS
+      </div>
+      <div class="w-100 text-center font-arboria-bolder text-black font48px pt-0 mt-0 lineheight1">1 MILLION WAGERR & 1
+        BITCOIN
+      </div>
       <div class="w-100 d-flex flex-row pt-5">
         <div class="w-50"></div>
-        <div class="w-100 text-center font-arboria-book text-black">Owning a Wagerr Oracle is like “Being the House” or
-          owning a
-          sportsbook. The Wagerr network distributes a portion of all winning bets to the Oracles. While bettors place
-          money on uncertain events, bookkeepers bet on a sure thing: fees. Steady fees provide reliable income. The
-          more betting action there is, the larger the Oracle rewards. Be the house!
+        <div class="w-100 text-center font-arboria-book text-black">The grand prize is awarded for a perfect bracket
+          submission. A perfect bracket is defined as an accurate prediction of the complete sequence of winners and
+          losers from the “Round of 64” to the official winner of the National Championship. All entrants also compete
+          for rewards based on the number of points for each successful prediction. The leaderboard shows point
+          progression of top competitors. Brackets must be submitted via wagerr.com sportsbook account. There is no
+          charge to make a wagerr.com sportsbook account.
+        </div>
+        <div class="w-50"></div>
+      </div>
+      <div class="w-100 d-flex flex-row pt-5">
+        <div class="w-50"></div>
+        <div class="w-100 text-center font-arboria-book text-underline text-black">
+          <a href="/assets/March_Madness_Rules_2021.pdf" target="_blank">Wagerr.com March Madness 2021 Rules</a>
         </div>
         <div class="w-50"></div>
       </div>

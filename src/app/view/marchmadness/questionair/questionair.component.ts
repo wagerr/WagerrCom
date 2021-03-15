@@ -53,7 +53,7 @@ export class QuestionairComponent implements OnInit {
     userAccount.settings.email = this.questionThis.get('Email').value;
     userAccount.settings.sport = this.questionThis.get('Sport').value;
     userAccount.settings.team = this.questionThis.get('Team').value;
-    userAccount.settings.marketing = this.questionThis.get('Marketing').value;
+    userAccount.settings.agree = this.questionThis.get('Marketing').value;
     this.wsb.updateUserSetting(userAccount);
     this.bsModalRef.hide();
   }
