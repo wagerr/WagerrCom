@@ -58,7 +58,8 @@ export class SubmitModalComponent implements OnInit {
 
   getLoser() {
     const roundSix = this.final.bracketString.finalFour.roundSix[0].set;
-    if (!roundSix[0].winner) {
+    const roundSeven = this.final.bracketString.finalFour.roundSeven[0].set[0];
+    if (roundSix[0] === roundSeven) {
       return roundSix[1].name;
     }
     return roundSix[0].name;
