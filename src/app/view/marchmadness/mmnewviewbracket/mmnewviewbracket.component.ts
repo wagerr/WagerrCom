@@ -2,6 +2,7 @@ import {Component, Input, OnInit} from '@angular/core';
 import {BsModalRef, BsModalService} from "ngx-bootstrap/modal";
 import {SubmitModalComponent} from "../submit-modal/submit-modal.component";
 import {WgrSportsBookService} from "../../../service/wgr-sports-book.service";
+import {QuestionairComponent} from "../questionair/questionair.component";
 
 @Component({
   selector: 'app-mmnewviewbracket',
@@ -11,383 +12,384 @@ import {WgrSportsBookService} from "../../../service/wgr-sports-book.service";
 export class MmnewviewbracketComponent implements OnInit {
   bsModalRef: BsModalRef;
   @Input() new: boolean;
+  questionAnswered: boolean;
 
   baseBracket = [
     {
-      name: 'west',
+      name: 'West Region',
       set: [
         {
           set: [
             {
-              rank: '16',
-              name: 'FDU/Batman',
+              rank: '1',
+              name: 'Gonzaga',
             },
             {
               rank: '1',
-              name: 'Gonzaga',
+              name: 'Norfolk St./Appalachian St.',
             },
           ]
         },
         {
           set: [
             {
-              rank: '9',
-              name: 'Baylor',
-            },
-            {
               rank: '8',
-              name: 'Syracuse',
+              name: 'Oklahoma',
+            },
+            {
+              rank: '9',
+              name: 'Missouri',
             },]
         },
         {
           set: [
-            {
-              rank: '13',
-              name: 'Vermont',
-            },
-            {
-              rank: '4',
-              name: 'Florida',
-            },]
-        },
-        {
-          set: [
-            {
-              rank: '12',
-              name: 'Murray',
-            },
             {
               rank: '5',
-              name: 'Marquette',
+              name: 'Creighton',
+            },
+            {
+              rank: '12',
+              name: 'UCSB',
             },]
         },
         {
           set: [
+            {
+              rank: '4',
+              name: 'Virginia',
+            },
+            {
+              rank: '13',
+              name: 'Ohio',
+            },]
+        },
+        {
+          set: [
+            {
+              rank: '6',
+              name: 'USC',
+            },
             {
               rank: '11',
-              name: 'Arizona State Sun Devils',
-            },
-            {
-              rank: '6',
-              name: 'Buffalo Bulls',
+              name: 'Wichita ST/Drake',
             },]
         },
         {
           set: [
-            {
-              rank: '14',
-              name: 'Nothern',
-            },
             {
               rank: '3',
-              name: 'Texas Tech',
+              name: 'Kansas',
+            },
+            {
+              rank: '14',
+              name: 'Eastern Washington',
             },]
         },
         {
           set: [
+            {
+              rank: '7',
+              name: 'Oregon',
+            },
             {
               rank: '10',
-              name: 'Florida Gators',
-            },
-            {
-              rank: '6',
-              name: 'Navada',
+              name: 'VCU',
             },]
         },
         {
           set: [
             {
-              rank: '14',
-              name: 'Montana',
+              rank: '2',
+              name: 'Iowa',
             },
             {
-              rank: '3',
-              name: 'Michigan',
+              rank: '15',
+              name: 'Grand Canyon',
             },
           ]
         },
       ]
     },
     {
-      name: 'south',
+      name: 'South Region',
       set: [
         {
           set: [
             {
-              rank: '16',
-              name: 'FDU/Batman',
+              rank: '1',
+              name: 'Baylor',
             },
             {
-              rank: '1',
-              name: 'Gonzaga',
+              rank: '16',
+              name: 'Hartford',
             },
           ]
         },
         {
           set: [
             {
-              rank: '9',
-              name: 'Baylor',
-            },
-            {
               rank: '8',
-              name: 'Syracuse',
+              name: 'North Carolina',
+            },
+            {
+              rank: '9',
+              name: 'Wisconsin',
             },]
         },
         {
           set: [
-            {
-              rank: '13',
-              name: 'Vermont',
-            },
-            {
-              rank: '4',
-              name: 'Florida',
-            },]
-        },
-        {
-          set: [
-            {
-              rank: '12',
-              name: 'Murray',
-            },
             {
               rank: '5',
-              name: 'Marquette',
+              name: 'Villanova',
+            },
+            {
+              rank: '12',
+              name: 'Winthrop',
             },]
         },
         {
           set: [
+            {
+              rank: '4',
+              name: 'Purdue',
+            },
+            {
+              rank: '13',
+              name: 'North Texas',
+            },]
+        },
+        {
+          set: [
+            {
+              rank: '6',
+              name: 'Texas Tech',
+            },
             {
               rank: '11',
-              name: 'Arizona State Sun Devils',
-            },
-            {
-              rank: '6',
-              name: 'Buffalo Bulls',
+              name: 'Utah St.',
             },]
         },
         {
           set: [
-            {
-              rank: '14',
-              name: 'Nothern',
-            },
             {
               rank: '3',
-              name: 'Texas Tech',
+              name: 'Arkansas',
+            },
+            {
+              rank: '14',
+              name: 'Colgate',
             },]
         },
         {
           set: [
+            {
+              rank: '7',
+              name: 'Florida',
+            },
             {
               rank: '10',
-              name: 'Florida Gators',
-            },
-            {
-              rank: '6',
-              name: 'Navada',
+              name: 'Virginia Tech',
             },]
         },
         {
           set: [
             {
-              rank: '14',
-              name: 'Montana',
+              rank: '2',
+              name: 'Ohio St.',
             },
             {
-              rank: '3',
-              name: 'Michigan',
+              rank: '15',
+              name: 'Oral Roberts',
             },
           ]
         },
       ]
     },
     {
-      name: 'east',
+      name: 'Midwest Region',
       set: [
         {
           set: [
             {
-              rank: '16',
-              name: 'FDU/Batman',
+              rank: '1',
+              name: 'Illinois',
             },
             {
-              rank: '1',
-              name: 'Gonzaga',
+              rank: '16',
+              name: 'Drexel',
             },
           ]
         },
         {
           set: [
             {
-              rank: '9',
-              name: 'Baylor',
+              rank: '8',
+              name: 'Loyola Chicago',
             },
             {
-              rank: '8',
+              rank: '9',
+              name: 'Georgia Tech',
+            },]
+        },
+        {
+          set: [
+            {
+              rank: '5',
+              name: 'Tennessee',
+            },
+            {
+              rank: '12',
+              name: 'Oregon St.',
+            },]
+        },
+        {
+          set: [
+            {
+              rank: '4',
+              name: 'Oklahoma St.',
+            },
+            {
+              rank: '13',
+              name: 'Liberty',
+            },]
+        },
+        {
+          set: [
+            {
+              rank: '6',
+              name: 'San Diego St.',
+            },
+            {
+              rank: '11',
               name: 'Syracuse',
             },]
         },
         {
           set: [
             {
-              rank: '13',
-              name: 'Vermont',
+              rank: '3',
+              name: 'West Virginia',
             },
-            {
-              rank: '4',
-              name: 'Florida',
-            },]
-        },
-        {
-          set: [
-            {
-              rank: '12',
-              name: 'Murray',
-            },
-            {
-              rank: '5',
-              name: 'Marquette',
-            },]
-        },
-        {
-          set: [
-            {
-              rank: '11',
-              name: 'Arizona State Sun Devils',
-            },
-            {
-              rank: '6',
-              name: 'Buffalo Bulls',
-            },]
-        },
-        {
-          set: [
             {
               rank: '14',
-              name: 'Nothern',
-            },
-            {
-              rank: '3',
-              name: 'Texas Tech',
+              name: 'Morehead St.',
             },]
         },
         {
           set: [
+            {
+              rank: '7',
+              name: 'Clemson',
+            },
             {
               rank: '10',
-              name: 'Florida Gators',
-            },
-            {
-              rank: '6',
-              name: 'Navada',
+              name: 'Rutgers',
             },]
         },
         {
           set: [
             {
-              rank: '14',
-              name: 'Montana',
+              rank: '2',
+              name: 'Houston',
             },
             {
-              rank: '3',
-              name: 'Michigan',
+              rank: '15',
+              name: 'Cleveland St.',
             },
           ]
         },
       ]
     },
     {
-      name: 'midwest',
+      name: 'East Region',
       set: [
         {
           set: [
             {
-              rank: '16',
-              name: 'FDU/Batman'
+              rank: '1',
+              name: 'Michigan'
             },
             {
-              rank: '1',
-              name: 'Gonzaga',
+              rank: '16',
+              name: 'Mount St Mary\'s/Texas Southern',
             },
           ]
         },
         {
           set: [
             {
-              rank: '9',
-              name: 'Baylor',
-            },
-            {
               rank: '8',
-              name: 'Syracuse',
+              name: 'LSU',
+            },
+            {
+              rank: '9',
+              name: 'St. Bonaventure',
             },]
         },
         {
           set: [
-            {
-              rank: '13',
-              name: 'Vermont',
-            },
-            {
-              rank: '4',
-              name: 'Florida',
-            },]
-        },
-        {
-          set: [
-            {
-              rank: '12',
-              name: 'Murray',
-            },
             {
               rank: '5',
-              name: 'Marquette',
+              name: 'Colorado',
+            },
+            {
+              rank: '12',
+              name: 'Georgetown',
             },]
         },
         {
           set: [
+            {
+              rank: '4',
+              name: 'Florida St.',
+            },
+            {
+              rank: '13',
+              name: 'UNC Greensboro',
+            },]
+        },
+        {
+          set: [
+            {
+              rank: '6',
+              name: 'BYU',
+            },
             {
               rank: '11',
-              name: 'Arizona State Sun Devils',
-            },
-            {
-              rank: '6',
-              name: 'Buffalo Bulls',
+              name: 'Michigan St./UCLA',
             },]
         },
         {
           set: [
-            {
-              rank: '14',
-              name: 'Nothern',
-            },
             {
               rank: '3',
-              name: 'Texas Tech',
+              name: 'Texas',
+            },
+            {
+              rank: '14',
+              name: 'Abilene Christian',
             },]
         },
         {
           set: [
+            {
+              rank: '7',
+              name: 'UConn',
+            },
             {
               rank: '10',
-              name: 'Florida Gators',
-            },
-            {
-              rank: '6',
-              name: 'Navada',
+              name: 'Maryland',
             },]
         },
         {
           set: [
             {
-              rank: '14',
-              name: 'Montana',
+              rank: '2',
+              name: 'Alabama',
             },
             {
-              rank: '3',
-              name: 'Michigan',
+              rank: '15',
+              name: 'Iona',
             },
           ]
         },
@@ -399,7 +401,7 @@ export class MmnewviewbracketComponent implements OnInit {
 
   userBracket = {
     bracket: {
-      west: {
+      'West Region': {
         roundTwo: [
           {
             set: [
@@ -501,7 +503,7 @@ export class MmnewviewbracketComponent implements OnInit {
           }
         ]
       },
-      south: {
+      'South Region': {
         roundTwo: [
           {
             set: [
@@ -606,7 +608,7 @@ export class MmnewviewbracketComponent implements OnInit {
           }
         ]
       },
-      east: {
+      'Midwest Region': {
         roundTwo: [
           {
             set: [
@@ -712,7 +714,7 @@ export class MmnewviewbracketComponent implements OnInit {
           }
         ]
       },
-      midwest: {
+      'East Region': {
         roundTwo: [
           {
             set: [
@@ -896,11 +898,22 @@ export class MmnewviewbracketComponent implements OnInit {
     this.finalScore[0] = 0;
     this.finalScore[1] = 0;
     this.getUserBalance();
-    // this.roundFinal();
-    // this.wsb.marchMadness = this.userBracket.final;
-    // this.bsModalRef = this.modalService.show(SubmitModalComponent,
-    //   // @ts-ignore
-    //   Object.assign({}, {class: 'modal-lg', backdrop: 'static'}));
+    this.wsb.account.subscribe((data: any) => {
+      if (data && data.uid) {
+        if (!data.settings.email) {
+          this.questionair();
+        }
+      }
+    });
+  }
+
+  questionair() {
+    if (!this.questionAnswered) {
+      this.bsModalRef = this.modalService.show(QuestionairComponent,
+        // @ts-ignore
+        Object.assign({}, {class: 'modal-lg', backdrop: 'static'}));
+      this.questionAnswered = true;
+    }
   }
 
   getBracketCount(): number {

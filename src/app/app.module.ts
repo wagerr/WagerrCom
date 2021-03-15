@@ -78,6 +78,7 @@ import { MmleaderboardComponent } from './view/marchmadness/mmleaderboard/mmlead
 import { MmdashboardComponent } from './view/marchmadness/mmdashboard/mmdashboard.component';
 import { MmnewviewbracketComponent } from './view/marchmadness/mmnewviewbracket/mmnewviewbracket.component';
 import { SubmitModalComponent } from './view/marchmadness/submit-modal/submit-modal.component';
+import { QuestionairComponent } from './view/marchmadness/questionair/questionair.component';
 
 @NgModule({
   declarations: [
@@ -130,6 +131,7 @@ import { SubmitModalComponent } from './view/marchmadness/submit-modal/submit-mo
     MmdashboardComponent,
     MmnewviewbracketComponent,
     SubmitModalComponent,
+    QuestionairComponent,
   ],
   imports: [
     BrowserModule,
