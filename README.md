@@ -30,3 +30,8 @@ Angular      |  10.0.6
 ## Development server
 
 Run `npm run start` for a dev server. Navigate to `http://localhost:5100/`. The app will automatically reload if you change any of the source files.
+
+## White Label
+
+https://github.com/wagerr/WagerrCom/blob/main/src/app/view/sportsbook/sportsbook.component.ts#L33 <br>
+refAddress = your referal address
