@@ -46,7 +46,7 @@ export class SubmitModalComponent implements OnInit {
   goTwitter() {
     this.uid = this.wsb.getUserUID();
     const url = encodeURIComponent('https://wagerr.com/marchmadness/ref/' + this.uid);
-    window.open(`https://twitter.com/intent/tweet?text=March%20Madness%20Pick%27em.%0D%0A%0D%0A$100,000%20prize%20pool!%0D%0A%0D%0AFree%20Bracket%20Entry.%0D%0A%0D%0A&url={url}%0D%0A%0D%0A&hashtags=Wagerr,cryptocurrency,sportsbetting,BTC,Bitcoin,NCAA,basketball,sports,betting,MarchMadness,brackets`);
+    window.open(`https://twitter.com/intent/tweet?text=March%20Madness%20Pick%27em.%0D%0A%0D%0A$100,000%20prize%20pool!%0D%0A%0D%0AFree%20Bracket%20Entry.%0D%0A%0D%0A&url=${url}%0D%0A%0D%0A&hashtags=Wagerr,cryptocurrency,sportsbetting,BTC,Bitcoin,NCAA,basketball,sports,betting,MarchMadness,brackets`);
     this.wsb.marchMadness = {};
     this.wsb.getMarchMadnessAccount();
     this.bsModalRef.hide();
