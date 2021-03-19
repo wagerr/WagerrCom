@@ -242,10 +242,12 @@ export class WgrSportsBookService {
 
   getMarchMadnessBracketFromHash(hash: string): any {
     //Check if this is current users bracket
+    let found = false;
     const marchMadnessUser: any = this.marchMadnessUser.getValue();
     if (marchMadnessUser && marchMadnessUser.brackets) {
       marchMadnessUser.brackets.forEach((bracket: any) => {
         if (bracket.bracketHash === hash) {
+          found = true;
           const foundBracket = {
             bracket: bracket.bracketString[0],
             final: bracket
@@ -253,6 +255,9 @@ export class WgrSportsBookService {
           this.marchMadnessFoundBracket.next(foundBracket);
         }
       });
+    }
+    if (!found) {
+      this.socket.emit('getMarchMadnessBracketFromHash', hash);
     }
 }
 
