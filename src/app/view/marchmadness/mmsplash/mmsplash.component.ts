@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {AccountComponent} from "../../sportsbook/sbdisplay/account/account.component";
 import {BsModalRef, BsModalService} from "ngx-bootstrap/modal";
 import {WgrSportsBookService} from "../../../service/wgr-sports-book.service";
+import {MmVerifyBracketComponent} from "../mm-verify-bracket/mm-verify-bracket.component";
 const Filter = require('bad-words')
 
 @Component({
@@ -14,9 +15,12 @@ export class MmsplashComponent implements OnInit {
   bsModalRef: BsModalRef;
   leaderboard = false;
   createBracket = false;
+  viewBracket = false;
   editUserName = false;
   oldusername = '';
   username = '';
+  bracketHash: string;
+
   constructor(
     private wsb: WgrSportsBookService,
     private modalService: BsModalService,) { }
@@ -26,6 +30,11 @@ export class MmsplashComponent implements OnInit {
       if (data && data.uid) {
         this.userAccount = data;
         this.getUserName();
+      }
+    });
+    this.wsb.marchMadnessFoundBracket.subscribe((bracket: any) => {
+      if (bracket.final && !this.viewBracket) {
+        this.viewBracket = true;
       }
     });
   }
@@ -80,6 +89,19 @@ export class MmsplashComponent implements OnInit {
   eventStarted(): boolean {
     const canSubmit = Date.now();
     return (canSubmit > 1616169600000);
+  }
+
+  showVerifyBracket(): void {
+    if (this.viewBracket) {
+      this.wsb.marchMadnessFoundBracket.next([]);
+      this.viewBracket = false;
+      this.bracketHash = null;
+      this.createBracket = false;
+    } else {
+      this.bsModalRef = this.modalService.show(MmVerifyBracketComponent,
+        // @ts-ignore
+        Object.assign({}, {class: 'modal-lg', backdrop: 'static'}));
+    }
   }
 
 }
