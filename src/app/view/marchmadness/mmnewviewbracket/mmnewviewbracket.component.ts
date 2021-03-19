@@ -901,7 +901,7 @@ export class MmnewviewbracketComponent implements OnInit {
     this.getUserBalance();
     this.wsb.account.subscribe((data: any) => {
       if (data && data.uid) {
-        if (!data.settings.email) {
+        if (!data.settings.email && this.new) {
           this.questionair();
         }
       }
