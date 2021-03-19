@@ -79,6 +79,7 @@ import { MmdashboardComponent } from './view/marchmadness/mmdashboard/mmdashboar
 import { MmnewviewbracketComponent } from './view/marchmadness/mmnewviewbracket/mmnewviewbracket.component';
 import { SubmitModalComponent } from './view/marchmadness/submit-modal/submit-modal.component';
 import { QuestionairComponent } from './view/marchmadness/questionair/questionair.component';
+import { MmVerifyBracketComponent } from './view/marchmadness/mm-verify-bracket/mm-verify-bracket.component';
 
 @NgModule({
   declarations: [
@@ -132,6 +133,7 @@ import { QuestionairComponent } from './view/marchmadness/questionair/questionai
     MmnewviewbracketComponent,
     SubmitModalComponent,
     QuestionairComponent,
+    MmVerifyBracketComponent,
   ],
   imports: [
     BrowserModule,

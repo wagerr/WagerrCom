@@ -1,9 +1,16 @@
 <div class="d-flex flex-column flex-sm-row pt-2">
   <div class="w-100"></div>
   <div class="w-100 text-center pt-4">
-    <button class="btn round-btn btn-sportsbook3 w-50 text-uppercase font-arboria-bold" *ngIf="isLoggedIn()"
-            [ngClass]="this.createBracket ? 'active' : ''" (click)="toggleCreateBracket()">Create Bracket
-    </button>
+    <ng-container *ngIf="!eventStarted()">
+      <button class="btn round-btn btn-sportsbook3 w-50 text-uppercase font-arboria-bold py-2" *ngIf="isLoggedIn()"
+              [ngClass]="this.createBracket ? 'active' : ''" (click)="toggleCreateBracket()">Create Bracket
+      </button>
+    </ng-container>
+    <ng-container *ngIf="eventStarted()">
+      <button class="btn round-btn btn-sportsbook3 w-50 text-uppercase font-arboria-bold py-2" *ngIf="isLoggedIn()"
+              [ngClass]="this.viewBracket ? 'active' : ''" (click)="showVerifyBracket()">Verify Bracket
+      </button>
+    </ng-container>
   </div>
   <div class="w-100 d-flex flex-column py-2 px-3" *ngIf="isLoggedIn()">
     <div class="w-100 font-arboria-bold text-black text-uppercase text-center">your leaderboard username</div>
@@ -20,13 +27,19 @@
 <ng-container *ngIf="createBracket">
   <app-mmnewviewbracket [new]="true"></app-mmnewviewbracket>
 </ng-container>
-<ng-container *ngIf="!createBracket">
+<ng-container *ngIf="viewBracket">
+  <app-mmnewviewbracket [new]="false" [hash]="bracketHash"></app-mmnewviewbracket>
+</ng-container>
+<ng-container *ngIf="!createBracket && !viewBracket">
   <div class="d-flex flex-column flex-sm-row">
     <div class="w-100"></div>
     <div class="w-100 font-arboria-bold text-black d-flex flex-column pt-3">
       <div class="w-100 font20px text-center">Your Brackets</div>
       <ng-container *ngFor="let bracket of brackets; let i = index">
+        <div class="w-100 d-flex flex-row">
         <div class="w-100 pl-2">{{(i + 1)}}. {{getBracketChamp(bracket.bracketString)}}</div>
+        <div class="w-50 pr-2"><button class="btn round-btn btn-sportsbook m-0 p-0" (click)="toggleViewBracket(bracket.bracketHash)">View Bracket</button></div>
+        </div>
       </ng-container>
     </div>
     <div class="w-100 font-arboria-bold text-black d-flex flex-column border-left pl-2 pt-3">

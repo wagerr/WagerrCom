@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {WgrSportsBookService} from "../../../service/wgr-sports-book.service";
+import {QuestionairComponent} from "../questionair/questionair.component";
+import {BsModalRef, BsModalService} from "ngx-bootstrap/modal";
+import {MmVerifyBracketComponent} from "../mm-verify-bracket/mm-verify-bracket.component";
 const Filter = require('bad-words')
 
 @Component({
@@ -8,15 +11,19 @@ const Filter = require('bad-words')
   styleUrls: ['./mmdashboard.component.scss']
 })
 export class MmdashboardComponent implements OnInit {
+  bsModalRef: BsModalRef;
   createBracket = false;
+  viewBracket = false;
   editUserName = false;
   username = '';
   oldusername = '';
   userAccount: any;
   brackets: any = {};
+  bracketHash: string;
 
   constructor(
-    private wsb: WgrSportsBookService,) { }
+    private wsb: WgrSportsBookService,
+    private modalService: BsModalService) { }
 
   ngOnInit(): void {
     this.wsb.getMarchMadnessLeaderboard();
@@ -29,6 +36,11 @@ export class MmdashboardComponent implements OnInit {
     this.wsb.marchMadnessUser.subscribe((data: any) => {
       if (data && data.brackets) {
         this.brackets = data.brackets;
+      }
+    });
+    this.wsb.marchMadnessFoundBracket.subscribe((bracket: any) => {
+      if (bracket.final && !this.viewBracket) {
+        this.viewBracket = true;
       }
     });
   }
@@ -55,7 +67,14 @@ export class MmdashboardComponent implements OnInit {
   }
 
   toggleCreateBracket() {
+    this.viewBracket = false;
     this.createBracket = !this.createBracket;
+  }
+
+  toggleViewBracket(string: any) {
+    this.bracketHash = string;
+    this.createBracket = false;
+    this.viewBracket = !this.viewBracket;
   }
 
   getUserName() {
@@ -69,4 +88,23 @@ export class MmdashboardComponent implements OnInit {
   getBracketChamp(bracket): string {
     return bracket[0].finalFour.roundSeven[0].set[0].name;
   }
+
+  eventStarted(): boolean {
+    const canSubmit = Date.now();
+    return (canSubmit > 1616169600000);
+  }
+
+  showVerifyBracket(): void {
+    if (this.viewBracket) {
+      this.wsb.marchMadnessFoundBracket.next([]);
+      this.viewBracket = false;
+      this.bracketHash = null;
+      this.createBracket = false;
+    } else {
+      this.bsModalRef = this.modalService.show(MmVerifyBracketComponent,
+        // @ts-ignore
+        Object.assign({}, {class: 'modal-lg', backdrop: 'static'}));
+    }
+  }
+
 }

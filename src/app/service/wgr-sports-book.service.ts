@@ -36,6 +36,7 @@ export class WgrSportsBookService {
   exchangeRates = new BehaviorSubject([]);
   marchMadnessUser: any = new BehaviorSubject([]);
   marchMadnessLeaderboard: any = new BehaviorSubject([]);
+  marchMadnessFoundBracket: any = new BehaviorSubject([]);
   qrCodeChannelSet = false;
   marchMadness: any;
 
@@ -98,6 +99,15 @@ export class WgrSportsBookService {
       .fromEvent<any[]>('marchMadnessLeaderboard')
       .subscribe((data: any) => {
         this.marchMadnessLeaderboard.next(data);
+      });
+    this.socket
+      .fromEvent<any[]>('getMarchMadnessBracketFromHash')
+      .subscribe((data: any) => {
+        const foundBracket = {
+          bracket: data.bracketString[0],
+          final: data
+        };
+        this.marchMadnessFoundBracket.next(foundBracket);
       });
     this.socket
       .fromEvent<any[]>('betpushed')
@@ -238,6 +248,27 @@ export class WgrSportsBookService {
   getMarchMadnessLeaderboard(): any {
     this.socket.emit('marchMadnessLeaderboard');
   }
+
+  getMarchMadnessBracketFromHash(hash: string): any {
+    //Check if this is current users bracket
+    let found = false;
+    const marchMadnessUser: any = this.marchMadnessUser.getValue();
+    if (marchMadnessUser && marchMadnessUser.brackets) {
+      marchMadnessUser.brackets.forEach((bracket: any) => {
+        if (bracket.bracketHash === hash) {
+          found = true;
+          const foundBracket = {
+            bracket: bracket.bracketString[0],
+            final: bracket
+          };
+          this.marchMadnessFoundBracket.next(foundBracket);
+        }
+      });
+    }
+    if (!found) {
+      this.socket.emit('getMarchMadnessBracketFromHash', hash);
+    }
+}
 
   public getMarchMadnessBracketCount(): number {
     const marchMadnessUser: any = this.marchMadnessUser.getValue();
