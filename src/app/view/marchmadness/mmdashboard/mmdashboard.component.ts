@@ -38,6 +38,11 @@ export class MmdashboardComponent implements OnInit {
         this.brackets = data.brackets;
       }
     });
+    this.wsb.marchMadnessFoundBracket.subscribe((bracket: any) => {
+      if (bracket.final && !this.viewBracket) {
+        this.viewBracket = true;
+      }
+    });
   }
 
   filterName() {
@@ -95,15 +100,11 @@ export class MmdashboardComponent implements OnInit {
       this.viewBracket = false;
       this.bracketHash = null;
       this.createBracket = false;
+    } else {
+      this.bsModalRef = this.modalService.show(MmVerifyBracketComponent,
+        // @ts-ignore
+        Object.assign({}, {class: 'modal-lg', backdrop: 'static'}));
     }
-    this.bsModalRef = this.modalService.show(MmVerifyBracketComponent,
-      // @ts-ignore
-      Object.assign({}, {class: 'modal-lg', backdrop: 'static'}));
-    this.wsb.marchMadnessFoundBracket.subscribe((bracket: any) => {
-      if (bracket.final) {
-        this.viewBracket = true;
-      }
-    });
   }
 
 }
