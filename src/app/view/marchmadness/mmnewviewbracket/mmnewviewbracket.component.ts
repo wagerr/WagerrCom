@@ -12,6 +12,7 @@ import {QuestionairComponent} from "../questionair/questionair.component";
 export class MmnewviewbracketComponent implements OnInit {
   bsModalRef: BsModalRef;
   @Input() new: boolean;
+  @Input() hash: string;
   questionAnswered: boolean;
 
   baseBracket = [
@@ -905,6 +906,19 @@ export class MmnewviewbracketComponent implements OnInit {
         }
       }
     });
+    if (!this.new) {
+      this.wsb.marchMadnessFoundBracket.subscribe((bracket: any) => {
+        if (bracket.final) {
+          this.hash = bracket.final.bracketHash;
+          console.log('foundBracket', bracket);
+          this.userBracket = bracket;
+          this.finalScore[0] = this.userBracket.final.home;
+          this.finalScore[1] = this.userBracket.final.away;
+        }
+      });
+      this.wsb.getMarchMadnessBracketFromHash(this.hash);
+
+    }
   }
 
   questionair() {
@@ -944,12 +958,14 @@ export class MmnewviewbracketComponent implements OnInit {
 
   isSelected(round, i, ti, bracket) {
     let ret = false;
-    const roundLook = Math.floor(i / 2);
-    if (this.userBracket.bracket[bracket][round][roundLook].set[0] === ti) {
-      ret = true;
-    }
-    if (this.userBracket.bracket[bracket][round][roundLook].set[1] === ti) {
-      ret = true;
+    if (this.new) {
+      const roundLook = Math.floor(i / 2);
+      if (this.userBracket.bracket[bracket][round][roundLook].set[0] === ti) {
+        ret = true;
+      }
+      if (this.userBracket.bracket[bracket][round][roundLook].set[1] === ti) {
+        ret = true;
+      }
     }
     return ret;
   }
@@ -996,82 +1012,93 @@ export class MmnewviewbracketComponent implements OnInit {
   }
 
   baseSelect(basei, i, ti, bracket) {
-    let set = 0;
-    const round = Math.floor(i / 2);
-    if (i & 1) {
-      set = 1
-    } else {
-      set = 0
+    if (this.new) {
+      let set = 0;
+      const round = Math.floor(i / 2);
+      if (i & 1) {
+        set = 1
+      } else {
+        set = 0
+      }
+      this.roundChangeClear(bracket, 'roundTwo', this.userBracket.bracket[bracket].roundTwo[round].set[set]);
+      this.userBracket.bracket[bracket].roundTwo[round].set[set] = this.baseBracket[basei].set[i].set[ti]
     }
-    this.roundChangeClear(bracket, 'roundTwo', this.userBracket.bracket[bracket].roundTwo[round].set[set]);
-    this.userBracket.bracket[bracket].roundTwo[round].set[set] = this.baseBracket[basei].set[i].set[ti]
   }
 
   roundTwo(i, ti, bracket) {
-
-    let set = 0;
-    const round = Math.floor(i / 2);
-    if (i & 1) {
-      set = 1
-    } else {
-      set = 0
-    }
-    if (this.verifyBracket(this.userBracket.bracket[bracket].roundTwo[i].set)) {
-      this.roundChangeClear(bracket, 'roundThree', this.userBracket.bracket[bracket].roundThree[round].set[set]);
-      this.userBracket.bracket[bracket].roundThree[round].set[set] = this.userBracket.bracket[bracket].roundTwo[i].set[ti]
+    if (this.new) {
+      let set = 0;
+      const round = Math.floor(i / 2);
+      if (i & 1) {
+        set = 1
+      } else {
+        set = 0
+      }
+      if (this.verifyBracket(this.userBracket.bracket[bracket].roundTwo[i].set)) {
+        this.roundChangeClear(bracket, 'roundThree', this.userBracket.bracket[bracket].roundThree[round].set[set]);
+        this.userBracket.bracket[bracket].roundThree[round].set[set] = this.userBracket.bracket[bracket].roundTwo[i].set[ti]
+      }
     }
   }
 
   roundThree(i, ti, bracket) {
-    let set = 0;
-    const round = Math.floor(i / 2);
-    if (i & 1) {
-      set = 1
-    } else {
-      set = 0
-    }
-    if (this.verifyBracket(this.userBracket.bracket[bracket].roundThree[i].set)) {
-      this.roundChangeClear(bracket, 'roundFour', this.userBracket.bracket[bracket].roundFour[round].set[set]);
-      this.userBracket.bracket[bracket].roundFour[round].set[set] = this.userBracket.bracket[bracket].roundThree[i].set[ti]
+    if (this.new) {
+      let set = 0;
+      const round = Math.floor(i / 2);
+      if (i & 1) {
+        set = 1
+      } else {
+        set = 0
+      }
+      if (this.verifyBracket(this.userBracket.bracket[bracket].roundThree[i].set)) {
+        this.roundChangeClear(bracket, 'roundFour', this.userBracket.bracket[bracket].roundFour[round].set[set]);
+        this.userBracket.bracket[bracket].roundFour[round].set[set] = this.userBracket.bracket[bracket].roundThree[i].set[ti]
+      }
     }
   }
 
   roundFour(i, ti, basei, bracket) {
-    let set = 0;
-    const round = Math.floor(basei / 2);
-    if (basei & 1) {
-      set = 1
-    } else {
-      set = 0
-    }
-    if (this.verifyBracket(this.userBracket.bracket[bracket].roundFour[i].set)) {
-      this.roundChangeClear('finalFour', 'roundFive', this.userBracket.bracket.finalFour.roundFive[round].set[set]);
-      this.userBracket.bracket.finalFour.roundFive[round].set[set] = this.userBracket.bracket[bracket].roundFour[i].set[ti]
+    if (this.new) {
+      let set = 0;
+      const round = Math.floor(basei / 2);
+      if (basei & 1) {
+        set = 1
+      } else {
+        set = 0
+      }
+      if (this.verifyBracket(this.userBracket.bracket[bracket].roundFour[i].set)) {
+        this.roundChangeClear('finalFour', 'roundFive', this.userBracket.bracket.finalFour.roundFive[round].set[set]);
+        this.userBracket.bracket.finalFour.roundFive[round].set[set] = this.userBracket.bracket[bracket].roundFour[i].set[ti]
+      }
     }
   }
 
   roundFive(i, ti) {
-    let set = 0;
-    if (i & 1) {
-      set = 1
-    } else {
-      set = 0
-    }
-    if (this.verifyBracket(this.userBracket.bracket.finalFour.roundFive[i].set)) {
-      this.roundChangeClear('finalFour', 'roundSix', this.userBracket.bracket.finalFour.roundSix[0].set[set]);
-      this.userBracket.bracket.finalFour.roundSix[0].set[set] = this.userBracket.bracket.finalFour.roundFive[i].set[ti]
+    if (this.new) {
+      let set = 0;
+      if (i & 1) {
+        set = 1
+      } else {
+        set = 0
+      }
+      if (this.verifyBracket(this.userBracket.bracket.finalFour.roundFive[i].set)) {
+        this.roundChangeClear('finalFour', 'roundSix', this.userBracket.bracket.finalFour.roundSix[0].set[set]);
+        this.userBracket.bracket.finalFour.roundSix[0].set[set] = this.userBracket.bracket.finalFour.roundFive[i].set[ti]
+      }
     }
   }
 
   roundSix(i, ti) {
-    let set = 0;
-    if (i & 1) {
-      set = 1
-    } else {
-      set = 0
-    }
-    if (this.verifyBracket(this.userBracket.bracket.finalFour.roundSix[i].set)) {
-      this.userBracket.bracket.finalFour.roundSeven[0].set[set] = this.userBracket.bracket.finalFour.roundSix[i].set[ti]
+    if (this.new) {
+      let set = 0;
+      if (i & 1) {
+        set = 1
+      } else {
+        set = 0
+      }
+      if (this.verifyBracket(this.userBracket.bracket.finalFour.roundSix[i].set)) {
+        this.userBracket.bracket.finalFour.roundSeven[0].set[set] = this.userBracket.bracket.finalFour.roundSix[i].set[ti]
+      }
     }
   }
 
@@ -1132,6 +1159,10 @@ export class MmnewviewbracketComponent implements OnInit {
       return true;
     }
     return false;
+  }
+
+  getJson(object: any) {
+    return JSON.stringify(object);
   }
 
 }

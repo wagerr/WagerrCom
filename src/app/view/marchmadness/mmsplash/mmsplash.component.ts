@@ -77,4 +77,9 @@ export class MmsplashComponent implements OnInit {
     return this.wsb.isLoggedIn();
   }
 
+  eventStarted(): boolean {
+    const canSubmit = Date.now();
+    return (canSubmit > 1616169600000);
+  }
+
 }

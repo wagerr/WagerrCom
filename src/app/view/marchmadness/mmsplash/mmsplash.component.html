@@ -4,9 +4,16 @@
     <button class="btn round-btn btn-sportsbook3 w-50 text-uppercase font-arboria-bold py-2" (click)="openModalAccount()"
             *ngIf="!isLoggedIn()">Sign Up
     </button>
-    <button class="btn round-btn btn-sportsbook3 w-50 text-uppercase font-arboria-bold py-2" *ngIf="isLoggedIn()"
-            [ngClass]="this.createBracket ? 'active' : ''" (click)="toggleCreateBracket()">Create Bracket
-    </button>
+    <ng-container *ngIf="!eventStarted()">
+      <button class="btn round-btn btn-sportsbook3 w-50 text-uppercase font-arboria-bold py-2" *ngIf="isLoggedIn()"
+              [ngClass]="this.createBracket ? 'active' : ''" (click)="toggleCreateBracket()">Create Bracket
+      </button>
+    </ng-container>
+    <ng-container *ngIf="eventStarted()">
+      <button class="btn round-btn btn-sportsbook3 w-50 text-uppercase font-arboria-bold py-2" *ngIf="isLoggedIn()"
+              [ngClass]="this.createBracket ? 'active' : ''" (click)="toggleCreateBracket()">Verify Bracket
+      </button>
+    </ng-container>
   </div>
   <div class="w-100 d-flex flex-column py-2 px-3" *ngIf="isLoggedIn()">
     <div class="w-100 font-arboria-bold text-black text-uppercase text-center">your leaderboard username</div>

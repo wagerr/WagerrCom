@@ -1,0 +1,17 @@
+<div class="modal-body">
+  <div class="d-flex flex-row">
+    <div class="w-25"></div>
+    <div class="w-100 d-flex flex-column">
+      <div class="w-100 text-center text-uppercase font-arboria-bold font33px py-4">VERIFY BRACKET</div>
+      <div class="w-100 text-center text-uppercase font-arboria-bold font16px py-4"><input type="text" class="w-100" [(ngModel)]="hash"></div>
+      <div class="w-100 d-flex flex-row py-3 mb-3">
+        <div class="w-50"></div>
+        <div class="w-100 font-arboria-book text-uppercase font12px">
+          <button class="btn round-btn btn-sportsbook btn-sportsbook" (click)="getBracket()" *ngIf="hash !== null">VERIFY</button>
+        </div>
+        <div class="w-50"></div>
+      </div>
+    </div>
+    <div class="w-25"></div>
+  </div>
+</div>
