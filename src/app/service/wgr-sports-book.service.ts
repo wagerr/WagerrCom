@@ -101,6 +101,15 @@ export class WgrSportsBookService {
         this.marchMadnessLeaderboard.next(data);
       });
     this.socket
+      .fromEvent<any[]>('getMarchMadnessBracketFromHash')
+      .subscribe((data: any) => {
+        const foundBracket = {
+          bracket: data.bracketString[0],
+          final: data
+        };
+        this.marchMadnessFoundBracket.next(foundBracket);
+      });
+    this.socket
       .fromEvent<any[]>('betpushed')
       .subscribe((data: any) => {
         this.updateBets(data);
