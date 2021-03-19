@@ -11,7 +11,7 @@
     </ng-container>
     <ng-container *ngIf="eventStarted()">
       <button class="btn round-btn btn-sportsbook3 w-50 text-uppercase font-arboria-bold py-2" *ngIf="isLoggedIn()"
-              [ngClass]="this.createBracket ? 'active' : ''" (click)="toggleCreateBracket()">Verify Bracket
+              [ngClass]="this.viewBracket ? 'active' : ''" (click)="showVerifyBracket()">Verify Bracket
       </button>
     </ng-container>
   </div>
@@ -45,7 +45,10 @@
   <ng-container *ngIf="createBracket">
     <app-mmnewviewbracket [new]="true"></app-mmnewviewbracket>
   </ng-container>
-  <ng-container *ngIf="!createBracket">
+  <ng-container *ngIf="viewBracket">
+    <app-mmnewviewbracket [new]="false" [hash]="bracketHash"></app-mmnewviewbracket>
+  </ng-container>
+  <ng-container *ngIf="!createBracket && !viewBracket">
     <div class="d-flex flex-column flex-sm-row pt-3">
       <div class="w-100"></div>
       <div class="w-100 text-center"><img src="assets/images/MMfirst.svg" class="img-fluid widthSize300px"></div>
