@@ -21,4 +21,8 @@ export class MmleaderboardComponent implements OnInit {
     this.wsb.getMarchMadnessLeaderboard();
   }
 
+  toggleViewBracket(hash: string): void {
+    this.wsb.getMarchMadnessBracketFromHash(hash);
+
+}
 }
