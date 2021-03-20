@@ -17,7 +17,8 @@
     <div class="w-100 font-arboria-bold text-black text-center border border-dark mt-1 d-flex">
       <input class="border-0 text-center w-100 font-arboria-bold text-black" type="text" [(ngModel)]="username"
              (keyup)="filterName()" placeholder="Enter Custom Username" [disabled]="!editUserName">
-      <div class="pull-right border-left border-dark px-2" [ngClass]="(editUserName) ? 'fontColorE6' : ''" tooltip="edit/save username" (click)="editUsername()"><i class="fas fa-edit"></i></div>
+      <div class="pull-right border-left border-dark px-2" [ngClass]="(editUserName) ? 'fontColorE6' : ''"
+           tooltip="edit/save username" (click)="editUsername()"><i class="fas fa-edit"></i></div>
     </div>
   </div>
   <div class="w-100 text-center pt-4 py-2">
@@ -37,8 +38,13 @@
       <div class="w-100 font20px text-center">Your Brackets</div>
       <ng-container *ngFor="let bracket of brackets; let i = index">
         <div class="w-100 d-flex flex-row">
-        <div class="w-100 pl-2">{{(i + 1)}}. {{getBracketChamp(bracket.bracketString)}}</div>
-        <div class="w-50 pr-2"><button class="btn round-btn btn-sportsbook m-0 p-0" (click)="toggleViewBracket(bracket.bracketHash)">View Bracket</button></div>
+          <div class="w-100 pl-2">{{(i + 1)}}. {{getBracketChamp(bracket.bracketString)}}</div>
+          <div class="w-25">{{bracket.points}} pts</div>
+          <div class="w-50 pr-2">
+            <button class="btn round-btn btn-sportsbook m-0 p-0" (click)="toggleViewBracket(bracket.bracketHash)">View
+              Bracket
+            </button>
+          </div>
         </div>
       </ng-container>
     </div>
