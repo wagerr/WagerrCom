@@ -241,6 +241,11 @@ export class WgrSportsBookService {
     return 0.00000000;
   }
 
+  getMarchMadnessFinalBracket(): any {
+    const marchMadnessUser: any = this.marchMadnessUser.getValue();
+    return marchMadnessUser.finalBracket;
+  }
+
   getMarchMadnessAccount(): any {
     this.socket.emit('getMarchMadnessData', this.userAccount.betAddress);
   }

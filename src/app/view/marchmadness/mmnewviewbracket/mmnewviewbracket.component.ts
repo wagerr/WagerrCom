@@ -400,6 +400,8 @@ export class MmnewviewbracketComponent implements OnInit {
 
   finalScore: any = [];
 
+  finalBracket: any = {};
+
   userBracket = {
     bracket: {
       'West Region': {
@@ -907,10 +909,11 @@ export class MmnewviewbracketComponent implements OnInit {
       }
     });
     if (!this.new) {
+      this.finalBracket = this.wsb.getMarchMadnessFinalBracket();
+      console.log('finalBracket', this.finalBracket);
       this.wsb.marchMadnessFoundBracket.subscribe((bracket: any) => {
         if (bracket.final) {
           this.hash = bracket.final.bracketHash;
-          console.log('foundBracket', bracket);
           this.userBracket = bracket;
           this.finalScore[0] = this.userBracket.final.home;
           this.finalScore[1] = this.userBracket.final.away;
@@ -956,15 +959,23 @@ export class MmnewviewbracketComponent implements OnInit {
     return (this.finalScore[1] >= this.finalScore[0])
   }
 
-  isSelected(round, i, ti, bracket) {
-    let ret = false;
+  isSelected(round, i, ti, bracket): string {
+    let ret = '';
+    const roundLook = Math.floor(i / 2);
     if (this.new) {
-      const roundLook = Math.floor(i / 2);
-      if (this.userBracket.bracket[bracket][round][roundLook].set[0] === ti) {
-        ret = true;
+      if (this.userBracket.bracket[bracket][round][roundLook].set[0].name === ti.name) {
+        ret = 'mmSelected';
       }
-      if (this.userBracket.bracket[bracket][round][roundLook].set[1] === ti) {
-        ret = true;
+      if (this.userBracket.bracket[bracket][round][roundLook].set[1].name === ti.name) {
+        ret = 'mmSelected';
+      }
+    } if (!this.new) {
+      ret = 'mmFLose';
+      if (this.finalBracket[bracket][round][roundLook].set[0].name === ti.name) {
+        ret = 'mmFWin';
+      }
+      if (this.finalBracket[bracket][round][roundLook].set[1] && this.finalBracket[bracket][round][roundLook].set[1].name === ti.name) {
+        ret = 'mmFWin';
       }
     }
     return ret;
