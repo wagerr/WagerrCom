@@ -21,7 +21,8 @@ export class EurousoddsComponent implements OnInit {
     if (points > 2) {
       beforeOdds = ((points - 1) * 100);
     } else {
-      beforeOdds = ((-100) / (points - 1));
+      let newPoints = (points - 1);
+      beforeOdds = (newPoints > 0) ? ((-100) / newPoints) : -100;
     }
     odds = Math.round(beforeOdds);
     let finalOdds: string = odds.toString();
