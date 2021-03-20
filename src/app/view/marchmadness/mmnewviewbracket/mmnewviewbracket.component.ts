@@ -910,9 +910,9 @@ export class MmnewviewbracketComponent implements OnInit {
     });
     if (!this.new) {
       this.finalBracket = this.wsb.getMarchMadnessFinalBracket();
-      console.log('finalBracket', this.finalBracket);
       this.wsb.marchMadnessFoundBracket.subscribe((bracket: any) => {
         if (bracket.final) {
+          console.log('bracket', bracket);
           this.hash = bracket.final.bracketHash;
           this.userBracket = bracket;
           this.finalScore[0] = this.userBracket.final.home;

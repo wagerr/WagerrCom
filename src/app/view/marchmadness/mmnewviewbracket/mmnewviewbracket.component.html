@@ -1,5 +1,11 @@
 <ng-container *ngIf="getBracketCount() < 2 || !new">
-
+<ng-container *ngIf="!new">
+  <div class="d-flex flex-row mt-4">
+    <div class="w-25"></div>
+    <div class="w-100 text-center text-uppercase font-arboria-bold text-black font26px">{{userBracket.final.username}} Bracket</div>
+    <div class="w-25"></div>
+  </div>
+</ng-container>
 <ng-container *ngFor="let bracket of baseBracket; let basei = index">
   <div class="d-flex flex-row mt-4">
     <div class="w-25"></div>
