@@ -34,6 +34,7 @@ export class MmsplashComponent implements OnInit {
     });
     this.wsb.marchMadnessFoundBracket.subscribe((bracket: any) => {
       if (bracket.final && !this.viewBracket) {
+        this.leaderboard = false;
         this.viewBracket = true;
       }
     });
@@ -61,6 +62,7 @@ export class MmsplashComponent implements OnInit {
   }
 
   toggleLeaderBoard() {
+    this.viewBracket = false;
     this.createBracket = false;
     this.leaderboard = !this.leaderboard;
   }

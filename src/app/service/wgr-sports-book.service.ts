@@ -37,6 +37,7 @@ export class WgrSportsBookService {
   marchMadnessUser: any = new BehaviorSubject([]);
   marchMadnessLeaderboard: any = new BehaviorSubject([]);
   marchMadnessFoundBracket: any = new BehaviorSubject([]);
+  marchMadnessFinalBracket: any = new BehaviorSubject([]);
   qrCodeChannelSet = false;
   marchMadness: any;
 
@@ -99,6 +100,11 @@ export class WgrSportsBookService {
       .fromEvent<any[]>('marchMadnessLeaderboard')
       .subscribe((data: any) => {
         this.marchMadnessLeaderboard.next(data);
+      });
+    this.socket
+      .fromEvent<any[]>('marchMadnessFinalBracket')
+      .subscribe((data: any) => {
+        this.marchMadnessFinalBracket.next(data);
       });
     this.socket
       .fromEvent<any[]>('getMarchMadnessBracketFromHash')
@@ -242,8 +248,7 @@ export class WgrSportsBookService {
   }
 
   getMarchMadnessFinalBracket(): any {
-    const marchMadnessUser: any = this.marchMadnessUser.getValue();
-    return marchMadnessUser.finalBracket;
+    return this.marchMadnessFinalBracket.getValue();
   }
 
   getMarchMadnessAccount(): any {
