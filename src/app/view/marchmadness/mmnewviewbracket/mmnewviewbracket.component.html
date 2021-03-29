@@ -1,162 +1,170 @@
 <ng-container *ngIf="getBracketCount() < 2 || !new">
-<ng-container *ngIf="!new">
+  <ng-container *ngIf="!new">
+    <div class="d-flex flex-row mt-4">
+      <div class="w-25"></div>
+      <div class="w-100 text-center text-uppercase font-arboria-bold text-black font26px">{{userBracket.final.username}}
+        Bracket
+      </div>
+      <div class="w-25"></div>
+    </div>
+  </ng-container>
+  <ng-container *ngFor="let bracket of baseBracket; let basei = index">
+    <div class="d-flex flex-row mt-4">
+      <div class="w-25"></div>
+      <div class="w-100 text-uppercase font-arboria-bold text-black font26px">{{bracket.name}}</div>
+      <div class="w-25"></div>
+    </div>
+    <div class="d-flex flex-row">
+      <div class="w-25"></div>
+      <div class="w-100 d-flex flex-column flex-sm-row">
+        <div class="w-100 d-flex flex-column text-black">
+          <div class="w-100 font-arboria-book font16px text-center">Round of 64</div>
+          <ng-container *ngFor="let base of bracket.set; let i = index">
+            <div class="w-100 my-2">
+              <ng-container *ngFor="let set of base.set; let ti = index">
+                <div class="w-100 font-arboria-bold font16px border-dark border p-1"
+                     [ngClass]="isSelected('roundTwo', i, set, bracket.name)"
+                     (click)="baseSelect(basei, i, ti, bracket.name)">{{set.rank}}&nbsp;{{set.name}}</div>
+              </ng-container>
+            </div>
+          </ng-container>
+        </div>
+        <div class="w-25"></div>
+        <div class="w-100 d-flex flex-column text-black round32pt">
+          <div class="w-100 font-arboria-book font16px text-center">Round of 32</div>
+          <ng-container *ngFor="let base of userBracket.bracket[bracket.name].roundTwo; let i = index">
+            <div class="w-100" [ngClass]="i > 0 ? 'round32mm' : ''">
+              <ng-container *ngFor="let set of base.set; let ti = index">
+                <div class="w-100 font-arboria-bold font16px border-dark border p-1"
+                     [ngClass]="isSelected('roundThree', i, set, bracket.name)"
+                     (click)="roundTwo(i, ti, bracket.name)">{{set.rank}}&nbsp;{{set.name}}</div>
+              </ng-container>
+            </div>
+          </ng-container>
+        </div>
+        <div class="w-25"></div>
+        <div class="w-100 d-flex flex-column text-black round16pt">
+          <div class="w-100 font-arboria-book font16px text-center">Round of 16</div>
+          <ng-container *ngFor="let base of userBracket.bracket[bracket.name].roundThree; let i = index">
+            <div class="w-100 " [ngClass]="i > 0 ? 'round16mm' : ''">
+              <ng-container *ngFor="let set of base.set; let ti = index">
+                <div class="w-100 font-arboria-bold font16px border-dark border p-1"
+                     [ngClass]="isSelected('roundFour', i, set,  bracket.name)"
+                     (click)="roundThree(i, ti, bracket.name)">{{set.rank}}&nbsp;{{set.name}}</div>
+              </ng-container>
+            </div>
+          </ng-container>
+        </div>
+        <div class="w-25"></div>
+        <div class="w-100 d-flex flex-column text-black round8pt">
+          <div class="w-100 font-arboria-book font16px text-center">Round of 8</div>
+          <ng-container *ngFor="let base of userBracket.bracket[bracket.name].roundFour; let i = index">
+            <div class="w-100">
+              <ng-container *ngFor="let set of base.set; let ti = index">
+                <div
+                  class="w-100 font-arboria-bold font16px border-dark border p-1"
+                  [ngClass]="isSelected('roundFive', basei, set,  'finalFour')"
+                  (click)="roundFour(i, ti, basei, bracket.name)">{{set.rank}}&nbsp;{{set.name}}</div>
+              </ng-container>
+            </div>
+          </ng-container>
+        </div>
+      </div>
+      <div class="w-25"></div>
+    </div>
+    <div class="d-flex flex-row mt-4">
+      <div class="w-25"></div>
+      <div class="w-100 border-bottom border-dark"></div>
+      <div class="w-25"></div>
+    </div>
+  </ng-container>
   <div class="d-flex flex-row mt-4">
     <div class="w-25"></div>
-    <div class="w-100 text-center text-uppercase font-arboria-bold text-black font26px">{{userBracket.final.username}} Bracket</div>
-    <div class="w-25"></div>
-  </div>
-</ng-container>
-<ng-container *ngFor="let bracket of baseBracket; let basei = index">
-  <div class="d-flex flex-row mt-4">
-    <div class="w-25"></div>
-    <div class="w-100 text-uppercase font-arboria-bold text-black font26px">{{bracket.name}}</div>
+    <div class="w-100 text-uppercase font-arboria-bold text-black font26px">Final Four</div>
     <div class="w-25"></div>
   </div>
   <div class="d-flex flex-row">
     <div class="w-25"></div>
     <div class="w-100 d-flex flex-column flex-sm-row">
       <div class="w-100 d-flex flex-column text-black">
-        <div class="w-100 font-arboria-book font16px text-center">Round of 64</div>
-        <ng-container *ngFor="let base of bracket.set; let i = index">
-          <div class="w-100 my-2">
+        <div class="w-100 font-arboria-book font16px text-center">Round of 4</div>
+        <ng-container *ngFor="let base of userBracket.bracket.finalFour.roundFive; let i = index">
+          <div class="w-100 my-2" [ngClass]="i > 0 ? 'round4mm' : ''">
             <ng-container *ngFor="let set of base.set; let ti = index">
-              <div class="w-100 font-arboria-bold font16px border-dark border p-1"
-                   [ngClass]="isSelected('roundTwo', i, set, bracket.name)"
-                   (click)="baseSelect(basei, i, ti, bracket.name)">{{set.rank}}&nbsp;{{set.name}}</div>
+              <div
+                class="w-100 font-arboria-bold font16px border-dark border p-1"
+                [ngClass]="isSelected('roundSix', i, set,  'finalFour')"
+                (click)="roundFive(i, ti)">{{set.rank}}&nbsp;{{set.name}}</div>
             </ng-container>
           </div>
         </ng-container>
       </div>
       <div class="w-25"></div>
-      <div class="w-100 d-flex flex-column text-black round32pt">
-        <div class="w-100 font-arboria-book font16px text-center">Round of 32</div>
-        <ng-container *ngFor="let base of userBracket.bracket[bracket.name].roundTwo; let i = index">
-          <div class="w-100" [ngClass]="i > 0 ? 'round32mm' : ''">
-            <ng-container *ngFor="let set of base.set; let ti = index">
-              <div class="w-100 font-arboria-bold font16px border-dark border p-1"
-                   [ngClass]="isSelected('roundThree', i, set, bracket.name)"
-                   (click)="roundTwo(i, ti, bracket.name)">{{set.rank}}&nbsp;{{set.name}}</div>
-            </ng-container>
+      <div class="w-100 d-flex flex-column text-black round2pt">
+        <div class="w-100 font-arboria-book font16px text-center">
+          <div class="w-100 d-flex flex-row">
+            <div class="w-100 font-arboria-bold font16px p-1">Championship</div>
+            <div class="w-auto font-arboria-bold font16px p-1">Score</div>
           </div>
+        </div>
+        <ng-container *ngFor="let base of userBracket.bracket.finalFour.roundSix; let i = index">
+          <ng-container *ngFor="let set of base.set; let ti = index">
+            <div class="w-100 d-flex flex-row">
+              <div
+                class="w-100 font-arboria-bold font16px border  border-dark border-bottom p-1"
+                [ngClass]="isSelected('roundSeven', i, set,  'finalFour')"
+                (click)="roundSix(i, ti)"
+              >{{set.rank}}&nbsp;{{set.name}}</div>
+              <div class="w-auto"><input [(ngModel)]="finalScore[ti]" [ngClass]="!validateScore() ? 'border-red' : ''"
+                                         type="number" class="score ml-1"></div>
+            </div>
+          </ng-container>
         </ng-container>
       </div>
       <div class="w-25"></div>
-      <div class="w-100 d-flex flex-column text-black round16pt">
-        <div class="w-100 font-arboria-book font16px text-center">Round of 16</div>
-        <ng-container *ngFor="let base of userBracket.bracket[bracket.name].roundThree; let i = index">
-          <div class="w-100 " [ngClass]="i > 0 ? 'round16mm' : ''">
-            <ng-container *ngFor="let set of base.set; let ti = index">
-              <div class="w-100 font-arboria-bold font16px border-dark border p-1"
-                   [ngClass]="isSelected('roundFour', i, set,  bracket.name)"
-                   (click)="roundThree(i, ti, bracket.name)">{{set.rank}}&nbsp;{{set.name}}</div>
-            </ng-container>
-          </div>
+      <div class="w-100 d-flex flex-column text-black round2pt">
+        <div class="w-100 font-arboria-bold font16px p-1 text-center">
+          Champion
+        </div>
+        <ng-container *ngFor="let base of userBracket.bracket.finalFour.roundSeven; let i = index">
+          <ng-container *ngFor="let set of base.set; let ti = index">
+            <div class="w-100 d-flex flex-row">
+              <div
+                class="w-100 font-arboria-bold font16px border  border-dark border-bottom p-1"
+                (click)="roundSix(i, ti)"
+              >{{set.rank}}&nbsp;{{set.name}}</div>
+            </div>
+          </ng-container>
         </ng-container>
       </div>
       <div class="w-25"></div>
       <div class="w-100 d-flex flex-column text-black round8pt">
-        <div class="w-100 font-arboria-book font16px text-center">Round of 8</div>
-        <ng-container *ngFor="let base of userBracket.bracket[bracket.name].roundFour; let i = index">
-          <div class="w-100">
-            <ng-container *ngFor="let set of base.set; let ti = index">
-              <div
-                class="w-100 font-arboria-bold font16px border-dark border p-1"
-                [ngClass]="isSelected('roundFive', basei, set,  'finalFour')"
-                (click)="roundFour(i, ti, basei, bracket.name)">{{set.rank}}&nbsp;{{set.name}}</div>
-            </ng-container>
-          </div>
-        </ng-container>
       </div>
     </div>
     <div class="w-25"></div>
   </div>
   <div class="d-flex flex-row mt-4">
     <div class="w-25"></div>
-    <div class="w-100 border-bottom border-dark"></div>
+    <div class="w-100 text-center font-arboria-bold text-highlight2">
+      <ng-container *ngIf="!validateScore() && new">
+        <span class="font20px">Invalid score submission.</span><br>
+        Winner's score must be higher than loser's.
+      </ng-container>
+      <br>
+      <button class="btn btn-sportsbook3 widthSize140px" (click)="openSubmitBracket()" [disabled]="!userCanSubmit()"
+              *ngIf="canSubmit()">
+        Submit Bracket
+      </button>
+    </div>
     <div class="w-25"></div>
   </div>
-</ng-container>
-<div class="d-flex flex-row mt-4">
-  <div class="w-25"></div>
-  <div class="w-100 text-uppercase font-arboria-bold text-black font26px">Final Four</div>
-  <div class="w-25"></div>
-</div>
-<div class="d-flex flex-row">
-  <div class="w-25"></div>
-  <div class="w-100 d-flex flex-column flex-sm-row">
-    <div class="w-100 d-flex flex-column text-black">
-      <div class="w-100 font-arboria-book font16px text-center">Round of 4</div>
-      <ng-container *ngFor="let base of userBracket.bracket.finalFour.roundFive; let i = index">
-        <div class="w-100 my-2" [ngClass]="i > 0 ? 'round4mm' : ''">
-          <ng-container *ngFor="let set of base.set; let ti = index">
-            <div
-              class="w-100 font-arboria-bold font16px border-dark border p-1"
-              [ngClass]="isSelected('roundSix', i, set,  'finalFour')"
-              (click)="roundFive(i, ti)">{{set.rank}}&nbsp;{{set.name}}</div>
-          </ng-container>
-        </div>
-      </ng-container>
-    </div>
-    <div class="w-25"></div>
-    <div class="w-100 d-flex flex-column text-black round2pt">
-      <div class="w-100 font-arboria-book font16px text-center">
-        <div class="w-100 d-flex flex-row">
-          <div class="w-100 font-arboria-bold font16px p-1">Championship</div>
-          <div class="w-auto font-arboria-bold font16px p-1">Score</div>
-        </div></div>
-      <ng-container *ngFor="let base of userBracket.bracket.finalFour.roundSix; let i = index">
-        <ng-container *ngFor="let set of base.set; let ti = index">
-          <div class="w-100 d-flex flex-row">
-            <div
-              class="w-100 font-arboria-bold font16px border  border-dark border-bottom p-1"
-              [ngClass]="isSelected('roundSeven', i, set,  'finalFour')"
-              (click)="roundSix(i, ti)"
-            >{{set.rank}}&nbsp;{{set.name}}</div>
-            <div class="w-auto"><input [(ngModel)]="finalScore[ti]" [ngClass]="!validateScore() ? 'border-red' : ''" type="number" class="score ml-1"></div>
-          </div>
-        </ng-container>
-      </ng-container>
-    </div>
-    <div class="w-25"></div>
-    <div class="w-100 d-flex flex-column text-black round2pt">
-      <div class="w-100 font-arboria-bold font16px p-1 text-center">
-        Champion
-      </div>
-      <ng-container *ngFor="let base of userBracket.bracket.finalFour.roundSeven; let i = index">
-        <ng-container *ngFor="let set of base.set; let ti = index">
-          <div class="w-100 d-flex flex-row">
-            <div
-              class="w-100 font-arboria-bold font16px border  border-dark border-bottom p-1"
-              (click)="roundSix(i, ti)"
-            >{{set.rank}}&nbsp;{{set.name}}</div>
-          </div>
-        </ng-container>
-      </ng-container>
-    </div>
-    <div class="w-25"></div>
-    <div class="w-100 d-flex flex-column text-black round8pt">
-    </div>
-  </div>
-  <div class="w-25"></div>
-</div>
-<div class="d-flex flex-row mt-4">
-  <div class="w-25"></div>
-  <div class="w-100 text-center font-arboria-bold text-highlight2">
-    <ng-container *ngIf="!validateScore() && new">
-      <span class="font20px">Invalid score submission.</span><br>
-      Winner's score must be higher than loser's.
-    </ng-container><br>
-    <button class="btn btn-sportsbook3 widthSize140px" (click)="openSubmitBracket()" [disabled]="!userCanSubmit()" *ngIf="canSubmit()">
-      Submit Bracket
-    </button>
-  </div>
-  <div class="w-25"></div>
-</div>
 </ng-container>
 <ng-container *ngIf="getBracketCount() >= 2 && new">
   <div class="d-flex flex-row my-5 py-5">
     <div class="w-25"></div>
-    <div class="w-100 text-center font-arboria-bold font24px text-black">You have submitted the maximum number of brackets allowed. (2)</div>
+    <div class="w-100 text-center font-arboria-bold font24px text-black">You have submitted the maximum number of
+      brackets allowed. (2)
+    </div>
     <div class="w-25"></div>
   </div>
 </ng-container>

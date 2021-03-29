@@ -968,7 +968,7 @@ export class MmnewviewbracketComponent implements OnInit {
       if (this.userBracket.bracket[bracket][round][roundLook].set[1].name === ti.name) {
         ret = 'mmSelected';
       }
-    } if (!this.new) {
+    } if (!this.new && this.finalBracket[bracket]) {
       ret = 'mmFLose';
       if (this.finalBracket[bracket][round][roundLook].set[0].name === ti.name) {
         ret = 'mmFWin';
