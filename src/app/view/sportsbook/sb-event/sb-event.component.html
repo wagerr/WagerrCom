@@ -24,7 +24,8 @@
                 [ngClass]="isMobile('teamnamesMobile')"
               >{{eventData.teams.home}}</div>
               <div class="w-100 font-roboto-condensed font-italic teamnames"
-                   [ngClass]="isMobile('teamnamesMobile')">vs.</div>
+                   [ngClass]="isMobile('teamnamesMobile')">vs.
+              </div>
               <div
                 class="w-100 font-roboto-condensed font-weight-bold teamnames"
                 [ngClass]="isMobile('teamnamesMobile')">{{eventData.teams.away}}</div>
@@ -39,6 +40,22 @@
           </div>
           <app-sbbetdisplay [sport]="eventData.sport.toLowerCase()" [eventid]="eventData.event_id"
                             *ngIf="showBet"></app-sbbetdisplay>
+        </div>
+      </div>
+      <div class="card-body px-0 my-1 py-2 position-relative">
+        <div class="content">
+          <div class="w-100 d-flex flex-row">
+            <div class="w-100 px-1">
+              <button class="w-100 btn btn-outline-wgr py-0 font-arboria-bold ColorWgrHover" (click)="goTwitter()">
+                <i class="fab fa-twitter ColorWgr"></i> Share Event
+              </button>
+            </div>
+<!--            <div class="w-100 px-1">-->
+<!--              <button class="w-100 btn btn-outline-light py-0 font-arboria-bold ColorWgrHover" (click)="goFacebook()">-->
+<!--                <i class="fab fa-facebook ColorWgrWhite"></i> Share Event-->
+<!--              </button>-->
+<!--            </div>-->
+          </div>
         </div>
       </div>
       <div class="card-body p-0 position-relative">

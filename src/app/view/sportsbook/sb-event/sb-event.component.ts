@@ -1,6 +1,5 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {WgrSportsBookService} from '../../../service/wgr-sports-book.service';
-import {AuthService} from '../../../service/auth.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {SocketConnService} from '../../../service/socket-conn.service';
 
@@ -117,4 +116,39 @@ export class SbEventComponent implements OnInit, OnDestroy {
   backToSportsBook(): void {
     this.router.navigate(['/sportsbook']);
   }
+
+  getSocialUrl() {
+    console.log('eventData', this.eventData);
+    const home = 'home=' + this.eventData.teams.home.split(' ').join('_');
+    const away = '&away=' + this.eventData.teams.away.split(' ').join('_');
+    const st = '&start=' + this.eventData.starting;
+    const eventID = '&wgrID=' + this.eventData.event_id;
+    const sport = '&sport=' + this.eventData.sport;
+    const tour = '&tournament=' + this.eventData.tournament;
+    const ml = '&mlh=' + this.eventData.odds[0].mlHome + '&mla=' + this.eventData.odds[0].mlAway + '&mld=' + this.eventData.odds[0].mlDraw;
+    const spread = '&sf=' + this.eventData.odds[1].favorite + '&sp=' + this.eventData.odds[1].spreadPoints + '&sh=' + this.eventData.odds[1].spreadHome + '&sa' + this.eventData.odds[1].spreadAway;
+    const totals = '&tp=' + this.eventData.odds[2].totalPoints + '&to=' + this.eventData.odds[2].totalOver + '&tu=' + this.eventData.odds[2].totalUnder;
+    let ref = '';
+    const uid = this.wsb.getUserUID();
+    if (uid != null) {
+      ref = '&ref=' + uid;
+    }
+    const now = new Date().getTime();
+    const rawURL = 'https://wagerr.com/showevent/' + now + '?' + home + away + st + eventID + sport + tour + ml + spread + totals + ref;
+    console.log('rawUrl', rawURL);
+    return encodeURIComponent(rawURL);
+  }
+
+  goTwitter() {
+    const hashtags = "," + this.eventData.sport + "," + this.eventData.tournament;
+    const home = this.eventData.teams.home;
+    const away = this.eventData.teams.away;
+    const url = this.getSocialUrl();
+    window.open(`https://twitter.com/intent/tweet?text=${home}%20vs.%20${away}%0D%0A%0D%0AAmazing%20odds%20on%20Wagerr:%0D%0A%0D%0A&url=${url}%0D%0A%0D%0A&hashtags=Wagerr,cryptocurrency,sportsbetting,BTC,Bitcoin,odds,sports,betting${hashtags}`);
+  }
+
+  goFacebook() {
+    const url = this.getSocialUrl();
+  }
+
 }

@@ -3059,6 +3059,32 @@ a .btn-sportsbook3:hover {
   border-color: #fff;
 }
 
+.btn-outline-twitter {
+  color: #fff;
+  background-color: transparent;
+  background-image: none;
+  border-color: #38D0F8;
+}
+
+.btn-outline-twitter:hover {
+  color: #fff;
+  background-color: rgba(56, 208, 248, 1);
+  border-color: #38D0F8;
+}
+
+.btn-outline-twitter {
+  color: #fff;
+  background-color: transparent;
+  background-image: none;
+  border-color: #38D0F8;
+}
+
+.btn-outline-twitter:hover {
+  color: #fff;
+  background-color: rgba(56, 208, 248, 1);
+  border-color: #38D0F8;
+}
+
 .sliderImg {
   height: 100%;
   width: 100%;
@@ -3194,6 +3220,15 @@ input[type=number] {
 
 .twitterColor {
   color: #00A2CE;
+}
+
+.ColorWgrHover .ColorWgr,
+.ColorWgrHover .ColorWgrWhite
+{
+  color: #F40000;
+}
+.ColorWgrHover:hover .ColorWgr {
+  color: #fff;
 }
 
 /* width */
