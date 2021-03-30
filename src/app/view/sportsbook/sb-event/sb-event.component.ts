@@ -2,6 +2,7 @@ import {Component, OnDestroy, OnInit} from '@angular/core';
 import {WgrSportsBookService} from '../../../service/wgr-sports-book.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {SocketConnService} from '../../../service/socket-conn.service';
+import {CoreFunc} from "../../../service/Corefunc";
 
 @Component({
   selector: 'app-sb-event',
@@ -123,11 +124,18 @@ export class SbEventComponent implements OnInit, OnDestroy {
     const away = '&away=' + this.eventData.teams.away.split(' ').join('_');
     const st = '&start=' + this.eventData.starting;
     const eventID = '&wgrID=' + this.eventData.event_id;
-    const sport = '&sport=' + this.eventData.sport;
-    const tour = '&tournament=' + this.eventData.tournament;
-    const ml = '&mlh=' + this.eventData.odds[0].mlHome + '&mla=' + this.eventData.odds[0].mlAway + '&mld=' + this.eventData.odds[0].mlDraw;
-    const spread = '&sf=' + this.eventData.odds[1].favorite + '&sp=' + this.eventData.odds[1].spreadPoints + '&sh=' + this.eventData.odds[1].spreadHome + '&sa' + this.eventData.odds[1].spreadAway;
-    const totals = '&tp=' + this.eventData.odds[2].totalPoints + '&to=' + this.eventData.odds[2].totalOver + '&tu=' + this.eventData.odds[2].totalUnder;
+    const sport = '&sport=' + this.eventData.sport.split(' ').join('%20');
+    const tour = '&tournament=' + this.eventData.tournament.split(' ').join('%20');
+    const ml = '&mlh=' + CoreFunc.getMLPoints(this.eventData, 'Home') +
+      '&mla=' + CoreFunc.getMLPoints(this.eventData, 'Away') +
+      '&mld=' + CoreFunc.getMLPoints(this.eventData, 'Draw');
+    const spread = '&sph=' + CoreFunc.getSpreadNumber(this.eventData, 'Home') +
+      '&spa=' + CoreFunc.getSpreadNumber(this.eventData, 'Away') +
+      '&sh=' + CoreFunc.getSpreadPoints(this.eventData, 'Home') +
+      '&sa=' + CoreFunc.getSpreadPoints(this.eventData, 'Away');
+    const totals = '&tp=' + CoreFunc.getTotalsNumber(this.eventData) +
+      '&to=' + CoreFunc.getTotalsPoints(this.eventData, 'Over') +
+      '&tu=' + CoreFunc.getTotalsPoints(this.eventData, 'Under');
     let ref = '';
     const uid = this.wsb.getUserUID();
     if (uid != null) {
@@ -140,7 +148,7 @@ export class SbEventComponent implements OnInit, OnDestroy {
   }
 
   goTwitter() {
-    const hashtags = "," + this.eventData.sport + "," + this.eventData.tournament;
+    const hashtags = "," + this.eventData.sport.split(' ').join('') + "," + this.eventData.tournament.split(' ').join('');
     const home = this.eventData.teams.home;
     const away = this.eventData.teams.away;
     const url = this.getSocialUrl();
