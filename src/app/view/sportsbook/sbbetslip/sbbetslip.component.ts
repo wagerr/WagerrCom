@@ -496,4 +496,20 @@ export class SbbetslipComponent implements OnInit, OnDestroy {
     this.wsb.bets.next([]);
   }
 
+  goTwitter(bet: any) {
+    const type = bet.bet.type;
+    const homeTeam = bet.bet.event.teams.home.split(' ').join('_');
+    const awayTeam = bet.bet.event.teams.away.split(' ').join('_');
+    let price = bet.bet.points;
+    if (this.accountSettings.odds && this.accountSettings.odds === 'us') {
+      price = this.wsb.usOdds(bet.bet.points);
+    }
+    const selected = bet.bet.selected.toLowerCase();
+    const title = bet.bet.extra;
+    const now = new Date().getTime();
+    const rawURL = 'https://wagerr.com/ninja/' + now + '?ref=' + this.wsb.getUserUID() + '&t=' + type + '&h=' + homeTeam + '&a=' + awayTeam + '&title=' + title + '&price=' + price + '&select=' + selected;
+    const url = encodeURIComponent(rawURL);
+    window.open(`https://twitter.com/intent/tweet?text=Check%20out%20the%20odds%20I%20just%20got%20at%20&url=${url}%0D%0A%0D%0A&hashtags=Wagerr,cryptocurrency,sportsbetting,BTC,Bitcoin,odds,sports,betting`);
+  }
+
 }

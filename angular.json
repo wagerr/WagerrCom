@@ -24,6 +24,8 @@
             "tsConfig": "tsconfig.app.json",
             "aot": true,
             "assets": [
+              "src/index.php",
+              "src/event.php",
               "src/favicon.ico",
               "src/assets"
             ],

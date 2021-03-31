@@ -10,9 +10,19 @@
   <meta name="twitter:site" content="@wagerrx" />
   <meta name="twitter:title" content="Wagerr - The private, no limit sportsbook">
   <meta name="twitter:description" content="The private, no limit sportsbook">
-  <meta name="twitter:image" content="https://img.wagerr.com/myBet.php?<?php echo $_SERVER['QUERY_STRING']; ?>">
-  <meta name="og:image" content="https://img.wagerr.com/myBet.php?<?php echo $_SERVER['QUERY_STRING']; ?>">
+  <meta name="twitter:image" content="https://img.wagerr.com/event.php?<?php echo $_SERVER['QUERY_STRING']; ?>">
+  <meta name="og:image" content="https://img.wagerr.com/event.php?<?php echo $_SERVER['QUERY_STRING']; ?>">
+  <?php
+   if (isset($_GET['ref'])) {
+   ?>
   <meta http-equiv="refresh" content="0;url=https://wagerr.com/sportsbook/ref/<?php echo $_GET['ref']; ?>" />
+  <?php
+  } else {
+  ?>
+  <meta http-equiv="refresh" content="0;url=https://wagerr.com/sportsbook/" />
+  <?php
+  }
+  ?>
 </head>
 <body>
 </body>
