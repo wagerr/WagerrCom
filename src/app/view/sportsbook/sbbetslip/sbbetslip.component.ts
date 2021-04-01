@@ -355,7 +355,11 @@ export class SbbetslipComponent implements OnInit, OnDestroy {
     let rate = bet * this.coinData.usd;
     if (this.accountSettings && this.accountSettings.currency !== 'usd') {
       this.curCode = this.accountSettings.currency.toUpperCase();
-      rate = rate * this.exchangeRates.rates[this.curCode];
+      if (this.exchangeRates && this.exchangeRates.rates && this.exchangeRates.rates[this.curCode]) {
+        rate = rate * this.exchangeRates.rates[this.curCode];
+      } else {
+        this.curCode = 'USD';
+      }
     }
     return rate;
   }
