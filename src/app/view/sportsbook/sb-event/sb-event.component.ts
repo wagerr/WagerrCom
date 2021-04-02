@@ -126,16 +126,19 @@ export class SbEventComponent implements OnInit, OnDestroy {
     const eventID = '&wgrID=' + this.eventData.event_id;
     const sport = '&sport=' + this.eventData.sport.split(' ').join('%20');
     const tour = '&tournament=' + this.eventData.tournament.split(' ').join('%20');
-    const ml = '&mlh=' + CoreFunc.getMLPoints(this.eventData, 'Home').toFixed(2) +
-      '&mla=' + CoreFunc.getMLPoints(this.eventData, 'Away').toFixed(2) +
-      '&mld=' + CoreFunc.getMLPoints(this.eventData, 'Draw').toFixed(2);
-    const spread = '&sph=' + CoreFunc.getSpreadNumber(this.eventData, 'Home').toFixed(2) +
-      '&spa=' + CoreFunc.getSpreadNumber(this.eventData, 'Away').toFixed(2) +
-      '&sh=' + CoreFunc.getSpreadPoints(this.eventData, 'Home').toFixed(2) +
-      '&sa=' + CoreFunc.getSpreadPoints(this.eventData, 'Away').toFixed(2);
-    const totals = '&tp=' + CoreFunc.getTotalsNumber(this.eventData).toFixed(2) +
-      '&to=' + CoreFunc.getTotalsPoints(this.eventData, 'Over').toFixed(2) +
-      '&tu=' + CoreFunc.getTotalsPoints(this.eventData, 'Under').toFixed(2);
+    const mlh = +CoreFunc.getMLPoints(this.eventData, 'Home', false);
+    const mla = +CoreFunc.getMLPoints(this.eventData, 'Away', false);
+    const mld = +CoreFunc.getMLPoints(this.eventData, 'Draw', false);
+    const sph = +CoreFunc.getSpreadNumber(this.eventData, 'Home', false);
+    const spa = +CoreFunc.getSpreadNumber(this.eventData, 'Away', false);
+    const sh = +CoreFunc.getSpreadPoints(this.eventData, 'Home', false);
+    const sa = +CoreFunc.getSpreadPoints(this.eventData, 'Away', false);
+    const tp = +CoreFunc.getTotalsNumber(this.eventData, false);
+    const to = +CoreFunc.getTotalsPoints(this.eventData, 'Over', false);
+    const tu = +CoreFunc.getTotalsPoints(this.eventData, 'Under', false);
+    const ml = '&mlh=' + mlh.toFixed(2) + '&mla=' + mla.toFixed(2) + '&mld=' + mld.toFixed(2);
+    const spread = '&sph=' + sph.toFixed(2) + '&spa=' + spa.toFixed(2) + '&sh=' + sh.toFixed(2) + '&sa=' + sa.toFixed(2);
+    const totals = '&tp=' + tp.toFixed(2) + '&to=' + to.toFixed(2) + '&tu=' + tu.toFixed(2);
     let ref = '';
     const uid = this.wsb.getUserUID();
     if (uid != null) {
