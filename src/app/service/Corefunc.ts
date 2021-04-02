@@ -49,11 +49,14 @@ export class Corefunc {
     return '—';
   }
 
-  getTotalsPoints(item: any, type: string): any {
+  getTotalsPoints(item: any, type: string, show = true): any {
     if (item.odds[2].totalsPoints && item.odds[2]['totals' + type]) {
       return this.updateTrueOdds((item.odds[2]['totals' + type] / 10000));
     }
-    return '—';
+    if (show) {
+      return '—';
+    }
+    return 0;
   }
 
   updateTrueOdds(amt: number): number {

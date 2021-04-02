@@ -126,16 +126,16 @@ export class SbEventComponent implements OnInit, OnDestroy {
     const eventID = '&wgrID=' + this.eventData.event_id;
     const sport = '&sport=' + this.eventData.sport.split(' ').join('%20');
     const tour = '&tournament=' + this.eventData.tournament.split(' ').join('%20');
-    const ml = '&mlh=' + CoreFunc.getMLPoints(this.eventData, 'Home') +
-      '&mla=' + CoreFunc.getMLPoints(this.eventData, 'Away') +
-      '&mld=' + CoreFunc.getMLPoints(this.eventData, 'Draw');
-    const spread = '&sph=' + CoreFunc.getSpreadNumber(this.eventData, 'Home') +
-      '&spa=' + CoreFunc.getSpreadNumber(this.eventData, 'Away') +
-      '&sh=' + CoreFunc.getSpreadPoints(this.eventData, 'Home') +
-      '&sa=' + CoreFunc.getSpreadPoints(this.eventData, 'Away');
-    const totals = '&tp=' + CoreFunc.getTotalsNumber(this.eventData) +
-      '&to=' + CoreFunc.getTotalsPoints(this.eventData, 'Over') +
-      '&tu=' + CoreFunc.getTotalsPoints(this.eventData, 'Under');
+    const ml = '&mlh=' + CoreFunc.getMLPoints(this.eventData, 'Home').toFixed(2) +
+      '&mla=' + CoreFunc.getMLPoints(this.eventData, 'Away').toFixed(2) +
+      '&mld=' + CoreFunc.getMLPoints(this.eventData, 'Draw').toFixed(2);
+    const spread = '&sph=' + CoreFunc.getSpreadNumber(this.eventData, 'Home').toFixed(2) +
+      '&spa=' + CoreFunc.getSpreadNumber(this.eventData, 'Away').toFixed(2) +
+      '&sh=' + CoreFunc.getSpreadPoints(this.eventData, 'Home').toFixed(2) +
+      '&sa=' + CoreFunc.getSpreadPoints(this.eventData, 'Away').toFixed(2);
+    const totals = '&tp=' + CoreFunc.getTotalsNumber(this.eventData).toFixed(2) +
+      '&to=' + CoreFunc.getTotalsPoints(this.eventData, 'Over').toFixed(2) +
+      '&tu=' + CoreFunc.getTotalsPoints(this.eventData, 'Under').toFixed(2);
     let ref = '';
     const uid = this.wsb.getUserUID();
     if (uid != null) {
