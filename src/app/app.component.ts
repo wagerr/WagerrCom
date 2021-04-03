@@ -9,6 +9,7 @@ import {Meta} from '@angular/platform-browser';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
+
 export class AppComponent implements AfterContentInit {
   title = 'frontend';
   loaded = false;
