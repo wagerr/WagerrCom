@@ -120,8 +120,8 @@ export class SbEventComponent implements OnInit, OnDestroy {
 
   getSocialUrl() {
     console.log('eventData', this.eventData);
-    const home = 'home=' + this.eventData.teams.home.split(' ').join('_');
-    const away = '&away=' + this.eventData.teams.away.split(' ').join('_');
+    const home = 'home=' + this.processTeamName(this.eventData.teams.home);
+    const away = '&away=' + this.processTeamName(this.eventData.teams.away);
     const st = '&start=' + this.eventData.starting;
     const eventID = '&wgrID=' + this.eventData.event_id;
     const sport = '&sport=' + this.eventData.sport.split(' ').join('%20');
@@ -160,6 +160,17 @@ export class SbEventComponent implements OnInit, OnDestroy {
 
   goFacebook() {
     const url = this.getSocialUrl();
+  }
+
+  processTeamName(teamname: string): string {
+    let name = teamname.split(' ').join('_');
+    name = name.split('é').join('e');
+    name = name.split('å').join('a');
+    name = name.split('á').join('a');
+    name = name.split('í').join('i');
+    name = name.split(' . ').join('a');
+    name = name.split('ê').join('e');
+    return name;
   }
 
 }
