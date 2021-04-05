@@ -146,7 +146,6 @@ export class SbEventComponent implements OnInit, OnDestroy {
     }
     const now = new Date().getTime();
     const rawURL = 'https://wagerr.com/showevent/' + now + '?' + home + away + st + eventID + sport + tour + ml + spread + totals + ref;
-    console.log('rawUrl', rawURL);
     return encodeURIComponent(rawURL);
   }
 
