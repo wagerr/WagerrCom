@@ -15,6 +15,17 @@ export class SportsbookComponent implements OnInit {
   bsModalRef: BsModalRef;
   userActivity;
   userInactive: Subject<any> = new Subject();
+  toasts = [
+    {
+      status: true,
+      title: 'Maintenance Update',
+      time: 1619456292,
+      body: '<p class="p-0 font-roboto-condensed">Wagerr.com is upgrading the web-based sportsbook. The long-term result will be improved compatibility, mobility, and affiliate tracking.</p>' +
+        '<p class="p-0 font-roboto-condensed">The process of upgrading has affected the display of some user balances on the website. New accounts are not affected.</p>' +
+        '<p class="p-0 font-roboto-condensed">Note that these temporary display issues have no effect on the true account balances on the blockchain. True account balances can be verified on the block explorer. When the upgrade is complete, all balances will display correctly and affected accounts can resume betting on wagerr.com.</p>' +
+        '<p class="p-0 font-roboto-condensed">During the upgrade process, users can access their funds and continue betting by using the Wagerr Electrum Betting App or mobile app. Thank you for your patience. </p>'
+    }
+  ];
 
   constructor(private wsb: WgrSportsBookService,
               private modalService: BsModalService,
@@ -37,6 +48,10 @@ export class SportsbookComponent implements OnInit {
     }
     this.wsb.account.subscribe((data: any) => {
     });
+  }
+
+  getDate(time: any): any {
+    return new Date(time * 1000);
   }
 
   openModalAddDevice(): void {

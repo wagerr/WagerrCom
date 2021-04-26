@@ -1,4 +1,18 @@
 <main class="sportsbook">
   <router-outlet></router-outlet>
-<!--  <app-footer nohat="true"></app-footer>-->
+  <div class="position-fixed p-3 font-roboto-condensed" style="z-index: 5; right: 0; top: 50px;">
+    <ng-container *ngFor="let toast of toasts">
+      <div class="toast" [ngClass]="(toast.status) ? 'show' : ''">
+        <div class="toast-header font-roboto-condensed text-black">
+          <img src="assets/images/wgrmodernicon-01.png" class="rounded mr-2 toastImg" alt="...">
+          <strong class="mr-auto">{{toast.title}}</strong>
+          <small>{{ getDate(toast.time) | dateAgo}}</small>
+          <button type="button" class="ml-2 mb-1 close" (click)="toast.status = !toast.status">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="toast-body" [innerHTML]="toast.body"></div>
+      </div>
+    </ng-container>
+  </div>
 </main>
