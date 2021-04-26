@@ -15,8 +15,8 @@
   <div class="d-flex flex-row">
     <div class="w-25"></div>
     <div class="w-100 d-flex flex-row border">
-      <div class="w-100 text-center p-2"><span
-        class="font-arboria-medium font12px">{{getUserBetAddress()}}</span></div>
+      <div class="w-100 text-center p-2"><a href="https://explorer.wagerr.com/#/address/{{getUserBetAddress()}}" target="_blank"
+        class="font-arboria-medium font12px">{{getUserBetAddress()}}</a></div>
       <div class="w-auto p-2 border-left usePointer" (click)="copyMessage(getUserBetAddress())"><i
         class="fal fa-copy text-highlight"></i></div>
     </div>
