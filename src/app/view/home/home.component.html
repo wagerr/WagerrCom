@@ -41,7 +41,7 @@
           <div class="col-12 col-md mb-3 mb-md-0 event-item" (click)="gotoEvent(item.event_id)">
             <div class="text-center font-weight-bold font-arboria-book text-white-50 font12px p-0 pt-2 m-0 mb-2">Event
               starts
-              in {{ getDate(item.starting) | dateAgo}}
+              in {{ getDate(item.starting) | dateTo}}
             </div>
             <div class="card bg-transparent mx-auto h-100 position-relative">
               <div class="h-100 d-flex flex-column">

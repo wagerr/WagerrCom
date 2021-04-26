@@ -80,6 +80,7 @@ import { MmnewviewbracketComponent } from './view/marchmadness/mmnewviewbracket/
 import { SubmitModalComponent } from './view/marchmadness/submit-modal/submit-modal.component';
 import { QuestionairComponent } from './view/marchmadness/questionair/questionair.component';
 import { MmVerifyBracketComponent } from './view/marchmadness/mm-verify-bracket/mm-verify-bracket.component';
+import {DateToPipe} from "./pipes/date-to.pipe";
 
 @NgModule({
   declarations: [
@@ -90,6 +91,7 @@ import { MmVerifyBracketComponent } from './view/marchmadness/mm-verify-bracket/
     FooterComponent,
     HeaderComponent,
     DateAgoPipe,
+    DateToPipe,
     SportsbookComponent,
     HomeLayoutComponent,
     SbdisplayComponent,
