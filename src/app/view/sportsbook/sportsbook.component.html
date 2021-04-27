@@ -1,8 +1,8 @@
 <main class="sportsbook">
   <router-outlet></router-outlet>
-  <div class="position-fixed p-3 font-roboto-condensed" style="z-index: 5; right: 0; top: 50px;">
+  <div style="position: absolute; top: 75px; right: 0;">
     <ng-container *ngFor="let toast of toasts">
-      <div class="toast" [ngClass]="(toast.status) ? 'show' : ''">
+      <div class="toast" [ngClass]="(toast.status) ? 'show' : 'hide'">
         <div class="toast-header font-roboto-condensed text-black">
           <img src="assets/images/wgrmodernicon-01.png" class="rounded mr-2 toastImg" alt="...">
           <strong class="mr-auto">{{toast.title}}</strong>
