@@ -11,7 +11,7 @@
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
-        <div class="toast-body" [innerHTML]="toast.body"></div>
+        <div class="toast-body" [ngClass]="'toast'+toast.type" [innerHTML]="toast.body"></div>
       </div>
     </ng-container>
   </div>

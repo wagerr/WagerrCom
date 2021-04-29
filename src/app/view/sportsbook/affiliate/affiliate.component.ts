@@ -18,8 +18,8 @@ export class AffiliateComponent implements OnInit {
     private wsb: WgrSportsBookService,
     public bsModalRef: BsModalRef) {
     this.wsb.account.subscribe((accountData: any) => {
-      if (accountData && accountData.uid) {
-        this.userID = accountData.uid;
+      if (accountData && accountData.refData) {
+        this.userID = accountData.refData.refid;
       }
     });
 
@@ -30,6 +30,7 @@ export class AffiliateComponent implements OnInit {
   }
 
   getUserBetAddress(): string {
+     // return 'Under Maintenance';
      return 'https://' + this.hostname + '/sb/ref/' + this.userID;
   }
 

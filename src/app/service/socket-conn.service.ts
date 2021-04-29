@@ -23,12 +23,18 @@ export class SocketConnService {
   sportBookChat = new BehaviorSubject([]);
   sportBookAccount = new BehaviorSubject([]);
   masternodecount = new BehaviorSubject([]);
+  toastAll = new BehaviorSubject([]);
 
   constructor(
     private socket: Socket,
     private wsb: WgrSportsBookService,
     private auth: AuthService
   ) {
+    this.socket
+      .fromEvent<any[]>('toast')
+      .subscribe((data: any) => {
+        this.toastAll.next(data);
+      });
     this.socket
       .fromEvent<any[]>('totalUSD')
       .subscribe((data: any) => {

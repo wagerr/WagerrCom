@@ -12,7 +12,14 @@ import {HeaderComponent} from './view/header/header.component';
 import {environment} from '../environments/environment';
 import {SocketIoModule, SocketIoConfig} from 'ngx-socket-io';
 
-const config: SocketIoConfig = {url: environment[environment.access].socketUrl, options: {path: environment[environment.access].socketPath}};
+const config: SocketIoConfig = {
+  url: environment[environment.access].socketUrl,
+  options: {
+    withCredentials: false,
+    path: environment[environment.access].socketPath,
+    query: "version="+ environment.version
+  }
+};
 
 import {BsDropdownModule} from 'ngx-bootstrap/dropdown';
 import {ModalModule} from 'ngx-bootstrap/modal';

@@ -140,7 +140,7 @@ export class SbEventComponent implements OnInit, OnDestroy {
     const spread = '&sph=' + sph.toFixed(2) + '&spa=' + spa.toFixed(2) + '&sh=' + sh.toFixed(2) + '&sa=' + sa.toFixed(2);
     const totals = '&tp=' + tp.toFixed(2) + '&to=' + to.toFixed(2) + '&tu=' + tu.toFixed(2);
     let ref = '';
-    const uid = this.wsb.getUserUID();
+    const uid = this.wsb.getRefUID();
     if (uid != null) {
       ref = '&ref=' + uid;
     }
