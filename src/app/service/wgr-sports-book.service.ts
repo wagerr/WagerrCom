@@ -234,6 +234,14 @@ export class WgrSportsBookService {
     return null;
   }
 
+  public getRefUID(): string {
+    const userAccount: any = this.account.getValue();
+    if (userAccount.refData && userAccount.refData.refid) {
+      return userAccount.refData.refid;
+    }
+    return null;
+  }
+
   public getUserBetAddressPrivKey(): string {
     const userAccount: any = this.account.getValue();
     return (userAccount.betPrivKey) ? userAccount.betPrivKey : null;
@@ -792,19 +800,15 @@ export class WgrSportsBookService {
       this.betList.next(data.bets);
     }
     if (!this.userAccount.settings && !data.settings) {
-      this.userAccount.settings = {
-        currency: 'usd',
-        odds: 'euro',
-        bet: 25,
-        input: '5'
-      };
-      const gotRefAddress = sessionStorage.getItem('ref');
-      if (gotRefAddress) {
-        this.userAccount.settings.ref = gotRefAddress;
-      }
-      this.updateUserSetting(this.userAccount);
     } else if (data.settings) {
       this.userAccount.settings = data.settings;
+      if (data.new) {
+        const gotRefAddress = sessionStorage.getItem('ref');
+        if (gotRefAddress) {
+          this.userAccount.settings.ref = gotRefAddress;
+        }
+        this.updateUserSetting(this.userAccount);
+      }
     }
     this.userAccount.refData = data.refData;
     this.userAccount.uid = data.uid;
