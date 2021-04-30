@@ -321,7 +321,7 @@ export class WgrSportsBookService {
         } else {
           psbt.addInput({
             hash: eachUnspent.txid,
-            index: eachUnspent.vout,
+            index: eachUnspent.n,
             nonWitnessUtxo: Buffer.from(eachUnspent.hex, 'hex')
           });
           eachUnspent.used = true;
@@ -408,7 +408,7 @@ export class WgrSportsBookService {
         } else {
           psbt.addInput({
             hash: eachUnspent.txid,
-            index: eachUnspent.vout,
+            index: eachUnspent.n,
             nonWitnessUtxo: Buffer.from(eachUnspent.hex, 'hex')
           });
           eachUnspent.used = true;
@@ -533,7 +533,7 @@ export class WgrSportsBookService {
           } else {
             psbt.addInput({
               hash: eachUnspent.txid,
-              index: eachUnspent.vout,
+              index: eachUnspent.n,
               nonWitnessUtxo: Buffer.from(eachUnspent.hex, 'hex')
             });
             eachUnspent.used = true;
