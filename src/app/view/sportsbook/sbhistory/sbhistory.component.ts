@@ -147,7 +147,7 @@ export class SbhistoryComponent implements OnInit {
         list[key].bet = this.getBet(value.txid);
       }
       if (value.type === 'betpayout') {
-        list[key].bet = this.getCompleteBet(value.txid, value.vout);
+        list[key].bet = this.getCompleteBet(value.txid, value.n);
       }
     });
     const filter = list
