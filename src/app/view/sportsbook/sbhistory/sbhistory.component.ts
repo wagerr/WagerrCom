@@ -372,8 +372,13 @@ export class SbhistoryComponent implements OnInit {
   }
 
   getParlayTeam(leg: any): string {
+    console.log('leg', leg);
     const outcome = this.getBetOutcome(leg);
-    return leg.lockedEvent[outcome.team];
+    if (outcome.team === 'over' || outcome.team === 'under') {
+      return '<small>' + leg.lockedEvent['home'] + ' Vs. ' + leg.lockedEvent['away'] + '</small>';
+    } else {
+      return leg.lockedEvent[outcome.team];
+    }
   }
 
   getParlayOdds(leg: any): string {
