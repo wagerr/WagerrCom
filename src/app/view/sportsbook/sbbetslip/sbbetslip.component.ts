@@ -451,7 +451,7 @@ export class SbbetslipComponent implements OnInit, OnDestroy {
 
   betMaxParlay(): void {
     if (!this.placeParleyBetsDisabled()) {
-      this.wsb.parlayBet = this.betMaxAmount(this.wsb.parlayBet, 3000);
+      this.wsb.parlayBet = this.betMaxAmount(this.wsb.parlayBet, 5000);
       this.wsb.processAvailableBalance();
     }
   }
