@@ -423,7 +423,7 @@ export class SbbetslipComponent implements OnInit, OnDestroy {
   }
 
   checkBetParlay(): void {
-    this.wsb.parlayBet = this.checkBetAmount(+this.wsb.parlayBet, 3000);
+    this.wsb.parlayBet = this.checkBetAmount(+this.wsb.parlayBet, 5000);
   }
 
   checkBetAmount(amt: number, max = 10000): number {
