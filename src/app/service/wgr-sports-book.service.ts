@@ -24,6 +24,7 @@ export class WgrSportsBookService {
   source = interval(30000);
   betType = 'single';
   mnemonic: any;
+  accountData = new BehaviorSubject([]);
   account = new BehaviorSubject([]);
   bets = new BehaviorSubject([]);
   placedBets = new BehaviorSubject([]);
@@ -134,6 +135,22 @@ export class WgrSportsBookService {
       this.coinNetwork = this.wgrNetworkTestnet;
     } else {
       this.coinNetwork = this.wgrNetwork;
+    }
+  }
+
+  accountSocket() {
+    let accountAddress;
+    const userAccount: any = this.account.getValue();
+    if (userAccount) {
+     accountAddress = userAccount.betAddress;
+    }
+    if (accountAddress) {
+      //TODO check if subscribe already if not then sub
+      this.socket
+        .fromEvent<any[]>(accountAddress)
+        .subscribe((data: any) => {
+          this.accountData.next(data);
+        });
     }
   }
 
