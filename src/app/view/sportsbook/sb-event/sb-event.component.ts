@@ -154,7 +154,7 @@ export class SbEventComponent implements OnInit, OnDestroy {
     const home = this.eventData.teams.home;
     const away = this.eventData.teams.away;
     const url = this.getSocialUrl();
-    window.open(`https://twitter.com/intent/tweet?text=${home}%20vs%20${away}%0D%0A%0D%0AWagerr%20No-Limit%20Betting.%20True%20odds.%20Guaranteed%20Payouts.%0D%0A%0D%0A&url=${url}%0D%0A%0D%0A&hashtags= Wagerr,sportsbetting,blockchain,BettingTwitter,gaming,sports,betting,odds,crypto,WGR,BTC,Bitcoin,ETH,Ethereum,Uniswap,PancakeSwap,${hashtags}`);
+    window.open(`https://twitter.com/intent/tweet?text=${home}%20vs%20${away}%0D%0A%0D%0AWagerr%20No-Limit%20Betting.%20True%20odds.%20Guaranteed%20payouts.%0D%0A%0D%0A&url=${url}%0D%0A%0D%0A&hashtags= Wagerr,sportsbetting,blockchain,BettingTwitter,gaming,sports,betting,odds,crypto,WGR,BTC,Bitcoin,ETH,Ethereum,Uniswap,PancakeSwap,${hashtags}`);
   }
 
   goFacebook() {
