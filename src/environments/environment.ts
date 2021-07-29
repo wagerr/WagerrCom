@@ -31,7 +31,7 @@ export const environment = {
     accountEnabled: true,
     ver: 2,
     testnet: false,
-    socketUrl: 'http://10.5.0.222:3200/wgr',
+    socketUrl: 'http://10.5.0.222:3002/wgr',
     socketPath: '/socket.io',
   },
   dpath: 'm/0\'/0/',
