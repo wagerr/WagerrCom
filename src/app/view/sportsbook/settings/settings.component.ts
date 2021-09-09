@@ -108,9 +108,7 @@ export class SettingsComponent implements OnInit {
       full: 'Split less than 10'
     }
   ];
-
   user: any;
-
   seed = {
     word1: '',
     word2: '',

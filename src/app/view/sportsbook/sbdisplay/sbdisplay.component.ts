@@ -179,7 +179,6 @@ export class SbdisplayComponent implements OnInit, AfterViewInit {
   }
 
   logOut(): void {
-
     this.showMobileNav();
     /* this is how we open a Modal Component from another component */
     this.bsModalRef = this.modalService.show(LogoutModalComponent,
