@@ -24,9 +24,6 @@ export class WgrSportsBookService {
   source = interval(30000);
   betType = 'single';
   mnemonic: any;
-  qrCodeChannelSet = false;
-  marchMadness: any;
-
   accountData = new BehaviorSubject([]);
   account = new BehaviorSubject([]);
   bets = new BehaviorSubject([]);
@@ -42,6 +39,8 @@ export class WgrSportsBookService {
   marchMadnessLeaderboard: any = new BehaviorSubject([]);
   marchMadnessFoundBracket: any = new BehaviorSubject([]);
   marchMadnessFinalBracket: any = new BehaviorSubject([]);
+  qrCodeChannelSet = false;
+  marchMadness: any;
 
   public userAccount: any = {
     mnemonicSeed: '',
@@ -182,11 +181,6 @@ export class WgrSportsBookService {
 
   getAddressData(): void {
     this.socket.emit('getAddressData', this.userAccount.betAddress);
-    this.socket
-      .fromEvent<any[]>(this.userAccount.betAddress)
-      .subscribe((data: any) => {
-        console.log('getAddressData', data);
-      });
   }
 
   updateAccountBalance(newBal: number): void {
@@ -771,7 +765,7 @@ export class WgrSportsBookService {
   }
 
   getBetData(): void {
-    // this.socket.emit('getAddressData', this.userAccount.betAddress);
+    this.socket.emit('getAddressData', this.userAccount.betAddress);
   }
 
   // Base Functions

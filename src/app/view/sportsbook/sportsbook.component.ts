@@ -27,13 +27,22 @@ export class SportsbookComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.socketService.toastAll.subscribe((gotData: any) => {this.toasts = gotData;});
+    this.socketService.toastAll.subscribe((gotData: any) => {
+      this.toasts = gotData;
+    });
     const addDevice = this.route.snapshot.queryParamMap.get('addDevice');
-    if (addDevice) {this.openModalAddDevice();}
+    if (addDevice) {
+      this.openModalAddDevice();
+    }
     const refAddress = this.route.snapshot.paramMap.get('refAddress');
-    if (refAddress) {sessionStorage.setItem('ref', refAddress);}
+    if (refAddress) {
+      sessionStorage.setItem('ref', refAddress);
+    }
     const gotRefAddress = sessionStorage.getItem('ref');
-    this.wsb.account.subscribe((data: any) => {});
+    if (gotRefAddress) {
+    }
+    this.wsb.account.subscribe((data: any) => {
+    });
   }
 
   getDate(time: any): any {
