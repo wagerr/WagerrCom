@@ -16,6 +16,7 @@ export class TeamlogoComponent implements OnInit {
 
   processTeamName(teamname: string): string {
     let name = teamname.split(' ').join('_');
+    name = name.split('&').join('-');
     name = name.split('é').join('e');
     name = name.split('å').join('a');
     name = name.split('á').join('a');
