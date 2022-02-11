@@ -55,7 +55,7 @@ export class SbEventComponent implements OnInit, OnDestroy {
     this.wsb.getEventID(eventId);
     const eventData = data
       .filter((item) => (item.event_id === eventId))
-      .filter((item) => (item.odds[0].mlHome > 0))
+      .filter((item) => ((item.odds[0].mlHome > 0) || (item.odds[1].spreadPoints > 0) || (item.odds[2].totalsPoints > 0)))
       .filter((item) => ((item.starting * 1000) > (+new Date() + (12 * 60000))));
     this.eventData = (eventData[0]) ? eventData[0] : [];
   }
