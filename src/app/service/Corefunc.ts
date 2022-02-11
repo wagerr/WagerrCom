@@ -7,6 +7,9 @@ export class Corefunc {
     if (item.odds[0]['ml' + type]) {
       return this.updateTrueOdds((item.odds[0]['ml' + type] / 10000));
     }
+    if (show) {
+      return '—';
+    }
     return 0;
   }
 
@@ -75,4 +78,5 @@ export class Corefunc {
   }
 
 }
+
 export const CoreFunc = new Corefunc();
