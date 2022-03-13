@@ -19,9 +19,9 @@
     <div class="w-100 font-arboria-bold text-black text-uppercase text-center">your leaderboard username</div>
     <div class="w-100 font-arboria-bold text-black text-center border border-dark mt-1 d-flex">
       <input class="border-0 text-center w-100 font-arboria-bold text-black" type="text" [(ngModel)]="username"
-             (keyup)="filterName()" placeholder="Enter Custom Username" [disabled]="!editUserName">
-      <div class="pull-right border-left border-dark px-2" [ngClass]="(editUserName) ? 'fontColorE6' : ''"
-           tooltip="edit/save username" (click)="editUsername()"><i class="fas fa-edit"></i></div>
+             [disabled]="true">
+<!--      <div class="pull-right border-left border-dark px-2" [ngClass]="(editUserName) ? 'fontColorE6' : ''"-->
+<!--           tooltip="edit/save username" (click)="editUsername()"><i class="fas fa-edit"></i></div>-->
     </div>
   </div>
   <div class="w-100 text-center pt-4 py-2">
@@ -77,7 +77,7 @@
       <div class="w-100 d-flex flex-row pt-5">
         <div class="w-50"></div>
         <div class="w-100 text-center font-arboria-book text-underline text-black">
-          <a href="/assets/March_Madness_Rules_2021.pdf" target="_blank">Wagerr.com March Madness 2021 Rules</a>
+          <a href="/assets/March_Madness_Rules_2022.pdf" target="_blank">Wagerr.com March Madness 2022 Rules</a>
         </div>
         <div class="w-50"></div>
       </div>
