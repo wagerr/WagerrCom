@@ -785,7 +785,7 @@ export class MmnewviewbracketComponent implements OnInit {
 
   canSubmit(): boolean {
     const canSubmit = Date.now();
-    if (canSubmit < 1647529200000) {
+    if (canSubmit < 1647529200000) { // TODO: Edit for MarchMadness
       return true;
     }
     return false;
