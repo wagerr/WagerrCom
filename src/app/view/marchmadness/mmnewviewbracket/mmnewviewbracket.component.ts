@@ -567,6 +567,10 @@ export class MmnewviewbracketComponent implements OnInit {
     const winnerSelected = (this.userBracket.bracket.finalFour.roundSeven[0].set[0].rank != '');
     const hasChampionship = (this.userBracket.bracket.finalFour.roundSix[0].set[0].rank != '' && this.userBracket.bracket.finalFour.roundSix[0].set[1].rank != '')
     const userBalance = this.wsb.getUserBalance();
+    console.log('userBalance',userBalance);
+    console.log('hasChampionship',hasChampionship);
+    console.log('winnerSelected',winnerSelected);
+    console.log('validateScore',this.validateScore());
     return (userBalance > 0 && winnerSelected && hasChampionship && this.validateScore());
   }
 
@@ -785,7 +789,7 @@ export class MmnewviewbracketComponent implements OnInit {
 
   canSubmit(): boolean {
     const canSubmit = Date.now();
-    if (canSubmit < 1616169600000) {
+    if (canSubmit < 1647529200000) {
       return true;
     }
     return false;
