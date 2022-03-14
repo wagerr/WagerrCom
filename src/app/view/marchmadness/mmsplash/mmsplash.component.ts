@@ -90,8 +90,7 @@ export class MmsplashComponent implements OnInit {
 
   eventStarted(): boolean {
     const canSubmit = Date.now();
-    // return (canSubmit < 1647226800000 || canSubmit > 1647529200000);
-    return (canSubmit < 1647136262000 || canSubmit > 1647529200000);
+    return (canSubmit > 1647529200000);
   }
 
   showVerifyBracket(): void {
