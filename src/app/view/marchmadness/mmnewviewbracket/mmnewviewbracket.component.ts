@@ -497,7 +497,6 @@ export class MmnewviewbracketComponent implements OnInit {
               {
                 rank: '',
                 name: '',
-
               }
             ]
           }
@@ -586,7 +585,7 @@ export class MmnewviewbracketComponent implements OnInit {
       if (this.userBracket.bracket[bracket][round][roundLook].set[0].name === ti.name) {
         ret = 'mmSelected';
       }
-      if (this.userBracket.bracket[bracket][round][roundLook].set[1].name === ti.name) {
+      if (this.userBracket.bracket[bracket][round][roundLook].set[1] && this.userBracket.bracket[bracket][round][roundLook].set[1].name === ti.name) {
         ret = 'mmSelected';
       }
     } if (!this.new && this.finalBracket[bracket]) {
